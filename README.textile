@@ -21,6 +21,7 @@ in the browser console, and many more (see feature list).
 
 
 h2. Keyboard Shortcut
+
 Press Ctrl+Shift+Alt+C twice to open the references list for copying references to the clipboard,
 Press Ctrl+Shift+Alt+V twice to open the references list for inserting references into the editor.
 
@@ -29,6 +30,7 @@ The list can be cancelled via Esc key, navigated using cursor keys and items are
 
 
 h2. Types of references
+
 All parsed items in the following list are relative to the current caret position,
 for example "previous classname" refers to the first classname found when searching backwards starting
 from the caret position. Some references are only specifically available for certain file types.
