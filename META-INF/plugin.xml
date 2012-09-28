@@ -1,0 +1,97 @@
+<!--
+  ~ Copyright 2012 Kay Stenschke
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<idea-plugin version="2">
+  <name>Referencer</name>
+  <description><![CDATA[
+    The plugin helps to quickly copy/insert references of different types.<br/>
+    <br/>
+    When evoking the referencer plugin, a list of selectable references, taken automatically from the
+    current context, is opened. The references can be inserted or copied.<br/>
+    <br/>
+    The references are useful to save time otherwise needed for looking up and having to type informations
+    that are actually present somewhere else already.<br/>
+    Possible use cases are for example: annotating debug outputs, copying the namespaced classname of the
+    currently edited javascript file (w/o having to locate it in the currently edited file!) for doing tests
+    in the browser console, and many more.<br/>
+    <br/>
+    Shortcuts:<br/>
+    <ul>
+        <li>Ctrl+Shift+Alt+V twice - open references list for inserting into the current document</li>
+        <li>Ctrl+Shift+Alt+C twice - open references list for copying to clipboard</li>
+    </ul><br/>
+    Types of references:<br/>
+    All parsed items in the following list are relative to the current caret position,
+    for example "previous classname" refers to the first classname found when searching backwards starting
+    from the caret position. Some references are only specifically available for certain file types.<br/>
+    <br/><ul>
+        <li>Current filename::line number</li>
+        <li>Path to current file::line number</li>
+        <li>When having a multi-line selection: File path / selection: line num. sel. start - line num. sel. end</li>
+    </ul><ul>
+        <li>PHP files: previous classname::previous methodname</li>
+        <li>PHP files: previous classname::linenumber</li>
+        <li>PHP files: previous classname</li>
+        <li>PHP files: previous functionname</li>
+        <li>PHP files: previous/next variablename</li>
+    </ul><ul>
+        <li>JavaScript files: namespace.classname</li>
+        <li>JavaScript files: namespace.classname.previous methodname</li>
+        <li>JavaScript files: namespace.classname::line number</li>
+        <li>JavaScript files: previous/next methodname</li>
+    </ul><br/>
+...more to come
+<br/><br/>
+    Please note: This plugin is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ]]></description>
+  <vendor url="" email="info@stenschke.com">Kay Stenschke</vendor>
+  <version>1.0.0</version>
+
+  <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
+  <idea-version since-build="8000"/>
+
+  <change-notes><![CDATA[
+        1.0.0 - initial release<br>
+  ]]></change-notes>
+
+
+
+  <application-components>
+    <!-- Add your application components here -->
+  </application-components>
+
+  <project-components>
+    <!-- Add your project components here -->
+  </project-components>
+
+  <actions>
+      <action id="Copy References" class="com.kstenschke.referencer.actions.CopyAction" text="Copy Reference..."
+              description="Copy a selectable references">
+          <add-to-group group-id="EditorPopupMenu" anchor="before" relative-to-action="CopyReference"/>
+          <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt C" second-keystroke="shift ctrl alt C"/>
+      </action>
+
+      <action id="InsertReferencesAction" class="com.kstenschke.referencer.actions.InsertAction"
+              text="Insert Reference..." description="Insert Reference from list">
+          <add-to-group group-id="EditorActions" anchor="after" relative-to-action="EditorPaste"/>
+          <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt V" second-keystroke="shift ctrl alt V"/>
+      </action>
+  </actions>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <!-- Add your extensions here -->
+  </extensions>
+</idea-plugin>
