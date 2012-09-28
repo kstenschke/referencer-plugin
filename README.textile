@@ -1,6 +1,6 @@
 h1. Referencer Plugin
 
-Source code of the intellij IDEA "Referencer plugin":http://plugins.intellij.net/plugin/index?pr=&pluginId=xxxxx
+Source code of the intellij IDEA "Referencer plugin":http://plugins.intellij.net/plugin?pr=&pluginId=7104
 This is a plugin for the various intellij IDEs, working in IDEA, PhpStorm, AppCode, etc.
 
 
