@@ -92,6 +92,8 @@
   </actions>
 
   <extensions defaultExtensionNs="com.intellij">
-    <!-- Add your extensions here -->
+
   </extensions>
+
+  <depends>com.intellij.modules.lang</depends>
 </idea-plugin>
