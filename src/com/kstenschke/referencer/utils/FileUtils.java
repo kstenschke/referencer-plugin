@@ -25,16 +25,34 @@ public class FileUtils {
 	 * Compare given extension against known PHP extensions
 	 *
 	 * @param	fileExtension	Extension to be checked
-	 * @return					php extension?
+	 * @return					PHP extension?
 	 */
 	static Boolean isPhpFileExtension(String fileExtension) {
 		if( fileExtension == null) return false;
+
+		fileExtension	= fileExtension.toLowerCase();
 
 		return fileExtension.equals("phpsh")
 				|| fileExtension.equals("php")
 				|| fileExtension.equals("php3")
 				|| fileExtension.equals("php4")
 				|| fileExtension.equals("php5");
+	}
+
+
+
+	/**
+	 * Compare given extension against known JavaScript extensions
+	 *
+	 * @param	fileExtension	Extension to be checked
+	 * @return					JavaScript extension?
+	 */
+	static Boolean isJavaScriptFileExtension(String fileExtension) {
+		if( fileExtension == null) return false;
+
+		fileExtension	= fileExtension.toLowerCase();
+
+		return fileExtension.equals("js");
 	}
 
 }

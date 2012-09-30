@@ -115,7 +115,7 @@ public class ParserJavascript {
 	 * @param	text	Source code to be searched
 	 * @return			All found PHP method names
 	 */
-	static List<String> getAllMethodsInText(String text) {
+	private static List<String> getAllMethodsInText(String text) {
 			// 1. Find matches ala: "function methodname(", if any found return it
 		List<String> allMatches = new ArrayList<String>();
 		Matcher m = Pattern.compile("function.*[a-zA-Z0-9_]+\\(").matcher(text);
@@ -128,7 +128,7 @@ public class ParserJavascript {
 
 			// No matches found? look for OOP style methods, ala: "methodname: function("
 		if( allMatches.size() == 0) {
-			m = Pattern.compile("[a-zA-Z0-9_]+\\:(\\s)*function.*\\(").matcher(text);
+			m = Pattern.compile("[a-zA-Z0-9_]+:(\\s)*function.*\\(").matcher(text);
 
 			while (m.find()) {
 				if( !allMatches.contains(m.group())) {
@@ -146,10 +146,10 @@ public class ParserJavascript {
 	 * @param	text	Source code to be searched
 	 * @return			All found PHP class names
 	 */
-	static List<String> getAllClassnamesInText(String text) {
+	private static List<String> getAllClassnamesInText(String text) {
 			// Look for "@class" annotations
 		List<String> allMatches = new ArrayList<String>();
-		Matcher m = Pattern.compile("\\@class(\\s)*([a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*)").matcher(text);
+		Matcher m = Pattern.compile("@class(\\s)*([a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*)").matcher(text);
 
 		while (m.find()) {
 			if( !allMatches.contains(m.group())) {
@@ -178,9 +178,9 @@ public class ParserJavascript {
 	 * @param	text	Source code to be searched
 	 * @return			All found PHP class names
 	 */
-	static List<String> getAllNamespaceInText(String text) {
+	private static List<String> getAllNamespaceInText(String text) {
 		List<String> allMatches = new ArrayList<String>();
-		Matcher m = Pattern.compile("\\@namespace(\\s)*([a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*)").matcher(text);
+		Matcher m = Pattern.compile("@namespace(\\s)*([a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*)").matcher(text);
 
 		while (m.find()) {
 			if( !allMatches.contains(m.group())) {
@@ -199,7 +199,7 @@ public class ParserJavascript {
 	 * @param	methodName	Method name to be cleaned
 	 * @return				Cleaned method name
 	 */
-	static String cleanupMethodName(String methodName) {
+	private static String cleanupMethodName(String methodName) {
 		String[] removeEachStrs	= {"(", ":"};
 
 		return StringUtils.cleanReference(methodName, "function", removeEachStrs, "();");
@@ -213,7 +213,7 @@ public class ParserJavascript {
 	 * @param	namespaceName	Namespace name to be cleaned
 	 * @return					Cleaned namespace name
 	 */
-	static String cleanupNamespaceName(String namespaceName) {
+	private static String cleanupNamespaceName(String namespaceName) {
 		String[] removeEachStrs	= {"\t"};
 
 		return StringUtils.cleanReference(namespaceName, "@namespace", removeEachStrs);
@@ -227,7 +227,7 @@ public class ParserJavascript {
 	 * @param	className	Class name to be cleaned
 	 * @return				Cleaned class name
 	 */
-	static String cleanupClassname(String className) {
+	private static String cleanupClassname(String className) {
 		String[] removeEachStrs	= {"\t", " ", "=", "("};
 		className	= StringUtils.cleanReference(className, "@class", removeEachStrs);
 

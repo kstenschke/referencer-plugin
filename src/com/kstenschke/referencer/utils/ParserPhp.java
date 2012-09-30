@@ -126,7 +126,7 @@ public class ParserPhp {
 	 * @param	text	Source code to be searched
 	 * @return			All found PHP variables
 	 */
-	static List<String> getAllVariablesInText(String text) {
+	private static List<String> getAllVariablesInText(String text) {
 		List<String> allMatches = new ArrayList<String>();
 		Matcher m = Pattern.compile("\\$[a-zA-Z0-9_]+").matcher(text);
 
@@ -147,7 +147,7 @@ public class ParserPhp {
 	 * @param	text	Source code to be searched
 	 * @return			All found PHP method names
 	 */
-	static List<String> getAllMethodsInText(String text) {
+	private static List<String> getAllMethodsInText(String text) {
 		List<String> allMatches = new ArrayList<String>();
 		Matcher m = Pattern.compile("function.*[a-zA-Z0-9_]+\\(").matcher(text);
 
@@ -168,7 +168,7 @@ public class ParserPhp {
 	 * @param	text	Source code to be searched
 	 * @return			All found PHP class names
 	 */
-	static List<String> getAllClassInText(String text) {
+	private static List<String> getAllClassInText(String text) {
 		List<String> allMatches = new ArrayList<String>();
 		Matcher m = Pattern.compile("class.*[a-zA-Z0-9_]+").matcher(text);
 
@@ -189,7 +189,7 @@ public class ParserPhp {
 	 * @param	methodName	Method name to be cleaned
 	 * @return              Cleaned method name
 	 */
-	static String cleanupMethodName(String methodName) {
+	private static String cleanupMethodName(String methodName) {
 		String[] removeEachStrs	= {"("};
 
 		return StringUtils.cleanReference(methodName, "function", removeEachStrs, "();");
@@ -203,7 +203,7 @@ public class ParserPhp {
 	 * @param	className	Class name to be cleaned
 	 * @return				Cleaned class name
 	 */
-	static String cleanupClassName(String className) {
+	private static String cleanupClassName(String className) {
 		return StringUtils.cleanReference(className, "class");
 	}
 

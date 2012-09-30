@@ -16,16 +16,21 @@
 
 package com.kstenschke.referencer.actions;
 
+import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.command.CommandProcessor;
+import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.PopupChooserBuilder;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.kstenschke.referencer.utils.Parser;
+import com.kstenschke.referencer.utils.Preferences;
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,16 +55,31 @@ public class CopyAction extends AnAction {
 		if( project != null && editor != null ) {
 			final Object[] refArr = Parser.getItems(e);
 			if( refArr != null ) {
+				final JList referencesList = new JList(refArr);
 
-			final JList referencesList = new JList(refArr);
-			PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
+				final Document document = editor.getDocument();
+				VirtualFile file		= FileDocumentManager.getInstance().getFile(document);
+				final String fileExtension	= (file != null) ? file.getExtension() : "";
 
-			popup.setTitle("Select reference to be copied").setItemChoosenCallback(new Runnable() {
-				public void run() {
-				CommandProcessor.getInstance().executeCommand(project, new Runnable() {
+					// Preselect item from preferences
+				Integer selectedIndex	= Preferences.getSelectedIndex(fileExtension);
+				if( selectedIndex > refArr.length ) selectedIndex	= 0;
+				referencesList.setSelectedIndex(selectedIndex);
+
+				PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
+
+				popup.setTitle("Select reference to be copied").setItemChoosenCallback(new Runnable() {
+					public void run() {
+
+						// Callback when item chosen
+					CommandProcessor.getInstance().executeCommand(project, new Runnable() {
 						public void run() {
 							final int index = referencesList.getSelectedIndex();
 
+								// Store preferences
+							Preferences.saveSelectedIndex(fileExtension, index);
+
+								// Copy item to clipboard
 							StringSelection clipString = new StringSelection( refArr[index].toString() );
 							Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 							clipboard.setContents(clipString, null);
