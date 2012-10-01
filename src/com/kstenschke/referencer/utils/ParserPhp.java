@@ -43,7 +43,7 @@ public class ParserPhp {
 
 
 		final Project project	= e.getData(PlatformDataKeys.PROJECT);
-		Editor editor			= e.getData(DataKeys.EDITOR);
+		Editor editor			= e.getData(PlatformDataKeys.EDITOR);
 
 		if( project != null && editor != null ) {
 			final Document document = editor.getDocument();

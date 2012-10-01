@@ -46,7 +46,7 @@ public class InsertAction extends AnAction {
 	 */
 	public void actionPerformed(final AnActionEvent e) {
 		final Project project	= e.getData(PlatformDataKeys.PROJECT);
-		final Editor editor			= e.getData(DataKeys.EDITOR);
+		final Editor editor		= e.getData(PlatformDataKeys.EDITOR);
 
 		if( project != null && editor != null ) {
 			final Object[] refArr = Parser.getItems(e);

@@ -50,7 +50,7 @@ public class CopyAction extends AnAction {
 	 */
 	public void actionPerformed(AnActionEvent e) {
 		final Project project	= e.getData(PlatformDataKeys.PROJECT);
-		Editor editor			= e.getData(DataKeys.EDITOR);
+		Editor editor			= e.getData(PlatformDataKeys.EDITOR);
 
 		if( project != null && editor != null ) {
 			final Object[] refArr = Parser.getItems(e);
