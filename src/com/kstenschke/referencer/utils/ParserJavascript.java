@@ -21,7 +21,9 @@ import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +53,11 @@ public class ParserJavascript {
 			String textFull = document.getText();
 			String textBeforeCaret	= textFull.substring(0, caretOffset);
 			String textAfterCaret	= textFull.substring(caretOffset);
+
+				// File path and name
+			VirtualFile file	= FileDocumentManager.getInstance().getFile(document);
+			String filePath		= (file != null) ? file.getPath() : "";
+			String filename		= (file != null) ? file.getName() : "";
 
 
 				// Add namespace
@@ -102,6 +109,12 @@ public class ParserJavascript {
 
 			if(methodBefore != null ) referenceItems.add(methodBefore);
 			if(methodAfter != null ) referenceItems.add(methodAfter);
+
+
+				// Convert path to namespace (slashes to dots)
+			String namespaceFromFilepath= filePath.replace("/", ".").replaceFirst("\\.", "");
+			namespaceFromFilepath		= StringUtils.replaceLast(namespaceFromFilepath, ".js", "");
+			referenceItems.add( namespaceFromFilepath );
 		}
 
 		return referenceItems;

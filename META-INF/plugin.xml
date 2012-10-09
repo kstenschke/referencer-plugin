@@ -52,26 +52,24 @@
         <li>JavaScript files: namespace.classname.previous methodname</li>
         <li>JavaScript files: namespace.classname::line number</li>
         <li>JavaScript files: previous/next methodname</li>
+        <li>JavaScript files: filepath formatted as namespace</li>
     </ul><br/>
-...more to come
 <br/><br/>
     Please note: This plugin is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ]]></description>
   <vendor url="" email="info@stenschke.com">Kay Stenschke</vendor>
-  <version>1.0.1</version>
+  <version>1.0.2</version>
 
   <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
   <idea-version since-build="8000"/>
 
   <change-notes><![CDATA[
+    1.0.2<br/>
+    <ul><li>Added namespace reference from JavaScript filepath</li></ul>
     1.0.1<br/>
-    <ul>
-        <li>Added preference retaining (selected reference per file type)</li>
-    </ul>
+    <ul><li>Added preference retaining (selected reference per file type)</li></ul>
     1.0.0<br/>
-    <ul>
-        <li>Initial release</li>
-    </ul>
+    <ul><li>Initial release</li></ul>
   ]]></change-notes>
 
 

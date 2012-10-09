@@ -49,8 +49,7 @@ from the caret position. Some references are only specifically available for cer
 * JavaScript files: namespace.classname.previous methodname
 * JavaScript files: namespace.classname::line number
 * JavaScript files: previous/next methodname
-
-...more to come
+* JavaScript files: filepath formatted as namespace
 
 
 
