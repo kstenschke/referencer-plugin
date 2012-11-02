@@ -56,6 +56,7 @@ from the caret position. Some references are only specifically available for cer
 * JavaScript files: previous/next methodname
 * JavaScript files: filepath formatted as namespace (helpful e.g. when working with Ext JS)
 
+* References of all endings to occurences of the word at the caret
 
 
 h2. License
