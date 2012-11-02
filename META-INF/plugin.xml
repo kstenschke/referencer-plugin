@@ -57,17 +57,21 @@
         <li>JavaScript files: namespace.classname::line number</li>
         <li>JavaScript files: previous/next methodname</li>
         <li>JavaScript files: filepath formatted as namespace (helpful e.g. when working with Ext JS)</li>
+    </ul><ul>
+        <li>References of all endings to occurences of the word at the caret</li>
     </ul><br/>
 <br/><br/>
     Please note: This plugin is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ]]></description>
   <vendor url="" email="info@stenschke.com">Kay Stenschke</vendor>
-  <version>1.0.3</version>
+  <version>1.0.4</version>
 
   <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
   <idea-version since-build="8000"/>
 
   <change-notes><![CDATA[
+    1.0.4<br/>
+    <ul><li>Added references of all endings to occurences of the word at the caret</li></ul>
     1.0.3<br/>
     <ul><li>Added date and timestamp references</li></ul>
     1.0.2<br/>

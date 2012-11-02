@@ -94,4 +94,43 @@ public class StringUtils {
 		}
 	}
 
+
+
+	/**
+	 * Get word at caret offset out of given text
+	 *
+	 * @param   text           The full text
+	 * @param   cursorOffset   Character offset of caret
+	 * @return                 The extracted word or null
+	 */
+	public static String getWordAtOffset(CharSequence text, int cursorOffset) {
+		if (	text.length() == 0
+				||	cursorOffset >= text.length())  return null;
+
+		if (cursorOffset > 0
+				&& !Character.isJavaIdentifierPart(text.charAt(cursorOffset))
+				&& Character.isJavaIdentifierPart(text.charAt(cursorOffset - 1))
+				) {
+			cursorOffset--;
+		}
+
+		if (Character.isJavaIdentifierPart(text.charAt(cursorOffset))) {
+			int start = cursorOffset;
+			int end = cursorOffset;
+
+
+			while (start > 0 && Character.isJavaIdentifierPart(text.charAt(start - 1))) {
+				start--;
+			}
+
+			while (end < text.length() && Character.isJavaIdentifierPart(text.charAt(end))) {
+				end++;
+			}
+
+			return text.subSequence(start, end).toString();
+		}
+
+		return null;
+	}
+
 }

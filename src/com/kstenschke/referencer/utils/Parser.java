@@ -29,9 +29,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class Parser {
 
@@ -66,6 +64,10 @@ public class Parser {
 			int lineSelStart	= document.getLineNumber(selStart);
 			int lineSelEnd		= document.getLineNumber(selEnd);
 
+				// Grab the "word" before the caret
+			String wordAtCaret	= StringUtils.getWordAtOffset(document.getCharsSequence(), caretOffset);
+
+
 
 				// Setup list of items
 			List<String> referenceItems = new ArrayList<String>();
@@ -89,6 +91,26 @@ public class Parser {
 				// Add PHP items
 			else if( FileUtils.isPhpFileExtension(fileExtension) ) referenceItems.addAll(ParserPhp.getReferenceItems(e));
 
+
+				// Add all line-parts in current document that begin the same as the word at the caret
+			if( wordAtCaret!= null && !wordAtCaret.isEmpty() && wordAtCaret.length() > 2 ) {
+				String docText	= document.getText();
+				String[] lineParts	= docText.split( wordAtCaret );
+				List<String> listLineParts = Arrays.asList(lineParts);
+				int count	= 0;
+				for (String listLinePart : listLineParts) {
+					if(count > 0 ) {
+						listLinePart	= listLinePart.split("\\n")[0];
+
+						if( !listLinePart.equals(wordAtCaret) && !listLinePart.trim().isEmpty()
+							&& !referenceItems.contains(listLinePart)
+						) {
+							referenceItems.add(listLinePart);
+						}
+					}
+					count++;
+				}
+			}
 
 			refArr = referenceItems.toArray();
 		} else {
