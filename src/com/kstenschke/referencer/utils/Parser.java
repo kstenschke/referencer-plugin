@@ -27,7 +27,10 @@ import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Parser {
@@ -67,7 +70,14 @@ public class Parser {
 				// Setup list of items
 			List<String> referenceItems = new ArrayList<String>();
 
+				// Add date/timestamps
+			Date date = new Date();
+			referenceItems.add(new SimpleDateFormat("yyyy-MM-dd").format(date));
+			referenceItems.add(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date));
+
 				// Add common items of all file types
+			referenceItems.add(filePath);
+			referenceItems.add(filename);
 			referenceItems.add(filename + "::" + (lineNumber+1));
 			referenceItems.add(filePath + "::" + (lineNumber+1));
 

@@ -82,6 +82,7 @@ public class CopyAction extends AnAction {
 								// Copy item to clipboard
 							StringSelection clipString = new StringSelection( refArr[index].toString() );
 							Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+
 							clipboard.setContents(clipString, null);
 						}
 					},

@@ -35,6 +35,11 @@ All parsed items in the following list are relative to the current caret positio
 for example "previous classname" refers to the first classname found when searching backwards starting
 from the caret position. Some references are only specifically available for certain file types.
 
+* Current date as YYYY-MM-DD
+* Current date as YYYY-MM-DD HH:MM:SS
+
+* Path to current file
+* Current filename
 * Current filename::line number
 * Path to current file::line number
 * When having a multi-line selection: File path / selection: line num. sel. start - line num. sel. end

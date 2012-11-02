@@ -64,7 +64,7 @@ public class ParserPhp {
 				referenceItems.add(classBefore);
 			}
 				// Add class after caret
-			String classAfter = null;
+			String classAfter;
 			List<String> allClassAfterCaret	= getAllClassInText(textAfterCaret);
 			if( allClassAfterCaret.size() > 0 ) {
 				classAfter	= cleanupClassName(allClassAfterCaret.get( 0 ));
@@ -105,7 +105,7 @@ public class ParserPhp {
 				referenceItems.add(varBefore);
 			}
 				// Add variable after caret
-			String varAfter	= null;
+			String varAfter;
 			List<String> allVarsAfterCaret	= getAllVariablesInText(textAfterCaret);
 			if( allVarsAfterCaret.size() > 0 ) {
 				varAfter	= allVarsAfterCaret.get( 0 );

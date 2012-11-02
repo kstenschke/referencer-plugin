@@ -19,7 +19,7 @@ package com.kstenschke.referencer.utils;
 /**
  * File helper methods
  */
-public class FileUtils {
+class FileUtils {
 
 	/**
 	 * Compare given extension against known PHP extensions

@@ -61,7 +61,7 @@ public class StringUtils {
 	 * @return					The cleaned string
 	 */
 	public static String cleanReference(String referenceStr, String removeOnceStr, String[] removeEachStrs, String postfix) {
-		return cleanReference(referenceStr, removeOnceStr, removeEachStrs) + postfix;
+		return cleanReference(referenceStr, "function", removeEachStrs) + postfix;
 	}
 
 
@@ -73,7 +73,7 @@ public class StringUtils {
 	 * @param	needles		Sub strings to be removed
 	 * @return				The modified string
 	 */
-	public static String removeSubStrings(String haystack, String[] needles) {
+	private static String removeSubStrings(String haystack, String[] needles) {
 		for (String needle : needles) {
 			haystack = haystack.replace(needle, "");
 		}

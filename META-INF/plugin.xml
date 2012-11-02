@@ -38,6 +38,10 @@
     for example "previous classname" refers to the first classname found when searching backwards starting
     from the caret position. Some references are only specifically available for certain file types.<br/>
     <br/><ul>
+        <li>Current date as YYYY-MM-DD</li>
+        <li>Current date as YYYY-MM-DD HH:MM:SS</li>
+        <li>Path to current file</li>
+        <li>Current filename</li>
         <li>Current filename::line number</li>
         <li>Path to current file::line number</li>
         <li>When having a multi-line selection: File path / selection: line num. sel. start - line num. sel. end</li>
@@ -58,12 +62,14 @@
     Please note: This plugin is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ]]></description>
   <vendor url="" email="info@stenschke.com">Kay Stenschke</vendor>
-  <version>1.0.2</version>
+  <version>1.0.3</version>
 
   <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
   <idea-version since-build="8000"/>
 
   <change-notes><![CDATA[
+    1.0.3<br/>
+    <ul><li>Added date and timestamp references</li></ul>
     1.0.2<br/>
     <ul><li>Added namespace reference from JavaScript filepath</li></ul>
     1.0.1<br/>

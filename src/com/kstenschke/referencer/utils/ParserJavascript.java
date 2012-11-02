@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ParserJavascript {
+class ParserJavascript {
 
 	/**
 	 * Parse document of given event for JavaScript references and return them
@@ -57,7 +57,7 @@ public class ParserJavascript {
 				// File path and name
 			VirtualFile file	= FileDocumentManager.getInstance().getFile(document);
 			String filePath		= (file != null) ? file.getPath() : "";
-			String filename		= (file != null) ? file.getName() : "";
+//			String filename		= (file != null) ? file.getName() : "";
 
 
 				// Add namespace
