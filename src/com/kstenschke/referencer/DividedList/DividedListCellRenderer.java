@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kstenschke.referencer;
+package com.kstenschke.referencer.DividedList;
 
 import javax.swing.*;
 import java.awt.*;
@@ -33,17 +33,20 @@ public class DividedListCellRenderer extends DefaultListCellRenderer implements 
 	 * @return  The rendered cell
 	 */
 	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-		if ( value != null && value.toString( ).equals("_") ) {
-			JLabel lblSeparator = new JLabel( );
-			lblSeparator.setBorder(
-					BorderFactory.createLineBorder(Color.DARK_GRAY) );
-			lblSeparator.setPreferredSize( new
-					Dimension( 1, 1 ) );
+		if ( value != null && value.toString().equals("_") ) {
+				// Separator item
+			JLabel lblSeparator = new JLabel();
+			lblSeparator.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.DARK_GRAY) );
+			//lblSeparator.setPreferredSize( new Dimension(1, 1) );
+
+			lblSeparator.setEnabled(false);
+			lblSeparator.setFocusable(false);
+			lblSeparator.setVisible(false);
+
 			return lblSeparator ;
 		} else
-			return super.getListCellRendererComponent
-					( list, value,
-							index, isSelected, cellHasFocus);
+				// Non-separator item
+			return super.getListCellRendererComponent ( list, value, index, isSelected, cellHasFocus);
 	}
 
 }

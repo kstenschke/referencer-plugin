@@ -64,12 +64,14 @@
     Please note: This plugin is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ]]></description>
   <vendor url="" email="info@stenschke.com">Kay Stenschke</vendor>
-  <version>1.0.4</version>
+  <version>1.0.5</version>
 
   <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
   <idea-version since-build="8000"/>
 
   <change-notes><![CDATA[
+    1.0.5<br/>
+    <ul><li>Added item group separators</li></ul>
     1.0.4<br/>
     <ul><li>Added references of all endings to occurences of the word at the caret</li></ul>
     1.0.3<br/>

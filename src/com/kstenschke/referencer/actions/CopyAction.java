@@ -27,7 +27,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.kstenschke.referencer.DividedListCellRenderer;
+import com.kstenschke.referencer.DividedList.DividedListCellKeyListener;
+import com.kstenschke.referencer.DividedList.DividedListCellRenderer;
+import com.kstenschke.referencer.DividedList.DividedListSelectionListener;
 import com.kstenschke.referencer.parser.Parser;
 import com.kstenschke.referencer.Preferences;
 
@@ -56,6 +58,10 @@ public class CopyAction extends AnAction {
 			if( refArr != null ) {
 				final JList referencesList = new JList(refArr);
 				referencesList.setCellRenderer(new DividedListCellRenderer() );
+
+				DividedListCellKeyListener keyListener	= new DividedListCellKeyListener();
+				referencesList.addKeyListener(keyListener);
+				referencesList.addListSelectionListener(new DividedListSelectionListener(keyListener));
 
 				final Document document = editor.getDocument();
 				VirtualFile file		= FileDocumentManager.getInstance().getFile(document);
