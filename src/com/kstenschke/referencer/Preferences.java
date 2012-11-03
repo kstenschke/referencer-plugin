@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package com.kstenschke.referencer.utils;
+package com.kstenschke.referencer;
 
 import com.intellij.ide.util.PropertiesComponent;
+import com.kstenschke.referencer.FileUtils;
 import org.jetbrains.annotations.NonNls;
 
 /**

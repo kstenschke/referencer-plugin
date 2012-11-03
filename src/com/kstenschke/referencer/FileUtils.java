@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package com.kstenschke.referencer.utils;
+package com.kstenschke.referencer;
 
 /**
  * File helper methods
  */
-class FileUtils {
+public class FileUtils {
 
 	/**
 	 * Compare given extension against known PHP extensions
@@ -27,7 +27,7 @@ class FileUtils {
 	 * @param	fileExtension	Extension to be checked
 	 * @return					PHP extension?
 	 */
-	static Boolean isPhpFileExtension(String fileExtension) {
+	public static Boolean isPhpFileExtension(String fileExtension) {
 		if( fileExtension == null) return false;
 
 		fileExtension	= fileExtension.toLowerCase();
@@ -47,7 +47,7 @@ class FileUtils {
 	 * @param	fileExtension	Extension to be checked
 	 * @return					JavaScript extension?
 	 */
-	static Boolean isJavaScriptFileExtension(String fileExtension) {
+	public static Boolean isJavaScriptFileExtension(String fileExtension) {
 		if( fileExtension == null) return false;
 
 		fileExtension	= fileExtension.toLowerCase();

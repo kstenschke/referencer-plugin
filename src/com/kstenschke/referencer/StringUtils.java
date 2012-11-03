@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kstenschke.referencer.utils;
+package com.kstenschke.referencer;
 
 /**
  * String utility methods

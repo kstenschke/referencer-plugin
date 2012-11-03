@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package com.kstenschke.referencer.utils;
+package com.kstenschke.referencer.parser;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.kstenschke.referencer.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;

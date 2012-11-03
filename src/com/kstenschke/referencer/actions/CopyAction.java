@@ -16,10 +16,8 @@
 
 package com.kstenschke.referencer.actions;
 
-import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.DataKeys;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.command.CommandProcessor;
 import com.intellij.openapi.editor.Document;
@@ -29,8 +27,8 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.kstenschke.referencer.utils.Parser;
-import com.kstenschke.referencer.utils.Preferences;
+import com.kstenschke.referencer.parser.Parser;
+import com.kstenschke.referencer.Preferences;
 
 import javax.swing.*;
 import java.awt.*;
