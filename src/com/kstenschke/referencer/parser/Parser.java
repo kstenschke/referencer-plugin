@@ -78,6 +78,7 @@ public class Parser {
 			referenceItems.add(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date));
 
 				// Add common items of all file types
+			referenceItems.add("_");
 			referenceItems.add(filePath);
 			referenceItems.add(filename);
 			referenceItems.add(filename + "::" + (lineNumber+1));
@@ -86,29 +87,40 @@ public class Parser {
 			if( selectionModel.hasSelection() && lineSelEnd > lineSelStart ) referenceItems.add(filePath + " / Selection: " + (lineSelStart+1) + " - " + (lineSelEnd+1));
 
 				// Add JavaScript items
-			if( fileExtension != null && fileExtension.equals("js") ) referenceItems.addAll(ParserJavascript.getReferenceItems(e));
+			if( fileExtension != null && fileExtension.equals("js") ) {
+				referenceItems.add("_");
+				referenceItems.addAll(ParserJavascript.getReferenceItems(e));
+			}
 
 				// Add PHP items
-			else if( FileUtils.isPhpFileExtension(fileExtension) ) referenceItems.addAll(ParserPhp.getReferenceItems(e));
+			else if( FileUtils.isPhpFileExtension(fileExtension) ) {
+				referenceItems.add("_");
+				referenceItems.addAll(ParserPhp.getReferenceItems(e));
+			}
 
 
 				// Add all line-parts in current document that begin the same as the word at the caret
 			if( wordAtCaret!= null && !wordAtCaret.isEmpty() && wordAtCaret.length() > 2 ) {
 				String docText	= document.getText();
 				String[] lineParts	= docText.split( wordAtCaret );
-				List<String> listLineParts = Arrays.asList(lineParts);
-				int count	= 0;
-				for (String listLinePart : listLineParts) {
-					if(count > 0 ) {
-						listLinePart	= listLinePart.split("\\n")[0];
 
-						if( !listLinePart.equals(wordAtCaret) && !listLinePart.trim().isEmpty()
-							&& !referenceItems.contains(listLinePart)
-						) {
-							referenceItems.add(listLinePart);
+				if( lineParts.length > 0 ) {
+					referenceItems.add("_");
+
+					List<String> listLineParts = Arrays.asList(lineParts);
+					int count	= 0;
+					for (String listLinePart : listLineParts) {
+						if(count > 0 ) {
+							listLinePart	= listLinePart.split("\\n")[0];
+
+							if( !listLinePart.equals(wordAtCaret) && !listLinePart.trim().isEmpty()
+								&& !referenceItems.contains(listLinePart)
+							) {
+								referenceItems.add(listLinePart);
+							}
 						}
+						count++;
 					}
-					count++;
 				}
 			}
 
