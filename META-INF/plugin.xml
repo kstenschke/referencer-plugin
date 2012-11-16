@@ -45,6 +45,7 @@
         <li>Current filename::line number</li>
         <li>Path to current file::line number</li>
         <li>When having a multi-line selection: File path / selection: line num. sel. start - line num. sel. end</li>
+        <li>When having opened more than one file: list of paths to all opened files</li>
     </ul><ul>
         <li>PHP files: previous classname::previous methodname</li>
         <li>PHP files: previous classname::linenumber</li>
@@ -58,18 +59,20 @@
         <li>JavaScript files: previous/next methodname</li>
         <li>JavaScript files: filepath formatted as namespace (helpful e.g. when working with Ext JS)</li>
     </ul><ul>
-        <li>References of all endings to occurences of the word at the caret</li>
+        <li>References of all endings to occurences (in current file) of the word at the caret</li>
     </ul><br/>
 <br/><br/>
     Please note: This plugin is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ]]></description>
   <vendor url="" email="info@stenschke.com">Kay Stenschke</vendor>
-  <version>1.0.5</version>
+  <version>1.0.6</version>
 
   <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
   <idea-version since-build="8000"/>
 
   <change-notes><![CDATA[
+    1.0.6<br/>
+    <ul><li>Added list of all open files</li></ul>
     1.0.5<br/>
     <ul><li>Added item group separators</li></ul>
     1.0.4<br/>

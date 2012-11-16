@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ParserPhp {
+class ParserPhp {
 
 	/**
 	 * Parse document of given event for PHP references and return them
@@ -76,13 +76,12 @@ public class ParserPhp {
 				referenceItems.add(methodBefore);
 			}
 				// Add method after caret
-			String methodAfter = null;
+			String methodAfter;
 			List<String> allMethodsAfterCaret	= getAllMethodsInText(textAfterCaret);
 			if( allMethodsAfterCaret.size() > 0 ) {
 				methodAfter	= cleanupMethodName(allMethodsAfterCaret.get(0));
 				referenceItems.add( methodAfter );
 			}
-
 				// Add method before caret / prev. variable
 			String varBefore = null;
 			List<String> allVarsBeforeCaret	= getAllVariablesInText(textBeforeCaret);

@@ -49,13 +49,11 @@ public class Parser {
 				// File path and name
 			VirtualFile file	= FileDocumentManager.getInstance().getFile(document);
 			String filePath		= (file != null) ? file.getPath() : "";
-			String filename		= (file != null) ? file.getName() : "";
 			String fileExtension= (file != null) ? file.getExtension() : "";
 			if( fileExtension != null && fileExtension.length() > 0) fileExtension = fileExtension.toLowerCase();
 
 				// Get line number the caret is in
 			int caretOffset	= editor.getCaretModel().getOffset();
-			int lineNumber	= document.getLineNumber( caretOffset );
 
 			SelectionModel selectionModel	= editor.getSelectionModel();
 			int selStart= selectionModel.getSelectionStart();
@@ -73,18 +71,16 @@ public class Parser {
 			List<String> referenceItems = new ArrayList<String>();
 
 				// Add date/timestamps
-			Date date = new Date();
-			referenceItems.add(new SimpleDateFormat("yyyy-MM-dd").format(date));
-			referenceItems.add(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date));
+			referenceItems.addAll(ParserDateTime.getReferenceItems(e));
 
-				// Add common items of all file types
+				// Add file / path items
 			referenceItems.add("_");
-			referenceItems.add(filePath);
-			referenceItems.add(filename);
-			referenceItems.add(filename + "::" + (lineNumber+1));
-			referenceItems.add(filePath + "::" + (lineNumber+1));
+			referenceItems.addAll(ParserFilesFolders.getReferenceItems(e));
 
-			if( selectionModel.hasSelection() && lineSelEnd > lineSelStart ) referenceItems.add(filePath + " / Selection: " + (lineSelStart+1) + " - " + (lineSelEnd+1));
+				// Add selection info
+			if( selectionModel.hasSelection() && lineSelEnd > lineSelStart ) {
+				referenceItems.add(filePath + " / Selection: " + (lineSelStart+1) + " - " + (lineSelEnd+1));
+			}
 
 				// Add JavaScript items
 			if( fileExtension != null && fileExtension.equals("js") ) {
@@ -97,7 +93,6 @@ public class Parser {
 				referenceItems.add("_");
 				referenceItems.addAll(ParserPhp.getReferenceItems(e));
 			}
-
 
 				// Add all line-parts in current document that begin the same as the word at the caret
 			if( wordAtCaret!= null && !wordAtCaret.isEmpty() && wordAtCaret.length() > 2 ) {
