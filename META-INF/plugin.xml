@@ -17,18 +17,12 @@
 <idea-plugin version="2">
   <name>Referencer</name>
   <description><![CDATA[
-    The plugin helps to quickly copy/insert references of different types.<br/>
+    The plugin implements an additional list of code-completion suggestions into the editor, taken from various
+    contexts, such as: opened file(s), selection and caret position in the editor, date and time and more.<br/>
+    When evoking the referencer plugin, a list of reference items, taken from the current contexts, is opened.
+    The references can be inserted into the current document or copied to the clipboard.
     <br/>
-    When evoking the referencer plugin, a list of selectable references, taken automatically from the
-    current context, is opened. The references can be inserted or copied.<br/>
-    <br/>
-    The references are useful to save time otherwise needed for looking up and having to type informations
-    that are actually present somewhere else already.<br/>
-    Possible use cases are for example: annotating debug outputs, copying the namespaced classname of the
-    currently edited javascript file (w/o having to locate it in the currently edited file!) for doing tests
-    in the browser console, and many more.<br/>
-    <br/>
-    Shortcuts:<br/>
+    Keyboard shortcuts:<br/>
     <ul>
         <li>Ctrl+Shift+Alt+V twice - open references list for inserting into the current document</li>
         <li>Ctrl+Shift+Alt+C twice - open references list for copying to clipboard</li>

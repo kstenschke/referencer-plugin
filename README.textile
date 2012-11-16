@@ -7,16 +7,11 @@ This is a plugin for the various intellij IDEs, working in IDEA, PhpStorm, AppCo
 
 h2. Description
 
-The plugin helps to quickly copy/insert references of different types.
+The plugin implements an additional list of code-completion suggestions into the editor, taken from various
+contexts, such as: opened file(s), selection and caret position in the editor, date and time and more.
 
-When evoking the referencer plugin, a list of selectable references, taken automatically from the
-current context, is opened. The references can be inserted or copied.
-
-The references are useful to save time otherwise needed for looking up and having to type informations
-that are actually present somewhere else already.
-Possible use cases are for example: annotating debug outputs, copying the namespaced classname of the
-currently edited javascript file (w/o having to locate it in the currently edited file!) for doing tests
-in the browser console, and many more (see feature list).
+When evoking the referencer plugin, a list of reference items, taken from the current contexts, is opened.
+The references can be inserted into the current document or copied to the clipboard.
 
 
 
