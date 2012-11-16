@@ -25,28 +25,45 @@ import java.awt.*;
 public class DividedListCellRenderer extends DefaultListCellRenderer implements ListCellRenderer {
 
 	/**
-	 * @param	list
-	 * @param	value
-	 * @param	index
-	 * @param	isSelected
-	 * @param	cellHasFocus
+	 * @param	list				List of reference items
+	 * @param	value               Value of reference item
+	 * @param	index               Item index
+	 * @param	isSelected			Item currently selected?
+	 * @param	cellHasFocus		Item currently has focus?
 	 * @return  The rendered cell
 	 */
 	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-		if ( value != null && value.toString().equals("_") ) {
-				// Separator item
-			JLabel lblSeparator = new JLabel();
-			lblSeparator.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.DARK_GRAY) );
-			//lblSeparator.setPreferredSize( new Dimension(1, 1) );
+		if ( value != null ) {
+			String valueStr	= value.toString();
 
-			lblSeparator.setEnabled(false);
-			lblSeparator.setFocusable(false);
-			lblSeparator.setVisible(false);
+			if ( valueStr.equals("_") ) {
+					// Separator item
+				JLabel lblSeparator = new JLabel();
+				lblSeparator.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.LIGHT_GRAY) );
+				//lblSeparator.setPreferredSize( new Dimension(1, 1) );
 
-			return lblSeparator ;
-		} else
-				// Non-separator item
-			return super.getListCellRendererComponent ( list, value, index, isSelected, cellHasFocus);
+				lblSeparator.setEnabled(false);
+				lblSeparator.setFocusable(false);
+				lblSeparator.setVisible(false);
+
+				return lblSeparator;
+			} else
+			if ( valueStr.startsWith("SECTIONTITLE:") ) {
+				JLabel lblSectionLabel = new JLabel( valueStr.replace("SECTIONTITLE: ", "") + ":" );
+				lblSectionLabel.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.LIGHT_GRAY) );
+				//lblSectionLabel.setBackground(Color.BLUE);
+				//lblSectionLabel.setForeground(Color.WHITE);
+				//lblSeparator.setPreferredSize( new Dimension(1, 1) );
+
+				lblSectionLabel.setEnabled(false);
+				lblSectionLabel.setFocusable(false);
+				lblSectionLabel.setVisible(true);
+
+				return lblSectionLabel ;
+			}
+		}
+			// Non-separator item
+		return super.getListCellRendererComponent ( list, value, index, isSelected, cellHasFocus);
 	}
 
 }

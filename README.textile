@@ -35,8 +35,8 @@ All parsed items in the following list are relative to the current caret positio
 for example "previous classname" refers to the first classname found when searching backwards starting
 from the caret position. Some references are only specifically available for certain file types.
 
-* Current date as YYYY-MM-DD
-* Current date as YYYY-MM-DD HH:MM:SS
+* Current date/time formatted as YYYY-MM-DD and YYYY-MM-DD HH:MM:SS
+* Current UNIX timestamp in seconds and milliseconds
 
 * Path to current file
 * Current filename
@@ -45,17 +45,17 @@ from the caret position. Some references are only specifically available for cer
 * When having a multi-line selection: File path / selection: line num. sel. start - line num. sel. end
 * When having opened more than one file: list of paths to all opened files
 
-* PHP files: previous classname::previous methodname
-* PHP files: previous classname::linenumber
+* PHP files: previous classname::previous method name
+* PHP files: previous classname::line number
 * PHP files: previous classname
-* PHP files: previous functionname
-* PHP files: previous/next variablename
+* PHP files: previous function name
+* PHP files: previous/next variable name
 
 * JavaScript files: namespace.classname
-* JavaScript files: namespace.classname.previous methodname
+* JavaScript files: namespace.classname.previous method name
 * JavaScript files: namespace.classname::line number
-* JavaScript files: previous/next methodname
-* JavaScript files: filepath formatted as namespace (helpful e.g. when working with Ext JS)
+* JavaScript files: previous/next method name
+* JavaScript files: file path formatted as namespace
 
 * References of all endings to occurences (in current file) of the word at the caret
 

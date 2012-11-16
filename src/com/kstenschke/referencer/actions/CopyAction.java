@@ -49,7 +49,7 @@ public class CopyAction extends AnAction {
 	 *
 	 * @param	e	Action system event
 	 */
-	public void actionPerformed(AnActionEvent e) {
+	public void actionPerformed(final AnActionEvent e) {
 		final Project project	= e.getData(PlatformDataKeys.PROJECT);
 		Editor editor			= e.getData(PlatformDataKeys.EDITOR);
 
@@ -80,16 +80,16 @@ public class CopyAction extends AnAction {
 						// Callback when item chosen
 					CommandProcessor.getInstance().executeCommand(project, new Runnable() {
 						public void run() {
-							final int index = referencesList.getSelectedIndex();
+						final int index = referencesList.getSelectedIndex();
 
-								// Store preferences
-							Preferences.saveSelectedIndex(fileExtension, index);
+							// Store preferences
+						Preferences.saveSelectedIndex(fileExtension, index);
 
-								// Copy item to clipboard
-							StringSelection clipString = new StringSelection( refArr[index].toString() );
-							Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+							// Copy item to clipboard
+						StringSelection clipString	= new StringSelection( Parser.fixReferenceValue(project, refArr[index].toString()) );
+						Clipboard clipboard			= Toolkit.getDefaultToolkit().getSystemClipboard();
 
-							clipboard.setContents(clipString, null);
+						clipboard.setContents(clipString, null);
 						}
 					},
 				null, null);

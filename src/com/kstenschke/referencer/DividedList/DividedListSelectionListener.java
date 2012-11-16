@@ -22,7 +22,7 @@ import javax.swing.event.ListSelectionListener;
 
 public class DividedListSelectionListener extends JFrame implements ListSelectionListener {
 
-	DividedListCellKeyListener keyListener;
+	private final DividedListCellKeyListener keyListener;
 
 	public DividedListSelectionListener(DividedListCellKeyListener keyListener) {
 		this.keyListener	= keyListener;
@@ -39,11 +39,18 @@ public class DividedListSelectionListener extends JFrame implements ListSelectio
 		JList list	= (JList) e.getSource();
 		Object val	= list.getSelectedValue();
 
-		if ( val != null && val.toString().equals("_") ) {
-			int selectedIndex	= list.getSelectedIndex();
+		if ( val != null ) {
+			String valStr	= val.toString();
 
-			if( keyListener.isGoingDown)	list.setSelectedIndex(selectedIndex + 1);
-			if( keyListener.isGoingUp)	list.setSelectedIndex(selectedIndex - 1);
+				// If the selected item is a section title or divider - forward to the next item in that direction
+			if ( valStr.equals("_") || valStr.startsWith("SECTIONTITLE:") ) {
+				if( keyListener.isGoingDown || keyListener.isGoingUp) {
+					int selectedIndex	= list.getSelectedIndex();
+					int offset			= keyListener.isGoingDown ? 1 : -1;
+
+					list.setSelectedIndex(selectedIndex + offset);
+				}
+			}
 		}
 	}
 

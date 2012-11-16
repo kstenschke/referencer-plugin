@@ -37,9 +37,11 @@
     All parsed items in the following list are relative to the current caret position,
     for example "previous classname" refers to the first classname found when searching backwards starting
     from the caret position. Some references are only specifically available for certain file types.<br/>
-    <br/><ul>
-        <li>Current date as YYYY-MM-DD</li>
-        <li>Current date as YYYY-MM-DD HH:MM:SS</li>
+    <br/>
+    <ul>
+        <li>Current date/time formatted as YYYY-MM-DD and YYYY-MM-DD HH:MM:SS</li>
+        <li>Current UNIX timestamp in seconds and milliseconds</li>
+    </ul><ul>
         <li>Path to current file</li>
         <li>Current filename</li>
         <li>Current filename::line number</li>
@@ -47,17 +49,17 @@
         <li>When having a multi-line selection: File path / selection: line num. sel. start - line num. sel. end</li>
         <li>When having opened more than one file: list of paths to all opened files</li>
     </ul><ul>
-        <li>PHP files: previous classname::previous methodname</li>
-        <li>PHP files: previous classname::linenumber</li>
+        <li>PHP files: previous classname::previous method name</li>
+        <li>PHP files: previous classname::line number</li>
         <li>PHP files: previous classname</li>
-        <li>PHP files: previous functionname</li>
-        <li>PHP files: previous/next variablename</li>
+        <li>PHP files: previous function name</li>
+        <li>PHP files: previous/next variable name</li>
     </ul><ul>
         <li>JavaScript files: namespace.classname</li>
-        <li>JavaScript files: namespace.classname.previous methodname</li>
+        <li>JavaScript files: namespace.classname.previous method name</li>
         <li>JavaScript files: namespace.classname::line number</li>
-        <li>JavaScript files: previous/next methodname</li>
-        <li>JavaScript files: filepath formatted as namespace (helpful e.g. when working with Ext JS)</li>
+        <li>JavaScript files: previous/next method name</li>
+        <li>JavaScript files: filepath formatted as namespace</li>
     </ul><ul>
         <li>References of all endings to occurences (in current file) of the word at the caret</li>
     </ul><br/>
@@ -72,7 +74,10 @@
 
   <change-notes><![CDATA[
     1.0.6<br/>
-    <ul><li>Added list of all open files</li></ul>
+    <ul><li>Improved references list with section headers</li>
+        <li>Added list of all open files</li>
+        <li>Added UNIX timestamp in seconds and milliseconds</li>
+    </ul>
     1.0.5<br/>
     <ul><li>Added item group separators</li></ul>
     1.0.4<br/>

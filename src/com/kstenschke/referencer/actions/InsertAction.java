@@ -89,7 +89,7 @@ public class InsertAction extends AnAction {
 										final Document document = editor.getDocument();
 										int caretOffset	= editor.getCaretModel().getOffset();
 
-										document.insertString(caretOffset, refArr[index].toString());
+										document.insertString(caretOffset, Parser.fixReferenceValue(project, refArr[index].toString()) );
 									}
 								},
 								null, null);

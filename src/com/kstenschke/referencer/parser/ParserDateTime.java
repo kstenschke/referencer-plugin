@@ -44,6 +44,9 @@ class ParserDateTime {
 
 		referenceItems.add(new SimpleDateFormat("yyyy-MM-dd").format(date));
 		referenceItems.add(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date));
+			// Current UNIX timestamp
+		referenceItems.add( Long.toString( System.currentTimeMillis() ) );
+		referenceItems.add( Long.toString( System.currentTimeMillis() / 1000) );
 
 		return referenceItems;
 	}

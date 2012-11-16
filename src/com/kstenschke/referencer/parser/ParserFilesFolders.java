@@ -63,15 +63,18 @@ class ParserFilesFolders {
 
 
 				// Add items
+			FileEditorManager fileEditorManager	= FileEditorManager.getInstance(project);
+			int amountOpenFiles	= fileEditorManager.getOpenFiles().length;
+			if( amountOpenFiles > 1 ) {
+//				referenceItems.add( getAllOpenedFiles(fileEditorManager));
+				referenceItems.add( "List of currently opened files" );
+			}
+
 			referenceItems.add(filePath);
-			referenceItems.add(filename);
-			referenceItems.add(filename + "::" + (lineNumber+1));
 			referenceItems.add(filePath + "::" + (lineNumber+1));
 
-			FileEditorManager fileEditorManager	= FileEditorManager.getInstance(project);
-			if( fileEditorManager.getOpenFiles().length > 1 ) {
-				referenceItems.add( getAllOpenedFiles(fileEditorManager));
-			}
+			referenceItems.add(filename);
+			referenceItems.add(filename + "::" + (lineNumber+1));
 		}
 
 		return referenceItems;
@@ -83,7 +86,7 @@ class ParserFilesFolders {
 	 * @param 	fileEditorManager	FileEditorManager
 	 * @return	String with concatenated list of all files that are opened currently
 	 */
-	private static String getAllOpenedFiles(FileEditorManager fileEditorManager) {
+	public static String getAllOpenedFiles(FileEditorManager fileEditorManager) {
 		String allOpenFiles	= "";
 
 		List<VirtualFile> openFiles = Arrays.asList( fileEditorManager.getOpenFiles() );

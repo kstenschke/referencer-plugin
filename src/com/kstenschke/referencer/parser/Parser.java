@@ -23,6 +23,7 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
+import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.kstenschke.referencer.FileUtils;
@@ -71,10 +72,12 @@ public class Parser {
 			List<String> referenceItems = new ArrayList<String>();
 
 				// Add date/timestamps
+			referenceItems.add("SECTIONTITLE: Date / Time");
 			referenceItems.addAll(ParserDateTime.getReferenceItems(e));
 
 				// Add file / path items
-			referenceItems.add("_");
+			referenceItems.add("SECTIONTITLE: Files / Paths");
+//			referenceItems.add("_");
 			referenceItems.addAll(ParserFilesFolders.getReferenceItems(e));
 
 				// Add selection info
@@ -84,13 +87,15 @@ public class Parser {
 
 				// Add JavaScript items
 			if( fileExtension != null && fileExtension.equals("js") ) {
-				referenceItems.add("_");
+//				referenceItems.add("_");
+				referenceItems.add("SECTIONTITLE: JavaScript");
 				referenceItems.addAll(ParserJavascript.getReferenceItems(e));
 			}
 
 				// Add PHP items
 			else if( FileUtils.isPhpFileExtension(fileExtension) ) {
-				referenceItems.add("_");
+//				referenceItems.add("_");
+				referenceItems.add("SECTIONTITLE: PHP");
 				referenceItems.addAll(ParserPhp.getReferenceItems(e));
 			}
 
@@ -100,9 +105,10 @@ public class Parser {
 				String[] lineParts	= docText.split( wordAtCaret );
 
 				if( lineParts.length > 0 ) {
-					referenceItems.add("_");
+//					referenceItems.add("_");
 
 					List<String> listLineParts = Arrays.asList(lineParts);
+
 					int count	= 0;
 					for (String listLinePart : listLineParts) {
 						if(count > 0 ) {
@@ -111,6 +117,7 @@ public class Parser {
 							if( !listLinePart.equals(wordAtCaret) && !listLinePart.trim().isEmpty()
 								&& !referenceItems.contains(listLinePart)
 							) {
+								if( count == 1) referenceItems.add("SECTIONTITLE: Text Completions");
 								referenceItems.add(listLinePart);
 							}
 						}
@@ -125,6 +132,24 @@ public class Parser {
 		}
 
 		return refArr;
+	}
+
+
+
+	/**
+	 * Process given reference item - if it's a type description "translate" to the respective value
+	 *
+	 * @param	project							IDEA project
+	 * @param	itemString						Selected references list item value
+	 * @return  String to be inserted/copied
+	 */
+	public static String fixReferenceValue(Project project, String itemString) {
+		if( itemString.equals("List of currently opened files") ) {
+			return ParserFilesFolders.getAllOpenedFiles(FileEditorManager.getInstance(project));
+		}
+
+
+		return itemString;
 	}
 
 }
