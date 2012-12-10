@@ -19,41 +19,57 @@ package com.kstenschke.referencer.DividedList;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import static java.awt.event.KeyEvent.VK_CONTROL;
-import static java.awt.event.KeyEvent.VK_DOWN;
-import static java.awt.event.KeyEvent.VK_UP;
+import static java.awt.event.KeyEvent.*;
 
 public class DividedListCellKeyListener implements KeyListener {
 
-	Boolean isControlDown = false;
+	Boolean isVkControlDown = false;
+	private Boolean isVkDownDown	= false;
+	private Boolean isVkUpDown		= false;
+
 	Boolean isGoingDown		= false;
 	Boolean isGoingUp		= false;
+
+	private Boolean isSectionJumpAlreadyDone = true;	// only one jump per cursor key press
 
 
 
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == VK_CONTROL) isControlDown = true;
+		if (e.getKeyCode() == VK_CONTROL) isVkControlDown = true;
 
 		if ( e.getKeyCode() == VK_DOWN ) {
-			isGoingDown = true;
-			isGoingUp = false;
-		} else
-		if ( e.getKeyCode() == VK_UP ) {
-			isGoingDown = false;
-			isGoingUp = true;
+				isVkDownDown	= true;
+				isGoingDown		= true;
+				isGoingUp		= false;
+				isSectionJumpAlreadyDone	= false;
+		} else if ( e.getKeyCode() == VK_UP ) {
+			isVkUpDown		= true;
+			isGoingDown		= false;
+			isGoingUp		= true;
+			isSectionJumpAlreadyDone	= false;
 		}
 	}
 
 
 
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == VK_CONTROL && isControlDown) isControlDown = false;
+		if (e.getKeyCode() == VK_CONTROL ) {
+			isVkControlDown = false;
+		}
+		if ( e.getKeyCode() == VK_DOWN ) {
+			isVkDownDown	= false;
+			isSectionJumpAlreadyDone	= true;
+		}
+		if ( e.getKeyCode() == VK_UP ) {
+			isVkUpDown	= false;
+			isSectionJumpAlreadyDone	= true;
+		}
 	}
 
 
 
 	public void keyTyped(KeyEvent e) {
-		// nothing
+
 	}
 
 }

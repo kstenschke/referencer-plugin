@@ -24,6 +24,8 @@ public class DividedListSelectionListener extends JFrame implements ListSelectio
 
 	private final DividedListCellKeyListener keyListener;
 
+
+
 	public DividedListSelectionListener(DividedListCellKeyListener keyListener) {
 		this.keyListener	= keyListener;
 	}
@@ -40,18 +42,37 @@ public class DividedListSelectionListener extends JFrame implements ListSelectio
 		Object val	= list.getSelectedValue();
 
 		if ( val != null ) {
-			String valStr	= val.toString();
+			 if ( keyListener.isVkControlDown ) {
+					// CTRL+DOWN: 1st item of next section
+				 if( keyListener.isGoingDown ) {
+					while( 		list.getSelectedIndex() < (list.getModel().getSize() - 1)
+							&&	!isSeparatorOrSection( list.getSelectedValue().toString() )
+					) {
+						list.setSelectedIndex( list.getSelectedIndex() + 1);
+					}
+					//if( list.getSelectedIndex() < (list.getModel().getSize() - 1)) {
+					//	list.setSelectedIndex( list.getSelectedIndex() + 1);
+					//}
+				 }
+			 }
 
+
+				// Navigating item selection up/down
 				// If the selected item is a section title or divider - forward to the next item in that direction
-			if ( valStr.equals("_") || valStr.startsWith("SECTIONTITLE:") ) {
+			if ( isSeparatorOrSection( list.getSelectedValue().toString() )) {
 				if( keyListener.isGoingDown || keyListener.isGoingUp) {
-					int selectedIndex	= list.getSelectedIndex();
 					int offset			= keyListener.isGoingDown ? 1 : -1;
 
-					list.setSelectedIndex(selectedIndex + offset);
+					list.setSelectedIndex(list.getSelectedIndex() + offset);
 				}
 			}
+
 		}
 	}
 
+
+
+	private boolean isSeparatorOrSection(String valStr) {
+		return valStr.equals("_") || valStr.startsWith("SECTIONTITLE:");
+	}
 }

@@ -66,7 +66,6 @@ class ParserFilesFolders {
 			FileEditorManager fileEditorManager	= FileEditorManager.getInstance(project);
 			int amountOpenFiles	= fileEditorManager.getOpenFiles().length;
 			if( amountOpenFiles > 1 ) {
-//				referenceItems.add( getAllOpenedFiles(fileEditorManager));
 				referenceItems.add( "List of currently opened files" );
 			}
 

@@ -26,11 +26,12 @@ import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.kstenschke.referencer.ArrayUtils;
 import com.kstenschke.referencer.FileUtils;
 import com.kstenschke.referencer.StringUtils;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class Parser {
 
@@ -63,8 +64,15 @@ public class Parser {
 			int lineSelStart	= document.getLineNumber(selStart);
 			int lineSelEnd		= document.getLineNumber(selEnd);
 
-				// Grab the "word" before the caret
-			String wordAtCaret	= StringUtils.getWordAtOffset(document.getCharsSequence(), caretOffset);
+//				// Grab the "word" at the caret - all java identifier characters
+//			String wordAtCaret	= StringUtils.getWordAtOffset(document.getCharsSequence(), caretOffset);
+//				// Grab the "string" at the caret - all non white-space characters
+//			String stringAtCaret	= StringUtils.getStringAtOffset(document.getCharsSequence(), caretOffset);
+
+				// Grab the "word" to the left of the caret - all java identifier characters
+			String wordLeftOfCaret	= StringUtils.getWordLeftOfOffset(document.getCharsSequence(), caretOffset);
+				// Grab the "string" to the left of the caret - all non white-space characters
+			String stringLeftOfCaret	= StringUtils.getStringLeftOfOffset(document.getCharsSequence(), caretOffset);
 
 
 
@@ -77,7 +85,6 @@ public class Parser {
 
 				// Add file / path items
 			referenceItems.add("SECTIONTITLE: Files / Paths");
-//			referenceItems.add("_");
 			referenceItems.addAll(ParserFilesFolders.getReferenceItems(e));
 
 				// Add selection info
@@ -87,38 +94,57 @@ public class Parser {
 
 				// Add JavaScript items
 			if( fileExtension != null && fileExtension.equals("js") ) {
-//				referenceItems.add("_");
 				referenceItems.add("SECTIONTITLE: JavaScript");
 				referenceItems.addAll(ParserJavascript.getReferenceItems(e));
 			}
-
 				// Add PHP items
 			else if( FileUtils.isPhpFileExtension(fileExtension) ) {
-//				referenceItems.add("_");
 				referenceItems.add("SECTIONTITLE: PHP");
 				referenceItems.addAll(ParserPhp.getReferenceItems(e));
 			}
 
 				// Add all line-parts in current document that begin the same as the word at the caret
-			if( wordAtCaret!= null && !wordAtCaret.isEmpty() && wordAtCaret.length() > 2 ) {
+			if( 	(wordLeftOfCaret!= null && !wordLeftOfCaret.isEmpty() && wordLeftOfCaret.length() > 1)
+			    ||  (stringLeftOfCaret!= null && !stringLeftOfCaret.isEmpty() && stringLeftOfCaret.length() > 2)
+			) {
 				String docText	= document.getText();
-				String[] lineParts	= docText.split( wordAtCaret );
 
-				if( lineParts.length > 0 ) {
-//					referenceItems.add("_");
+				String[] wordLineParts = null;
+				if( wordLeftOfCaret != null && !wordLeftOfCaret.isEmpty() ) {
+					wordLineParts	= docText.split(wordLeftOfCaret);
+				}
 
-					List<String> listLineParts = Arrays.asList(lineParts);
+				String[] allLineParts;
+				if( stringLeftOfCaret != null && !stringLeftOfCaret.isEmpty() ) {
+					String[] stringLineParts= docText.split( Pattern.quote(stringLeftOfCaret) );
+					allLineParts 	= ArrayUtils.merge(wordLineParts, stringLineParts);
+				} else {
+					allLineParts	= wordLineParts;
+				}
+
+
+				if( allLineParts != null && allLineParts.length > 0 ) {
+					List<String> listLineParts = Arrays.asList(allLineParts);
 
 					int count	= 0;
 					for (String listLinePart : listLineParts) {
 						if(count > 0 ) {
 							listLinePart	= listLinePart.split("\\n")[0];
 
-							if( !listLinePart.equals(wordAtCaret) && !listLinePart.trim().isEmpty()
-								&& !referenceItems.contains(listLinePart)
-							) {
-								if( count == 1) referenceItems.add("SECTIONTITLE: Text Completions");
-								referenceItems.add(listLinePart);
+							if( listLinePart.length() > 1 ) {
+								listLinePart	= listLinePart.substring(1);
+
+								if( 	listLinePart != null	&& listLinePart.trim().length() > 1
+									&&	!referenceItems.contains(listLinePart)
+								) {
+									if( ! listLinePart.isEmpty() && !referenceItems.contains("SECTIONTITLE: Text Completions") ) {
+										referenceItems.add("SECTIONTITLE: Text Completions");
+									}
+
+									if( ! listLinePart.isEmpty()  ) {
+										referenceItems.add(listLinePart);
+									}
+								}
 							}
 						}
 						count++;
@@ -147,7 +173,6 @@ public class Parser {
 		if( itemString.equals("List of currently opened files") ) {
 			return ParserFilesFolders.getAllOpenedFiles(FileEditorManager.getInstance(project));
 		}
-
 
 		return itemString;
 	}

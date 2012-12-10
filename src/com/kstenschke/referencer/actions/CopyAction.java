@@ -74,7 +74,7 @@ public class CopyAction extends AnAction {
 
 				PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
 
-				popup.setTitle("Select reference to be copied").setItemChoosenCallback(new Runnable() {
+				popup.setTitle("Select what to copy").setItemChoosenCallback(new Runnable() {
 					public void run() {
 
 						// Callback when item chosen

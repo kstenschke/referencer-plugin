@@ -72,7 +72,7 @@ public class InsertAction extends AnAction {
 
 				PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
 
-				popup.setTitle("Select reference to be inserted").setItemChoosenCallback(new Runnable() {
+				popup.setTitle("Select Insertion").setItemChoosenCallback(new Runnable() {
 					public void run() {
 
 						ApplicationManager.getApplication().runWriteAction(new Runnable() {
@@ -89,7 +89,9 @@ public class InsertAction extends AnAction {
 										final Document document = editor.getDocument();
 										int caretOffset	= editor.getCaretModel().getOffset();
 
-										document.insertString(caretOffset, Parser.fixReferenceValue(project, refArr[index].toString()) );
+										String insertString = Parser.fixReferenceValue(project, refArr[index].toString());
+										document.insertString(caretOffset, insertString );
+										editor.getCaretModel().moveToOffset( caretOffset + insertString.length() );
 									}
 								},
 								null, null);

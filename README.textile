@@ -52,7 +52,7 @@ from the caret position. Some references are only specifically available for cer
 * JavaScript files: previous/next method name
 * JavaScript files: file path formatted as namespace
 
-* References of all endings to occurences (in current file) of the word at the caret
+* General word-completions: all continuations to the word to the left of the caret, found in the current file
 
 
 h2. License

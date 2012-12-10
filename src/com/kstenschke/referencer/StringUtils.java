@@ -97,6 +97,19 @@ public class StringUtils {
 
 
 	/**
+	 * Get word to the left of caret offset out of given text
+	 *
+	 * @param   text           The full text
+	 * @param   cursorOffset   Character offset of caret
+	 * @return                 The extracted word or null
+	 */
+	public static String getWordLeftOfOffset(CharSequence text, int cursorOffset) {
+		return grabWord(text, cursorOffset - 1, false);
+	}
+
+
+
+	/**
 	 * Get word at caret offset out of given text
 	 *
 	 * @param   text           The full text
@@ -104,10 +117,24 @@ public class StringUtils {
 	 * @return                 The extracted word or null
 	 */
 	public static String getWordAtOffset(CharSequence text, int cursorOffset) {
+		return grabWord(text, cursorOffset, true);
+	}
+
+
+
+	/**
+	 * Get word at caret offset out of given text
+	 *
+	 * @param   text           			The full text
+	 * @param   cursorOffset   			Character offset of caret
+	 * @param   expandWordBoundaryRight Detect string boundary by expanding to the right?
+	 * @return                 			The extracted word or null
+	 */
+	private static String grabWord(CharSequence text, int cursorOffset, boolean expandWordBoundaryRight) {
 		if (	text.length() == 0
 				||	cursorOffset >= text.length())  return null;
 
-		if (cursorOffset > 0
+		while (cursorOffset < (text.length()-1)
 				&& !Character.isJavaIdentifierPart(text.charAt(cursorOffset))
 				&& Character.isJavaIdentifierPart(text.charAt(cursorOffset - 1))
 				) {
@@ -115,16 +142,90 @@ public class StringUtils {
 		}
 
 		if (Character.isJavaIdentifierPart(text.charAt(cursorOffset))) {
-			int start = cursorOffset;
-			int end = cursorOffset;
+			int start	= cursorOffset;
+			int end		= cursorOffset;
 
 
 			while (start > 0 && Character.isJavaIdentifierPart(text.charAt(start - 1))) {
 				start--;
 			}
 
-			while (end < text.length() && Character.isJavaIdentifierPart(text.charAt(end))) {
-				end++;
+			if( expandWordBoundaryRight ) {
+					// Find ending of word by expanding boundary until first non-whitespace to the right
+				while (end < text.length() && !Character.isWhitespace(text.charAt(end))) {
+					end++;
+				}
+			}
+
+			return text.subSequence(start, end).toString();
+		}
+
+		return null;
+	}
+
+
+
+
+	/**
+	 * Get "string" at caret offset out of given text - string-boundary: white-space characters
+	 *
+	 * @param   text           The full text
+	 * @param   cursorOffset   Character offset of caret
+	 * @return                 The extracted word or null
+	 */
+	public static String getStringLeftOfOffset(CharSequence text, int cursorOffset) {
+		return grabString(text, cursorOffset - 1, false);
+	}
+
+
+
+
+	/**
+	 * Get "string" at caret offset out of given text - string-boundary: white-space characters
+	 *
+	 * @param   text           The full text
+	 * @param   cursorOffset   Character offset of caret
+	 * @return                 The extracted word or null
+	 */
+	public static String getStringAtOffset(CharSequence text, int cursorOffset) {
+		return grabString(text, cursorOffset, true);
+	}
+
+
+
+
+	/**
+	 * Get "string" at caret offset out of given text - string-boundary: white-space characters
+	 *
+	 * @param   text           			The full text
+	 * @param   cursorOffset   			Character offset of caret
+	 * @param   expandWordBoundaryRight	Detect string boundary by expanding to the right?
+	 * @return                 			The extracted word or null
+	 */
+	private static String grabString(CharSequence text, int cursorOffset, boolean expandWordBoundaryRight) {
+		if (	text.length() == 0
+				||	cursorOffset >= text.length())  return null;
+
+		while (cursorOffset < (text.length()-1)
+				&& !Character.isWhitespace(text.charAt(cursorOffset))
+				&& Character.isWhitespace(text.charAt(cursorOffset - 1))
+				) {
+			cursorOffset--;
+		}
+
+		if (Character.isWhitespace(text.charAt(cursorOffset))) {
+			int start	= cursorOffset;
+			int end		= cursorOffset;
+
+
+			while (start > 0 && Character.isWhitespace(text.charAt(start - 1))) {
+				start--;
+			}
+
+			if( expandWordBoundaryRight ) {
+				while (end < text.length() && !Character.isWhitespace(text.charAt(end))) {
+					end++;
+				}
 			}
 
 			return text.subSequence(start, end).toString();
