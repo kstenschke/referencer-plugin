@@ -69,7 +69,7 @@
   <change-notes><![CDATA[
     1.0.7<br/>
     <ul><li>Improved general word-completions detection</li>
-    <ul><li>Added respective caret movement to text insertion</li>
+        <li>Added respective caret movement to text insertion</li>
     </ul>
     1.0.6<br/>
     <ul><li>Improved references list with section headers</li>
