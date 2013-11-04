@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright 2012 Kay Stenschke
+  ~ Copyright Kay Stenschke
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -12,7 +12,7 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
-  -->
+-->
 
 <idea-plugin version="2">
   <name>Referencer</name>
@@ -61,12 +61,17 @@
     Please note: This plugin is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ]]></description>
   <vendor url="" email="info@stenschke.com">Kay Stenschke</vendor>
-  <version>1.0.7</version>
+  <version>1.0.8</version>
 
   <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
   <idea-version since-build="8000"/>
 
   <change-notes><![CDATA[
+    1.0.8<br/>
+    <ul>
+        <li>Updated API to IC-129.713</li>
+        <li>Improved UI, added Darcula Theme compatibility</li>
+    </ul>
     1.0.7<br/>
     <ul><li>Improved general word-completions detection</li>
         <li>Added respective caret movement to text insertion</li>
@@ -89,8 +94,6 @@
     1.0.0<br/>
     <ul><li>Initial release</li></ul>
   ]]></change-notes>
-
-
 
   <application-components>
     <!-- Add your application components here -->

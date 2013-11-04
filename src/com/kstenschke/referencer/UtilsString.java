@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Kay Stenschke
+ * Copyright Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.kstenschke.referencer;
 /**
  * String utility methods
  */
-public class StringUtils {
+public class UtilsString {
 
 	/**
 	 * @param	referenceStr	String to be cleaned
@@ -34,8 +34,6 @@ public class StringUtils {
 		return referenceStr.trim();
 	}
 
-
-
 	/**
 	 * @param	referenceStr	String to be cleaned
 	 * @param	removeOnceStr	Sub string to be removed only once (first occurrence)
@@ -44,12 +42,10 @@ public class StringUtils {
 	 */
 	public static String cleanReference(String referenceStr, String removeOnceStr, String[] removeEachStrs) {
 		referenceStr	= cleanReference(referenceStr, removeOnceStr);
-		referenceStr	= StringUtils.removeSubStrings(referenceStr, removeEachStrs);
+		referenceStr	= UtilsString.removeSubStrings(referenceStr, removeEachStrs);
 
 		return referenceStr.trim();
 	}
-
-
 
 	/**
 	 * Cleanup and concatenate given postfix
@@ -63,8 +59,6 @@ public class StringUtils {
 	public static String cleanReference(String referenceStr, String removeOnceStr, String[] removeEachStrs, String postfix) {
 		return cleanReference(referenceStr, "function", removeEachStrs) + postfix;
 	}
-
-
 
 	/**
 	 * Remove all of the given sub string from the given string
@@ -81,8 +75,12 @@ public class StringUtils {
 		return haystack;
 	}
 
-
-
+    /**
+     * @param   string
+     * @param   toReplace
+     * @param   replacement
+     * @return  String
+     */
 	public static String replaceLast(String string, String toReplace, String replacement) {
 		int pos = string.lastIndexOf(toReplace);
 		if (pos > -1) {
@@ -93,8 +91,6 @@ public class StringUtils {
 			return string;
 		}
 	}
-
-
 
 	/**
 	 * Get word to the left of caret offset out of given text
@@ -107,8 +103,6 @@ public class StringUtils {
 		return grabWord(text, cursorOffset - 1, false);
 	}
 
-
-
 	/**
 	 * Get word at caret offset out of given text
 	 *
@@ -119,8 +113,6 @@ public class StringUtils {
 	public static String getWordAtOffset(CharSequence text, int cursorOffset) {
 		return grabWord(text, cursorOffset, true);
 	}
-
-
 
 	/**
 	 * Get word at caret offset out of given text
@@ -163,9 +155,6 @@ public class StringUtils {
 		return null;
 	}
 
-
-
-
 	/**
 	 * Get "string" at caret offset out of given text - string-boundary: white-space characters
 	 *
@@ -177,9 +166,6 @@ public class StringUtils {
 		return grabString(text, cursorOffset - 1, false);
 	}
 
-
-
-
 	/**
 	 * Get "string" at caret offset out of given text - string-boundary: white-space characters
 	 *
@@ -190,9 +176,6 @@ public class StringUtils {
 	public static String getStringAtOffset(CharSequence text, int cursorOffset) {
 		return grabString(text, cursorOffset, true);
 	}
-
-
-
 
 	/**
 	 * Get "string" at caret offset out of given text - string-boundary: white-space characters

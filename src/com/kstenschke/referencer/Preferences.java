@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Kay Stenschke
+ * Copyright Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 package com.kstenschke.referencer;
 
 import com.intellij.ide.util.PropertiesComponent;
-import com.kstenschke.referencer.FileUtils;
 import org.jetbrains.annotations.NonNls;
 
 /**
@@ -36,8 +35,6 @@ public class Preferences {
 	@NonNls
 	private static final String PROPERTY_REFERENCER_INDEX_JS = "PluginReferencer.SelectedIndexJS";
 
-
-
 	/**
 	 * Store referencer preferences: selected index per supported file type
 	 *
@@ -50,8 +47,6 @@ public class Preferences {
 		PropertiesComponent.getInstance().setValue(preferenceIdentifier, selectedIndex.toString());
 	}
 
-
-
 	/**
 	 * Get identifier for referencer preference of given file extension
 	 *
@@ -59,17 +54,15 @@ public class Preferences {
 	 * @return						Preference identifier
 	 */
 	private static String getPropertyIdentifierByFileExtension(String fileExtension) {
-		if( FileUtils.isPhpFileExtension(fileExtension) ) {
+		if( UtilsFile.isPhpFileExtension(fileExtension) ) {
 			return PROPERTY_REFERENCER_INDEX_PHP;
-		} else if( FileUtils.isJavaScriptFileExtension(fileExtension) ) {
+		} else if( UtilsFile.isJavaScriptFileExtension(fileExtension) ) {
 			return PROPERTY_REFERENCER_INDEX_JS;
 		}
 
 			// Default
 		return PROPERTY_REFERENCER_INDEX;
 	}
-
-
 
 	/**
 	 * @param	fileExtension	Extension of file open while invoking referencer

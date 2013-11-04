@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Kay Stenschke
+ * Copyright Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,9 +28,9 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.kstenschke.referencer.DividedList.DividedListCellKeyListener;
-import com.kstenschke.referencer.DividedList.DividedListCellRenderer;
-import com.kstenschke.referencer.DividedList.DividedListSelectionListener;
+import com.kstenschke.referencer.dividedlist.DividedListCellRenderer;
+import com.kstenschke.referencer.dividedlist.DividedListSelectionListener;
+import com.kstenschke.referencer.StaticTexts;
 import com.kstenschke.referencer.parser.Parser;
 import com.kstenschke.referencer.Preferences;
 
@@ -51,15 +51,12 @@ public class InsertAction extends AnAction {
 		final Editor editor		= e.getData(PlatformDataKeys.EDITOR);
 
 		if( project != null && editor != null ) {
-			final Object[] refArr = Parser.getItems(e);
+			final String[] refArr = Parser.getItems(e);
 			if( refArr != null ) {
 
-				final JList referencesList = new JList(refArr);
+				final JList referencesList = new JList<String>(refArr);
 				referencesList.setCellRenderer(new DividedListCellRenderer() );
-
-				DividedListCellKeyListener keyListener	= new DividedListCellKeyListener();
-				referencesList.addKeyListener(keyListener);
-				referencesList.addListSelectionListener(new DividedListSelectionListener(keyListener));
+				referencesList.addListSelectionListener(new DividedListSelectionListener());
 
 				final Document document = editor.getDocument();
 				VirtualFile file		= FileDocumentManager.getInstance().getFile(document);
@@ -68,11 +65,12 @@ public class InsertAction extends AnAction {
 					// Preselect item from preferences
 				Integer selectedIndex	= Preferences.getSelectedIndex(fileExtension);
 				if( selectedIndex > refArr.length ) selectedIndex	= 0;
+
 				referencesList.setSelectedIndex(selectedIndex);
 
 				PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
 
-				popup.setTitle("Select Insertion").setItemChoosenCallback(new Runnable() {
+				popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_INSERT).setItemChoosenCallback(new Runnable() {
 					public void run() {
 
 						ApplicationManager.getApplication().runWriteAction(new Runnable() {
@@ -89,7 +87,7 @@ public class InsertAction extends AnAction {
 										final Document document = editor.getDocument();
 										int caretOffset	= editor.getCaretModel().getOffset();
 
-										String insertString = Parser.fixReferenceValue(project, refArr[index].toString());
+										String insertString = Parser.fixReferenceValue(project, refArr[index]);
 										document.insertString(caretOffset, insertString );
 										editor.getCaretModel().moveToOffset( caretOffset + insertString.length() );
 									}

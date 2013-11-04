@@ -57,7 +57,7 @@ from the caret position. Some references are only specifically available for cer
 
 h2. License
 
-Copyright 2012 Kay Stenschke
+Copyright Kay Stenschke
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Kay Stenschke
+ * Copyright Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.kstenschke.referencer.StringUtils;
+import com.kstenschke.referencer.UtilsString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,8 +57,6 @@ class ParserJavascript {
 				// File path and name
 			VirtualFile file	= FileDocumentManager.getInstance().getFile(document);
 			String filePath		= (file != null) ? file.getPath() : "";
-//			String filename		= (file != null) ? file.getName() : "";
-
 
 				// Add namespace
 			String namespaceBefore = null;
@@ -81,7 +79,6 @@ class ParserJavascript {
 				namespacedClassname	= namespaceBefore + "." + classnameBefore;
 				referenceItems.add(namespacedClassname);
 			}
-
 
 				// Add method before caret
 			String methodBefore = null;
@@ -113,14 +110,12 @@ class ParserJavascript {
 
 				// Convert path to namespace (slashes to dots)
 			String namespaceFromFilepath= filePath.replace("/", ".").replaceFirst("\\.", "");
-			namespaceFromFilepath		= StringUtils.replaceLast(namespaceFromFilepath, ".js", "");
+			namespaceFromFilepath		= UtilsString.replaceLast(namespaceFromFilepath, ".js", "");
 			referenceItems.add( namespaceFromFilepath );
 		}
 
 		return referenceItems;
 	}
-
-
 
 	/**
 	 * Get all JavaScript method names in the order of their appearance in the given text, but each item only once
@@ -153,8 +148,6 @@ class ParserJavascript {
 		return allMatches;
 	}
 
-
-
 	/**
 	 * @param	text	Source code to be searched
 	 * @return			All found PHP class names
@@ -183,8 +176,6 @@ class ParserJavascript {
 		return allMatches;
 	}
 
-
-
 	/**
 	 * Get all JS namespace in the order of their appearance, defined as doc-annotations in the given text, but each item only once
 	 *
@@ -204,8 +195,6 @@ class ParserJavascript {
 		return allMatches;
 	}
 
-
-
 	/**
 	 * Clean up method name
 	 *
@@ -215,10 +204,8 @@ class ParserJavascript {
 	private static String cleanupMethodName(String methodName) {
 		String[] removeEachStrs	= {"(", ":"};
 
-		return StringUtils.cleanReference(methodName, "function", removeEachStrs, "();");
+		return UtilsString.cleanReference(methodName, "function", removeEachStrs, "();");
 	}
-
-
 
 	/**
 	 * Clean up namespace name
@@ -229,10 +216,8 @@ class ParserJavascript {
 	private static String cleanupNamespaceName(String namespaceName) {
 		String[] removeEachStrs	= {"\t"};
 
-		return StringUtils.cleanReference(namespaceName, "@namespace", removeEachStrs);
+		return UtilsString.cleanReference(namespaceName, "@namespace", removeEachStrs);
 	}
-
-
 
 	/**
 	 * Clean up class name
@@ -242,9 +227,8 @@ class ParserJavascript {
 	 */
 	private static String cleanupClassname(String className) {
 		String[] removeEachStrs	= {"\t", " ", "=", "("};
-		className	= StringUtils.cleanReference(className, "@class", removeEachStrs);
+		className	= UtilsString.cleanReference(className, "@class", removeEachStrs);
 
-//		className	= StringUtils.cleanReference(className, "Class\\.create");
 		className	= className.replace("Class.create", "");
 
 		return className.trim();

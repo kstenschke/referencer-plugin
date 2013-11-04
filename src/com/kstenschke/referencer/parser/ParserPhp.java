@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Kay Stenschke
+ * Copyright Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
-import com.kstenschke.referencer.StringUtils;
+import com.kstenschke.referencer.UtilsString;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -115,8 +115,6 @@ class ParserPhp {
 		return referenceItems;
 	}
 
-
-
 	/**
 	 * Get all PHP variable names in the order of their appearance in the given text, but each item only once
 	 *
@@ -135,8 +133,6 @@ class ParserPhp {
 
 		return allMatches;
 	}
-
-
 
 	/**
 	 * Get all PHP method names in the order of their appearance in the given text, but each item only once
@@ -157,8 +153,6 @@ class ParserPhp {
 		return allMatches;
 	}
 
-
-
 	/**
 	 * Get all PHP class names in the order of their appearance in the given text, but each item only once
 	 *
@@ -178,8 +172,6 @@ class ParserPhp {
 		return allMatches;
 	}
 
-	
-	
 	/**
 	 * Clean up method name
 	 *
@@ -189,10 +181,8 @@ class ParserPhp {
 	private static String cleanupMethodName(String methodName) {
 		String[] removeEachStrs	= {"("};
 
-		return StringUtils.cleanReference(methodName, "function", removeEachStrs, "();");
+		return UtilsString.cleanReference(methodName, "function", removeEachStrs, "();");
 	}
-
-
 
 	/**
 	 * Clean up method name
@@ -201,7 +191,7 @@ class ParserPhp {
 	 * @return				Cleaned class name
 	 */
 	private static String cleanupClassName(String className) {
-		return StringUtils.cleanReference(className, "class");
+		return UtilsString.cleanReference(className, "class");
 	}
 
 }

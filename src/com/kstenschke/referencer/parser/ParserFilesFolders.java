@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Kay Stenschke
+ * Copyright Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,19 +20,15 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.kstenschke.referencer.StringUtils;
+import com.kstenschke.referencer.StaticTexts;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 class ParserFilesFolders {
 
@@ -66,7 +62,7 @@ class ParserFilesFolders {
 			FileEditorManager fileEditorManager	= FileEditorManager.getInstance(project);
 			int amountOpenFiles	= fileEditorManager.getOpenFiles().length;
 			if( amountOpenFiles > 1 ) {
-				referenceItems.add( "List of currently opened files" );
+				referenceItems.add(StaticTexts.POPUP_ITEM_OPEN_FILES);
 			}
 
 			referenceItems.add(filePath);
@@ -78,8 +74,6 @@ class ParserFilesFolders {
 
 		return referenceItems;
 	}
-
-
 
 	/**
 	 * @param 	fileEditorManager	FileEditorManager

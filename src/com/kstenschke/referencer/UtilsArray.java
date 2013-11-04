@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Kay Stenschke
+ * Copyright Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import java.util.*;
 /**
  * Array utility methods
  */
-public class ArrayUtils {
+public class UtilsArray {
 
 	/**
 	 * Merge the two given arrays of strings
@@ -50,8 +50,6 @@ public class ArrayUtils {
 
 		return merged;
 	}
-
-
 
 	/**
 	 * Filter-out duplicates from given array of strings

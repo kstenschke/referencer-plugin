@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Kay Stenschke
+ * Copyright Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,7 +19,7 @@ package com.kstenschke.referencer;
 /**
  * File helper methods
  */
-public class FileUtils {
+public class UtilsFile {
 
 	/**
 	 * Compare given extension against known PHP extensions
@@ -32,14 +32,12 @@ public class FileUtils {
 
 		fileExtension	= fileExtension.toLowerCase();
 
-		return fileExtension.equals("phpsh")
+		return     fileExtension.equals("phpsh")
 				|| fileExtension.equals("php")
 				|| fileExtension.equals("php3")
 				|| fileExtension.equals("php4")
 				|| fileExtension.equals("php5");
 	}
-
-
 
 	/**
 	 * Compare given extension against known JavaScript extensions

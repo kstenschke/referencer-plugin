@@ -1,5 +1,5 @@
 /*
- * Copyright 2012 Kay Stenschke
+ * Copyright Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,9 +26,10 @@ import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.kstenschke.referencer.ArrayUtils;
-import com.kstenschke.referencer.FileUtils;
-import com.kstenschke.referencer.StringUtils;
+import com.kstenschke.referencer.UtilsArray;
+import com.kstenschke.referencer.UtilsFile;
+import com.kstenschke.referencer.StaticTexts;
+import com.kstenschke.referencer.UtilsString;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -39,8 +40,8 @@ public class Parser {
 	 * @param	e	Action system event
 	 * @return		Items of the events context
 	 */
-	public static Object[] getItems(AnActionEvent e) {
-		Object[] refArr;
+	public static String[] getItems(AnActionEvent e) {
+		String[] refArr;
 
 		final Project project	= e.getData(PlatformDataKeys.PROJECT);
 		Editor editor			= e.getData(PlatformDataKeys.EDITOR);
@@ -64,27 +65,20 @@ public class Parser {
 			int lineSelStart	= document.getLineNumber(selStart);
 			int lineSelEnd		= document.getLineNumber(selEnd);
 
-//				// Grab the "word" at the caret - all java identifier characters
-//			String wordAtCaret	= StringUtils.getWordAtOffset(document.getCharsSequence(), caretOffset);
-//				// Grab the "string" at the caret - all non white-space characters
-//			String stringAtCaret	= StringUtils.getStringAtOffset(document.getCharsSequence(), caretOffset);
-
 				// Grab the "word" to the left of the caret - all java identifier characters
-			String wordLeftOfCaret	= StringUtils.getWordLeftOfOffset(document.getCharsSequence(), caretOffset);
+			String wordLeftOfCaret	= UtilsString.getWordLeftOfOffset(document.getCharsSequence(), caretOffset);
 				// Grab the "string" to the left of the caret - all non white-space characters
-			String stringLeftOfCaret	= StringUtils.getStringLeftOfOffset(document.getCharsSequence(), caretOffset);
-
-
+			String stringLeftOfCaret	= UtilsString.getStringLeftOfOffset(document.getCharsSequence(), caretOffset);
 
 				// Setup list of items
 			List<String> referenceItems = new ArrayList<String>();
 
 				// Add date/timestamps
-			referenceItems.add("SECTIONTITLE: Date / Time");
+			referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_DATE_TIME);
 			referenceItems.addAll(ParserDateTime.getReferenceItems(e));
 
 				// Add file / path items
-			referenceItems.add("SECTIONTITLE: Files / Paths");
+			referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_FILES_PATHS);
 			referenceItems.addAll(ParserFilesFolders.getReferenceItems(e));
 
 				// Add selection info
@@ -94,12 +88,12 @@ public class Parser {
 
 				// Add JavaScript items
 			if( fileExtension != null && fileExtension.equals("js") ) {
-				referenceItems.add("SECTIONTITLE: JavaScript");
+				referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_JAVASCRIPT);
 				referenceItems.addAll(ParserJavascript.getReferenceItems(e));
 			}
 				// Add PHP items
-			else if( FileUtils.isPhpFileExtension(fileExtension) ) {
-				referenceItems.add("SECTIONTITLE: PHP");
+			else if( UtilsFile.isPhpFileExtension(fileExtension) ) {
+				referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_PHP);
 				referenceItems.addAll(ParserPhp.getReferenceItems(e));
 			}
 
@@ -117,7 +111,7 @@ public class Parser {
 				String[] allLineParts;
 				if( stringLeftOfCaret != null && !stringLeftOfCaret.isEmpty() ) {
 					String[] stringLineParts= docText.split( Pattern.quote(stringLeftOfCaret) );
-					allLineParts 	= ArrayUtils.merge(wordLineParts, stringLineParts);
+					allLineParts 	= UtilsArray.merge(wordLineParts, stringLineParts);
 				} else {
 					allLineParts	= wordLineParts;
 				}
@@ -134,11 +128,11 @@ public class Parser {
 							if( listLinePart.length() > 1 ) {
 								listLinePart	= listLinePart.substring(1);
 
-								if( 	listLinePart != null	&& listLinePart.trim().length() > 1
+								if( 	listLinePart.trim().length() > 1
 									&&	!referenceItems.contains(listLinePart)
 								) {
-									if( ! listLinePart.isEmpty() && !referenceItems.contains("SECTIONTITLE: Text Completions") ) {
-										referenceItems.add("SECTIONTITLE: Text Completions");
+									if( ! listLinePart.isEmpty() && !referenceItems.contains(StaticTexts.POPUP_SECTION_TITLE_TEXT_COMPLETIONS) ) {
+										referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_TEXT_COMPLETIONS);
 									}
 
 									if( ! listLinePart.isEmpty()  ) {
@@ -152,15 +146,13 @@ public class Parser {
 				}
 			}
 
-			refArr = referenceItems.toArray();
+			refArr = referenceItems.toArray( new String[referenceItems.size()] );
 		} else {
 			refArr	= null;
 		}
 
 		return refArr;
 	}
-
-
 
 	/**
 	 * Process given reference item - if it's a type description "translate" to the respective value
@@ -170,7 +162,7 @@ public class Parser {
 	 * @return  String to be inserted/copied
 	 */
 	public static String fixReferenceValue(Project project, String itemString) {
-		if( itemString.equals("List of currently opened files") ) {
+		if( itemString.equals(StaticTexts.POPUP_ITEM_OPEN_FILES) ) {
 			return ParserFilesFolders.getAllOpenedFiles(FileEditorManager.getInstance(project));
 		}
 
