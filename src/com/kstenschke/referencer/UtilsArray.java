@@ -1,5 +1,5 @@
 /*
- * Copyright Kay Stenschke
+ * Copyright 2012-2013 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,7 +33,7 @@ public class UtilsArray {
 	public static String[] merge(String[] strArr1, String[] strArr2) {
 		if( strArr1 == null && strArr2 != null ) return strArr2;
 		if( strArr2 == null && strArr1 != null ) return strArr1;
-		if( strArr1 == null && strArr2 == null ) return null;
+		if( strArr1 == null ) return null;
 
 		List<String> list = new ArrayList<String>(Arrays.asList(strArr1));
 		list.addAll(Arrays.asList(strArr2));
@@ -49,20 +49,6 @@ public class UtilsArray {
 		}
 
 		return merged;
-	}
-
-	/**
-	 * Filter-out duplicates from given array of strings
-	 *
-	 * @param	strArr	Array of strings
-	 * @return	Array	Array of unique strings
-	 */
-	public static String[] unique(String[] strArr) {
-		if( strArr == null ) return null;
-
-		Set<String> temp = new HashSet<String>( Arrays.asList(strArr) );
-
-		return temp.toArray(new String[temp.size()]);
 	}
 
 }

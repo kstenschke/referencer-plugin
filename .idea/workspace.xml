@@ -2,16 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c2f0ff72-4d91-4745-8269-02050f06f467" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/StaticTexts.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/README" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/com/kstenschke/referencer/DividedList/DividedListCellKeyListener.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/kstenschke/referencer/ArrayUtils.java" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/UtilsArray.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/kstenschke/referencer/DividedList/DividedListCellRenderer.java" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/DividedListCellRenderer.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/kstenschke/referencer/DividedList/DividedListSelectionListener.java" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/DividedListSelectionListener.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/kstenschke/referencer/FileUtils.java" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/UtilsFile.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/com/kstenschke/referencer/StringUtils.java" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/UtilsString.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Referencer.jar" afterPath="$PROJECT_DIR$/Referencer.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/GoAction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/CopyAction.java" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/CopyAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/DividedListCellRenderer.java" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/DividedListCellRenderer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/DividedListSelectionListener.java" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/DividedListSelectionListener.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/InsertAction.java" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/InsertAction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/kstenschke/referencer/parser/Parser.java" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/parser/Parser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/kstenschke/referencer/parser/ParserDateTime.java" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/parser/ParserDateTime.java" />
@@ -20,10 +14,10 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/kstenschke/referencer/parser/ParserPhp.java" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/parser/ParserPhp.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/kstenschke/referencer/Preferences.java" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/Preferences.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.textile" afterPath="$PROJECT_DIR$/README.textile" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Referencer.iml" afterPath="$PROJECT_DIR$/Referencer.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ant.xml" afterPath="$PROJECT_DIR$/.idea/ant.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/kstenschke/referencer/StaticTexts.java" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/StaticTexts.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/kstenschke/referencer/UtilsArray.java" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/UtilsArray.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/kstenschke/referencer/UtilsFile.java" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/UtilsFile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/kstenschke/referencer/UtilsString.java" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/UtilsString.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/META-INF/plugin.xml" afterPath="$PROJECT_DIR$/META-INF/plugin.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -94,19 +88,50 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="plugin.xml" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="plugin.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="8" selection-start="3552" selection-end="3552" vertical-scroll-proportion="0.3821229" vertical-offset="1026" max-vertical-offset="2470">
+            <state line="76" column="8" selection-start="3699" selection-end="3699" vertical-scroll-proportion="0.0" vertical-offset="950" max-vertical-offset="2584">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DividedListSelectionListener.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/DividedListSelectionListener.java">
+      <file leaf-file-name="InsertAction.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/actions/InsertAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="76" selection-start="1493" selection-end="1493" vertical-scroll-proportion="0.0" vertical-offset="112" max-vertical-offset="1007">
+            <state line="55" column="19" selection-start="2115" selection-end="2115" vertical-scroll-proportion="0.25326088" vertical-offset="185" max-vertical-offset="1387">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GoAction.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/actions/GoAction.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="74" column="56" selection-start="2876" selection-end="2876" vertical-scroll-proportion="0.0" vertical-offset="672" max-vertical-offset="2413">
+              <folding>
+                <element signature="e#0#6482#0" expanded="true" />
+                <element signature="e#4986#4994#0" expanded="true" />
+                <element signature="e#5181#5190#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ParserDateTime.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/parser/ParserDateTime.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="38" column="38" selection-start="1236" selection-end="1236" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="627">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Parser.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/parser/Parser.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="77" column="12" selection-start="3008" selection-end="3008" vertical-scroll-proportion="0.0" vertical-offset="634" max-vertical-offset="2831">
               <folding />
             </state>
           </provider>
@@ -115,7 +140,29 @@
       <file leaf-file-name="CopyAction.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/actions/CopyAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="29" column="0" selection-start="1202" selection-end="1202" vertical-scroll-proportion="0.0" vertical-offset="13" max-vertical-offset="1710">
+            <state line="61" column="56" selection-start="2246" selection-end="2246" vertical-scroll-proportion="0.0" vertical-offset="691" max-vertical-offset="1672">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UtilsArray.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/UtilsArray.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="8" selection-start="1093" selection-end="1093" vertical-scroll-proportion="0.0" vertical-offset="482" max-vertical-offset="1140">
+              <folding>
+                <element signature="e#0#1444#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="UtilsString.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/UtilsString.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="58" column="105" selection-start="2061" selection-end="2061" vertical-scroll-proportion="0.0" vertical-offset="653" max-vertical-offset="4161">
               <folding />
             </state>
           </provider>
@@ -124,16 +171,7 @@
       <file leaf-file-name="DividedListCellRenderer.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/DividedListCellRenderer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="12" selection-start="2185" selection-end="2185" vertical-scroll-proportion="0.0" vertical-offset="228" max-vertical-offset="1178">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="InsertAction.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/actions/InsertAction.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="0" selection-start="1262" selection-end="1262" vertical-scroll-proportion="0.0" vertical-offset="317" max-vertical-offset="1748">
+            <state line="64" column="16" selection-start="2507" selection-end="2507" vertical-scroll-proportion="0.0" vertical-offset="629" max-vertical-offset="1178">
               <folding />
             </state>
           </provider>
@@ -157,30 +195,30 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/parser/ParserPhp.java" />
-        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/parser/ParserJavascript.java" />
-        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/DividedList/DividedListCellKeyListener.java" />
-        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/ArrayUtils.java" />
-        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/parser/Parser.java" />
         <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/DividedList/RefDividedListCellRenderer.java" />
         <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/DividedList/DividedListSelectionListener.java" />
-        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/StaticTexts.java" />
         <option value="$PROJECT_DIR$/README.textile" />
         <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/RefDividedListCellRenderer.java" />
         <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/DividedListCellKeyListener.java" />
-        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/CopyAction.java" />
-        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/InsertAction.java" />
         <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/DividedListSelectionListener.java" />
-        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/DividedListCellRenderer.java" />
+        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/StaticTexts.java" />
         <option value="$PROJECT_DIR$/META-INF/plugin.xml" />
+        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/UtilsString.java" />
+        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/DividedListCellRenderer.java" />
+        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/parser/ParserDateTime.java" />
+        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/parser/Parser.java" />
+        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/UtilsArray.java" />
+        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/CopyAction.java" />
+        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/GoAction.java" />
+        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/InsertAction.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="72" />
-    <option name="y" value="24" />
-    <option name="width" value="2488" />
-    <option name="height" value="1416" />
+    <option name="x" value="64" />
+    <option name="y" value="-4" />
+    <option name="width" value="2497" />
+    <option name="height" value="1445" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -245,6 +283,30 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CopyReferences" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Referencer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CopyReferences" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -267,6 +329,32 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="src">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="com/kstenschke/referencer">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="referencer-plugin">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="com/kstenschke/referencer">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="actions">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -307,30 +395,6 @@
             <PATH_ELEMENT USER_OBJECT="Referencer">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CopyReferences" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="PackagesPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CopyReferences" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Referencer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -397,19 +461,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -436,6 +487,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -596,28 +660,29 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="72" y="24" width="2488" height="1416" extended-state="0" />
-    <editor active="false" />
+    <frame x="64" y="-4" width="2497" height="1445" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32874617" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24513948" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3280507" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.327653" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="AdHocNav" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.30348653" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3020914" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3280507" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.327653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28317836" sideWeight="0.55504584" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39983094" sideWeight="0.73394495" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.28307313" sideWeight="0.73454833" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26545167" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1571838" sideWeight="0.73741287" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.54996127" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26258713" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299578" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -626,7 +691,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5504587" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -665,43 +729,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/UtilsFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="4" selection-start="1183" selection-end="1183" vertical-scroll-proportion="0.0" vertical-offset="96" max-vertical-offset="912">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/parser/ParserPhp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="185" column="0" selection-start="5871" selection-end="5871" vertical-scroll-proportion="0.5808824" vertical-offset="2585" max-vertical-offset="3401">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/parser/ParserJavascript.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="231" column="0" selection-start="7476" selection-end="7476" vertical-scroll-proportion="0.7205882" vertical-offset="3307" max-vertical-offset="4123">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/parser/ParserFilesFolders.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="0" selection-start="2700" selection-end="2700" vertical-scroll-proportion="0.4644608" vertical-offset="571" max-vertical-offset="1387">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/UtilsArray.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="38" selection-start="644" selection-end="644" vertical-scroll-proportion="0.41911766" vertical-offset="0" max-vertical-offset="1406">
-          <folding>
-            <element signature="e#0#1805#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/README.textile">
       <provider selected="true" editor-type-id="text-editor">
         <state line="58" column="0" selection-start="2279" selection-end="2279" vertical-scroll-proportion="0.59664804" vertical-offset="568" max-vertical-offset="1463" />
@@ -709,63 +736,109 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/license.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="162" column="26" selection-start="9336" selection-end="9336" vertical-scroll-proportion="0.44581005" vertical-offset="2679" max-vertical-offset="3933">
+        <state line="162" column="26" selection-start="9336" selection-end="9336" vertical-scroll-proportion="0.44581005" vertical-offset="2679" max-vertical-offset="3933" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/DividedListSelectionListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="12" selection-start="1760" selection-end="1760" vertical-scroll-proportion="0.59709823" vertical-offset="111" max-vertical-offset="1007">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/parser/ParserDateTime.java">
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/ide/bookmarks/BookmarkManager.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="8" selection-start="1346" selection-end="1346" vertical-scroll-proportion="0.33966482" vertical-offset="0" max-vertical-offset="895">
-          <folding />
-        </state>
+        <state line="37" column="47" selection-start="2368" selection-end="2368" vertical-scroll-proportion="0.33598095" vertical-offset="261" max-vertical-offset="1691" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/parser/Parser.java">
+    <entry file="jar:///usr/lib/jvm/java-7-oracle/src.zip!/java/util/Arrays.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="164" column="52" selection-start="6007" selection-end="6007" vertical-scroll-proportion="0.9575419" vertical-offset="1708" max-vertical-offset="2831">
+        <state line="467" column="23" selection-start="20887" selection-end="20887" vertical-scroll-proportion="0.89021736" vertical-offset="7617" max-vertical-offset="69464">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/StaticTexts.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="4" selection-start="146" selection-end="221" vertical-scroll-proportion="0.12357724" vertical-offset="0" max-vertical-offset="1230">
+        <state line="12" column="4" selection-start="329" selection-end="329" vertical-scroll-proportion="0.24782608" vertical-offset="0" max-vertical-offset="920">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/actions/CopyAction.java">
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/openapi/editor/CaretModel.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="0" selection-start="1202" selection-end="1202" vertical-scroll-proportion="0.0" vertical-offset="13" max-vertical-offset="1710">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/actions/InsertAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="0" selection-start="1262" selection-end="1262" vertical-scroll-proportion="0.0" vertical-offset="317" max-vertical-offset="1748">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/DividedListSelectionListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="76" selection-start="1493" selection-end="1493" vertical-scroll-proportion="0.0" vertical-offset="112" max-vertical-offset="1007">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/DividedListCellRenderer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="12" selection-start="2185" selection-end="2185" vertical-scroll-proportion="0.0" vertical-offset="228" max-vertical-offset="1178">
+        <state line="15" column="9" selection-start="563" selection-end="563" vertical-scroll-proportion="0.2112788" vertical-offset="0" max-vertical-offset="1259">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="8" selection-start="3552" selection-end="3552" vertical-scroll-proportion="0.3821229" vertical-offset="1026" max-vertical-offset="2470">
+        <state line="76" column="8" selection-start="3699" selection-end="3699" vertical-scroll-proportion="0.0" vertical-offset="950" max-vertical-offset="2584">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/UtilsString.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="58" column="105" selection-start="2061" selection-end="2061" vertical-scroll-proportion="0.0" vertical-offset="653" max-vertical-offset="4161">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/parser/ParserDateTime.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="38" selection-start="1236" selection-end="1236" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="627">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/parser/Parser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="77" column="12" selection-start="3008" selection-end="3008" vertical-scroll-proportion="0.0" vertical-offset="634" max-vertical-offset="2831">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/UtilsArray.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="8" selection-start="1093" selection-end="1093" vertical-scroll-proportion="0.0" vertical-offset="482" max-vertical-offset="1140">
+          <folding>
+            <element signature="e#0#1444#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/DividedListCellRenderer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="64" column="16" selection-start="2507" selection-end="2507" vertical-scroll-proportion="0.0" vertical-offset="629" max-vertical-offset="1178">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/actions/CopyAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="56" selection-start="2246" selection-end="2246" vertical-scroll-proportion="0.0" vertical-offset="691" max-vertical-offset="1672">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/actions/GoAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="56" selection-start="2876" selection-end="2876" vertical-scroll-proportion="0.0" vertical-offset="672" max-vertical-offset="2413">
+          <folding>
+            <element signature="e#0#6482#0" expanded="true" />
+            <element signature="e#4986#4994#0" expanded="true" />
+            <element signature="e#5181#5190#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/actions/InsertAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="19" selection-start="2115" selection-end="2115" vertical-scroll-proportion="0.25326088" vertical-offset="185" max-vertical-offset="1387">
           <folding />
         </state>
       </provider>

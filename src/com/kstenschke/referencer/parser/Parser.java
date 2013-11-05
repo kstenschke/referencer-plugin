@@ -1,5 +1,5 @@
 /*
- * Copyright Kay Stenschke
+ * Copyright 2012-2013 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -41,7 +41,7 @@ public class Parser {
 	 * @return		Items of the events context
 	 */
 	public static String[] getItems(AnActionEvent e) {
-		String[] refArr;
+		String[] referencesArr;
 
 		final Project project	= e.getData(PlatformDataKeys.PROJECT);
 		Editor editor			= e.getData(PlatformDataKeys.EDITOR);
@@ -75,7 +75,7 @@ public class Parser {
 
 				// Add date/timestamps
 			referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_DATE_TIME);
-			referenceItems.addAll(ParserDateTime.getReferenceItems(e));
+			referenceItems.addAll(ParserDateTime.getReferenceItems());
 
 				// Add file / path items
 			referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_FILES_PATHS);
@@ -146,12 +146,12 @@ public class Parser {
 				}
 			}
 
-			refArr = referenceItems.toArray( new String[referenceItems.size()] );
+			referencesArr = referenceItems.toArray( new String[referenceItems.size()] );
 		} else {
-			refArr	= null;
+			referencesArr	= null;
 		}
 
-		return refArr;
+		return referencesArr;
 	}
 
 	/**

@@ -1,5 +1,5 @@
 <!--
-  ~ Copyright Kay Stenschke
+  ~ Copyright 2012-2013 Kay Stenschke
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -24,8 +24,9 @@
     <br/>
     Keyboard shortcuts:<br/>
     <ul>
-        <li>Ctrl+Shift+Alt+V twice - open references list for inserting into the current document</li>
-        <li>Ctrl+Shift+Alt+C twice - open references list for copying to clipboard</li>
+        <li>Ctrl+Shift+Alt+V twice - Open list of references for inserting into the current document</li>
+        <li>Ctrl+Shift+Alt+C twice - Open list of references for copying to clipboard</li>
+        <li>Ctrl+Shift+Alt+G twice - Open list of bookmarks in current file for going to</li>
     </ul><br/>
     Types of references:<br/>
     All parsed items in the following list are relative to the current caret position,
@@ -61,12 +62,16 @@
     Please note: This plugin is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ]]></description>
   <vendor url="" email="info@stenschke.com">Kay Stenschke</vendor>
-  <version>1.0.8</version>
+  <version>1.0.9</version>
 
   <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
   <idea-version since-build="8000"/>
 
   <change-notes><![CDATA[
+    1.0.9<br/>
+    <ul>
+        <li>Added go to bookmarks action</li>
+    </ul>
     1.0.8<br/>
     <ul>
         <li>Updated API to IC-129.713</li>
@@ -104,16 +109,17 @@
   </project-components>
 
   <actions>
-      <action id="Copy References" class="com.kstenschke.referencer.actions.CopyAction" text="Copy Reference..."
-              description="Copy a selectable references">
+      <action id="CopyAction" class="com.kstenschke.referencer.actions.CopyAction" text="Copy Reference" description="Copy a selectable references">
           <add-to-group group-id="EditorPopupMenu" anchor="before" relative-to-action="CopyReference"/>
           <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt C" second-keystroke="shift ctrl alt C"/>
       </action>
 
-      <action id="InsertReferencesAction" class="com.kstenschke.referencer.actions.InsertAction"
-              text="Insert Reference..." description="Insert Reference from list">
+      <action id="InsertAction" class="com.kstenschke.referencer.actions.InsertAction" text="Insert Reference" description="Insert Reference from List">
           <add-to-group group-id="EditorActions" anchor="after" relative-to-action="EditorPaste"/>
           <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt V" second-keystroke="shift ctrl alt V"/>
+      </action>
+      <action id="GoAction" class="com.kstenschke.referencer.actions.GoAction" text="Go to Bookmark" description="Go to Bookmark in current File">
+          <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt G" second-keystroke="shift ctrl alt G"/>
       </action>
   </actions>
 

@@ -1,5 +1,5 @@
 /*
- * Copyright Kay Stenschke
+ * Copyright 2012-2013 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.components.JBList;
 import com.kstenschke.referencer.dividedlist.DividedListCellRenderer;
 import com.kstenschke.referencer.dividedlist.DividedListSelectionListener;
 import com.kstenschke.referencer.StaticTexts;
@@ -57,7 +58,7 @@ public class CopyAction extends AnAction {
 			final String[] refArr = Parser.getItems(e);
 
 			if( refArr != null ) {
-				final JList referencesList = new JList<String>(refArr);
+				final JBList referencesList = new JBList(refArr);
 				referencesList.setCellRenderer(new DividedListCellRenderer() );
 				referencesList.addListSelectionListener(new DividedListSelectionListener());
 
@@ -71,27 +72,24 @@ public class CopyAction extends AnAction {
 				referencesList.setSelectedIndex(selectedIndex);
 
 				PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
-
 				popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_COPY).setItemChoosenCallback(new Runnable() {
 					public void run() {
+                            // Callback when item chosen
+                        CommandProcessor.getInstance().executeCommand(project, new Runnable() {
+                            public void run() {
+                            final int index = referencesList.getSelectedIndex();
 
-						// Callback when item chosen
-					CommandProcessor.getInstance().executeCommand(project, new Runnable() {
-						public void run() {
-						final int index = referencesList.getSelectedIndex();
+                                // Store preferences
+                            Preferences.saveSelectedIndex(fileExtension, index);
 
-							// Store preferences
-						Preferences.saveSelectedIndex(fileExtension, index);
+                                // Copy item to clipboard
+                            StringSelection clipString	= new StringSelection( Parser.fixReferenceValue(project, refArr[index]) );
+                            Clipboard clipboard			= Toolkit.getDefaultToolkit().getSystemClipboard();
 
-							// Copy item to clipboard
-						StringSelection clipString	= new StringSelection( Parser.fixReferenceValue(project, refArr[index]) );
-						Clipboard clipboard			= Toolkit.getDefaultToolkit().getSystemClipboard();
-
-						clipboard.setContents(clipString, null);
-						}
-					},
-				null, null);
-				}
+                            clipboard.setContents(clipString, null);
+                            }
+                        }, null, null);
+			        }
 			}).setMovable(true).createPopup().showCenteredInCurrentWindow(project);
 
 			}

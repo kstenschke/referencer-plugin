@@ -1,5 +1,5 @@
 /*
- * Copyright Kay Stenschke
+ * Copyright 2012-2013 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -52,12 +52,12 @@ public class UtilsString {
 	 *
 	 * @param	referenceStr	String to be cleaned
 	 * @param	removeOnceStr	Sub string to be removed only once (first occurrence)
-	 * @param	removeEachStrs	Sub strings to be removed allover
+	 * @param	removeEachStr	Sub strings to be removed allover
 	 * @param	postfix			String to concatenated at end
 	 * @return					The cleaned string
 	 */
-	public static String cleanReference(String referenceStr, String removeOnceStr, String[] removeEachStrs, String postfix) {
-		return cleanReference(referenceStr, "function", removeEachStrs) + postfix;
+	public static String cleanReference(String referenceStr, String removeOnceStr, String[] removeEachStr, String postfix) {
+		return cleanReference(referenceStr, removeOnceStr, removeEachStr) + postfix;
 	}
 
 	/**
@@ -101,17 +101,6 @@ public class UtilsString {
 	 */
 	public static String getWordLeftOfOffset(CharSequence text, int cursorOffset) {
 		return grabWord(text, cursorOffset - 1, false);
-	}
-
-	/**
-	 * Get word at caret offset out of given text
-	 *
-	 * @param   text           The full text
-	 * @param   cursorOffset   Character offset of caret
-	 * @return                 The extracted word or null
-	 */
-	public static String getWordAtOffset(CharSequence text, int cursorOffset) {
-		return grabWord(text, cursorOffset, true);
 	}
 
 	/**
@@ -169,17 +158,6 @@ public class UtilsString {
 	/**
 	 * Get "string" at caret offset out of given text - string-boundary: white-space characters
 	 *
-	 * @param   text           The full text
-	 * @param   cursorOffset   Character offset of caret
-	 * @return                 The extracted word or null
-	 */
-	public static String getStringAtOffset(CharSequence text, int cursorOffset) {
-		return grabString(text, cursorOffset, true);
-	}
-
-	/**
-	 * Get "string" at caret offset out of given text - string-boundary: white-space characters
-	 *
 	 * @param   text           			The full text
 	 * @param   cursorOffset   			Character offset of caret
 	 * @param   expandWordBoundaryRight	Detect string boundary by expanding to the right?
@@ -216,5 +194,34 @@ public class UtilsString {
 
 		return null;
 	}
+
+    /**
+     * @param   str
+     * @param   maxLen
+     */
+    public static String crop(String str, Integer maxLen) {
+        if( str.length() > maxLen ) {
+            str    = str.substring(0, maxLen) + "...";
+        }
+
+        return str;
+    }
+
+    /**
+     * @param   str
+     * @param   len
+     * @param   fillChar
+     */
+    public static String makeMinLen(String str, Integer len, String fillChar) {
+        while( str.length() < len ) {
+            str    = fillChar + str;
+        }
+
+        return str;
+    }
+
+    public static String makeMinLen(String str, Integer len) {
+        return makeMinLen(str, len, "0");
+    }
 
 }

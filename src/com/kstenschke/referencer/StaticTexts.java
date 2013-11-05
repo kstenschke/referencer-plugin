@@ -7,9 +7,10 @@ public class StaticTexts {
         // Popup titles
     @NonNls
     public static final String POPUP_TITLE_ACTION_COPY = "Select what to copy";
-
     @NonNls
     public static final String POPUP_TITLE_ACTION_INSERT = "Select Insertion";
+    @NonNls
+    public static final String POPUP_TITLE_ACTION_GO = "Select Bookmark to go";
 
         // Popup items
     @NonNls

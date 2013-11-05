@@ -1,5 +1,5 @@
 /*
- * Copyright Kay Stenschke
+ * Copyright 2012-2013 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,10 +34,9 @@ class ParserDateTime {
 	/**
 	 * Get date / time items
 	 *
-	 * @param	e	Action system event
 	 * @return		List of PHP items
 	 */
-	public static List<String> getReferenceItems(AnActionEvent e) {
+	public static List<String> getReferenceItems() {
 		List<String> referenceItems = new ArrayList<String>();
 
 		Date date = new Date();

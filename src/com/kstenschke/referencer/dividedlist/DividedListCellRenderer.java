@@ -1,5 +1,5 @@
 /*
- * Copyright Kay Stenschke
+ * Copyright 2012-2013 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,8 @@ import java.awt.*;
  */
 public class DividedListCellRenderer extends DefaultListCellRenderer { //implements ListCellRenderer {
 
-    private Border separatorBorder = BorderFactory.createMatteBorder(1, 0, 1, 0, new JBColor(JBColor.LIGHT_GRAY, JBColor.DARK_GRAY) );
+    private final Border separatorBorder          = BorderFactory.createMatteBorder(1, 0, 1, 0, new JBColor(JBColor.LIGHT_GRAY, JBColor.DARK_GRAY) );
+    private final Border separatorBorderTopMost   = BorderFactory.createMatteBorder(0, 0, 1, 0, new JBColor(JBColor.LIGHT_GRAY, JBColor.DARK_GRAY) );
     private Font   separatorFont   = null;
 
 	/**
@@ -51,7 +52,7 @@ public class DividedListCellRenderer extends DefaultListCellRenderer { //impleme
 
 			if ( valueStr.startsWith(StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE) ) {
 				JLabel lblSectionLabel = new JLabel( valueStr.replace(StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE + " ", "") + ":" );
-                setLabelUI(lblSectionLabel, true);
+                setLabelUI(lblSectionLabel, index == 0);
 
 				return lblSectionLabel ;
 			}
@@ -62,14 +63,13 @@ public class DividedListCellRenderer extends DefaultListCellRenderer { //impleme
 
     /**
      * @param   label
-     * @param   visible
      */
-    private void setLabelUI(JLabel label, Boolean visible) {
+    private void setLabelUI(JLabel label, Boolean topMost) {
         label.setFont(this.separatorFont);
-        label.setBorder(this.separatorBorder);
-        label.setEnabled(true);
+        label.setBorder(topMost ? this.separatorBorderTopMost : this.separatorBorder);
+        label.setEnabled(false);
         label.setFocusable(false);
-        label.setVisible(visible);
+        label.setVisible(true);
     }
 
 }

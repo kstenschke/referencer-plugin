@@ -1,5 +1,5 @@
 /*
- * Copyright Kay Stenschke
+ * Copyright 2012-2013 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,6 +28,7 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.ui.components.JBList;
 import com.kstenschke.referencer.dividedlist.DividedListCellRenderer;
 import com.kstenschke.referencer.dividedlist.DividedListSelectionListener;
 import com.kstenschke.referencer.StaticTexts;
@@ -54,7 +55,7 @@ public class InsertAction extends AnAction {
 			final String[] refArr = Parser.getItems(e);
 			if( refArr != null ) {
 
-				final JList referencesList = new JList<String>(refArr);
+				final JBList referencesList = new JBList(refArr);
 				referencesList.setCellRenderer(new DividedListCellRenderer() );
 				referencesList.addListSelectionListener(new DividedListSelectionListener());
 
@@ -72,7 +73,6 @@ public class InsertAction extends AnAction {
 
 				popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_INSERT).setItemChoosenCallback(new Runnable() {
 					public void run() {
-
 						ApplicationManager.getApplication().runWriteAction(new Runnable() {
 							public void run() {
 
