@@ -17,8 +17,9 @@ The references can be inserted into the current document or copied to the clipbo
 
 h2. Keyboard Shortcut
 
-Press Ctrl+Shift+Alt+C twice to open the references list for copying references to the clipboard,
-Press Ctrl+Shift+Alt+V twice to open the references list for inserting references into the editor.
+* Ctrl+Shift+Alt+C twice - Open list of references for inserting into the current document
+* Ctrl+Shift+Alt+V twice - Open list of references for copying to clipboard
+* Ctrl+Shift+Alt+G twice - Open list of bookmarks in current file for going to
 
 The list can be cancelled via Esc key, navigated using cursor keys and items are selected using Enter.
 
