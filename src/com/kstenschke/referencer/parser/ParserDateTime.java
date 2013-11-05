@@ -16,14 +16,6 @@
 
 package com.kstenschke.referencer.parser;
 
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.PlatformDataKeys;
-import com.intellij.openapi.editor.Document;
-import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.fileEditor.FileDocumentManager;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;

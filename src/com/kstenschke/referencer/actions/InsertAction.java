@@ -35,8 +35,6 @@ import com.kstenschke.referencer.StaticTexts;
 import com.kstenschke.referencer.parser.Parser;
 import com.kstenschke.referencer.Preferences;
 
-import javax.swing.*;
-
 /**
  * Insert Action
  */

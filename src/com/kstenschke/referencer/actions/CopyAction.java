@@ -34,7 +34,6 @@ import com.kstenschke.referencer.StaticTexts;
 import com.kstenschke.referencer.parser.Parser;
 import com.kstenschke.referencer.Preferences;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;

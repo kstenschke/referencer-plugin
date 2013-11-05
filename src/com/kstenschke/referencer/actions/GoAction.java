@@ -37,11 +37,7 @@ import com.kstenschke.referencer.StaticTexts;
 import com.kstenschke.referencer.UtilsString;
 import com.kstenschke.referencer.dividedlist.DividedListCellRenderer;
 import com.kstenschke.referencer.dividedlist.DividedListSelectionListener;
-import com.kstenschke.referencer.parser.Parser;
-import org.apache.commons.lang.StringUtils;
 
-import javax.swing.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
