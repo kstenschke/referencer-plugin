@@ -54,7 +54,7 @@ public class CopyAction extends AnAction {
 		Editor editor			= e.getData(PlatformDataKeys.EDITOR);
 
 		if( project != null && editor != null ) {
-			final String[] refArr = Parser.getItems(e);
+			final Object[] refArr = Parser.getItems(e);
 
 			if( refArr != null ) {
 				final JBList referencesList = new JBList(refArr);
@@ -82,7 +82,7 @@ public class CopyAction extends AnAction {
                             Preferences.saveSelectedIndex(fileExtension, index);
 
                                 // Copy item to clipboard
-                            StringSelection clipString	= new StringSelection( Parser.fixReferenceValue(project, refArr[index]) );
+                            StringSelection clipString	= new StringSelection( Parser.fixReferenceValue(project, refArr[index].toString()) );
                             Clipboard clipboard			= Toolkit.getDefaultToolkit().getSystemClipboard();
 
                             clipboard.setContents(clipString, null);

@@ -65,7 +65,7 @@ public class GoAction extends AnAction {
             this.file		= FileDocumentManager.getInstance().getFile(document);
             final String fileExtension	= (this.file != null) ? this.file.getExtension() : "";
 
-            final String[] refArr = this.getItems();
+            final Object[] refArr = this.getItems();
             if( refArr != null ) {
 
                 final JBList referencesList = new JBList(refArr);

@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c2f0ff72-4d91-4745-8269-02050f06f467" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.textile" afterPath="$PROJECT_DIR$/README.textile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Referencer.jar" afterPath="$PROJECT_DIR$/Referencer.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/CopyAction.java" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/CopyAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/GoAction.java" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/GoAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/InsertAction.java" afterPath="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/InsertAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/META-INF/plugin.xml" afterPath="$PROJECT_DIR$/META-INF/plugin.xml" />
     </list>
     <ignored path="CopyReferences.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -71,19 +75,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="plugin.xml" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="plugin.xml" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="88" selection-start="1397" selection-end="1448" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2584">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="README.textile" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/README.textile">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="0" selection-start="914" selection-end="914" vertical-scroll-proportion="0.33200952" vertical-offset="0" max-vertical-offset="1482">
+            <state line="71" column="4" selection-start="3606" selection-end="3606" vertical-scroll-proportion="0.35108694" vertical-offset="1026" max-vertical-offset="2584">
               <folding />
             </state>
           </provider>
@@ -112,17 +107,17 @@
         <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/RefDividedListCellRenderer.java" />
         <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/DividedListCellKeyListener.java" />
         <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/StaticTexts.java" />
-        <option value="$PROJECT_DIR$/META-INF/plugin.xml" />
         <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/UtilsString.java" />
         <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/DividedListCellRenderer.java" />
         <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/parser/Parser.java" />
         <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/UtilsArray.java" />
-        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/CopyAction.java" />
         <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/DividedListSelectionListener.java" />
-        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/GoAction.java" />
-        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/InsertAction.java" />
         <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/parser/ParserDateTime.java" />
         <option value="$PROJECT_DIR$/README.textile" />
+        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/GoAction.java" />
+        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/InsertAction.java" />
+        <option value="$PROJECT_DIR$/src/com/kstenschke/referencer/actions/CopyAction.java" />
+        <option value="$PROJECT_DIR$/META-INF/plugin.xml" />
       </list>
     </option>
   </component>
@@ -227,34 +222,6 @@
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
             <PATH_ELEMENT USER_OBJECT="referencer-plugin">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="referencer-plugin">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="referencer-plugin">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="META-INF">
               <option name="myItemId" value="" />
               <option name="myItemType" value="" />
             </PATH_ELEMENT>
@@ -470,7 +437,7 @@
       <AnalysisUIOptions />
     </option>
   </component>
-  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false">
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
     <option name="USER" value="" />
     <option name="PASSWORD" value="" />
     <option name="mySSHConnectionTimeout" value="30000" />
@@ -480,7 +447,6 @@
     <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
     <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
     <option name="IGNORE_SPACES_IN_MERGE" value="false" />
-    <option name="DETECT_NESTED_COPIES" value="true" />
     <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
     <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
     <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
@@ -558,17 +524,17 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="AdHocNav" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3020914" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26258713" sideWeight="0.5002047" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.327653" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.327653" sideWeight="0.49979535" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.28317836" sideWeight="0.55504584" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39983094" sideWeight="0.73394495" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1571838" sideWeight="0.45003873" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1571838" sideWeight="0.73741287" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.54996127" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26258713" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26258713" sideWeight="0.49979535" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299578" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -676,36 +642,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/actions/CopyAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="20" selection-start="1558" selection-end="1558" vertical-scroll-proportion="0.0" vertical-offset="235" max-vertical-offset="1653">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/dividedlist/DividedListSelectionListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="23" column="0" selection-start="809" selection-end="809" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1083">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/actions/GoAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="0" selection-start="1739" selection-end="1739" vertical-scroll-proportion="0.0" vertical-offset="444" max-vertical-offset="2888">
-          <folding>
-            <element signature="e#0#6336#0" expanded="true" />
-            <element signature="e#4840#4848#0" expanded="true" />
-            <element signature="e#5035#5044#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/actions/InsertAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="36" column="0" selection-start="1599" selection-end="1599" vertical-scroll-proportion="0.0" vertical-offset="254" max-vertical-offset="1710">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -721,16 +660,46 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
+    <entry file="file://$PROJECT_DIR$/README.textile">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="88" selection-start="1397" selection-end="1448" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2584">
+        <state line="26" column="47" selection-start="1020" selection-end="1020" vertical-scroll-proportion="0.3923749" vertical-offset="0" max-vertical-offset="1482">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.textile">
+    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/actions/CopyAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="0" selection-start="914" selection-end="914" vertical-scroll-proportion="0.33200952" vertical-offset="0" max-vertical-offset="1482">
+        <state line="62" column="69" selection-start="2329" selection-end="2329" vertical-scroll-proportion="0.19456522" vertical-offset="733" max-vertical-offset="1653">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/actions/InsertAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="87" column="40" selection-start="3512" selection-end="3512" vertical-scroll-proportion="0.5869565" vertical-offset="790" max-vertical-offset="1710">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/kstenschke/referencer/actions/GoAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="22" selection-start="2607" selection-end="2607" vertical-scroll-proportion="0.24021739" vertical-offset="1052" max-vertical-offset="2888">
+          <folding>
+            <element signature="e#0#6336#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#4840#4848#0" expanded="true" />
+            <element signature="e#5035#5044#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="71" column="4" selection-start="3606" selection-end="3606" vertical-scroll-proportion="0.35108694" vertical-offset="1026" max-vertical-offset="2584">
           <folding />
         </state>
       </provider>

@@ -50,7 +50,7 @@ public class InsertAction extends AnAction {
 		final Editor editor		= e.getData(PlatformDataKeys.EDITOR);
 
 		if( project != null && editor != null ) {
-			final String[] refArr = Parser.getItems(e);
+			final Object[] refArr = Parser.getItems(e);
 			if( refArr != null ) {
 
 				final JBList referencesList = new JBList(refArr);
@@ -85,7 +85,7 @@ public class InsertAction extends AnAction {
 										final Document document = editor.getDocument();
 										int caretOffset	= editor.getCaretModel().getOffset();
 
-										String insertString = Parser.fixReferenceValue(project, refArr[index]);
+										String insertString = Parser.fixReferenceValue(project, refArr[index].toString());
 										document.insertString(caretOffset, insertString );
 										editor.getCaretModel().moveToOffset( caretOffset + insertString.length() );
 									}
