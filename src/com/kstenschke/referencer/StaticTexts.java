@@ -30,4 +30,8 @@ public class StaticTexts {
     @NonNls
     public static final String POPUP_SECTION_TITLE_TEXT_COMPLETIONS = "SECTIONTITLE: Text Completions";
 
+        // Go action context menu
+    @NonNls
+    public static final String POPUP_GO_REMOVE_ALL_BOOKMARKS = "Remove all Bookmarks from this File";
+
 }

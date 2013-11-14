@@ -13,6 +13,9 @@ contexts, such as: opened file(s), selection and caret position in the editor, d
 When evoking the referencer plugin, a list of reference items, taken from the current contexts, is opened.
 The references can be inserted into the current document or copied to the clipboard.
 
+Additionally the plugin provides an option to navigate to bookmarked lines in the current file.
+The context menu of the bookmarks list allows to remove all bookmarks in the current file.
+
 
 
 h2. Keyboard Shortcut

@@ -28,10 +28,12 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.ScrollType;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
+import com.intellij.openapi.ui.popup.JBPopup;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.components.JBList;
+import com.kstenschke.referencer.PopupContextGo;
 import com.kstenschke.referencer.Preferences;
 import com.kstenschke.referencer.StaticTexts;
 import com.kstenschke.referencer.UtilsString;
@@ -78,9 +80,10 @@ public class GoAction extends AnAction {
 
                 referencesList.setSelectedIndex(selectedIndex);
 
+                    // Build and show popup
                 PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
 
-                popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_GO).setItemChoosenCallback(new Runnable() {
+                JBPopup popupGo = popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_GO).setItemChoosenCallback(new Runnable() {
                     public void run() {
                         ApplicationManager.getApplication().runWriteAction(new Runnable() {
                             public void run() {
@@ -99,7 +102,13 @@ public class GoAction extends AnAction {
                         });
 
                     }
-                }).setMovable(true).createPopup().showCenteredInCurrentWindow(project);
+                }).setMovable(true).createPopup();
+
+                    // Add context menu
+                PopupContextGo contextMenu = new PopupContextGo(popupGo, this.project);
+                referencesList.addMouseListener( contextMenu.getPopupListener() );
+
+                popupGo.showCenteredInCurrentWindow(project);
             }
         }
     }
