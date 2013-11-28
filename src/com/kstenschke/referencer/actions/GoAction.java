@@ -33,10 +33,7 @@ import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.components.JBList;
-import com.kstenschke.referencer.PopupContextGo;
-import com.kstenschke.referencer.Preferences;
-import com.kstenschke.referencer.StaticTexts;
-import com.kstenschke.referencer.UtilsString;
+import com.kstenschke.referencer.*;
 import com.kstenschke.referencer.dividedlist.DividedListCellRenderer;
 import com.kstenschke.referencer.dividedlist.DividedListSelectionListener;
 
@@ -68,13 +65,12 @@ public class GoAction extends AnAction {
             final String fileExtension	= (this.file != null) ? this.file.getExtension() : "";
 
             final Object[] refArr = this.getItems();
-            if( refArr != null ) {
-
+            if( refArr != null && refArr.length > 0) {
                 final JBList referencesList = new JBList(refArr);
                 referencesList.setCellRenderer(new DividedListCellRenderer() );
                 referencesList.addListSelectionListener(new DividedListSelectionListener());
 
-                // Preselect item from preferences
+                    // Preselect item from preferences
                 Integer selectedIndex	= Preferences.getSelectedIndex(fileExtension);
                 if( selectedIndex > refArr.length ) selectedIndex	= 0;
 
@@ -97,7 +93,6 @@ public class GoAction extends AnAction {
                                         editor.getScrollingModel().scrollToCaret(ScrollType.CENTER);
                                     }
                                 }, null, null);
-
                             }
                         });
 
@@ -109,6 +104,8 @@ public class GoAction extends AnAction {
                 referencesList.addMouseListener( contextMenu.getPopupListener() );
 
                 popupGo.showCenteredInCurrentWindow(project);
+            } else {
+                UtilsEnvironment.notify(StaticTexts.NOTIFY_BOOKMARK_NONE_FOUND);
             }
         }
     }

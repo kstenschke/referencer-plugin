@@ -35,13 +35,11 @@ import java.util.List;
 public class PopupContextGo {
 
     JPopupMenu popup;
-    Project currentProject;
 
     /**
      * Constructor
      */
     public PopupContextGo(final JBPopup popupGo, final Project curProject) {
-        this.currentProject = curProject;
         this.popup = new JPopupMenu();
 
             // Remove all bookmarks from current file

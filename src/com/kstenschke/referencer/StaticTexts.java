@@ -34,4 +34,8 @@ public class StaticTexts {
     @NonNls
     public static final String POPUP_GO_REMOVE_ALL_BOOKMARKS = "Remove all Bookmarks from this File";
 
+        // Notifications
+    @NonNls
+    public static final String NOTIFY_BOOKMARK_NONE_FOUND = "No Bookmarks found in File";
+
 }

@@ -119,30 +119,7 @@ public class Parser {
 
 				if( allLineParts != null && allLineParts.length > 0 ) {
 					List<String> listLineParts = Arrays.asList(allLineParts);
-
-					int count	= 0;
-					for (String listLinePart : listLineParts) {
-						if(count > 0 ) {
-							listLinePart	= listLinePart.split("\\n")[0];
-
-							if( listLinePart.length() > 1 ) {
-								listLinePart	= listLinePart.substring(1);
-
-								if( 	listLinePart.trim().length() > 1
-									&&	!referenceItems.contains(listLinePart)
-								) {
-									if( ! listLinePart.isEmpty() && !referenceItems.contains(StaticTexts.POPUP_SECTION_TITLE_TEXT_COMPLETIONS) ) {
-										referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_TEXT_COMPLETIONS);
-									}
-
-									if( ! listLinePart.isEmpty()  ) {
-										referenceItems.add(listLinePart);
-									}
-								}
-							}
-						}
-						count++;
-					}
+                    addReferenceItems(referenceItems, listLineParts);
 				}
 			}
 
@@ -154,7 +131,37 @@ public class Parser {
 		return referencesArr;
 	}
 
-	/**
+    /**
+     * @param   referenceItems
+     * @param   listLineParts
+     */
+    private static void addReferenceItems(List<String> referenceItems, List<String> listLineParts) {
+        int count	= 0;
+        for (String listLinePart : listLineParts) {
+            if(count > 0 ) {
+                listLinePart	= listLinePart.split("\\n")[0];
+
+                if( listLinePart.length() > 1 ) {
+                    listLinePart	= listLinePart.substring(1);
+
+                    if( 	listLinePart.trim().length() > 1
+                        &&	!referenceItems.contains(listLinePart)
+                    ) {
+                        if( ! listLinePart.isEmpty() && !referenceItems.contains(StaticTexts.POPUP_SECTION_TITLE_TEXT_COMPLETIONS) ) {
+                            referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_TEXT_COMPLETIONS);
+                        }
+
+                        if( ! listLinePart.isEmpty()  ) {
+                            referenceItems.add(listLinePart);
+                        }
+                    }
+                }
+            }
+            count++;
+        }
+    }
+
+    /**
 	 * Process given reference item - if it's a type description "translate" to the respective value
 	 *
 	 * @param	project							IDEA project
