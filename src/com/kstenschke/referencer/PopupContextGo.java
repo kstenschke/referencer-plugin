@@ -34,7 +34,7 @@ import java.util.List;
 
 public class PopupContextGo {
 
-    JPopupMenu popup;
+    private final JPopupMenu popup;
 
     /**
      * Constructor
@@ -70,13 +70,6 @@ public class PopupContextGo {
     }
 
     /**
-     * @return  JPopupMenu
-     */
-    public JPopupMenu getPopup() {
-        return this.popup;
-    }
-
-    /**
      * @return  PopupListener
      */
     public PopupListener getPopupListener() {
@@ -107,7 +100,7 @@ public class PopupContextGo {
          * @param   e
          */
         private void maybeShowPopup(MouseEvent e) {
-            if (e.isPopupTrigger()) {
+            if( e.isPopupTrigger() ) {
                 popup.show(e.getComponent(), e.getX(), e.getY());
             }
         }

@@ -41,7 +41,7 @@ public class DividedListCellRenderer extends DefaultListCellRenderer { //impleme
 	 * @return  The rendered cell
 	 */
 	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-		if ( value != null ) {
+		if( value != null ) {
 
             if( this.separatorFont == null ) {
                 Font defaultFont    = list.getFont();
@@ -50,7 +50,7 @@ public class DividedListCellRenderer extends DefaultListCellRenderer { //impleme
 
 			String valueStr	= value.toString();
 
-			if ( valueStr.startsWith(StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE) ) {
+			if( valueStr.startsWith(StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE) ) {
 				JLabel lblSectionLabel = new JLabel( valueStr.replace(StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE + " ", "") + ":" );
                 setLabelUI(lblSectionLabel, index == 0);
 

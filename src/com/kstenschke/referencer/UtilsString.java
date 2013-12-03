@@ -83,7 +83,7 @@ public class UtilsString {
      */
 	public static String replaceLast(String string, String toReplace, String replacement) {
 		int pos = string.lastIndexOf(toReplace);
-		if (pos > -1) {
+		if( pos > -1 ) {
 			return string.substring(0, pos)
 					+ replacement
 					+ string.substring(pos + toReplace.length(), string.length());
@@ -112,17 +112,16 @@ public class UtilsString {
 	 * @return                 			The extracted word or null
 	 */
 	private static String grabWord(CharSequence text, int cursorOffset, boolean expandWordBoundaryRight) {
-		if (	text.length() == 0
-				||	cursorOffset >= text.length())  return null;
+		if(	text.length() == 0 || cursorOffset >= text.length())  return null;
 
-		while (cursorOffset < (text.length()-1)
+		while (cursorOffset > 0 && cursorOffset < text.length()-1
 				&& !Character.isJavaIdentifierPart(text.charAt(cursorOffset))
 				&& Character.isJavaIdentifierPart(text.charAt(cursorOffset - 1))
 				) {
 			cursorOffset--;
 		}
 
-		if (Character.isJavaIdentifierPart(text.charAt(cursorOffset))) {
+		if( cursorOffset >= 0 && Character.isJavaIdentifierPart(text.charAt(cursorOffset)) ) {
 			int start	= cursorOffset;
 			int end		= cursorOffset;
 
@@ -164,17 +163,16 @@ public class UtilsString {
 	 * @return                 			The extracted word or null
 	 */
 	private static String grabString(CharSequence text, int cursorOffset, boolean expandWordBoundaryRight) {
-		if (	text.length() == 0
-				||	cursorOffset >= text.length())  return null;
+		if(	text.length() == 0 || cursorOffset >= text.length() )  return null;
 
-		while (cursorOffset < (text.length()-1)
+		while ( cursorOffset > 0 && cursorOffset < (text.length()-1)
 				&& !Character.isWhitespace(text.charAt(cursorOffset))
 				&& Character.isWhitespace(text.charAt(cursorOffset - 1))
 				) {
 			cursorOffset--;
 		}
 
-		if (Character.isWhitespace(text.charAt(cursorOffset))) {
+		if( cursorOffset >= 0 && Character.isWhitespace(text.charAt(cursorOffset)) ) {
 			int start	= cursorOffset;
 			int end		= cursorOffset;
 
@@ -212,7 +210,7 @@ public class UtilsString {
      * @param   len
      * @param   fillChar
      */
-    public static String makeMinLen(String str, Integer len, String fillChar) {
+    private static String makeMinLen(String str, Integer len, String fillChar) {
         while( str.length() < len ) {
             str    = fillChar + str;
         }

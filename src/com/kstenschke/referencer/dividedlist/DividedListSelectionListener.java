@@ -24,7 +24,7 @@ import javax.swing.event.ListSelectionListener;
 
 public class DividedListSelectionListener extends JFrame implements ListSelectionListener {
 
-    int prevSelectedIndex = 0;
+    private int prevSelectedIndex = 0;
 
     /**
      * Constructor
