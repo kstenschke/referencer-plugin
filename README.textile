@@ -20,9 +20,11 @@ The context menu of the bookmarks list allows to remove all bookmarks in the cur
 
 h2. Keyboard Shortcut
 
-* Ctrl+Shift+Alt+C twice - Open list of references for inserting into the current document
-* Ctrl+Shift+Alt+V twice - Open list of references for copying to clipboard
+* Ctrl+Shift+Alt+C twice - Open list of references for copying to clipboard
+* Ctrl+Shift+Alt+V twice - Open list of references for inserting into the current document
 * Ctrl+Shift+Alt+G twice - Open list of bookmarks in current file for going to
+
+*Mac Users:* On Macs, the keyboard shortcuts are Shift+Alt+Cmd+C twice (copy), Shift+Alt+Cmd+V twice (paste) or Shift+Alt+Cmd+G twice (go)
 
 The list can be cancelled via Esc key, navigated using cursor keys and items are selected using Enter.
 
