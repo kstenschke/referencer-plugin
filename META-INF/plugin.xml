@@ -62,55 +62,30 @@
     Please note: This plugin is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ]]></description>
   <vendor url="" email="info@stenschke.com">Kay Stenschke</vendor>
-  <version>1.0.12</version>
+  <version>1.1.0</version>
 
   <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
   <idea-version since-build="8000"/>
 
   <change-notes><![CDATA[
-    1.0.12<br/>
-    <ul>
-        <li>Minor Bugfix: Opening Referencer on first character of document caused IndexOutOfBoundsException</li>
-    </ul>
-    1.0.11<br/>
-    <ul>
-        <li>Added notification when there are no bookmarks for going to</li>
-        <li>Improved compatibility: Compiled with JDK target bytecode version 1.6 (was 1.7)</li>
-    </ul>
-    1.0.10<br/>
-    <ul>
-        <li>Added context menu to go action: remove all bookmarks from current file</li>
-    </ul>
-    1.0.9<br/>
-    <ul>
-        <li>Added action: go to bookmarks</li>
-    </ul>
-    1.0.8<br/>
-    <ul>
-        <li>Updated API to IC-129.713</li>
-        <li>Improved UI, added Darcula Theme compatibility</li>
-    </ul>
-    1.0.7<br/>
-    <ul><li>Improved general word-completions detection</li>
-        <li>Added respective caret movement to text insertion</li>
-    </ul>
-    1.0.6<br/>
-    <ul><li>Improved references list with section headers</li>
-        <li>Added list of all open files</li>
-        <li>Added UNIX timestamp in seconds and milliseconds</li>
-    </ul>
-    1.0.5<br/>
-    <ul><li>Added item group separators</li></ul>
-    1.0.4<br/>
-    <ul><li>Added references of all endings to occurences of the word at the caret</li></ul>
-    1.0.3<br/>
-    <ul><li>Added date and timestamp references</li></ul>
-    1.0.2<br/>
-    <ul><li>Added namespace reference from JavaScript filepath</li></ul>
-    1.0.1<br/>
-    <ul><li>Added preference retaining (selected reference per file type)</li></ul>
-    1.0.0<br/>
-    <ul><li>Initial release</li></ul>
+  <ul>
+    <li>1.1.0
+        <ul>
+            <li>Reduced changelog to previous five versions, added separate full changelog</li>
+            <li>Bugfix: IndexOutOfBoundsException in go to bookmark action</li>
+         </ul>
+    </li>
+    <li>1.0.12 Bugfix: Opening Referencer on first character of document caused IndexOutOfBoundsException</li>
+    <li>1.0.11
+        <ul>
+            <li>Added notification when there are no bookmarks for going to</li>
+            <li>Improved compatibility: Compiled with JDK target bytecode version 1.6 (was 1.7)</li>
+        </ul>
+    </li>
+    <li>1.0.10 Added context menu to go action: remove all bookmarks from current file</li>
+    <li>1.0.9 Added action: go to bookmarks</li>
+  </ul><br />
+  <a href="https://github.com/kstenschke/referencer-plugin/blob/master/CHANGELOG.textile" target="_blank">...Read full changelog on github</a>
   ]]></change-notes>
 
   <application-components>

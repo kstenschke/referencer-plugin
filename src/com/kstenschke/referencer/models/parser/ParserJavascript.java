@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kstenschke.referencer.parser;
+package com.kstenschke.referencer.models.parser;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
@@ -23,7 +23,7 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.kstenschke.referencer.UtilsString;
+import com.kstenschke.referencer.utils.UtilsString;
 
 import java.util.ArrayList;
 import java.util.List;

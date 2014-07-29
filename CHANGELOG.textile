@@ -1,0 +1,25 @@
+* 1.1.0
+    ** Reduced changelog to previous five versions, added separate full changelog
+    ** Bugfix: IndexOutOfBoundsException in go to bookmark action
+* 1.0.12 Bugfix: Opening Referencer on first character of document caused IndexOutOfBoundsException
+* 1.0.11
+    ** Added notification when there are no bookmarks for going to
+    ** Improved compatibility: Compiled with JDK target bytecode version 1.6 (was 1.7)
+* 1.0.10 Added context menu to go action: remove all bookmarks from current file
+* 1.0.9 Added action: go to bookmarks
+* 1.0.8
+    ** Updated API to IC-129.713
+    ** Improved UI, added Darcula Theme compatibility
+* 1.0.7
+    ** Improved general word-completions detection
+    ** Added respective caret movement to text insertion
+* 1.0.6
+    ** Improved references list with section headers
+    ** Added list of all open files
+    ** Added UNIX timestamp in seconds and milliseconds
+* 1.0.5 Added item group separators
+* 1.0.4 Added references of all endings to occurrences of the word at the caret
+* 1.0.3 Added date and timestamp references
+* 1.0.2 Added namespace reference from JavaScript filepath
+* 1.0.1 Added preference retaining (selected reference per file type)
+* 1.0.0 Initial release

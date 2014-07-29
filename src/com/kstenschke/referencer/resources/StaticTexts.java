@@ -1,4 +1,4 @@
-package com.kstenschke.referencer;
+package com.kstenschke.referencer.resources;
 
 import org.jetbrains.annotations.NonNls;
 

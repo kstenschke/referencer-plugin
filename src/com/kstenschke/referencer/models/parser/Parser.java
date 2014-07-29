@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kstenschke.referencer.parser;
+package com.kstenschke.referencer.models.parser;
 
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -26,10 +26,10 @@ import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
-import com.kstenschke.referencer.UtilsArray;
-import com.kstenschke.referencer.UtilsFile;
-import com.kstenschke.referencer.StaticTexts;
-import com.kstenschke.referencer.UtilsString;
+import com.kstenschke.referencer.utils.UtilsArray;
+import com.kstenschke.referencer.utils.UtilsFile;
+import com.kstenschke.referencer.resources.StaticTexts;
+import com.kstenschke.referencer.utils.UtilsString;
 
 import java.util.*;
 import java.util.regex.Pattern;

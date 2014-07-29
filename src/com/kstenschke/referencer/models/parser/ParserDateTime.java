@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kstenschke.referencer.parser;
+package com.kstenschke.referencer.models.parser;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

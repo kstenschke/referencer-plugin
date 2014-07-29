@@ -17,6 +17,7 @@
 package com.kstenschke.referencer;
 
 import com.intellij.ide.util.PropertiesComponent;
+import com.kstenschke.referencer.utils.UtilsFile;
 import org.jetbrains.annotations.NonNls;
 
 /**

@@ -29,10 +29,10 @@ import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.components.JBList;
-import com.kstenschke.referencer.dividedlist.DividedListCellRenderer;
-import com.kstenschke.referencer.dividedlist.DividedListSelectionListener;
-import com.kstenschke.referencer.StaticTexts;
-import com.kstenschke.referencer.parser.Parser;
+import com.kstenschke.referencer.resources.ui.DividedListCellRenderer;
+import com.kstenschke.referencer.listeners.DividedListSelectionListener;
+import com.kstenschke.referencer.resources.StaticTexts;
+import com.kstenschke.referencer.models.parser.Parser;
 import com.kstenschke.referencer.Preferences;
 
 /**

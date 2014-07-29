@@ -34,8 +34,12 @@ import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.components.JBList;
 import com.kstenschke.referencer.*;
-import com.kstenschke.referencer.dividedlist.DividedListCellRenderer;
-import com.kstenschke.referencer.dividedlist.DividedListSelectionListener;
+import com.kstenschke.referencer.resources.ui.DividedListCellRenderer;
+import com.kstenschke.referencer.listeners.DividedListSelectionListener;
+import com.kstenschke.referencer.resources.StaticTexts;
+import com.kstenschke.referencer.resources.ui.PopupContextGo;
+import com.kstenschke.referencer.utils.UtilsEnvironment;
+import com.kstenschke.referencer.utils.UtilsString;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -122,23 +126,27 @@ public class GoAction extends AnAction {
         List<Bookmark> bookmarks  = bookmarkManager.getValidBookmarks();
         String documentText = this.document.getText();
 
-        List<Integer> bookmarkLineNums = new ArrayList<Integer>();
+        List<Integer> bookmarkLineNumbers = new ArrayList<Integer>();
         for( Bookmark curBookmark : bookmarks ) {
-            if( curBookmark.getFile() == this.file ) {
-                bookmarkLineNums.add( curBookmark.getLine() );
+            if( curBookmark.getFile().equals(this.file) ) {
+                bookmarkLineNumbers.add(curBookmark.getLine());
             }
         }
 
-        if( bookmarkLineNums.size() > 0 ) {
-            Integer digits          = Collections.max(bookmarkLineNums).toString().length();
-            Integer[] lineNumbersArr= bookmarkLineNums.toArray( new Integer[bookmarkLineNums.size()] );
+        if( bookmarkLineNumbers.size() > 0 ) {
+            int digits          = Collections.max(bookmarkLineNumbers).toString().length();
+            Integer[] lineNumbersArr= bookmarkLineNumbers.toArray( new Integer[bookmarkLineNumbers.size()] );
             Arrays.sort(lineNumbersArr);
 
-            Integer index   = 0;
+            int index   = 0;
             for( Integer curLineNum : lineNumbersArr ) {
-                String lineSummary = this.getLineSummary( documentText.substring( this.document.getLineStartOffset(curLineNum), this.document.getLineEndOffset(curLineNum) ) );
-                bookmarkItems.add(index, UtilsString.makeMinLen(Integer.toString(curLineNum), digits) + ": " + lineSummary);
-                index++;
+                if( curLineNum > 0 ) {
+                    int offsetLineStart = this.document.getLineStartOffset(curLineNum);
+                    int offsetLineEnd   = this.document.getLineEndOffset(curLineNum);
+                    String lineSummary = this.getLineSummary(documentText.substring(offsetLineStart, offsetLineEnd));
+                    bookmarkItems.add(index, UtilsString.makeMinLen(Integer.toString(curLineNum), digits) + ": " + lineSummary);
+                    index++;
+                }
             }
 
             referencesArr = bookmarkItems.toArray( new String[bookmarkItems.size()] );

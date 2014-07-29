@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kstenschke.referencer;
+package com.kstenschke.referencer.utils;
 
 import java.util.*;
 

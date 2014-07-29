@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package com.kstenschke.referencer.dividedlist;
+package com.kstenschke.referencer.resources.ui;
 
 import com.intellij.ui.JBColor;
-import com.kstenschke.referencer.StaticTexts;
+import com.kstenschke.referencer.resources.StaticTexts;
 
 import javax.swing.*;
 import javax.swing.border.Border;
