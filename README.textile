@@ -5,7 +5,6 @@ This is a plugin for the various intellij IDEs, working in IntelliJ IDEA Ultimat
 RubyMine, WebStorm, PhpStorm, PyCharm, PyCharm CE, AppCode and Android Studio.
 
 
-
 h2. Description
 
 The plugin implements an additional list of code-completion suggestions into the editor, taken from various
@@ -18,7 +17,6 @@ Additionally the plugin provides an option to navigate to bookmarked lines in th
 The context menu of the bookmarks list allows to remove all bookmarks in the current file.
 
 
-
 h2. Keyboard Shortcut
 
 * Ctrl+Shift+Alt+C twice - Open list of references for copying to clipboard
@@ -28,7 +26,6 @@ h2. Keyboard Shortcut
 *Mac Users:* On Macs, the keyboard shortcuts are Shift+Alt+Cmd+C twice (copy), Shift+Alt+Cmd+V twice (paste) or Shift+Alt+Cmd+G twice (go)
 
 The list can be cancelled via Esc key, navigated using cursor keys and items are selected using Enter.
-
 
 
 h2. Types of references
@@ -60,6 +57,11 @@ from the caret position. Some references are only specifically available for cer
 * JavaScript files: file path formatted as namespace
 
 * General word-completions: all continuations to the word to the left of the caret, found in the current file
+
+
+h2. Changelog
+
+Read full changelog: https://github.com/kstenschke/referencer-plugin/blob/master/CHANGELOG.textile
 
 
 h2. License
