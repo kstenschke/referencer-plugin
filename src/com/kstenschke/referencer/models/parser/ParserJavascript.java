@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class ParserJavascript {
+public class ParserJavascript {
 
 	/**
 	 * Parse document of given event for JavaScript references and return them
@@ -123,7 +123,7 @@ class ParserJavascript {
 	 * @param	text	Source code to be searched
 	 * @return			All found PHP method names
 	 */
-	private static List<String> getAllMethodsInText(String text) {
+	public static List<String> getAllMethodsInText(String text) {
 			// 1. Find matches ala: "function methodname(", if any found return it
 		List<String> allMatches = new ArrayList<String>();
 		Matcher m = Pattern.compile("function.*[a-zA-Z0-9_]+\\(").matcher(text);

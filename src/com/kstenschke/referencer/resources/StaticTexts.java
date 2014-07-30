@@ -10,7 +10,7 @@ public class StaticTexts {
     @NonNls
     public static final String POPUP_TITLE_ACTION_INSERT = "Select Insertion";
     @NonNls
-    public static final String POPUP_TITLE_ACTION_GO = "Select Bookmark to go";
+    public static final String POPUP_TITLE_ACTION_GO = "Select where to go";
 
         // Popup items
     @NonNls
@@ -29,6 +29,8 @@ public class StaticTexts {
     public static final String POPUP_SECTION_TITLE_PHP = "SECTIONTITLE: PHP";
     @NonNls
     public static final String POPUP_SECTION_TITLE_TEXT_COMPLETIONS = "SECTIONTITLE: Text Completions";
+    @NonNls
+    public static final String POPUP_SECTION_BOOKMARKS= "SECTIONTITLE: Bookmarks";
 
         // Go action context menu
     @NonNls

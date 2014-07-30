@@ -61,8 +61,8 @@ public class CopyAction extends AnAction {
 				referencesList.setCellRenderer(new DividedListCellRenderer() );
 				referencesList.addListSelectionListener(new DividedListSelectionListener());
 
-				final Document document = editor.getDocument();
-				VirtualFile file		= FileDocumentManager.getInstance().getFile(document);
+				final Document document     = editor.getDocument();
+				VirtualFile file		    = FileDocumentManager.getInstance().getFile(document);
 				final String fileExtension	= (file != null) ? file.getExtension() : "";
 
 					// Preselect item from preferences

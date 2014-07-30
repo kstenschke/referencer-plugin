@@ -34,6 +34,7 @@ import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.components.JBList;
 import com.kstenschke.referencer.*;
+import com.kstenschke.referencer.models.parser.ParserJavascript;
 import com.kstenschke.referencer.resources.ui.DividedListCellRenderer;
 import com.kstenschke.referencer.listeners.DividedListSelectionListener;
 import com.kstenschke.referencer.resources.StaticTexts;
@@ -66,9 +67,12 @@ public class GoAction extends AnAction {
         if( this.project != null && this.editor != null ) {
             this.document = this.editor.getDocument();
             this.file		= FileDocumentManager.getInstance().getFile(document);
-            final String fileExtension	= (this.file != null) ? this.file.getExtension() : "";
 
-            final Object[] refArr = this.getItems();
+            final String fileExtension	= (this.file != null) ? this.file.getExtension() : "";
+            String content              = document.getText();
+
+            final Object[] refArr = this.getBookmarkItems();
+
             if( refArr != null && refArr.length > 0) {
                 final JBList referencesList = new JBList(refArr);
                 referencesList.setCellRenderer(new DividedListCellRenderer() );
@@ -108,7 +112,11 @@ public class GoAction extends AnAction {
                 referencesList.addMouseListener( contextMenu.getPopupListener() );
 
                 popupGo.showCenteredInCurrentWindow(project);
-            } else {
+            }
+
+//            List<String> refArrFunctions = ParserJavascript.getAllMethodsInText(content);
+
+            if( (refArr == null || refArr.length == 0) /*|| refArrFunctions.isEmpty()*/ ) {
                 UtilsEnvironment.notify(StaticTexts.NOTIFY_BOOKMARK_NONE_FOUND);
             }
         }
@@ -117,12 +125,14 @@ public class GoAction extends AnAction {
     /**
      * @return  String[]
      */
-    private String[] getItems() {
+    private String[] getBookmarkItems() {
         String[] referencesArr = null;
 
         BookmarkManager bookmarkManager = BookmarkManager.getInstance(this.project);
 
         List<String> bookmarkItems= new ArrayList<String>();
+        bookmarkItems.add( StaticTexts.POPUP_SECTION_BOOKMARKS );
+
         List<Bookmark> bookmarks  = bookmarkManager.getValidBookmarks();
         String documentText = this.document.getText();
 
@@ -138,7 +148,7 @@ public class GoAction extends AnAction {
             Integer[] lineNumbersArr= bookmarkLineNumbers.toArray( new Integer[bookmarkLineNumbers.size()] );
             Arrays.sort(lineNumbersArr);
 
-            int index   = 0;
+            int index   = 1;
             for( Integer curLineNum : lineNumbersArr ) {
                 if( curLineNum > 0 ) {
                     int offsetLineStart = this.document.getLineStartOffset(curLineNum);
