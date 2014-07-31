@@ -41,6 +41,7 @@ import com.kstenschke.referencer.resources.StaticTexts;
 import com.kstenschke.referencer.resources.ui.PopupContextGo;
 import com.kstenschke.referencer.utils.UtilsEnvironment;
 import com.kstenschke.referencer.utils.UtilsString;
+import org.apache.commons.lang.ArrayUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -71,12 +72,14 @@ public class GoAction extends AnAction {
             final String fileExtension	= (this.file != null) ? this.file.getExtension() : "";
             String content              = document.getText();
 
-            final Object[] refArr = this.getBookmarkItems();
+            Object[] refArr = this.getBookmarkItems();
+            refArr  = ArrayUtils.addAll( refArr, this.getFunctionItems() );
+
 
             if( refArr != null && refArr.length > 0) {
                 final JBList referencesList = new JBList(refArr);
                 referencesList.setCellRenderer(new DividedListCellRenderer() );
-                referencesList.addListSelectionListener(new DividedListSelectionListener());
+                referencesList.addListSelectionListener( new DividedListSelectionListener() );
 
                     // Preselect item from preferences
                 Integer selectedIndex	= Preferences.getSelectedIndex(fileExtension);
@@ -144,7 +147,7 @@ public class GoAction extends AnAction {
         }
 
         if( bookmarkLineNumbers.size() > 0 ) {
-            int digits          = Collections.max(bookmarkLineNumbers).toString().length();
+            int digits  = Collections.max(bookmarkLineNumbers).toString().length();
             Integer[] lineNumbersArr= bookmarkLineNumbers.toArray( new Integer[bookmarkLineNumbers.size()] );
             Arrays.sort(lineNumbersArr);
 
@@ -160,6 +163,52 @@ public class GoAction extends AnAction {
             }
 
             referencesArr = bookmarkItems.toArray( new String[bookmarkItems.size()] );
+        }
+
+        return referencesArr;
+    }
+
+    /**
+     * @return  String[]
+     */
+    private String[] getFunctionItems() {
+        String[] referencesArr = null;
+
+//        BookmarkManager bookmarkManager = BookmarkManager.getInstance(this.project);
+//
+        List<String> methodItems= new ArrayList<String>();
+        methodItems.add(StaticTexts.POPUP_SECTION_FUNCTIONS);
+
+//        List<Bookmark> bookmarks  = bookmarkManager.getValidBookmarks();
+        String documentText = this.document.getText();
+
+        List<String> functions = ParserJavascript.getAllMethodsInText(documentText);
+
+        List<Integer> methodLineNumbers = new ArrayList<Integer>();
+        for( String functionName : functions ) {
+//            if( curBookmark.getFile().equals(this.file) ) {
+//                bookmarkLineNumbers.add(curBookmark.getLine());
+//            }
+            methodItems.add( functionName );
+        }
+
+        if( methodLineNumbers.size() > 0 || true ) {
+//            int digits  = Collections.max(methodLineNumbers).toString().length();
+//            Integer[] lineNumbersArr= methodLineNumbers.toArray( new Integer[methodLineNumbers.size()] );
+//            Arrays.sort(lineNumbersArr);
+//
+//            int index   = 1;
+//            for( Integer curLineNum : lineNumbersArr ) {
+//                if( curLineNum > 0 ) {
+//                    int offsetLineStart = this.document.getLineStartOffset(curLineNum);
+//                    int offsetLineEnd   = this.document.getLineEndOffset(curLineNum);
+//                    String lineSummary = this.getLineSummary(documentText.substring(offsetLineStart, offsetLineEnd));
+//                    methodItems.add(index, UtilsString.makeMinLen(Integer.toString(curLineNum), digits) + ": " + lineSummary);
+//                    index++;
+//                }
+//            }
+
+            referencesArr = methodItems.toArray( new String[methodItems.size()] );
         }
 
         return referencesArr;

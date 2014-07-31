@@ -4,6 +4,11 @@ import org.jetbrains.annotations.NonNls;
 
 public class StaticTexts {
 
+    @NonNls
+    public static final String SETTINGS_DISPLAY_NAME = "Referencer";
+    @NonNls
+    public static final String SETTINGS_COMPONENT_NAME = "Referencer Settings";
+
         // Popup titles
     @NonNls
     public static final String POPUP_TITLE_ACTION_COPY = "Select what to copy";
@@ -31,6 +36,8 @@ public class StaticTexts {
     public static final String POPUP_SECTION_TITLE_TEXT_COMPLETIONS = "SECTIONTITLE: Text Completions";
     @NonNls
     public static final String POPUP_SECTION_BOOKMARKS= "SECTIONTITLE: Bookmarks";
+    @NonNls
+    public static final String POPUP_SECTION_FUNCTIONS= "SECTIONTITLE: Methods";
 
         // Go action context menu
     @NonNls

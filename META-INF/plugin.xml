@@ -71,19 +71,21 @@
   <ul>
     <li>1.1.0
         <ul>
-            <li>Reduced changelog to previous five versions, added separate full changelog</li>
+            <li>Added: plugin settings with "Go To..." jump patterns</li>
+            <li>Added: PHP and JavaScript methods listing in "Go To..." menu</li>
             <li>Bugfix: IndexOutOfBoundsException in go to bookmark action</li>
+            <li>Reduced changelog to previous five versions, added separate full changelog</li>
          </ul>
     </li>
     <li>1.0.12 Bugfix: Opening Referencer on first character of document caused IndexOutOfBoundsException</li>
     <li>1.0.11
         <ul>
-            <li>Added notification when there are no bookmarks for going to</li>
+            <li>Added: notification when there are no bookmarks for going to</li>
             <li>Improved compatibility: Compiled with JDK target bytecode version 1.6 (was 1.7)</li>
         </ul>
     </li>
-    <li>1.0.10 Added context menu to go action: remove all bookmarks from current file</li>
-    <li>1.0.9 Added action: go to bookmarks</li>
+    <li>1.0.10 Added: context menu to go action: remove all bookmarks from current file</li>
+    <li>1.0.9 Added: action "go to bookmarks"</li>
   </ul><br />
   <a href="https://github.com/kstenschke/referencer-plugin/blob/master/CHANGELOG.textile" target="_blank">...Read full changelog on github</a>
   ]]></change-notes>
@@ -94,6 +96,10 @@
 
   <project-components>
     <!-- Add your project components here -->
+      <component>
+          <implementation-class>com.kstenschke.referencer.resources.ui.ReferencerSettingsComponent</implementation-class>
+          <loadForDefaultProject/>
+      </component>
   </project-components>
 
   <actions>
