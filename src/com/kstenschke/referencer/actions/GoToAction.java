@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2013 Kay Stenschke
+ * Copyright 2012-2014 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.kstenschke.referencer.actions;
 
 import com.intellij.openapi.actionSystem.AnAction;
@@ -32,10 +31,8 @@ import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.components.JBList;
 import com.kstenschke.referencer.*;
-import com.kstenschke.referencer.parsers.ParserJavaScript;
-import com.kstenschke.referencer.parsers.ParserPhp;
 import com.kstenschke.referencer.referencers.goTo.GoToReferencerBookmarks;
-import com.kstenschke.referencer.referencers.insertOrCopy.InsertOrCopyReferencerJavascript;
+import com.kstenschke.referencer.referencers.goTo.GoToReferencerMethods;
 import com.kstenschke.referencer.resources.ui.DividedListCellRenderer;
 import com.kstenschke.referencer.listeners.DividedListSelectionListener;
 import com.kstenschke.referencer.resources.StaticTexts;
@@ -43,10 +40,6 @@ import com.kstenschke.referencer.resources.ui.PopupContextGo;
 import com.kstenschke.referencer.utils.UtilsEnvironment;
 import com.kstenschke.referencer.utils.UtilsFile;
 import org.apache.commons.lang.ArrayUtils;
-
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class GoToAction extends AnAction {
 
@@ -65,11 +58,18 @@ public class GoToAction extends AnAction {
         this.editor		= e.getData(PlatformDataKeys.EDITOR);
 
         if( this.project != null && this.editor != null ) {
-            this.document = this.editor.getDocument();
+            this.document   = this.editor.getDocument();
+            this.file       = FileDocumentManager.getInstance().getFile(document);
+
             String fileExtension = UtilsFile.getExtensionByDocument(this.document);
 
+                // Get bookmarks
             Object[] refArr = GoToReferencerBookmarks.getBookmarkItems(this.project, this.document, this.file);
-            refArr  = ArrayUtils.addAll( refArr, this.getFunctionItems(fileExtension) );
+                // Add JS or PHP methods
+            String[] methodItems = GoToReferencerMethods.getMethodItems(this.document, fileExtension);
+            if( methodItems.length > 1 ) {
+                refArr = ArrayUtils.addAll( refArr, methodItems );
+            }
 
             if( refArr != null && refArr.length > 0) {
                 final JBList referencesList = new JBList(refArr);
@@ -92,10 +92,8 @@ public class GoToAction extends AnAction {
                 popupGo.showCenteredInCurrentWindow(project);
             }
 
-//            List<String> refArrFunctions = ParserJavascript.getAllMethodsInText(content);
-
-            if( (refArr == null || refArr.length == 0) /*|| refArrFunctions.isEmpty()*/ ) {
-                UtilsEnvironment.notify(StaticTexts.NOTIFY_BOOKMARK_NONE_FOUND);
+            if( (refArr == null || refArr.length == 0) ) {
+                UtilsEnvironment.notify(StaticTexts.NOTIFY_GOTO_NONE_FOUND);
             }
         }
     }
@@ -127,56 +125,6 @@ public class GoToAction extends AnAction {
 
             }
         }).setMovable(true).createPopup();
-    }
-
-    /**
-     * @return  String[]
-     */
-    private String[] getFunctionItems(String fileExtension) {
-        String[] referencesArr = null;
-
-        List<String> methodItems= new ArrayList<String>();
-        methodItems.add(StaticTexts.POPUP_SECTION_FUNCTIONS);
-
-        String documentText = this.document.getText();
-
-        List<String> functions = null;
-        if( UtilsFile.isJavaScriptFileExtension(fileExtension) ) {
-            functions = ParserJavaScript.getAllMethodsInText(documentText);
-        } else if( UtilsFile.isPhpFileExtension(fileExtension) ) {
-            functions = ParserPhp.getAllMethodsInText(documentText);
-        }
-
-        List<Integer> methodLineNumbers = new ArrayList<Integer>();
-        if( functions != null ) {
-            for( String functionName : functions ) {
-//            if( curBookmark.getFile().equals(this.file) ) {
-//                bookmarkLineNumbers.add(curBookmark.getLine());
-//            }
-                methodItems.add( functionName );
-            }
-        }
-
-        if( methodLineNumbers.size() > 0 || true ) {
-//            int digits  = Collections.max(methodLineNumbers).toString().length();
-//            Integer[] lineNumbersArr= methodLineNumbers.toArray( new Integer[methodLineNumbers.size()] );
-//            Arrays.sort(lineNumbersArr);
-//
-//            int index   = 1;
-//            for( Integer curLineNum : lineNumbersArr ) {
-//                if( curLineNum > 0 ) {
-//                    int offsetLineStart = this.document.getLineStartOffset(curLineNum);
-//                    int offsetLineEnd   = this.document.getLineEndOffset(curLineNum);
-//                    String lineSummary = this.getLineSummary(documentText.substring(offsetLineStart, offsetLineEnd));
-//                    methodItems.add(index, UtilsString.makeMinLen(Integer.toString(curLineNum), digits) + ": " + lineSummary);
-//                    index++;
-//                }
-//            }
-
-            referencesArr = methodItems.toArray( new String[methodItems.size()] );
-        }
-
-        return referencesArr;
     }
 
 }

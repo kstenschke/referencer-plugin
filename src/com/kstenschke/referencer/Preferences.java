@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2013 Kay Stenschke
+ * Copyright 2012-2014 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.kstenschke.referencer;
 
 import com.intellij.ide.util.PropertiesComponent;
@@ -29,10 +28,8 @@ public class Preferences {
 		//  @NonNls = element is not a string requiring internationalization and it does not contain such strings.
 	@NonNls
 	private static final String PROPERTY_REFERENCER_INDEX = "PluginReferencer.SelectedIndex";
-
 	@NonNls
 	private static final String PROPERTY_REFERENCER_INDEX_PHP = "PluginReferencer.SelectedIndexPHP";
-
 	@NonNls
 	private static final String PROPERTY_REFERENCER_INDEX_JS = "PluginReferencer.SelectedIndexJS";
 

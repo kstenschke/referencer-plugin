@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2013 Kay Stenschke
+ * Copyright 2012-2014 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.kstenschke.referencer.actions;
 
 import com.intellij.openapi.actionSystem.AnAction;
@@ -38,7 +37,6 @@ import com.kstenschke.referencer.utils.UtilsFile;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-
 
 /**
  * Copy Action
@@ -74,7 +72,6 @@ public class CopyAction extends AnAction {
                 buildAndShowPopup(project, refArr, referencesList, fileExtension);
 			}
 		}
-
 	}
 
     /**

@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2013 Kay Stenschke
+ * Copyright 2012-2014 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package com.kstenschke.referencer.actions;
 
 import com.intellij.openapi.actionSystem.AnAction;
@@ -23,11 +22,9 @@ import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.command.CommandProcessor;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
-import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.PopupChooserBuilder;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.components.JBList;
 import com.kstenschke.referencer.referencers.insertOrCopy.InsertOrCopyReferencer;
 import com.kstenschke.referencer.resources.ui.DividedListCellRenderer;
