@@ -26,53 +26,53 @@ import org.jetbrains.annotations.NonNls;
 public class Preferences {
 
 		//  @NonNls = element is not a string requiring internationalization and it does not contain such strings.
-	@NonNls
-	private static final String PROPERTY_REFERENCER_INDEX = "PluginReferencer.SelectedIndex";
-	@NonNls
-	private static final String PROPERTY_REFERENCER_INDEX_PHP = "PluginReferencer.SelectedIndexPHP";
-	@NonNls
-	private static final String PROPERTY_REFERENCER_INDEX_JS = "PluginReferencer.SelectedIndexJS";
+    @NonNls
+    private static final String PROPERTY_REFERENCER_INDEX = "PluginReferencer.SelectedIndex";
+    @NonNls
+    private static final String PROPERTY_REFERENCER_INDEX_PHP = "PluginReferencer.SelectedIndexPHP";
+    @NonNls
+    private static final String PROPERTY_REFERENCER_INDEX_JS = "PluginReferencer.SelectedIndexJS";
 
-	/**
-	 * Store referencer preferences: selected index per supported file type
-	 *
-	 * @param	fileExtension			File extension of file open while using referencer
-	 * @param	selectedIndex			Selected item index
-	 */
-	public static void saveSelectedIndex(String fileExtension, Integer selectedIndex) {
-		String preferenceIdentifier = getPropertyIdentifierByFileExtension(fileExtension);
+    /**
+     * Store referencer preferences: selected index per supported file type
+     *
+     * @param	fileExtension			File extension of file open while using referencer
+     * @param	selectedIndex			Selected item index
+     */
+    public static void saveSelectedIndex(String fileExtension, Integer selectedIndex) {
+        String preferenceIdentifier = getPropertyIdentifierByFileExtension(fileExtension);
 
-		PropertiesComponent.getInstance().setValue(preferenceIdentifier, selectedIndex.toString());
-	}
+        PropertiesComponent.getInstance().setValue(preferenceIdentifier, selectedIndex.toString());
+    }
 
-	/**
-	 * Get identifier for referencer preference of given file extension
-	 *
-	 * @param	fileExtension		File extension of file open while using referencer
-	 * @return						Preference identifier
-	 */
-	private static String getPropertyIdentifierByFileExtension(String fileExtension) {
-		if( UtilsFile.isPhpFileExtension(fileExtension) ) {
-			return PROPERTY_REFERENCER_INDEX_PHP;
-		} else if( UtilsFile.isJavaScriptFileExtension(fileExtension) ) {
-			return PROPERTY_REFERENCER_INDEX_JS;
-		}
+    /**
+     * Get identifier for referencer preference of given file extension
+     *
+     * @param   fileExtension       File extension of file open while using referencer
+     * @return                      Preference identifier
+     */
+    private static String getPropertyIdentifierByFileExtension(String fileExtension) {
+        if( UtilsFile.isPhpFileExtension(fileExtension) ) {
+            return PROPERTY_REFERENCER_INDEX_PHP;
+        } else if( UtilsFile.isJavaScriptFileExtension(fileExtension) ) {
+            return PROPERTY_REFERENCER_INDEX_JS;
+        }
 
-			// Default
-		return PROPERTY_REFERENCER_INDEX;
-	}
+            // Default
+        return PROPERTY_REFERENCER_INDEX;
+    }
 
-	/**
-	 * @param	fileExtension	Extension of file open while invoking referencer
-	 * @return					Integer
-	 */
-	public static Integer getSelectedIndex(String fileExtension) {
-		String preferenceIdentifier	= getPropertyIdentifierByFileExtension(fileExtension);
+    /**
+     * @param   fileExtension   Extension of file open while invoking referencer
+     * @return                  Integer
+     */
+    public static Integer getSelectedIndex(String fileExtension) {
+        String preferenceIdentifier	= getPropertyIdentifierByFileExtension(fileExtension);
 
-		String preferredIndex	= PropertiesComponent.getInstance().getValue(preferenceIdentifier);
-		if( preferredIndex == null || preferredIndex.equals("")  ) return 0;
+        String preferredIndex	= PropertiesComponent.getInstance().getValue(preferenceIdentifier);
+        if( preferredIndex == null || preferredIndex.equals("")  ) return 0;
 
-		return Integer.parseInt(preferredIndex);
-	}
+        return Integer.parseInt(preferredIndex);
+    }
 
 }

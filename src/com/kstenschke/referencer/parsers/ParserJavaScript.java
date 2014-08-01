@@ -57,8 +57,8 @@ public class ParserJavaScript {
     }
 
     /**
-     * @param	text	Source code to be searched
-     * @return			All found PHP class names
+     * @param   text    Source code to be searched
+     * @return          All found PHP class names
      */
     public static List<String> getAllClassNamesInText(String text) {
         // Look for "@class" annotations

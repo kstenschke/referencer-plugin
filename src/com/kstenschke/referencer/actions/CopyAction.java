@@ -43,36 +43,36 @@ import java.awt.datatransfer.StringSelection;
  */
 public class CopyAction extends AnAction {
 
-	/**
-	 * Show list with possible references and copy chosen item to clipboard
-	 *
-	 * @param	e	Action system event
-	 */
-	public void actionPerformed(final AnActionEvent e) {
-		final Project project	= e.getData(PlatformDataKeys.PROJECT);
-		Editor editor			= e.getData(PlatformDataKeys.EDITOR);
+    /**
+     * Show list with possible references and copy chosen item to clipboard
+     *
+     * @param	e	Action system event
+     */
+    public void actionPerformed(final AnActionEvent e) {
+        final Project project	= e.getData(PlatformDataKeys.PROJECT);
+        Editor editor			= e.getData(PlatformDataKeys.EDITOR);
 
-		if( project != null && editor != null ) {
-			final Object[] refArr = InsertOrCopyReferencer.getItems(e);
+        if( project != null && editor != null ) {
+            final Object[] refArr = InsertOrCopyReferencer.getItems(e);
 
-			if( refArr != null ) {
-				final JBList referencesList = new JBList(refArr);
-				referencesList.setCellRenderer(new DividedListCellRenderer() );
-				referencesList.addListSelectionListener(new DividedListSelectionListener());
+            if( refArr != null ) {
+                final JBList referencesList = new JBList(refArr);
+                referencesList.setCellRenderer(new DividedListCellRenderer() );
+                referencesList.addListSelectionListener(new DividedListSelectionListener());
 
-				final Document document     = editor.getDocument();
-				final String fileExtension	= UtilsFile.getExtensionByDocument(document);
+                final Document document     = editor.getDocument();
+                final String fileExtension	= UtilsFile.getExtensionByDocument(document);
 
-					// Preselect item from preferences
-				Integer selectedIndex	= Preferences.getSelectedIndex(fileExtension);
-				if( selectedIndex > refArr.length ) selectedIndex	= 0;
-				referencesList.setSelectedIndex(selectedIndex);
+                // Preselect item from preferences
+                Integer selectedIndex	= Preferences.getSelectedIndex(fileExtension);
+                if( selectedIndex > refArr.length ) selectedIndex	= 0;
+                referencesList.setSelectedIndex(selectedIndex);
 
-                    // Build and show popup
+                // Build and show popup
                 buildAndShowPopup(project, refArr, referencesList, fileExtension);
-			}
-		}
-	}
+            }
+        }
+    }
 
     /**
      * @param project

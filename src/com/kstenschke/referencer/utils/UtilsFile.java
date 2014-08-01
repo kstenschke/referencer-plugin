@@ -24,37 +24,37 @@ import com.intellij.openapi.vfs.VirtualFile;
  */
 public class UtilsFile {
 
-	/**
-	 * Compare given extension against known PHP extensions
-	 *
-	 * @param	fileExtension	Extension to be checked
-	 * @return					PHP extension?
-	 */
-	public static Boolean isPhpFileExtension(String fileExtension) {
-		if( fileExtension == null) return false;
+    /**
+     * Compare given extension against known PHP extensions
+     *
+     * @param	fileExtension	Extension to be checked
+     * @return					PHP extension?
+     */
+    public static Boolean isPhpFileExtension(String fileExtension) {
+        if( fileExtension == null) return false;
 
-		fileExtension	= fileExtension.toLowerCase();
+        fileExtension	= fileExtension.toLowerCase();
 
-		return     fileExtension.equals("phpsh")
-				|| fileExtension.equals("php")
-				|| fileExtension.equals("php3")
-				|| fileExtension.equals("php4")
-				|| fileExtension.equals("php5");
-	}
+        return     fileExtension.equals("phpsh")
+                || fileExtension.equals("php")
+                || fileExtension.equals("php3")
+                || fileExtension.equals("php4")
+                || fileExtension.equals("php5");
+    }
 
-	/**
-	 * Compare given extension against known JavaScript extensions
-	 *
-	 * @param	fileExtension	Extension to be checked
-	 * @return					JavaScript extension?
-	 */
-	public static Boolean isJavaScriptFileExtension(String fileExtension) {
-		if( fileExtension == null) return false;
+    /**
+     * Compare given extension against known JavaScript extensions
+     *
+     * @param	fileExtension	Extension to be checked
+     * @return					JavaScript extension?
+     */
+    public static Boolean isJavaScriptFileExtension(String fileExtension) {
+        if( fileExtension == null) return false;
 
-		fileExtension	= fileExtension.toLowerCase();
+        fileExtension	= fileExtension.toLowerCase();
 
-		return fileExtension.equals("js" );
-	}
+        return fileExtension.equals("js" );
+    }
 
     /**
      * @param   document

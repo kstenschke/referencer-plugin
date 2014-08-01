@@ -28,17 +28,17 @@ public class DividedListSelectionListener extends JFrame implements ListSelectio
     /**
      * Constructor
      */
-	public DividedListSelectionListener() {
+    public DividedListSelectionListener() {
 
-	}
+    }
 
-	/**
-	 * Detect when a separator is selected via cursor keys, select previous/next item than
-	 *
-	 * @param	e	Selection event
-	 */
-	public void valueChanged(ListSelectionEvent e) {
-		JList list	            = (JList) e.getSource();
+    /**
+     * Detect when a separator is selected via cursor keys, select previous/next item than
+     *
+     * @param	e	Selection event
+     */
+    public void valueChanged(ListSelectionEvent e) {
+        JList list	            = (JList) e.getSource();
 
         if( list.getSelectedValue() != null && list.isVisible() ) {
             int selectedIndex   = list.getSelectedIndex();
@@ -53,13 +53,13 @@ public class DividedListSelectionListener extends JFrame implements ListSelectio
 
             this.prevSelectedIndex  = list.getSelectedIndex();
         }
-	}
+    }
 
     /**
      * @param   valueStr
      * @return  Boolean
      */
-	private boolean isSeparatorOrSection(String valueStr) {
-		return valueStr.equals("_") || valueStr.startsWith(StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE);
-	}
+    private boolean isSeparatorOrSection(String valueStr) {
+        return valueStr.equals("_") || valueStr.startsWith(StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE);
+    }
 }
