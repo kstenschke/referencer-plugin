@@ -50,7 +50,6 @@ public class PopupContextGo {
             public void actionPerformed(ActionEvent e) {
                 BookmarkManager bookmarkManager = BookmarkManager.getInstance(curProject);
                 List<Bookmark> bookmarks    = bookmarkManager.getValidBookmarks();
-
                 if( !bookmarks.isEmpty() ) {
                     FileEditorManager fileEditorManager = FileEditorManager.getInstance(curProject);
                     Editor editor   = fileEditorManager.getSelectedTextEditor();

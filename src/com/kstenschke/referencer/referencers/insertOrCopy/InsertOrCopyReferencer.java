@@ -52,8 +52,7 @@ public class InsertOrCopyReferencer {
 				// File path and name
 			VirtualFile file	= FileDocumentManager.getInstance().getFile(document);
 			String filePath		= (file != null) ? file.getPath() : "";
-			String fileExtension= (file != null) ? file.getExtension() : "";
-			if( fileExtension != null && fileExtension.length() > 0) fileExtension = fileExtension.toLowerCase();
+			String fileExtension= UtilsFile.getExtensionByDocument(document);
 
 				// Get line number the caret is in
 			int caretOffset	= editor.getCaretModel().getOffset();
@@ -87,7 +86,7 @@ public class InsertOrCopyReferencer {
 			}
 
 				// Add JavaScript items
-			if( fileExtension != null && fileExtension.equals("js") ) {
+			if( UtilsFile.isJavaScriptFileExtension("js") ) {
 				referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_JAVASCRIPT);
 				referenceItems.addAll(InsertOrCopyReferencerJavascript.getReferenceItems(e));
 			} else if( UtilsFile.isPhpFileExtension(fileExtension) ) {
@@ -113,7 +112,6 @@ public class InsertOrCopyReferencer {
 				} else {
 					allLineParts	= wordLineParts;
 				}
-
 
 				if( allLineParts != null && allLineParts.length > 0 ) {
 					List<String> listLineParts = Arrays.asList(allLineParts);

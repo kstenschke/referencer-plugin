@@ -33,6 +33,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.components.JBList;
 import com.kstenschke.referencer.*;
 import com.kstenschke.referencer.parsers.ParserJavaScript;
+import com.kstenschke.referencer.parsers.ParserPhp;
 import com.kstenschke.referencer.referencers.goTo.GoToReferencerBookmarks;
 import com.kstenschke.referencer.referencers.insertOrCopy.InsertOrCopyReferencerJavascript;
 import com.kstenschke.referencer.resources.ui.DividedListCellRenderer;
@@ -40,6 +41,7 @@ import com.kstenschke.referencer.listeners.DividedListSelectionListener;
 import com.kstenschke.referencer.resources.StaticTexts;
 import com.kstenschke.referencer.resources.ui.PopupContextGo;
 import com.kstenschke.referencer.utils.UtilsEnvironment;
+import com.kstenschke.referencer.utils.UtilsFile;
 import org.apache.commons.lang.ArrayUtils;
 
 import java.util.ArrayList;
@@ -64,13 +66,10 @@ public class GoToAction extends AnAction {
 
         if( this.project != null && this.editor != null ) {
             this.document = this.editor.getDocument();
-            this.file		= FileDocumentManager.getInstance().getFile(document);
-
-            final String fileExtension	= (this.file != null) ? this.file.getExtension() : "";
-            String content              = document.getText();
+            String fileExtension = UtilsFile.getExtensionByDocument(this.document);
 
             Object[] refArr = GoToReferencerBookmarks.getBookmarkItems(this.project, this.document, this.file);
-            refArr  = ArrayUtils.addAll( refArr, this.getFunctionItems() );
+            refArr  = ArrayUtils.addAll( refArr, this.getFunctionItems(fileExtension) );
 
             if( refArr != null && refArr.length > 0) {
                 final JBList referencesList = new JBList(refArr);
@@ -84,27 +83,7 @@ public class GoToAction extends AnAction {
                 referencesList.setSelectedIndex(selectedIndex);
 
                     // Build and show popup
-                PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
-
-                JBPopup popupGo = popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_GO).setItemChoosenCallback(new Runnable() {
-                    public void run() {
-                        ApplicationManager.getApplication().runWriteAction(new Runnable() {
-                            public void run() {
-                                    // Callback when item chosen
-                                CommandProcessor.getInstance().executeCommand(project, new Runnable() {
-                                    public void run() {
-                                        Preferences.saveSelectedIndex(fileExtension, referencesList.getSelectedIndex());
-
-                                        Integer lineNumber  = Integer.parseInt( referencesList.getSelectedValue().toString().split(":")[0] );
-                                        editor.getCaretModel().moveToOffset( document.getLineStartOffset(lineNumber), true );
-                                        editor.getScrollingModel().scrollToCaret(ScrollType.CENTER);
-                                    }
-                                }, null, null);
-                            }
-                        });
-
-                    }
-                }).setMovable(true).createPopup();
+                JBPopup popupGo = buildAndShowPopup(fileExtension, referencesList);
 
                     // Add context menu
                 PopupContextGo contextMenu = new PopupContextGo(popupGo, this.project);
@@ -122,27 +101,60 @@ public class GoToAction extends AnAction {
     }
 
     /**
+     * @param   fileExtension
+     * @param   referencesList
+     * @return  JBPopup
+     */
+    private JBPopup buildAndShowPopup(final String fileExtension, final JBList referencesList) {
+        PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
+
+        return popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_GO).setItemChoosenCallback(new Runnable() {
+            public void run() {
+                ApplicationManager.getApplication().runWriteAction(new Runnable() {
+                    public void run() {
+                            // Callback when item chosen
+                        CommandProcessor.getInstance().executeCommand(project, new Runnable() {
+                            public void run() {
+                                Preferences.saveSelectedIndex(fileExtension, referencesList.getSelectedIndex());
+
+                                Integer lineNumber  = Integer.parseInt( referencesList.getSelectedValue().toString().split(":")[0] );
+                                editor.getCaretModel().moveToOffset( document.getLineStartOffset(lineNumber), true );
+                                editor.getScrollingModel().scrollToCaret(ScrollType.CENTER);
+                            }
+                        }, null, null);
+                    }
+                });
+
+            }
+        }).setMovable(true).createPopup();
+    }
+
+    /**
      * @return  String[]
      */
-    private String[] getFunctionItems() {
+    private String[] getFunctionItems(String fileExtension) {
         String[] referencesArr = null;
 
-//        BookmarkManager bookmarkManager = BookmarkManager.getInstance(this.project);
-//
         List<String> methodItems= new ArrayList<String>();
         methodItems.add(StaticTexts.POPUP_SECTION_FUNCTIONS);
 
-//        List<Bookmark> bookmarks  = bookmarkManager.getValidBookmarks();
         String documentText = this.document.getText();
 
-        List<String> functions = ParserJavaScript.getAllMethodsInText(documentText);
+        List<String> functions = null;
+        if( UtilsFile.isJavaScriptFileExtension(fileExtension) ) {
+            functions = ParserJavaScript.getAllMethodsInText(documentText);
+        } else if( UtilsFile.isPhpFileExtension(fileExtension) ) {
+            functions = ParserPhp.getAllMethodsInText(documentText);
+        }
 
         List<Integer> methodLineNumbers = new ArrayList<Integer>();
-        for( String functionName : functions ) {
+        if( functions != null ) {
+            for( String functionName : functions ) {
 //            if( curBookmark.getFile().equals(this.file) ) {
 //                bookmarkLineNumbers.add(curBookmark.getLine());
 //            }
-            methodItems.add( functionName );
+                methodItems.add( functionName );
+            }
         }
 
         if( methodLineNumbers.size() > 0 || true ) {

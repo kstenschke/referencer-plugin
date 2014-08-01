@@ -16,6 +16,10 @@
 
 package com.kstenschke.referencer.utils;
 
+import com.intellij.openapi.editor.Document;
+import com.intellij.openapi.fileEditor.FileDocumentManager;
+import com.intellij.openapi.vfs.VirtualFile;
+
 /**
  * File helper methods
  */
@@ -50,7 +54,22 @@ public class UtilsFile {
 
 		fileExtension	= fileExtension.toLowerCase();
 
-		return fileExtension.equals("js");
+		return fileExtension.equals("js" );
 	}
+
+    /**
+     * @param   document
+     * @return  String
+     */
+    public static String getExtensionByDocument(Document document) {
+        VirtualFile file	  = FileDocumentManager.getInstance().getFile(document);
+        String fileExtension	= file != null ? file.getExtension() : "";
+
+        if(fileExtension != null && !fileExtension.isEmpty()) {
+            fileExtension = fileExtension.toLowerCase();
+        }
+
+        return fileExtension;
+    }
 
 }

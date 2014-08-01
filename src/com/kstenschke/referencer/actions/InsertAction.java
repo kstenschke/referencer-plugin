@@ -34,6 +34,7 @@ import com.kstenschke.referencer.resources.ui.DividedListCellRenderer;
 import com.kstenschke.referencer.listeners.DividedListSelectionListener;
 import com.kstenschke.referencer.resources.StaticTexts;
 import com.kstenschke.referencer.Preferences;
+import com.kstenschke.referencer.utils.UtilsFile;
 
 /**
  * Insert Action
@@ -57,9 +58,8 @@ public class InsertAction extends AnAction {
 				referencesList.setCellRenderer(new DividedListCellRenderer() );
 				referencesList.addListSelectionListener(new DividedListSelectionListener());
 
-				final Document document = editor.getDocument();
-				VirtualFile file		= FileDocumentManager.getInstance().getFile(document);
-				final String fileExtension	= (file != null) ? file.getExtension() : "";
+				final Document document     = editor.getDocument();
+				final String fileExtension	= UtilsFile.getExtensionByDocument(document);
 
 					// Preselect item from preferences
 				Integer selectedIndex	= Preferences.getSelectedIndex(fileExtension);
@@ -67,38 +67,48 @@ public class InsertAction extends AnAction {
 
 				referencesList.setSelectedIndex(selectedIndex);
 
-				PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
-
-				popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_INSERT).setItemChoosenCallback(new Runnable() {
-					public void run() {
-						ApplicationManager.getApplication().runWriteAction(new Runnable() {
-							public void run() {
-
-									// Callback when item chosen
-								CommandProcessor.getInstance().executeCommand(project, new Runnable() {
-									public void run() {
-										final int index = referencesList.getSelectedIndex();
-
-											// Store preferences
-										Preferences.saveSelectedIndex(fileExtension, index);
-
-										final Document document = editor.getDocument();
-										int caretOffset	= editor.getCaretModel().getOffset();
-
-										String insertString = InsertOrCopyReferencer.fixReferenceValue(project, refArr[index].toString());
-										document.insertString(caretOffset, insertString );
-										editor.getCaretModel().moveToOffset( caretOffset + insertString.length() );
-									}
-								},
-								null, null);
-
-							}
-						});
-
-					}
-				}).setMovable(true).createPopup().showCenteredInCurrentWindow(project);
+                    // Build and show popup
+                buildAndShowPopup(project, editor, refArr, referencesList, fileExtension);
 			}
 		}
 	}
+
+    /**
+     * @param project
+     * @param editor
+     * @param refArr
+     * @param referencesList
+     * @param fileExtension
+     */
+    private void buildAndShowPopup(final Project project, final Editor editor, final Object[] refArr, final JBList referencesList, final String fileExtension) {
+        PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
+        popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_INSERT).setItemChoosenCallback(new Runnable() {
+            public void run() {
+                ApplicationManager.getApplication().runWriteAction(new Runnable() {
+                    public void run() {
+
+                            // Callback when item chosen
+                        CommandProcessor.getInstance().executeCommand(project, new Runnable() {
+                            public void run() {
+                                final int index = referencesList.getSelectedIndex();
+
+                                    // Store preferences
+                                Preferences.saveSelectedIndex(fileExtension, index);
+
+                                final Document document = editor.getDocument();
+                                int caretOffset	= editor.getCaretModel().getOffset();
+
+                                String insertString = InsertOrCopyReferencer.fixReferenceValue(project, refArr[index].toString());
+                                document.insertString(caretOffset, insertString );
+                                editor.getCaretModel().moveToOffset( caretOffset + insertString.length() );
+                            }
+                        },
+                        null, null);
+
+                    }
+                });
+            }
+        }).setMovable(true).createPopup().showCenteredInCurrentWindow(project);
+    }
 
 }

@@ -33,6 +33,7 @@ import com.kstenschke.referencer.resources.ui.DividedListCellRenderer;
 import com.kstenschke.referencer.listeners.DividedListSelectionListener;
 import com.kstenschke.referencer.resources.StaticTexts;
 import com.kstenschke.referencer.Preferences;
+import com.kstenschke.referencer.utils.UtilsFile;
 
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
@@ -62,38 +63,47 @@ public class CopyAction extends AnAction {
 				referencesList.addListSelectionListener(new DividedListSelectionListener());
 
 				final Document document     = editor.getDocument();
-				VirtualFile file		    = FileDocumentManager.getInstance().getFile(document);
-				final String fileExtension	= (file != null) ? file.getExtension() : "";
+				final String fileExtension	= UtilsFile.getExtensionByDocument(document);
 
 					// Preselect item from preferences
 				Integer selectedIndex	= Preferences.getSelectedIndex(fileExtension);
 				if( selectedIndex > refArr.length ) selectedIndex	= 0;
 				referencesList.setSelectedIndex(selectedIndex);
 
-				PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
-				popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_COPY).setItemChoosenCallback(new Runnable() {
-					public void run() {
-                            // Callback when item chosen
-                        CommandProcessor.getInstance().executeCommand(project, new Runnable() {
-                            public void run() {
-                            final int index = referencesList.getSelectedIndex();
-
-                                // Store preferences
-                            Preferences.saveSelectedIndex(fileExtension, index);
-
-                                // Copy item to clipboard
-                            StringSelection clipString	= new StringSelection( InsertOrCopyReferencer.fixReferenceValue(project, refArr[index].toString()) );
-                            Clipboard clipboard			= Toolkit.getDefaultToolkit().getSystemClipboard();
-
-                            clipboard.setContents(clipString, null);
-                            }
-                        }, null, null);
-			        }
-			}).setMovable(true).createPopup().showCenteredInCurrentWindow(project);
-
+                    // Build and show popup
+                buildAndShowPopup(project, refArr, referencesList, fileExtension);
 			}
 		}
 
 	}
+
+    /**
+     * @param project
+     * @param refArr
+     * @param referencesList
+     * @param fileExtension
+     */
+    private void buildAndShowPopup(final Project project, final Object[] refArr, final JBList referencesList, final String fileExtension) {
+        PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
+        popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_COPY).setItemChoosenCallback(new Runnable() {
+            public void run() {
+                    // Callback when item chosen
+                CommandProcessor.getInstance().executeCommand(project, new Runnable() {
+                    public void run() {
+                        final int index = referencesList.getSelectedIndex();
+
+                            // Store preferences
+                        Preferences.saveSelectedIndex(fileExtension, index);
+
+                            // Copy item to clipboard
+                        StringSelection clipString	= new StringSelection( InsertOrCopyReferencer.fixReferenceValue(project, refArr[index].toString()) );
+                        Clipboard clipboard			= Toolkit.getDefaultToolkit().getSystemClipboard();
+
+                        clipboard.setContents(clipString, null);
+                    }
+                }, null, null);
+            }
+        }).setMovable(true).createPopup().showCenteredInCurrentWindow(project);
+    }
 
 }
