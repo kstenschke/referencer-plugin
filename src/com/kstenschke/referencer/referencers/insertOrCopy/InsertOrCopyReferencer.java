@@ -34,7 +34,7 @@ import com.kstenschke.referencer.utils.UtilsString;
 import java.util.*;
 import java.util.regex.Pattern;
 
-public class Referencer {
+public class InsertOrCopyReferencer {
 
 	/**
 	 * @param	e	Action system event
@@ -75,11 +75,11 @@ public class Referencer {
 
 				// Add date/timestamps
 			referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_DATE_TIME);
-			referenceItems.addAll(DateTimeReferencer.getReferenceItems());
+			referenceItems.addAll(InsertOrCopyReferencerDateTime.getReferenceItems());
 
 				// Add file / path items
 			referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_FILES_PATHS);
-			referenceItems.addAll(FilesFoldersReferencer.getReferenceItems(e));
+			referenceItems.addAll(InsertOrCopyReferencerFilesFolders.getReferenceItems(e));
 
 				// Add selection info
 			if( selectionModel.hasSelection() && lineSelEnd > lineSelStart ) {
@@ -89,20 +89,18 @@ public class Referencer {
 				// Add JavaScript items
 			if( fileExtension != null && fileExtension.equals("js") ) {
 				referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_JAVASCRIPT);
-				referenceItems.addAll(JavascriptReferencer.getReferenceItems(e));
-			}
-				// Add PHP items
-			else if( UtilsFile.isPhpFileExtension(fileExtension) ) {
+				referenceItems.addAll(InsertOrCopyReferencerJavascript.getReferenceItems(e));
+			} else if( UtilsFile.isPhpFileExtension(fileExtension) ) {
+                    // Add PHP items
 				referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_PHP);
-				referenceItems.addAll(PhpReferencer.getReferenceItems(e));
+				referenceItems.addAll(InsertOrCopyReferencerPhp.getReferenceItems(e));
 			}
 
 				// Add all line-parts in current document that begin the same as the word at the caret
 			if( 	(wordLeftOfCaret!= null && !wordLeftOfCaret.isEmpty() && wordLeftOfCaret.length() > 1)
 			    ||  (stringLeftOfCaret!= null && !stringLeftOfCaret.isEmpty() && stringLeftOfCaret.length() > 2)
 			) {
-				String docText	= document.getText();
-
+				String docText	       = document.getText();
 				String[] wordLineParts = null;
 				if( wordLeftOfCaret != null && !wordLeftOfCaret.isEmpty() ) {
 					wordLineParts	= docText.split(wordLeftOfCaret);
@@ -170,7 +168,7 @@ public class Referencer {
 	 */
 	public static String fixReferenceValue(Project project, String itemString) {
 		if( itemString.equals(StaticTexts.POPUP_ITEM_OPEN_FILES) ) {
-			return FilesFoldersReferencer.getAllOpenedFiles(FileEditorManager.getInstance(project));
+			return InsertOrCopyReferencerFilesFolders.getAllOpenedFiles(FileEditorManager.getInstance(project));
 		}
 
 		return itemString;

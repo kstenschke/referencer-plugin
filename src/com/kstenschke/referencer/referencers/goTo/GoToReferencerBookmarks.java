@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class BookmarkReferencer {
+public class GoToReferencerBookmarks extends GoToReferencer {
 
     /**
      * @return  String[]
@@ -57,11 +57,4 @@ public class BookmarkReferencer {
         return referencesArr;
     }
 
-    /**
-     * @param   lineText
-     * @return  String
-     */
-    private static String getLineSummary(String lineText) {
-        return lineText.isEmpty() ? "" : UtilsString.crop( lineText.trim().replace("\t", " ").replace("  ", " "), 80 );
-    }
 }

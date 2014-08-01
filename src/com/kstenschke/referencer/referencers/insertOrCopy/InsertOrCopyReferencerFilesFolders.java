@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class FilesFoldersReferencer {
+class InsertOrCopyReferencerFilesFolders {
 
 	/**
 	 * Get items regarding files / folder / paths

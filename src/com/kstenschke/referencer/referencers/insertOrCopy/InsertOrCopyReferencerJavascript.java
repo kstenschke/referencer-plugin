@@ -23,14 +23,13 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.kstenschke.referencer.parsers.ParserJavaScript;
 import com.kstenschke.referencer.utils.UtilsString;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class JavascriptReferencer {
+public class InsertOrCopyReferencerJavascript {
 
 	/**
 	 * Parse document of given event for JavaScript references and return them
@@ -60,7 +59,7 @@ public class JavascriptReferencer {
 
 				// Add namespace
 			String namespaceBefore = null;
-			List<String> allNamespaces	= getAllNamespaceInText(textBeforeCaret);
+			List<String> allNamespaces	= ParserJavaScript.getAllNamespaceInText(textBeforeCaret);
 			if( allNamespaces.size() > 0 ) {
 				namespaceBefore	= cleanupNamespaceName(allNamespaces.get(allNamespaces.size() - 1));
 				referenceItems.add(namespaceBefore);
@@ -68,7 +67,7 @@ public class JavascriptReferencer {
 
 				// Add classname
 			String classnameBefore = null;
-			List<String> allClassnames	= getAllClassnamesInText(textBeforeCaret);
+			List<String> allClassnames	= ParserJavaScript.getAllClassNamesInText(textBeforeCaret);
 			if( allClassnames.size() > 0 ) {
 				classnameBefore	= cleanupClassname(allClassnames.get(allClassnames.size() - 1));
 				referenceItems.add(classnameBefore);
@@ -82,13 +81,13 @@ public class JavascriptReferencer {
 
 				// Add method before caret
 			String methodBefore = null;
-			List<String> allMethodsBeforeCaret	= getAllMethodsInText(textBeforeCaret);
+			List<String> allMethodsBeforeCaret	= ParserJavaScript.getAllMethodsInText(textBeforeCaret);
 			if( allMethodsBeforeCaret.size() > 0 ) {
 				methodBefore	= cleanupMethodName(allMethodsBeforeCaret.get( allMethodsBeforeCaret.size()-1 ));
 			}
 				// Add method after caret
 			String methodAfter = null;
-			List<String> allMethodsAfterCaret	= getAllMethodsInText(textAfterCaret);
+			List<String> allMethodsAfterCaret	= ParserJavaScript.getAllMethodsInText(textAfterCaret);
 			if( allMethodsAfterCaret.size() > 0 ) {
 				methodAfter	= cleanupMethodName(allMethodsAfterCaret.get(0));
 			}
@@ -115,84 +114,6 @@ public class JavascriptReferencer {
 		}
 
 		return referenceItems;
-	}
-
-	/**
-	 * Get all JavaScript method names in the order of their appearance in the given text, but each item only once
-	 *
-	 * @param	text	Source code to be searched
-	 * @return			All found PHP method names
-	 */
-	public static List<String> getAllMethodsInText(String text) {
-			// 1. Find matches ala: "function methodname(", if any found return it
-		List<String> allMatches = new ArrayList<String>();
-		Matcher m = Pattern.compile("function.*[a-zA-Z0-9_]+\\(").matcher(text);
-
-		while (m.find()) {
-			if( !allMatches.contains(m.group())) {
-				allMatches.add(m.group());
-			}
-		}
-
-			// No matches found? look for OOP style methods, ala: "methodname: function("
-		if( allMatches.size() == 0) {
-			m = Pattern.compile("[a-zA-Z0-9_]+:(\\s)*function.*\\(").matcher(text);
-
-			while (m.find()) {
-				if( !allMatches.contains(m.group())) {
-					allMatches.add(m.group());
-				}
-			}
-		}
-
-		return allMatches;
-	}
-
-	/**
-	 * @param	text	Source code to be searched
-	 * @return			All found PHP class names
-	 */
-	private static List<String> getAllClassnamesInText(String text) {
-			// Look for "@class" annotations
-		List<String> allMatches = new ArrayList<String>();
-		Matcher m = Pattern.compile("@class(\\s)*([a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*)").matcher(text);
-
-		while (m.find()) {
-			if( !allMatches.contains(m.group())) {
-				allMatches.add(m.group());
-			}
-		}
-			// Nothing found? look for "...Class.create("
-		if( allMatches.size() == 0 ) {
-			m = Pattern.compile("[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*\\s*=\\s*Class\\.create\\(").matcher(text);
-
-			while (m.find()) {
-				if( !allMatches.contains(m.group())) {
-					allMatches.add(m.group());
-				}
-			}
-		}
-
-		return allMatches;
-	}
-
-	/**
-	 * Get all JS namespace in the order of their appearance, defined as doc-annotations in the given text, but each item only once
-	 *
-	 * @param	text	Source code to be searched
-	 * @return			All found PHP class names
-	 */
-	private static List<String> getAllNamespaceInText(String text) {
-		List<String> allMatches = new ArrayList<String>();
-		Matcher m = Pattern.compile("@namespace(\\s)*([a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*)").matcher(text);
-
-		while (m.find()) {
-			if( !allMatches.contains(m.group())) {
-				allMatches.add(m.group());
-			}
-		}
-
-		return allMatches;
 	}
 
 	/**

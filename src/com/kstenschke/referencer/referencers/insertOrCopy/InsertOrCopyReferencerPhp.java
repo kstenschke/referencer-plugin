@@ -21,6 +21,7 @@ import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
+import com.kstenschke.referencer.parsers.ParserPhp;
 import com.kstenschke.referencer.utils.UtilsString;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class PhpReferencer {
+class InsertOrCopyReferencerPhp {
 
 	/**
 	 * Parse document of given event for PHP references and return them
@@ -56,35 +57,35 @@ class PhpReferencer {
 
 				// Add class before caret
 			String classBefore = null;
-			List<String> allClassBeforeCaret	= getAllClassInText(textBeforeCaret);
+			List<String> allClassBeforeCaret	= ParserPhp.getAllClassNamesInText(textBeforeCaret);
 			if( allClassBeforeCaret.size() > 0 ) {
 				classBefore	= cleanupClassName(allClassBeforeCaret.get(allClassBeforeCaret.size() - 1));
 				referenceItems.add(classBefore);
 			}
 				// Add class after caret
 			String classAfter;
-			List<String> allClassAfterCaret	= getAllClassInText(textAfterCaret);
+			List<String> allClassAfterCaret	= ParserPhp.getAllClassNamesInText(textAfterCaret);
 			if( allClassAfterCaret.size() > 0 ) {
 				classAfter	= cleanupClassName(allClassAfterCaret.get( 0 ));
 				referenceItems.add(classAfter);
 			}
 				// Add method before caret
 			String methodBefore = null;
-			List<String> allMethodsBeforeCaret	= getAllMethodsInText(textBeforeCaret);
+			List<String> allMethodsBeforeCaret	= ParserPhp.getAllMethodsInText(textBeforeCaret);
 			if( allMethodsBeforeCaret.size() > 0 ) {
 				methodBefore	= cleanupMethodName(allMethodsBeforeCaret.get( allMethodsBeforeCaret.size()-1 ));
 				referenceItems.add(methodBefore);
 			}
 				// Add method after caret
 			String methodAfter;
-			List<String> allMethodsAfterCaret	= getAllMethodsInText(textAfterCaret);
+			List<String> allMethodsAfterCaret	= ParserPhp.getAllMethodsInText(textAfterCaret);
 			if( allMethodsAfterCaret.size() > 0 ) {
 				methodAfter	= cleanupMethodName(allMethodsAfterCaret.get(0));
 				referenceItems.add( methodAfter );
 			}
 				// Add method before caret / prev. variable
 			String varBefore = null;
-			List<String> allVarsBeforeCaret	= getAllVariablesInText(textBeforeCaret);
+			List<String> allVarsBeforeCaret	= ParserPhp.getAllVariablesInText(textBeforeCaret);
 			if( allVarsBeforeCaret.size() > 0 ) {
 				varBefore	= allVarsBeforeCaret.get( allVarsBeforeCaret.size()-1 );
 				if( methodBefore != null && varBefore != null ) {
@@ -103,7 +104,7 @@ class PhpReferencer {
 			}
 				// Add variable after caret
 			String varAfter;
-			List<String> allVarsAfterCaret	= getAllVariablesInText(textAfterCaret);
+			List<String> allVarsAfterCaret	= ParserPhp.getAllVariablesInText(textAfterCaret);
 			if( allVarsAfterCaret.size() > 0 ) {
 				varAfter	= allVarsAfterCaret.get( 0 );
 				if( !varAfter.equals(varBefore) ) {
@@ -113,63 +114,6 @@ class PhpReferencer {
 		}
 
 		return referenceItems;
-	}
-
-	/**
-	 * Get all PHP variable names in the order of their appearance in the given text, but each item only once
-	 *
-	 * @param	text	Source code to be searched
-	 * @return			All found PHP variables
-	 */
-	private static List<String> getAllVariablesInText(String text) {
-		List<String> allMatches = new ArrayList<String>();
-		Matcher m = Pattern.compile("\\$[a-zA-Z0-9_]+").matcher(text);
-
-		while (m.find()) {
-			if( !allMatches.contains(m.group())) {
-				allMatches.add(m.group());
-			}
-		}
-
-		return allMatches;
-	}
-
-	/**
-	 * Get all PHP method names in the order of their appearance in the given text, but each item only once
-	 *
-	 * @param	text	Source code to be searched
-	 * @return			All found PHP method names
-	 */
-	private static List<String> getAllMethodsInText(String text) {
-		List<String> allMatches = new ArrayList<String>();
-		Matcher m = Pattern.compile("function.*[a-zA-Z0-9_]+\\(").matcher(text);
-
-		while (m.find()) {
-			if( !allMatches.contains(m.group())) {
-				allMatches.add(m.group());
-			}
-		}
-
-		return allMatches;
-	}
-
-	/**
-	 * Get all PHP class names in the order of their appearance in the given text, but each item only once
-	 *
-	 * @param	text	Source code to be searched
-	 * @return			All found PHP class names
-	 */
-	private static List<String> getAllClassInText(String text) {
-		List<String> allMatches = new ArrayList<String>();
-		Matcher m = Pattern.compile("class.*[a-zA-Z0-9_]+").matcher(text);
-
-		while (m.find()) {
-			if( !allMatches.contains(m.group())) {
-				allMatches.add(m.group());
-			}
-		}
-
-		return allMatches;
 	}
 
 	/**

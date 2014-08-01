@@ -32,8 +32,9 @@ import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.components.JBList;
 import com.kstenschke.referencer.*;
-import com.kstenschke.referencer.referencers.goTo.BookmarkReferencer;
-import com.kstenschke.referencer.referencers.insertOrCopy.JavascriptReferencer;
+import com.kstenschke.referencer.parsers.ParserJavaScript;
+import com.kstenschke.referencer.referencers.goTo.GoToReferencerBookmarks;
+import com.kstenschke.referencer.referencers.insertOrCopy.InsertOrCopyReferencerJavascript;
 import com.kstenschke.referencer.resources.ui.DividedListCellRenderer;
 import com.kstenschke.referencer.listeners.DividedListSelectionListener;
 import com.kstenschke.referencer.resources.StaticTexts;
@@ -68,7 +69,7 @@ public class GoToAction extends AnAction {
             final String fileExtension	= (this.file != null) ? this.file.getExtension() : "";
             String content              = document.getText();
 
-            Object[] refArr = BookmarkReferencer.getBookmarkItems(this.project, this.document, this.file);
+            Object[] refArr = GoToReferencerBookmarks.getBookmarkItems(this.project, this.document, this.file);
             refArr  = ArrayUtils.addAll( refArr, this.getFunctionItems() );
 
             if( refArr != null && refArr.length > 0) {
@@ -134,7 +135,7 @@ public class GoToAction extends AnAction {
 //        List<Bookmark> bookmarks  = bookmarkManager.getValidBookmarks();
         String documentText = this.document.getText();
 
-        List<String> functions = JavascriptReferencer.getAllMethodsInText(documentText);
+        List<String> functions = ParserJavaScript.getAllMethodsInText(documentText);
 
         List<Integer> methodLineNumbers = new ArrayList<Integer>();
         for( String functionName : functions ) {

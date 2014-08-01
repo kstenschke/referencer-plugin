@@ -28,7 +28,7 @@ import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.components.JBList;
-import com.kstenschke.referencer.referencers.insertOrCopy.Referencer;
+import com.kstenschke.referencer.referencers.insertOrCopy.InsertOrCopyReferencer;
 import com.kstenschke.referencer.resources.ui.DividedListCellRenderer;
 import com.kstenschke.referencer.listeners.DividedListSelectionListener;
 import com.kstenschke.referencer.resources.StaticTexts;
@@ -54,7 +54,7 @@ public class CopyAction extends AnAction {
 		Editor editor			= e.getData(PlatformDataKeys.EDITOR);
 
 		if( project != null && editor != null ) {
-			final Object[] refArr = Referencer.getItems(e);
+			final Object[] refArr = InsertOrCopyReferencer.getItems(e);
 
 			if( refArr != null ) {
 				final JBList referencesList = new JBList(refArr);
@@ -82,7 +82,7 @@ public class CopyAction extends AnAction {
                             Preferences.saveSelectedIndex(fileExtension, index);
 
                                 // Copy item to clipboard
-                            StringSelection clipString	= new StringSelection( Referencer.fixReferenceValue(project, refArr[index].toString()) );
+                            StringSelection clipString	= new StringSelection( InsertOrCopyReferencer.fixReferenceValue(project, refArr[index].toString()) );
                             Clipboard clipboard			= Toolkit.getDefaultToolkit().getSystemClipboard();
 
                             clipboard.setContents(clipString, null);
