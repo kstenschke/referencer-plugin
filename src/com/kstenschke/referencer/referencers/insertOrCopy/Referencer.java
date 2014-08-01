@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kstenschke.referencer.models.parser;
+package com.kstenschke.referencer.referencers.insertOrCopy;
 
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
@@ -34,7 +34,7 @@ import com.kstenschke.referencer.utils.UtilsString;
 import java.util.*;
 import java.util.regex.Pattern;
 
-public class Parser {
+public class Referencer {
 
 	/**
 	 * @param	e	Action system event
@@ -75,11 +75,11 @@ public class Parser {
 
 				// Add date/timestamps
 			referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_DATE_TIME);
-			referenceItems.addAll(ParserDateTime.getReferenceItems());
+			referenceItems.addAll(DateTimeReferencer.getReferenceItems());
 
 				// Add file / path items
 			referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_FILES_PATHS);
-			referenceItems.addAll(ParserFilesFolders.getReferenceItems(e));
+			referenceItems.addAll(FilesFoldersReferencer.getReferenceItems(e));
 
 				// Add selection info
 			if( selectionModel.hasSelection() && lineSelEnd > lineSelStart ) {
@@ -89,12 +89,12 @@ public class Parser {
 				// Add JavaScript items
 			if( fileExtension != null && fileExtension.equals("js") ) {
 				referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_JAVASCRIPT);
-				referenceItems.addAll(ParserJavascript.getReferenceItems(e));
+				referenceItems.addAll(JavascriptReferencer.getReferenceItems(e));
 			}
 				// Add PHP items
 			else if( UtilsFile.isPhpFileExtension(fileExtension) ) {
 				referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_PHP);
-				referenceItems.addAll(ParserPhp.getReferenceItems(e));
+				referenceItems.addAll(PhpReferencer.getReferenceItems(e));
 			}
 
 				// Add all line-parts in current document that begin the same as the word at the caret
@@ -170,7 +170,7 @@ public class Parser {
 	 */
 	public static String fixReferenceValue(Project project, String itemString) {
 		if( itemString.equals(StaticTexts.POPUP_ITEM_OPEN_FILES) ) {
-			return ParserFilesFolders.getAllOpenedFiles(FileEditorManager.getInstance(project));
+			return FilesFoldersReferencer.getAllOpenedFiles(FileEditorManager.getInstance(project));
 		}
 
 		return itemString;

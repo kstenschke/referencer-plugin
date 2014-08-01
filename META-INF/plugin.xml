@@ -112,7 +112,7 @@
           <add-to-group group-id="EditorActions" anchor="after" relative-to-action="EditorPaste"/>
           <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt V" second-keystroke="shift ctrl alt V"/>
       </action>
-      <action id="GoAction" class="com.kstenschke.referencer.actions.GoAction" text="Go to Bookmark" description="Go to Bookmark in current File">
+      <action id="GoAction" class="com.kstenschke.referencer.actions.GoToAction" text="Go to Bookmark" description="Go to Bookmark in current File">
           <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt G" second-keystroke="shift ctrl alt G"/>
       </action>
   </actions>

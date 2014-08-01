@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kstenschke.referencer.models.parser;
+package com.kstenschke.referencer.referencers.insertOrCopy;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class ParserFilesFolders {
+class FilesFoldersReferencer {
 
 	/**
 	 * Get items regarding files / folder / paths

@@ -6,6 +6,7 @@ public class PluginConfiguration {
     private JTextArea textArea1;
     private JCheckBox regExCheckBox;
     private JPanel rootPanel;
+    private JCheckBox sortAlphabeticalCheckBox;
 
 
     public JPanel getRootPanel() {

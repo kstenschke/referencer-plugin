@@ -29,10 +29,10 @@ import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.components.JBList;
+import com.kstenschke.referencer.referencers.insertOrCopy.Referencer;
 import com.kstenschke.referencer.resources.ui.DividedListCellRenderer;
 import com.kstenschke.referencer.listeners.DividedListSelectionListener;
 import com.kstenschke.referencer.resources.StaticTexts;
-import com.kstenschke.referencer.models.parser.Parser;
 import com.kstenschke.referencer.Preferences;
 
 /**
@@ -50,7 +50,7 @@ public class InsertAction extends AnAction {
 		final Editor editor		= e.getData(PlatformDataKeys.EDITOR);
 
 		if( project != null && editor != null ) {
-			final Object[] refArr = Parser.getItems(e);
+			final Object[] refArr = Referencer.getItems(e);
 			if( refArr != null ) {
 
 				final JBList referencesList = new JBList(refArr);
@@ -85,7 +85,7 @@ public class InsertAction extends AnAction {
 										final Document document = editor.getDocument();
 										int caretOffset	= editor.getCaretModel().getOffset();
 
-										String insertString = Parser.fixReferenceValue(project, refArr[index].toString());
+										String insertString = Referencer.fixReferenceValue(project, refArr[index].toString());
 										document.insertString(caretOffset, insertString );
 										editor.getCaretModel().moveToOffset( caretOffset + insertString.length() );
 									}

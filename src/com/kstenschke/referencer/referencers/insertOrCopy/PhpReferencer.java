@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.kstenschke.referencer.models.parser;
+package com.kstenschke.referencer.referencers.insertOrCopy;
 
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-class ParserPhp {
+class PhpReferencer {
 
 	/**
 	 * Parse document of given event for PHP references and return them

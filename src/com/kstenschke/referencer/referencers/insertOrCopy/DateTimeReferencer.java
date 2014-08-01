@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.kstenschke.referencer.models.parser;
+package com.kstenschke.referencer.referencers.insertOrCopy;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-class ParserDateTime {
+class DateTimeReferencer {
 
 	/**
 	 * Get date / time items

@@ -16,8 +16,6 @@
 
 package com.kstenschke.referencer.actions;
 
-import com.intellij.ide.bookmarks.Bookmark;
-import com.intellij.ide.bookmarks.BookmarkManager;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
@@ -34,22 +32,20 @@ import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.components.JBList;
 import com.kstenschke.referencer.*;
-import com.kstenschke.referencer.models.parser.ParserJavascript;
+import com.kstenschke.referencer.referencers.goTo.BookmarkReferencer;
+import com.kstenschke.referencer.referencers.insertOrCopy.JavascriptReferencer;
 import com.kstenschke.referencer.resources.ui.DividedListCellRenderer;
 import com.kstenschke.referencer.listeners.DividedListSelectionListener;
 import com.kstenschke.referencer.resources.StaticTexts;
 import com.kstenschke.referencer.resources.ui.PopupContextGo;
 import com.kstenschke.referencer.utils.UtilsEnvironment;
-import com.kstenschke.referencer.utils.UtilsString;
 import org.apache.commons.lang.ArrayUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 
-public class GoAction extends AnAction {
+public class GoToAction extends AnAction {
 
     private Project project;
     private Editor editor;
@@ -72,9 +68,8 @@ public class GoAction extends AnAction {
             final String fileExtension	= (this.file != null) ? this.file.getExtension() : "";
             String content              = document.getText();
 
-            Object[] refArr = this.getBookmarkItems();
+            Object[] refArr = BookmarkReferencer.getBookmarkItems(this.project, this.document, this.file);
             refArr  = ArrayUtils.addAll( refArr, this.getFunctionItems() );
-
 
             if( refArr != null && refArr.length > 0) {
                 final JBList referencesList = new JBList(refArr);
@@ -128,49 +123,6 @@ public class GoAction extends AnAction {
     /**
      * @return  String[]
      */
-    private String[] getBookmarkItems() {
-        String[] referencesArr = null;
-
-        BookmarkManager bookmarkManager = BookmarkManager.getInstance(this.project);
-
-        List<String> bookmarkItems= new ArrayList<String>();
-        bookmarkItems.add( StaticTexts.POPUP_SECTION_BOOKMARKS );
-
-        List<Bookmark> bookmarks  = bookmarkManager.getValidBookmarks();
-        String documentText = this.document.getText();
-
-        List<Integer> bookmarkLineNumbers = new ArrayList<Integer>();
-        for( Bookmark curBookmark : bookmarks ) {
-            if( curBookmark.getFile().equals(this.file) ) {
-                bookmarkLineNumbers.add(curBookmark.getLine());
-            }
-        }
-
-        if( bookmarkLineNumbers.size() > 0 ) {
-            int digits  = Collections.max(bookmarkLineNumbers).toString().length();
-            Integer[] lineNumbersArr= bookmarkLineNumbers.toArray( new Integer[bookmarkLineNumbers.size()] );
-            Arrays.sort(lineNumbersArr);
-
-            int index   = 1;
-            for( Integer curLineNum : lineNumbersArr ) {
-                if( curLineNum > 0 ) {
-                    int offsetLineStart = this.document.getLineStartOffset(curLineNum);
-                    int offsetLineEnd   = this.document.getLineEndOffset(curLineNum);
-                    String lineSummary = this.getLineSummary(documentText.substring(offsetLineStart, offsetLineEnd));
-                    bookmarkItems.add(index, UtilsString.makeMinLen(Integer.toString(curLineNum), digits) + ": " + lineSummary);
-                    index++;
-                }
-            }
-
-            referencesArr = bookmarkItems.toArray( new String[bookmarkItems.size()] );
-        }
-
-        return referencesArr;
-    }
-
-    /**
-     * @return  String[]
-     */
     private String[] getFunctionItems() {
         String[] referencesArr = null;
 
@@ -182,7 +134,7 @@ public class GoAction extends AnAction {
 //        List<Bookmark> bookmarks  = bookmarkManager.getValidBookmarks();
         String documentText = this.document.getText();
 
-        List<String> functions = ParserJavascript.getAllMethodsInText(documentText);
+        List<String> functions = JavascriptReferencer.getAllMethodsInText(documentText);
 
         List<Integer> methodLineNumbers = new ArrayList<Integer>();
         for( String functionName : functions ) {
@@ -212,14 +164,6 @@ public class GoAction extends AnAction {
         }
 
         return referencesArr;
-    }
-
-    /**
-     * @param   lineText
-     * @return  String
-     */
-    private String getLineSummary(String lineText) {
-        return lineText.isEmpty() ? "" : UtilsString.crop( lineText.trim().replace("\t", " ").replace("  ", " "), 80 );
     }
 
 }
