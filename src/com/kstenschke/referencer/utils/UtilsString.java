@@ -46,10 +46,6 @@ public class UtilsString {
         return null;
     }
 
-    public static Integer getLineNumberOfString(String text, String subStr) {
-        return getLineNumberOfString(text, subStr, 0);
-    }
-
     /**
      * Remove all of the given sub string from the given string
      *

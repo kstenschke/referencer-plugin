@@ -28,9 +28,9 @@ import java.util.List;
 public class GoToReferencerPatterns {
 
     /**
-     * @return  String[]
+     * @return  String[]    Pattern definitions (containing label+pattern each)
      */
-    public static String[] getPatterns() {
+    public static String[] getPatternDefinitions() {
         return Preferences.getGoToPatterns().split("\n");
     }
 
@@ -41,9 +41,8 @@ public class GoToReferencerPatterns {
     private static String getLabelFromPatternDefinition(String pattern) {
         int splitPosition = pattern.indexOf(":");
         String label = splitPosition == -1 ? pattern : pattern.substring(0, splitPosition);
-        label   = label.trim();
 
-        return label.endsWith(":") ? label : label + ":";
+        return label.trim();
     }
 
     /**
@@ -67,28 +66,24 @@ public class GoToReferencerPatterns {
 
         String documentText = document.getText();
 
-        if( !documentText.contains(pattern) ) {
-            return null;
-        }
-
         List<String> patternItems= new ArrayList<String>();
-        patternItems.add( label + ":" );
+        patternItems.add("SECTIONTITLE: " + label);
 
-        List<Integer> patternLineNumbers = new ArrayList<Integer>();
-        List<String> patterns = ParserPattern.getAllOccurrencesInText(documentText, pattern);
+        List<Integer> occurrenceLineNumbers = new ArrayList<Integer>();
+        List<String> occurrences = ParserPattern.getAllOccurrencesInText(documentText, pattern);
 
         Integer lineOffset = 0;
-        if( patterns != null ) {
-            for( String curPattern : patterns ) {
-                Integer curLineNumber   = UtilsString.getLineNumberOfString(documentText, curPattern, lineOffset);
+        if( occurrences != null ) {
+            for( String occurrence : occurrences ) {
+                Integer curLineNumber   = UtilsString.getLineNumberOfString(documentText, occurrence, lineOffset);
                 if( curLineNumber != null ) {
-                    patternLineNumbers.add(curLineNumber);
+                    occurrenceLineNumbers.add(curLineNumber);
                 }
                 lineOffset = curLineNumber;
             }
         }
 
-        return buildReferencesArray(document, patternItems, documentText, patternLineNumbers);
+        return buildReferencesArray(document, patternItems, documentText, occurrenceLineNumbers);
     }
 
     /**

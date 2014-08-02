@@ -23,19 +23,18 @@ import java.util.regex.Pattern;
 public class ParserPattern {
 
     /**
-     * Get all PHP method names in the order of their appearance in the given text, but each item only once
+     * Get all occurrences of the given regex pattern
+     * in the order of their appearance in the given text
      *
-     * @param	text	Source code to be searched
-     * @return			All found PHP method names
+     * @param	text	Code to be searched in
+     * @return			Found pattern occurrences
      */
     public static List<String> getAllOccurrencesInText(String text, String pattern) {
         List<String> allMatches = new ArrayList<String>();
-        Matcher m = Pattern.compile(pattern).matcher(text);
+        Matcher m = Pattern.compile(pattern + ".*").matcher(text);
 
         while (m.find()) {
-            if( !allMatches.contains(m.group())) {
-                allMatches.add(m.group());
-            }
+            allMatches.add( m.group().trim() );
         }
 
         return allMatches;

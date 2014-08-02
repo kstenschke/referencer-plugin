@@ -70,9 +70,9 @@ public class GoToAction extends AnAction {
                 refArr = ArrayUtils.addAll( refArr, methodItems );
             }
                 // Add dynamical jump destination patterns
-            String[] patterns = GoToReferencerPatterns.getPatterns();
-            for(String curPattern : patterns) {
-                String[] curPatternItems = GoToReferencerPatterns.getItems(this.document, curPattern);
+            String[] patternDefinitions = GoToReferencerPatterns.getPatternDefinitions();
+            for(String curPatterDefinition : patternDefinitions) {
+                String[] curPatternItems = GoToReferencerPatterns.getItems(this.document, curPatterDefinition);
                 if( curPatternItems != null && curPatternItems.length > 1 ) {
                     refArr  = ArrayUtils.addAll( refArr, curPatternItems );
                 }
@@ -90,7 +90,7 @@ public class GoToAction extends AnAction {
                 referencesList.setSelectedIndex(selectedIndex);
 
                     // Build and show popup
-                JBPopup popupGo = buildAndShowPopup(fileExtension, referencesList);
+                JBPopup popupGo = buildPopup(fileExtension, referencesList);
 
                     // Add context menu
                 PopupContextGo contextMenu = new PopupContextGo(popupGo, this.project);
@@ -110,7 +110,7 @@ public class GoToAction extends AnAction {
      * @param   referencesList
      * @return  JBPopup
      */
-    private JBPopup buildAndShowPopup(final String fileExtension, final JBList referencesList) {
+    private JBPopup buildPopup(final String fileExtension, final JBList referencesList) {
         PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
 
         return popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_GO).setItemChoosenCallback(new Runnable() {
