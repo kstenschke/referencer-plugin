@@ -1,6 +1,9 @@
 * 1.1.0
-    ** Reduced changelog to previous five versions, added separate full changelog
+    ** Added: plugin settings with "Go To..." jump patterns
+    ** Added: PHP and JavaScript methods listing in "Go To..." menu
     ** Bugfix: IndexOutOfBoundsException in go to bookmark action
+    ** Bugfix: Line numbers in go to bookmark action were displayed one too high
+    ** Reduced changelog to previous five versions, added separate full changelog
 * 1.0.12 Bugfix: Opening Referencer on first character of document caused IndexOutOfBoundsException
 * 1.0.11
     ** Added notification when there are no bookmarks for going to
