@@ -17,10 +17,7 @@ package com.kstenschke.referencer.referencers.goTo;
 
 import com.intellij.openapi.editor.Document;
 import com.kstenschke.referencer.Preferences;
-import com.kstenschke.referencer.parsers.ParserJavaScript;
-import com.kstenschke.referencer.parsers.ParserPhp;
-import com.kstenschke.referencer.resources.StaticTexts;
-import com.kstenschke.referencer.utils.UtilsFile;
+import com.kstenschke.referencer.parsers.ParserPattern;
 import com.kstenschke.referencer.utils.UtilsString;
 
 import java.util.ArrayList;
@@ -38,40 +35,60 @@ public class GoToReferencerPatterns {
     }
 
     /**
-     * @param   document
      * @param   pattern
+     * @return  String      The label, or the whole definition if no colon-separated label prefix is found
+     */
+    private static String getLabelFromPatternDefinition(String pattern) {
+        int splitPosition = pattern.indexOf(":");
+        String label = splitPosition == -1 ? pattern : pattern.substring(0, splitPosition);
+        label   = label.trim();
+
+        return label.endsWith(":") ? label : label + ":";
+    }
+
+    /**
+     * @param   pattern
+     * @return  String      The label, or the whole definition if no colon-separated label prefix is found
+     */
+    private static String getPatternFromPatternDefinition(String pattern) {
+        int splitPosition = pattern.indexOf(":");
+
+        return splitPosition == -1 ? pattern : pattern.substring(splitPosition+1);
+    }
+
+    /**
+     * @param   document
+     * @param   patternDefinition
      * @return  String[]
      */
-    public static String[] getItems(Document document, String pattern) {
-        boolean isJavaScript = UtilsFile.isJavaScriptFileExtension(pattern);
-        boolean isPhp = UtilsFile.isPhpFileExtension(pattern);
-
-        if( ! isJavaScript && ! isPhp) {
-            return null;
-        }
-
-        List<String> methodItems= new ArrayList<String>();
-        methodItems.add(StaticTexts.POPUP_SECTION_FUNCTIONS);
+    public static String[] getItems(Document document, String patternDefinition) {
+        String label    = getLabelFromPatternDefinition(patternDefinition);
+        String pattern  = getPatternFromPatternDefinition(patternDefinition);
 
         String documentText = document.getText();
 
-        List<Integer> methodLineNumbers = new ArrayList<Integer>();
-        List<String> methods = isJavaScript
-            ? ParserJavaScript.getAllMethodsInText(documentText)
-            : ParserPhp.getAllMethodsInText(documentText);
+        if( !documentText.contains(pattern) ) {
+            return null;
+        }
+
+        List<String> patternItems= new ArrayList<String>();
+        patternItems.add( label + ":" );
+
+        List<Integer> patternLineNumbers = new ArrayList<Integer>();
+        List<String> patterns = ParserPattern.getAllOccurrencesInText(documentText, pattern);
 
         Integer lineOffset = 0;
-        if( methods != null ) {
-            for( String curMethodName : methods ) {
-                Integer curLineNumber   = UtilsString.getLineNumberOfString(documentText, curMethodName, lineOffset);
+        if( patterns != null ) {
+            for( String curPattern : patterns ) {
+                Integer curLineNumber   = UtilsString.getLineNumberOfString(documentText, curPattern, lineOffset);
                 if( curLineNumber != null ) {
-                    methodLineNumbers.add( curLineNumber );
+                    patternLineNumbers.add(curLineNumber);
                 }
                 lineOffset = curLineNumber;
             }
         }
 
-        return buildReferencesArray(document, methodItems, documentText, methodLineNumbers);
+        return buildReferencesArray(document, patternItems, documentText, patternLineNumbers);
     }
 
     /**

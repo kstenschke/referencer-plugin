@@ -36,7 +36,7 @@ public class GoToReferencerMethods {
         boolean isJavaScript = UtilsFile.isJavaScriptFileExtension(fileExtension);
         boolean isPhp = UtilsFile.isPhpFileExtension(fileExtension);
 
-        if( ! isJavaScript && ! isPhp) {
+        if( (!isJavaScript && !isPhp) ) {
             return null;
         }
 

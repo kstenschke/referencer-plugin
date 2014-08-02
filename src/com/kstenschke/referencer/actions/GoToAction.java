@@ -33,6 +33,7 @@ import com.intellij.ui.components.JBList;
 import com.kstenschke.referencer.*;
 import com.kstenschke.referencer.referencers.goTo.GoToReferencerBookmarks;
 import com.kstenschke.referencer.referencers.goTo.GoToReferencerMethods;
+import com.kstenschke.referencer.referencers.goTo.GoToReferencerPatterns;
 import com.kstenschke.referencer.resources.ui.DividedListCellRenderer;
 import com.kstenschke.referencer.listeners.DividedListSelectionListener;
 import com.kstenschke.referencer.resources.StaticTexts;
@@ -65,8 +66,16 @@ public class GoToAction extends AnAction {
             Object[] refArr = GoToReferencerBookmarks.getItems(this.project, this.document, file);
                 // Add JS or PHP methods
             String[] methodItems = GoToReferencerMethods.getItems(this.document, fileExtension);
-            if( methodItems.length >= 1 ) {
+            if( methodItems != null && methodItems.length > 1 ) {
                 refArr = ArrayUtils.addAll( refArr, methodItems );
+            }
+                // Add dynamical jump destination patterns
+            String[] patterns = GoToReferencerPatterns.getPatterns();
+            for(String curPattern : patterns) {
+                String[] curPatternItems = GoToReferencerPatterns.getItems(this.document, curPattern);
+                if( curPatternItems != null && curPatternItems.length > 1 ) {
+                    refArr  = ArrayUtils.addAll( refArr, curPatternItems );
+                }
             }
 
             if( refArr != null && refArr.length > 0) {

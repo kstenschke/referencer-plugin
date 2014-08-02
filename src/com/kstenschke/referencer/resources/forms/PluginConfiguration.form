@@ -61,6 +61,7 @@
             </constraints>
             <properties>
               <enabled value="false"/>
+              <selected value="true"/>
               <text value="RegEx"/>
             </properties>
           </component>
