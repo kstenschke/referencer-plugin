@@ -1,5 +1,5 @@
 * 1.1.0
-    ** Added: plugin settings with "Go To..." jump patterns
+    ** Added: plugin settings with dynamic "Go To..." jump patterns
     ** Added: PHP and JavaScript methods listing in "Go To..." menu
     ** Bugfix: IndexOutOfBoundsException in go to bookmark action
     ** Bugfix: Line numbers in go to bookmark action were displayed one too high

@@ -19,6 +19,7 @@ import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
+import com.kstenschke.referencer.Preferences;
 import com.kstenschke.referencer.resources.StaticTexts;
 import com.kstenschke.referencer.resources.forms.PluginConfiguration;
 import org.jetbrains.annotations.Nls;
@@ -30,6 +31,15 @@ import javax.swing.*;
 public class ReferencerSettingsComponent implements ProjectComponent, Configurable {
 
     private PluginConfiguration settingsPanel = null;
+
+    /**
+     * Constructor
+     *
+     * @param project
+     */
+    public ReferencerSettingsComponent(Project project) {
+
+    }
 
     @Nls
     @Override
@@ -57,22 +67,15 @@ public class ReferencerSettingsComponent implements ProjectComponent, Configurab
 
     @Override
     public boolean isModified() {
+
         return settingsPanel != null && settingsPanel.isModified();
     }
 
     @Override
     public void apply() throws ConfigurationException {
-//        if (settingsPanel != null) {
-//            ShifterPreferences.saveSortingMode(settingsPanel.getSelectedSortingMode());
-//            ShifterPreferences.saveIsActivePreserveCase(settingsPanel.getIsActivePreserveCase());
-//
-//            String dictionary	= settingsPanel.getData();
-//            if( dictionary != null ) {
-//                ShifterPreferences.saveDictionary(dictionary);
-//            }
-//
-//            applyGlobalSettings();
-//        }
+        if (settingsPanel != null) {
+            Preferences.saveGoToPatterns( settingsPanel.getGoToPatterns() );
+        }
     }
 
     @Override
@@ -85,15 +88,12 @@ public class ReferencerSettingsComponent implements ProjectComponent, Configurab
 
     }
 
-    public ReferencerSettingsComponent(Project project) {
-    }
-
     public void initComponent() {
-        // TODO: insert component initialization logic here
+
     }
 
     public void disposeComponent() {
-        // TODO: insert component disposal logic here
+
     }
 
     @NotNull

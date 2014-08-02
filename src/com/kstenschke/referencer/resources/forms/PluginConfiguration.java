@@ -15,22 +15,29 @@
  */
 package com.kstenschke.referencer.resources.forms;
 
+import com.kstenschke.referencer.Preferences;
+
 import javax.swing.*;
 
 public class PluginConfiguration {
 
-    private JTextArea textArea1;
+    private JTextArea textAreaGoToPatterns;
     private JCheckBox regExCheckBox;
     private JPanel rootPanel;
-    private JCheckBox sortAlphabeticalCheckBox;
 
+    public PluginConfiguration() {
+        textAreaGoToPatterns.setText( Preferences.getGoToPatterns() );
+    }
 
     public JPanel getRootPanel() {
         return rootPanel;
     }
 
     public boolean isModified() {
-        return false;
+        return ! getGoToPatterns().equals( Preferences.getGoToPatterns() );
     }
 
+    public String getGoToPatterns() {
+        return textAreaGoToPatterns.getText();
+    }
 }

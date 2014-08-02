@@ -62,9 +62,9 @@ public class GoToAction extends AnAction {
             String fileExtension = UtilsFile.getExtensionByDocument(this.document);
 
                 // Get bookmarks
-            Object[] refArr = GoToReferencerBookmarks.getBookmarkItems(this.project, this.document, file);
+            Object[] refArr = GoToReferencerBookmarks.getItems(this.project, this.document, file);
                 // Add JS or PHP methods
-            String[] methodItems = GoToReferencerMethods.getMethodItems(this.document, fileExtension);
+            String[] methodItems = GoToReferencerMethods.getItems(this.document, fileExtension);
             if( methodItems.length >= 1 ) {
                 refArr = ArrayUtils.addAll( refArr, methodItems );
             }

@@ -71,7 +71,7 @@
   <ul>
     <li>1.1.0
         <ul>
-            <li>Added: plugin settings with "Go To..." jump patterns</li>
+            <li>Added: plugin settings with dynamic "Go To..." jump patterns</li>
             <li>Added: PHP and JavaScript methods listing in "Go To..." menu</li>
             <li>Bugfix: IndexOutOfBoundsException in go to bookmark action</li>
             <li>Reduced changelog to previous five versions, added separate full changelog</li>

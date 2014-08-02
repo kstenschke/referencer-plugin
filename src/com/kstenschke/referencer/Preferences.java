@@ -27,6 +27,8 @@ public class Preferences {
 
 		//  @NonNls = element is not a string requiring internationalization and it does not contain such strings.
     @NonNls
+    private static final String PROPERTY_GOTO_PATTERNS = "PluginReferencer.GoToPatterns";
+    @NonNls
     private static final String PROPERTY_REFERENCER_INDEX = "PluginReferencer.SelectedIndex";
     @NonNls
     private static final String PROPERTY_REFERENCER_INDEX_PHP = "PluginReferencer.SelectedIndexPHP";
@@ -34,10 +36,26 @@ public class Preferences {
     private static final String PROPERTY_REFERENCER_INDEX_JS = "PluginReferencer.SelectedIndexJS";
 
     /**
+     * @param   patterns
+     */
+    public static void saveGoToPatterns(String patterns) {
+        PropertiesComponent.getInstance().setValue(PROPERTY_GOTO_PATTERNS, patterns);
+    }
+
+    /**
+     * @return  String
+     */
+    public static String getGoToPatterns() {
+        String patterns	= PropertiesComponent.getInstance().getValue( PROPERTY_GOTO_PATTERNS );
+
+        return patterns != null ? patterns : "";
+    }
+
+    /**
      * Store referencer preferences: selected index per supported file type
      *
-     * @param	fileExtension			File extension of file open while using referencer
-     * @param	selectedIndex			Selected item index
+     * @param   fileExtension       File extension of file open while using referencer
+     * @param   selectedIndex       Selected item index
      */
     public static void saveSelectedIndex(String fileExtension, Integer selectedIndex) {
         String preferenceIdentifier = getPropertyIdentifierByFileExtension(fileExtension);

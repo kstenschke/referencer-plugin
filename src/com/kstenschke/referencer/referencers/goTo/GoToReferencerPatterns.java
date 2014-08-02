@@ -16,6 +16,7 @@
 package com.kstenschke.referencer.referencers.goTo;
 
 import com.intellij.openapi.editor.Document;
+import com.kstenschke.referencer.Preferences;
 import com.kstenschke.referencer.parsers.ParserJavaScript;
 import com.kstenschke.referencer.parsers.ParserPhp;
 import com.kstenschke.referencer.resources.StaticTexts;
@@ -27,14 +28,23 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class GoToReferencerMethods {
+public class GoToReferencerPatterns {
 
     /**
      * @return  String[]
      */
-    public static String[] getItems(Document document, String fileExtension) {
-        boolean isJavaScript = UtilsFile.isJavaScriptFileExtension(fileExtension);
-        boolean isPhp = UtilsFile.isPhpFileExtension(fileExtension);
+    public static String[] getPatterns() {
+        return Preferences.getGoToPatterns().split("\n");
+    }
+
+    /**
+     * @param   document
+     * @param   pattern
+     * @return  String[]
+     */
+    public static String[] getItems(Document document, String pattern) {
+        boolean isJavaScript = UtilsFile.isJavaScriptFileExtension(pattern);
+        boolean isPhp = UtilsFile.isPhpFileExtension(pattern);
 
         if( ! isJavaScript && ! isPhp) {
             return null;

@@ -32,9 +32,7 @@ public class GoToReferencerBookmarks extends GoToReferencer {
     /**
      * @return  String[]
      */
-    public static String[] getBookmarkItems(Project project, Document document, VirtualFile file) {
-        String[] referencesArr = null;
-
+    public static String[] getItems(Project project, Document document, VirtualFile file) {
         com.intellij.ide.bookmarks.BookmarkManager bookmarkManager = com.intellij.ide.bookmarks.BookmarkManager.getInstance(project);
 
         List<String> bookmarkItems= new ArrayList<String>();
@@ -50,6 +48,18 @@ public class GoToReferencerBookmarks extends GoToReferencer {
             }
         }
 
+        return buildReferencesArray(document, bookmarkItems, documentText, bookmarkLineNumbers);
+    }
+
+    /**
+     * @param   document
+     * @param   bookmarkItems
+     * @param   documentText
+     * @param   bookmarkLineNumbers
+     * @return  String[]
+     */
+    private static String[] buildReferencesArray(Document document, List<String> bookmarkItems, String documentText, List<Integer> bookmarkLineNumbers) {
+        String[] referencesArr = null;
         if( bookmarkLineNumbers.size() > 0 ) {
             int digits  = Collections.max(bookmarkLineNumbers).toString().length();
             Integer[] lineNumbersArr= bookmarkLineNumbers.toArray( new Integer[bookmarkLineNumbers.size()] );
@@ -68,7 +78,6 @@ public class GoToReferencerBookmarks extends GoToReferencer {
 
             referencesArr = bookmarkItems.toArray( new String[bookmarkItems.size()] );
         }
-
         return referencesArr;
     }
 
