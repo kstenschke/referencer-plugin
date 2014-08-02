@@ -39,7 +39,8 @@ public class UtilsFile {
                 || fileExtension.equals("php")
                 || fileExtension.equals("php3")
                 || fileExtension.equals("php4")
-                || fileExtension.equals("php5");
+                || fileExtension.equals("php5")
+                || fileExtension.equals("phtml");
     }
 
     /**

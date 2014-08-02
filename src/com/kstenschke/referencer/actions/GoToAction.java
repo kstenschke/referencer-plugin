@@ -45,7 +45,6 @@ public class GoToAction extends AnAction {
 
     private Project project;
     private Editor editor;
-    private VirtualFile file;
     private Document document;
 
     /**
@@ -59,15 +58,14 @@ public class GoToAction extends AnAction {
 
         if( this.project != null && this.editor != null ) {
             this.document   = this.editor.getDocument();
-            this.file       = FileDocumentManager.getInstance().getFile(document);
-
+            VirtualFile file = FileDocumentManager.getInstance().getFile(document);
             String fileExtension = UtilsFile.getExtensionByDocument(this.document);
 
                 // Get bookmarks
-            Object[] refArr = GoToReferencerBookmarks.getBookmarkItems(this.project, this.document, this.file);
+            Object[] refArr = GoToReferencerBookmarks.getBookmarkItems(this.project, this.document, file);
                 // Add JS or PHP methods
             String[] methodItems = GoToReferencerMethods.getMethodItems(this.document, fileExtension);
-            if( methodItems.length > 1 ) {
+            if( methodItems.length >= 1 ) {
                 refArr = ArrayUtils.addAll( refArr, methodItems );
             }
 
@@ -116,7 +114,7 @@ public class GoToAction extends AnAction {
                                 Preferences.saveSelectedIndex(fileExtension, referencesList.getSelectedIndex());
 
                                 Integer lineNumber  = Integer.parseInt( referencesList.getSelectedValue().toString().split(":")[0] );
-                                editor.getCaretModel().moveToOffset( document.getLineStartOffset(lineNumber), true );
+                                editor.getCaretModel().moveToOffset( document.getLineStartOffset(lineNumber-1), true );
                                 editor.getScrollingModel().scrollToCaret(ScrollType.CENTER);
                             }
                         }, null, null);
