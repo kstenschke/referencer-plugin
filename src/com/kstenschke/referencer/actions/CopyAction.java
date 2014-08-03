@@ -55,7 +55,7 @@ public class CopyAction extends AnAction {
 
             if( refArr != null ) {
                 final JBList referencesList = new JBList(refArr);
-                referencesList.setCellRenderer(new DividedListCellRenderer() );
+                referencesList.setCellRenderer(new DividedListCellRenderer(referencesList) );
                 referencesList.addListSelectionListener(new DividedListSelectionListener());
 
                 final Document document     = editor.getDocument();

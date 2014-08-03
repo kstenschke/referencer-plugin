@@ -29,9 +29,23 @@ public class DividedListCellRenderer extends DefaultListCellRenderer { //impleme
 
     private final Border separatorBorder          = BorderFactory.createMatteBorder(1, 0, 1, 0, new JBColor(JBColor.LIGHT_GRAY, JBColor.DARK_GRAY) );
     private final Border separatorBorderTopMost   = BorderFactory.createMatteBorder(0, 0, 1, 0, new JBColor(JBColor.LIGHT_GRAY, JBColor.DARK_GRAY) );
-    private Font   separatorFont   = null;
+    private Font   separatorFont;
+    private Color separatorColorBackground;
+    private Color separatorColorForeground;
 
-	/**
+    /**
+     * Constructor
+     *
+     * @param list
+     */
+    public DividedListCellRenderer(JList list) {
+        Font defaultFont    = list.getFont();
+        this.separatorFont  = new Font( defaultFont.getName(), Font.BOLD, defaultFont.getSize() );
+        this.separatorColorBackground = new JBColor( new Color(243, 243, 243), new Color(243, 243, 243));
+        this.separatorColorForeground = new JBColor( new Color(44, 44, 44), new Color(44, 44, 44));
+    }
+
+    /**
 	 * @param	list				List of reference items
 	 * @param	value               Value of reference item
 	 * @param	index               Item index
@@ -41,16 +55,14 @@ public class DividedListCellRenderer extends DefaultListCellRenderer { //impleme
 	 */
 	public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
 		if( value != null ) {
-
-            if( this.separatorFont == null ) {
-                Font defaultFont    = list.getFont();
-                this.separatorFont  = new Font( defaultFont.getName(), Font.BOLD, defaultFont.getSize() );
-            }
-
 			String valueStr	= value.toString();
 
+                // Apply section title styling
 			if( valueStr.startsWith(StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE) ) {
-				JLabel lblSectionLabel = new JLabel( valueStr.replace(StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE + " ", "") + ":" );
+                String labelText = valueStr.replace(StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE + " ", "");
+                if(!labelText.endsWith(":")) labelText += ":";
+
+                JLabel lblSectionLabel = new JLabel(labelText);
                 setLabelUI(lblSectionLabel, index == 0);
 
 				return lblSectionLabel ;
@@ -64,8 +76,13 @@ public class DividedListCellRenderer extends DefaultListCellRenderer { //impleme
      * @param   label
      */
     private void setLabelUI(JLabel label, Boolean topMost) {
+        label.setOpaque(true);
+
         label.setFont(this.separatorFont);
         label.setBorder(topMost ? this.separatorBorderTopMost : this.separatorBorder);
+        label.setBackground(this.separatorColorBackground);
+        label.setForeground(this.separatorColorForeground);
+
         label.setEnabled(false);
         label.setFocusable(false);
         label.setVisible(true);

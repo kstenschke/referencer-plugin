@@ -80,7 +80,7 @@ public class GoToAction extends AnAction {
 
             if( refArr != null && refArr.length > 0) {
                 final JBList referencesList = new JBList(refArr);
-                referencesList.setCellRenderer(new DividedListCellRenderer() );
+                referencesList.setCellRenderer(new DividedListCellRenderer(referencesList) );
                 referencesList.addListSelectionListener( new DividedListSelectionListener() );
 
                     // Preselect item from preferences
