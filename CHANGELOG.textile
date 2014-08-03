@@ -1,3 +1,6 @@
+* 1.1.1
+    ** Sorted "Go To..." methods alphabetically
+    ** Made section headers within options popup more visually obvious
 * 1.1.0
     ** Added: plugin settings with dynamic "Go To..." jump patterns
     ** Added: PHP and JavaScript methods listing in "Go To..." menu

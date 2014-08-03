@@ -113,6 +113,7 @@ public class GoToReferencerPatterns {
             }
 
             referencesArr = methodItems.toArray( new String[methodItems.size()] );
+//            Arrays.sort(referencesArr, String.CASE_INSENSITIVE_ORDER);
         }
         return referencesArr;
     }

@@ -71,6 +71,7 @@
   <ul>
     <li>1.1.1
         <ul>
+            <li>Sorted "Go To..." methods alphabetically</li>
             <li>Made section headers within options popup more visually obvious</li>
          </ul>
     </li>

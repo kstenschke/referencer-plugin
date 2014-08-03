@@ -50,4 +50,17 @@ public class UtilsArray {
 		return merged;
 	}
 
+    /**
+     * @param   arr
+     * @param   item
+     * @return  String[]
+     */
+    public static String[] addToBeginning(String[] arr, String item) {
+        String[] a2 = new String[arr.length + 1];
+        a2[0] = item;
+        System.arraycopy(arr, 0, a2, 1, arr.length);
+
+        return a2;
+    }
+
 }
