@@ -80,6 +80,7 @@
             <li>Sorted "Go To..." jump destination from configured patterns alphabetically</li>
             <li>Sorted "Go To..." methods alphabetically</li>
             <li>Made section headers within options popup more visually obvious</li>
+            <li>Bugfix: Destination patterns were utilized even if not yet stored (= would list all lines)</li>
          </ul>
     </li>
     <li>1.1.0

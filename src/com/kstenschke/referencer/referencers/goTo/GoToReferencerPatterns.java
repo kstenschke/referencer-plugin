@@ -30,6 +30,13 @@ import java.util.List;
 public class GoToReferencerPatterns extends GoToReferencer {
 
     /**
+     * @return  Any patterns defined?
+     */
+    public static boolean hasPatternDefinitions(){
+        return Preferences.getGoToPatterns().length() > 0;
+    }
+
+    /**
      * @return  String[]    Pattern definitions (containing label+pattern each)
      */
     public static String[] getPatternDefinitions() {

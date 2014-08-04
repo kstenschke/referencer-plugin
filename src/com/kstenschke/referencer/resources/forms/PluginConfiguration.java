@@ -38,6 +38,9 @@ public class PluginConfiguration {
     }
 
     public String getGoToPatterns() {
-        return textAreaGoToPatterns.getText();
+        String text = textAreaGoToPatterns.getText().trim();
+        textAreaGoToPatterns.setText(text);
+
+        return text;
     }
 }

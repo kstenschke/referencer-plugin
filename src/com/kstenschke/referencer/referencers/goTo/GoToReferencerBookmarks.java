@@ -71,7 +71,7 @@ public class GoToReferencerBookmarks extends GoToReferencer {
                     int offsetLineStart = document.getLineStartOffset(curLineNum);
                     int offsetLineEnd   = document.getLineEndOffset(curLineNum);
                     String lineSummary  = getLineSummary(documentText.substring(offsetLineStart, offsetLineEnd));
-                    bookmarkItems.add(index, UtilsString.makeMinLen(Integer.toString(curLineNum), digits) + ": " + lineSummary);
+                    bookmarkItems.add(index, UtilsString.makeMinLen(Integer.toString(curLineNum+1), digits) + ": " + lineSummary);
                     index++;
                 }
             }

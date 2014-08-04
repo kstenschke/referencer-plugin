@@ -31,6 +31,7 @@ import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.components.JBList;
 import com.kstenschke.referencer.*;
+import com.kstenschke.referencer.referencers.goTo.GoToReferencer;
 import com.kstenschke.referencer.referencers.goTo.GoToReferencerBookmarks;
 import com.kstenschke.referencer.referencers.goTo.GoToReferencerMethods;
 import com.kstenschke.referencer.referencers.goTo.GoToReferencerPatterns;
@@ -70,11 +71,13 @@ public class GoToAction extends AnAction {
                 refArr = ArrayUtils.addAll( refArr, methodItems );
             }
                 // Add dynamical jump destination patterns
-            String[] patternDefinitions = GoToReferencerPatterns.getPatternDefinitions();
-            for(String curPatterDefinition : patternDefinitions) {
-                String[] curPatternItems = GoToReferencerPatterns.getItems(this.document, curPatterDefinition);
-                if( curPatternItems != null && curPatternItems.length > 1 ) {
-                    refArr  = ArrayUtils.addAll( refArr, curPatternItems );
+            if( GoToReferencerPatterns.hasPatternDefinitions() ) {
+                String[] patternDefinitions = GoToReferencerPatterns.getPatternDefinitions();
+                for(String curPatterDefinition : patternDefinitions) {
+                    String[] curPatternItems = GoToReferencerPatterns.getItems(this.document, curPatterDefinition);
+                    if( curPatternItems != null && curPatternItems.length > 1 ) {
+                        refArr  = ArrayUtils.addAll( refArr, curPatternItems );
+                    }
                 }
             }
 
