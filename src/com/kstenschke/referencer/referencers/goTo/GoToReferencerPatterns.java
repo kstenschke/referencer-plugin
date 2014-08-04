@@ -18,6 +18,8 @@ package com.kstenschke.referencer.referencers.goTo;
 import com.intellij.openapi.editor.Document;
 import com.kstenschke.referencer.Preferences;
 import com.kstenschke.referencer.parsers.ParserPattern;
+import com.kstenschke.referencer.resources.StaticTexts;
+import com.kstenschke.referencer.utils.UtilsArray;
 import com.kstenschke.referencer.utils.UtilsString;
 
 import java.util.ArrayList;
@@ -25,7 +27,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-public class GoToReferencerPatterns {
+public class GoToReferencerPatterns extends GoToReferencer {
 
     /**
      * @return  String[]    Pattern definitions (containing label+pattern each)
@@ -66,55 +68,47 @@ public class GoToReferencerPatterns {
 
         String documentText = document.getText();
 
-        List<String> patternItems= new ArrayList<String>();
-        patternItems.add("SECTIONTITLE: " + label);
-
-        List<Integer> occurrenceLineNumbers = new ArrayList<Integer>();
         List<String> occurrences = ParserPattern.getAllOccurrencesInText(documentText, pattern);
+        List<Integer> occurrenceLineNumbers = collectLineNumbers(documentText, occurrences);
 
-        Integer lineOffset = 0;
-        if( occurrences != null ) {
-            for( String occurrence : occurrences ) {
-                Integer curLineNumber   = UtilsString.getLineNumberOfString(documentText, occurrence, lineOffset);
-                if( curLineNumber != null ) {
-                    occurrenceLineNumbers.add(curLineNumber);
-                }
-                lineOffset = curLineNumber;
-            }
-        }
-
-        return buildReferencesArray(document, patternItems, documentText, occurrenceLineNumbers);
+        return buildReferencesArray(document, documentText, occurrenceLineNumbers, label);
     }
 
     /**
      * @param   document
-     * @param   methodItems
      * @param   documentText
      * @param   methodLineNumbers
      * @return  String[]
      */
-    private static String[] buildReferencesArray(Document document, List<String> methodItems, String documentText, List<Integer> methodLineNumbers) {
+    private static String[] buildReferencesArray(Document document, String documentText, List<Integer> methodLineNumbers, String label) {
+        List<String> methodItems= new ArrayList<String>();
         String[] referencesArr  = null;
         if( methodLineNumbers.size() > 0 ) {
             int digits  = Collections.max(methodLineNumbers).toString().length();
             Integer[] lineNumbersArr= methodLineNumbers.toArray( new Integer[methodLineNumbers.size()] );
             Arrays.sort(lineNumbersArr);
 
-            int index   = 1;
+                // Assemble items with line summary, and post-fixed with line number
+            int index   = 0;
             for( Integer curLineNum : lineNumbersArr ) {
                 if( curLineNum > 0 ) {
                     int offsetLineStart = document.getLineStartOffset(curLineNum);
                     int offsetLineEnd   = document.getLineEndOffset(curLineNum);
 
                     String lineSummary = GoToReferencer.getLineSummary(documentText.substring(offsetLineStart, offsetLineEnd));
-                    methodItems.add(index, UtilsString.makeMinLen(Integer.toString(curLineNum + 1), digits) + ": " + lineSummary);
+                    methodItems.add( index, lineSummary + ":" + UtilsString.makeMinLen(Integer.toString(curLineNum + 1), digits) );
                     index++;
                 }
             }
-
+                // Sort alphabetical
             referencesArr = methodItems.toArray( new String[methodItems.size()] );
-//            Arrays.sort(referencesArr, String.CASE_INSENSITIVE_ORDER);
+            Arrays.sort(referencesArr, String.CASE_INSENSITIVE_ORDER);
+                // Move line numbers to front
+            ReformItemsMovePostfixToFront(referencesArr);
+                // Add section header
+            referencesArr   = UtilsArray.addToBeginning(referencesArr, StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE + " " + label);
         }
+
         return referencesArr;
     }
 

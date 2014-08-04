@@ -78,6 +78,7 @@ public class GoToReferencerBookmarks extends GoToReferencer {
 
             referencesArr = bookmarkItems.toArray( new String[bookmarkItems.size()] );
         }
+
         return referencesArr;
     }
 

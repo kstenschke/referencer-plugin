@@ -22,11 +22,9 @@ import com.kstenschke.referencer.resources.StaticTexts;
 import com.kstenschke.referencer.utils.UtilsArray;
 import com.kstenschke.referencer.utils.UtilsFile;
 import com.kstenschke.referencer.utils.UtilsString;
-import org.apache.commons.lang.ArrayUtils;
-
 import java.util.*;
 
-public class GoToReferencerMethods {
+public class GoToReferencerMethods extends GoToReferencer {
 
     /**
      * @return  String[]
@@ -39,38 +37,24 @@ public class GoToReferencerMethods {
             return null;
         }
 
-        List<String> methodItems= new ArrayList<String>();
-
         String documentText = document.getText();
 
-        List<Integer> methodLineNumbers = new ArrayList<Integer>();
-        List<String> methods = isJavaScript
-            ? ParserJavaScript.getAllMethodsInText(documentText)
-            : ParserPhp.getAllMethodsInText(documentText);
+        List<String> methods = isJavaScript ? ParserJavaScript.getAllMethodsInText(documentText) : ParserPhp.getAllMethodsInText(documentText);
+        List<Integer> methodLineNumbers = collectLineNumbers(documentText, methods);
 
-        Integer lineOffset = 0;
-        if( methods != null ) {
-            for( String curMethodName : methods ) {
-                Integer curLineNumber   = UtilsString.getLineNumberOfString(documentText, curMethodName, lineOffset);
-                if( curLineNumber != null ) {
-                    methodLineNumbers.add( curLineNumber );
-                }
-                lineOffset = curLineNumber;
-            }
-        }
-
-        return buildReferencesArray(document, methodItems, documentText, methodLineNumbers);
+        return buildReferencesArray(document, documentText, methodLineNumbers);
     }
 
     /**
      * @param   document
-     * @param   methodItems
      * @param   documentText
      * @param   methodLineNumbers
      * @return  String[]
      */
-    private static String[] buildReferencesArray(Document document, List<String> methodItems, String documentText, List<Integer> methodLineNumbers) {
+    private static String[] buildReferencesArray(Document document, String documentText, List<Integer> methodLineNumbers) {
         String[] referencesArr  = null;
+        List<String> methodItems= new ArrayList<String>();
+
         if( methodLineNumbers.size() > 0 ) {
             int digits  = Collections.max(methodLineNumbers).toString().length();
             Integer[] lineNumbersArr= methodLineNumbers.toArray( new Integer[methodLineNumbers.size()] );
@@ -84,7 +68,10 @@ public class GoToReferencerMethods {
                     int offsetLineEnd   = document.getLineEndOffset(curLineNum);
 
                     String lineSummary = GoToReferencer.getLineSummary(documentText.substring(offsetLineStart, offsetLineEnd));
-                    methodItems.add( index, lineSummary + ":" + UtilsString.makeMinLen(Integer.toString(curLineNum + 1), digits) );
+                    methodItems.add( index,
+                            lineSummary + ":"
+                          + UtilsString.makeMinLen(Integer.toString(curLineNum + 1), digits)
+                    );
                     index++;
                 }
             }
@@ -92,12 +79,7 @@ public class GoToReferencerMethods {
             referencesArr = methodItems.toArray( new String[methodItems.size()] );
             Arrays.sort(referencesArr, String.CASE_INSENSITIVE_ORDER);
                 // Move line numbers to front
-            index = 0;
-            for(String item : referencesArr) {
-                String[] parts = item.split(":");
-                referencesArr[index]    = parts[1] + ": " + parts[0];
-                index++;
-            }
+            ReformItemsMovePostfixToFront(referencesArr);
                 // Add section header
             referencesArr   = UtilsArray.addToBeginning(referencesArr, StaticTexts.POPUP_SECTION_FUNCTIONS);
         }

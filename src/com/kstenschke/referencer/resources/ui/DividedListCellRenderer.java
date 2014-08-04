@@ -29,9 +29,9 @@ public class DividedListCellRenderer extends DefaultListCellRenderer { //impleme
 
     private final Border separatorBorder          = BorderFactory.createMatteBorder(1, 0, 1, 0, new JBColor(JBColor.LIGHT_GRAY, JBColor.DARK_GRAY) );
     private final Border separatorBorderTopMost   = BorderFactory.createMatteBorder(0, 0, 1, 0, new JBColor(JBColor.LIGHT_GRAY, JBColor.DARK_GRAY) );
-    private Font   separatorFont;
-    private Color separatorColorBackground;
-    private Color separatorColorForeground;
+    private final Font   separatorFont;
+    private final Color separatorColorBackground;
+    private final Color separatorColorForeground;
 
     /**
      * Constructor

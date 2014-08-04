@@ -17,8 +17,40 @@ package com.kstenschke.referencer.referencers.goTo;
 
 import com.kstenschke.referencer.utils.UtilsString;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GoToReferencer {
 
+    protected static List<Integer> collectLineNumbers(String documentText, List<String> methods) {
+        List<Integer> methodLineNumbers = new ArrayList<Integer>();
+
+        Integer lineOffset = 0;
+        if( methods != null ) {
+            for( String curMethodName : methods ) {
+                Integer curLineNumber   = UtilsString.getLineNumberOfString(documentText, curMethodName, lineOffset);
+                if( curLineNumber != null ) {
+                    methodLineNumbers.add( curLineNumber );
+                }
+                lineOffset = curLineNumber;
+            }
+        }
+
+        return methodLineNumbers;
+    }
+
+    protected static void ReformItemsMovePostfixToFront(String[] referencesArr) {
+        int index;
+        index = 0;
+        for(String item : referencesArr) {
+            int splitPos    = item.lastIndexOf(":");
+            String beginning= item.substring(0, splitPos);
+            String ending   = item.substring(splitPos+1);
+
+            referencesArr[index] = ending + ": " + beginning;
+            index++;
+        }
+    }
 
     /**
      * @param   lineText

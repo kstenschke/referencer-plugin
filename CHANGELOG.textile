@@ -1,4 +1,5 @@
 * 1.1.1
+    ** Sorted "Go To..." jump destination from configured patterns alphabetically
     ** Sorted "Go To..." methods alphabetically
     ** Made section headers within options popup more visually obvious
 * 1.1.0
