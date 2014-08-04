@@ -39,6 +39,9 @@ public class GoToReferencer {
         return methodLineNumbers;
     }
 
+    /**
+     * @param referencesArr
+     */
     protected static void ReformItemsMovePostfixToFront(String[] referencesArr) {
         int index;
         index = 0;
