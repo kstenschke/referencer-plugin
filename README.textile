@@ -21,14 +21,14 @@ h2. Keyboard Shortcut
 
 * Ctrl+Shift+Alt+C twice - Open list of references for copying to clipboard
 * Ctrl+Shift+Alt+V twice - Open list of references for inserting into the current document
-* Ctrl+Shift+Alt+G twice - Open list of bookmarks in current file for going to
+* Ctrl+Shift+Alt+G twice - Open list of jump destinations in the current file for going to
 
 *Mac Users:* On Macs, the keyboard shortcuts are Shift+Alt+Cmd+C twice (copy), Shift+Alt+Cmd+V twice (paste) or Shift+Alt+Cmd+G twice (go)
 
 The list can be cancelled via Esc key, navigated using cursor keys and items are selected using Enter.
 
 
-h2. Types of references
+h2. Types of references to copy or insert
 
 All parsed items in the following list are relative to the current caret position,
 for example "previous classname" refers to the first classname found when searching backwards starting
@@ -57,6 +57,13 @@ from the caret position. Some references are only specifically available for cer
 * JavaScript files: file path formatted as namespace
 
 * General word-completions: all continuations to the word to the left of the caret, found in the current file
+
+
+h2. Types of references to go to:<br/>
+
+* All lines with bookmarks in the current file
+* All lines with PHP or JavaScript method declarations in the current file
+* All lines with occurrences of any of the configured dynamic jump patterns in the current file
 
 
 h2. Changelog

@@ -26,9 +26,9 @@
     <ul>
         <li>Ctrl+Shift+Alt+V twice - Open list of references for inserting into the current document</li>
         <li>Ctrl+Shift+Alt+C twice - Open list of references for copying to clipboard</li>
-        <li>Ctrl+Shift+Alt+G twice - Open list of bookmarks in current file for going to</li>
+        <li>Ctrl+Shift+Alt+G twice - Open list of jump destinations in current file for going to</li>
     </ul><br/>
-    Types of references:<br/>
+    Types of references to insert/copy:<br/>
     All parsed items in the following list are relative to the current caret position,
     for example "previous classname" refers to the first classname found when searching backwards starting
     from the caret position. Some references are only specifically available for certain file types.<br/>
@@ -58,7 +58,13 @@
     </ul><ul>
         <li>General word-completions: all continuations to the word to the left of the caret, found in the current file</li>
     </ul><br/>
-<br/><br/>
+    Types of references to go to:<br/>
+    <ul>
+        <li>All lines with bookmarks in the current file</li>
+        <li>All lines with PHP or JavaScript method declarations in the current file</li>
+        <li>All lines with occurrences of any of the configured dynamic jump patterns in the current file</li>
+    </ul>
+    <br/>
     Please note: This plugin is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ]]></description>
   <vendor url="" email="info@stenschke.com">Kay Stenschke</vendor>
