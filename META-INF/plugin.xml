@@ -17,11 +17,16 @@
 <idea-plugin version="2">
   <name>Referencer</name>
   <description><![CDATA[
-    The plugin implements an additional list of code-completion suggestions into the editor, taken from various
-    contexts, such as: opened file(s), selection and caret position in the editor, date and time and more.<br/>
-    When evoking the referencer plugin, a list of reference items, taken from the current contexts, is opened.
-    The references can be inserted into the current document or copied to the clipboard.
-    <br/>
+    The plugin adds three new tools for inserting, copying and navigating among references out of the edited file(s) and other contexts.
+    To copy and insert items, a list suggestions is added to the editor, taken from various contexts, such as:
+    <ul>
+        <li>File(s)</li>
+        <li>Text selection</li>
+        <li>Caret position in the editor</li>
+        <li>Date and time</li>
+        <li>And more....</li>
+    </ul><br/>
+    When evoking the referencer plugin, a list of reference items taken from the current contexts is opened.<br/>
     Keyboard shortcuts:<br/>
     <ul>
         <li>Ctrl+Shift+Alt+V twice - Open list of references for inserting into the current document</li>
