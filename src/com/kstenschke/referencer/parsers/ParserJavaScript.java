@@ -34,7 +34,7 @@ public class ParserJavaScript {
     public static List<String> getAllMethodsInText(String text) {
         // 1. Find matches ala: "function methodname(", if any found return it
         List<String> allMatches = new ArrayList<String>();
-        Matcher m = Pattern.compile("function.*[a-zA-Z0-9_]+\\(").matcher(text);
+        Matcher m = Pattern.compile("function\\s*[a-zA-Z0-9_]+\\s*\\(").matcher(text);
 
         while (m.find()) {
             if (!allMatches.contains(m.group())) {
@@ -44,7 +44,7 @@ public class ParserJavaScript {
 
         // No matches found? look for OOP style methods, ala: "methodname: function("
         if (allMatches.isEmpty()) {
-            m = Pattern.compile("[a-zA-Z0-9_]+:(\\s)*function.*\\(").matcher(text);
+            m = Pattern.compile("[a-zA-Z0-9_]+\\s*:\\s*function\\s*\\(").matcher(text);
 
             while (m.find()) {
                 if (!allMatches.contains(m.group())) {
@@ -63,7 +63,7 @@ public class ParserJavaScript {
     public static List<String> getAllClassNamesInText(String text) {
         // Look for "@class" annotations
         List<String> allMatches = new ArrayList<String>();
-        Matcher m = Pattern.compile("@class(\\s)*([a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*)").matcher(text);
+        Matcher m = Pattern.compile("@class\\s*([a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*)").matcher(text);
 
         while (m.find()) {
             if (!allMatches.contains(m.group())) {

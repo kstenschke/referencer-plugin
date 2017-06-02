@@ -83,6 +83,7 @@ class InsertOrCopyReferencerJavascript {
             if (!allMethodsBeforeCaret.isEmpty()) {
                 methodBefore = cleanupMethodName(allMethodsBeforeCaret.get(allMethodsBeforeCaret.size() - 1));
             }
+
             // Add method after caret
             String methodAfter = null;
             List<String> allMethodsAfterCaret = ParserJavaScript.getAllMethodsInText(textAfterCaret);

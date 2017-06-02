@@ -84,7 +84,7 @@ public class InsertOrCopyReferencer {
             }
 
             // Add JavaScript items
-            if (UtilsFile.isJavaScriptFileExtension("js")) {
+            if (UtilsFile.isJavaScriptFileExtension(fileExtension)) {
                 referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_JAVASCRIPT);
                 referenceItems.addAll(InsertOrCopyReferencerJavascript.getReferenceItems(e));
             } else if (UtilsFile.isPhpFileExtension(fileExtension)) {

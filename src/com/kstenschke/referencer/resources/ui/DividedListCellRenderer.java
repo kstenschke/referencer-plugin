@@ -102,7 +102,6 @@ public class DividedListCellRenderer extends DefaultListCellRenderer {
         label.setBorder(isTopMost ? separatorBorderTopMost : separatorBorder);
 
         label.setBackground(separatorColorBackground);
-
         label.setForeground(separatorColorForeground);
 
         label.setEnabled(false);

@@ -32,7 +32,7 @@ public class GoToReferencerMethods extends GoToReferencer {
      */
     public static String[] getItems(Document document, String fileExtension) {
         boolean isJavaScript = UtilsFile.isJavaScriptFileExtension(fileExtension);
-        boolean isPhp = UtilsFile.isPhpFileExtension(fileExtension);
+        boolean isPhp        = UtilsFile.isPhpFileExtension(fileExtension);
 
         if (!isJavaScript && !isPhp) {
             return null;
@@ -40,7 +40,10 @@ public class GoToReferencerMethods extends GoToReferencer {
 
         String documentText = document.getText();
 
-        List<String> methods = isJavaScript ? ParserJavaScript.getAllMethodsInText(documentText) : ParserPhp.getAllMethodsInText(documentText);
+        List<String> methods = isJavaScript
+                ? ParserJavaScript.getAllMethodsInText(documentText)
+                : ParserPhp.getAllMethodsInText(documentText);
+
         List<Integer> methodLineNumbers = collectLineNumbers(documentText, methods);
 
         return buildReferencesArray(document, documentText, methodLineNumbers);
