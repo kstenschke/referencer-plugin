@@ -131,7 +131,7 @@
   <project-components>
     <!-- Add your project components here -->
       <component>
-          <implementation-class>com.kstenschke.referencer.resources.ui.ReferencerSettingsComponent</implementation-class>
+          <implementation-class>com.kstenschke.referencer.ReferencerSettingsComponent</implementation-class>
           <loadForDefaultProject/>
       </component>
   </project-components>
