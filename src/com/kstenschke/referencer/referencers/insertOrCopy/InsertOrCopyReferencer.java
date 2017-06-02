@@ -24,10 +24,12 @@ import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.kstenschke.referencer.parsers.ParserPhp;
 import com.kstenschke.referencer.utils.UtilsArray;
 import com.kstenschke.referencer.utils.UtilsFile;
 import com.kstenschke.referencer.resources.StaticTexts;
 import com.kstenschke.referencer.utils.UtilsString;
+import org.apache.commons.lang.StringUtils;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -162,7 +164,13 @@ public class InsertOrCopyReferencer {
      * @param itemString Selected references list item value
      * @return String to be inserted/copied
      */
-    public static String fixReferenceValue(Project project, String itemString) {
+    public static String fixReferenceValue(Project project, Editor editor, String itemString) {
+        if (StaticTexts.POPUP_ITEM_METHODS_IN_FILE.equals(itemString)) {
+            List<String> methods = ParserPhp.getAllMethodsInText(editor.getDocument().getText());
+            String methodsList = StringUtils.join(methods, "\n");
+
+            return methodsList.replaceAll("function ", "").replaceAll("\\(", "").replaceAll(" ", "");
+        }
         return StaticTexts.POPUP_ITEM_OPEN_FILES.equals(itemString)
                 ? InsertOrCopyReferencerFilesFolders.getAllOpenedFiles(FileEditorManager.getInstance(project))
                 : itemString;

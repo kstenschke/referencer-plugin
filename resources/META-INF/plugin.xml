@@ -91,6 +91,7 @@
   <ul>
     <li>1.2.0
         <ul>
+            <li>Added option to copy or insert list of all methods in current file</li>
             <li>Improved PHP file methods indexer</li>
             <li>Improved Darcula compatibility</li>
             <li>Modernized source code</li>

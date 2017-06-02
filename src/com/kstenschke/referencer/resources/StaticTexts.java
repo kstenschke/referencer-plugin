@@ -34,6 +34,7 @@ public class StaticTexts {
 
     // Popup items
     @NonNls
+    public static final String POPUP_ITEM_METHODS_IN_FILE = "List of methods in current file";
     public static final String POPUP_ITEM_OPEN_FILES = "List of currently opened files";
 
     // Popup section titles

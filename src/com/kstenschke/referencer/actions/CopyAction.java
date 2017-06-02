@@ -70,7 +70,7 @@ public class CopyAction extends AnAction {
                 referencesList.setSelectedIndex(selectedIndex);
 
                 // Build and show popup
-                buildAndShowPopup(project, refArr, referencesList, fileExtension);
+                buildAndShowPopup(project, editor, refArr, referencesList, fileExtension);
             }
         }
     }
@@ -81,7 +81,7 @@ public class CopyAction extends AnAction {
      * @param referencesList
      * @param fileExtension
      */
-    private void buildAndShowPopup(final Project project, final Object[] refArr, final JList referencesList, final String fileExtension) {
+    private void buildAndShowPopup(final Project project, final Editor editor, final Object[] refArr, final JList referencesList, final String fileExtension) {
         PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
         popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_COPY).setItemChoosenCallback(new Runnable() {
             @Override
@@ -96,7 +96,7 @@ public class CopyAction extends AnAction {
                         Preferences.saveSelectedIndex(fileExtension, index);
 
                         // Copy item to clipboard
-                        StringSelection clipString = new StringSelection(InsertOrCopyReferencer.fixReferenceValue(project, refArr[index].toString()));
+                        StringSelection clipString = new StringSelection(InsertOrCopyReferencer.fixReferenceValue(project, editor, refArr[index].toString()));
                         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 
                         clipboard.setContents(clipString, null);

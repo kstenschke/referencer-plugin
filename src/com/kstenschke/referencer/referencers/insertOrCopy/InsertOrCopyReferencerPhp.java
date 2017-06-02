@@ -21,6 +21,7 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.kstenschke.referencer.parsers.ParserPhp;
+import com.kstenschke.referencer.resources.StaticTexts;
 import com.kstenschke.referencer.utils.UtilsString;
 
 import java.util.ArrayList;
@@ -63,6 +64,9 @@ class InsertOrCopyReferencerPhp {
                 classAfter = cleanupClassName(allClassAfterCaret.get(0));
                 referenceItems.add(classAfter);
             }
+            // Add item for all methods in file, newline-separated
+            referenceItems.add(StaticTexts.POPUP_ITEM_METHODS_IN_FILE);
+
             // Add method before caret
             String methodBefore = null;
             List<String> allMethodsBeforeCaret = ParserPhp.getAllMethodsInText(textBeforeCaret);

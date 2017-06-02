@@ -1,4 +1,5 @@
 * 1.2.0
+    ** Added option to copy or insert list of all methods in current file
     ** Improved PHP file methods indexer
     ** Improved Darcula compatibility
     ** Modernized source code
