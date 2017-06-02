@@ -89,8 +89,8 @@ public class GoToAction extends AnAction {
 
                 // Preselect item from preferences
                 Integer selectedIndex = Preferences.getSelectedIndex(fileExtension);
-                if (selectedIndex > refArr.length) {
-                    selectedIndex = 0;
+                if (selectedIndex > refArr.length || selectedIndex == 0) {
+                    selectedIndex = 1;
                 }
 
                 referencesList.setSelectedIndex(selectedIndex);
