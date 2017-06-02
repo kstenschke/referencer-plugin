@@ -30,128 +30,128 @@ import java.util.List;
 
 public class InsertOrCopyReferencerJavascript {
 
-	/**
+    /**
      * Parse document of given event for JavaScript references and return them
-	 *
-	 * @param    e    Action system event
-	 * @return List of PHP items
-	 */
-	public static List<String> getReferenceItems(AnActionEvent e) {
-		List<String> referenceItems = new ArrayList<String>();
+     *
+     * @param    e    Action system event
+     * @return List of PHP items
+     */
+    public static List<String> getReferenceItems(AnActionEvent e) {
+        List<String> referenceItems = new ArrayList<String>();
 
-		final Project project = e.getData(PlatformDataKeys.PROJECT);
-		Editor editor = e.getData(PlatformDataKeys.EDITOR);
+        final Project project = e.getData(PlatformDataKeys.PROJECT);
+        Editor editor = e.getData(PlatformDataKeys.EDITOR);
 
-		if (project != null && editor != null) {
-			final Document document = editor.getDocument();
+        if (project != null && editor != null) {
+            final Document document = editor.getDocument();
 
-			// Get line number the caret is in
-			int caretOffset = editor.getCaretModel().getOffset();
-			String textFull = document.getText();
-			String textBeforeCaret = textFull.substring(0, caretOffset);
-			String textAfterCaret = textFull.substring(caretOffset);
+            // Get line number the caret is in
+            int caretOffset = editor.getCaretModel().getOffset();
+            String textFull = document.getText();
+            String textBeforeCaret = textFull.substring(0, caretOffset);
+            String textAfterCaret = textFull.substring(caretOffset);
 
-			// File path and name
-			VirtualFile file = FileDocumentManager.getInstance().getFile(document);
-			String filePath = (file != null) ? file.getPath() : "";
+            // File path and name
+            VirtualFile file = FileDocumentManager.getInstance().getFile(document);
+            String filePath = (file != null) ? file.getPath() : "";
 
-			// Add namespace
-			String namespaceBefore = null;
-			List<String> allNamespaces = ParserJavaScript.getAllNamespaceInText(textBeforeCaret);
-			if (!allNamespaces.isEmpty()) {
-				namespaceBefore = cleanupNamespaceName(allNamespaces.get(allNamespaces.size() - 1));
-				referenceItems.add(namespaceBefore);
-			}
+            // Add namespace
+            String namespaceBefore = null;
+            List<String> allNamespaces = ParserJavaScript.getAllNamespaceInText(textBeforeCaret);
+            if (!allNamespaces.isEmpty()) {
+                namespaceBefore = cleanupNamespaceName(allNamespaces.get(allNamespaces.size() - 1));
+                referenceItems.add(namespaceBefore);
+            }
 
-			// Add classname
-			String classnameBefore = null;
-			List<String> allClassnames = ParserJavaScript.getAllClassNamesInText(textBeforeCaret);
-			if (!allClassnames.isEmpty()) {
-				classnameBefore = cleanupClassname(allClassnames.get(allClassnames.size() - 1));
-				referenceItems.add(classnameBefore);
-			}
-			// Add namespace + classname
-			String namespacedClassname = null;
-			if (namespaceBefore != null && classnameBefore != null) {
-				namespacedClassname = namespaceBefore + "." + classnameBefore;
-				referenceItems.add(namespacedClassname);
-			}
+            // Add classname
+            String classnameBefore = null;
+            List<String> allClassnames = ParserJavaScript.getAllClassNamesInText(textBeforeCaret);
+            if (!allClassnames.isEmpty()) {
+                classnameBefore = cleanupClassname(allClassnames.get(allClassnames.size() - 1));
+                referenceItems.add(classnameBefore);
+            }
+            // Add namespace + classname
+            String namespacedClassname = null;
+            if (namespaceBefore != null && classnameBefore != null) {
+                namespacedClassname = namespaceBefore + "." + classnameBefore;
+                referenceItems.add(namespacedClassname);
+            }
 
-			// Add method before caret
-			String methodBefore = null;
-			List<String> allMethodsBeforeCaret = ParserJavaScript.getAllMethodsInText(textBeforeCaret);
-			if (!allMethodsBeforeCaret.isEmpty()) {
-				methodBefore = cleanupMethodName(allMethodsBeforeCaret.get(allMethodsBeforeCaret.size() - 1));
-			}
-			// Add method after caret
-			String methodAfter = null;
-			List<String> allMethodsAfterCaret = ParserJavaScript.getAllMethodsInText(textAfterCaret);
-			if (!allMethodsAfterCaret.isEmpty()) {
-				methodAfter = cleanupMethodName(allMethodsAfterCaret.get(0));
-			}
+            // Add method before caret
+            String methodBefore = null;
+            List<String> allMethodsBeforeCaret = ParserJavaScript.getAllMethodsInText(textBeforeCaret);
+            if (!allMethodsBeforeCaret.isEmpty()) {
+                methodBefore = cleanupMethodName(allMethodsBeforeCaret.get(allMethodsBeforeCaret.size() - 1));
+            }
+            // Add method after caret
+            String methodAfter = null;
+            List<String> allMethodsAfterCaret = ParserJavaScript.getAllMethodsInText(textAfterCaret);
+            if (!allMethodsAfterCaret.isEmpty()) {
+                methodAfter = cleanupMethodName(allMethodsAfterCaret.get(0));
+            }
 
-			// Add namespace.classname.methodBefore
-			// -or classname.methodBefore if no namespace found
-			if (classnameBefore != null && methodBefore != null) {
-				if (namespacedClassname != null) {
-					referenceItems.add(namespacedClassname + "." + methodBefore);
-				}
-				// Classname.method
-				referenceItems.add(classnameBefore + "." + methodBefore);
-			}
+            // Add namespace.classname.methodBefore
+            // -or classname.methodBefore if no namespace found
+            if (classnameBefore != null && methodBefore != null) {
+                if (namespacedClassname != null) {
+                    referenceItems.add(namespacedClassname + "." + methodBefore);
+                }
+                // Classname.method
+                referenceItems.add(classnameBefore + "." + methodBefore);
+            }
 
-			if (null != methodBefore) {
-				referenceItems.add(methodBefore);
-			}
-			if (null != methodAfter) {
-				referenceItems.add(methodAfter);
-			}
+            if (null != methodBefore) {
+                referenceItems.add(methodBefore);
+            }
+            if (null != methodAfter) {
+                referenceItems.add(methodAfter);
+            }
 
-			// Convert path to namespace (slashes to dots)
-			String namespaceFromFilepath = filePath.replace("/", ".").replaceFirst("\\.", "");
-			namespaceFromFilepath = UtilsString.replaceLast(namespaceFromFilepath, ".js", "");
-			referenceItems.add(namespaceFromFilepath);
-		}
+            // Convert path to namespace (slashes to dots)
+            String namespaceFromFilepath = filePath.replace("/", ".").replaceFirst("\\.", "");
+            namespaceFromFilepath = UtilsString.replaceLast(namespaceFromFilepath, ".js", "");
+            referenceItems.add(namespaceFromFilepath);
+        }
 
-		return referenceItems;
-	}
+        return referenceItems;
+    }
 
-	/**
-	 * Clean up method name
-	 *
-	 * @param    methodName    Method name to be cleaned
-	 * @return Cleaned method name
-	 */
-	private static String cleanupMethodName(String methodName) {
-		String[] removeEachStrs = {"(", ":"};
+    /**
+     * Clean up method name
+     *
+     * @param    methodName    Method name to be cleaned
+     * @return Cleaned method name
+     */
+    private static String cleanupMethodName(String methodName) {
+        String[] removeEachStrs = {"(", ":"};
 
-		return UtilsString.cleanReference(methodName, "function", removeEachStrs, "();");
-	}
+        return UtilsString.cleanReference(methodName, "function", removeEachStrs, "();");
+    }
 
-	/**
-	 * Clean up namespace name
-	 *
-	 * @param    namespaceName    Namespace name to be cleaned
-	 * @return Cleaned namespace name
-	 */
-	private static String cleanupNamespaceName(String namespaceName) {
-		String[] removeEachStrs = {"\t"};
+    /**
+     * Clean up namespace name
+     *
+     * @param    namespaceName    Namespace name to be cleaned
+     * @return Cleaned namespace name
+     */
+    private static String cleanupNamespaceName(String namespaceName) {
+        String[] removeEachStrs = {"\t"};
 
-		return UtilsString.cleanReference(namespaceName, "@namespace", removeEachStrs);
-	}
+        return UtilsString.cleanReference(namespaceName, "@namespace", removeEachStrs);
+    }
 
-	/**
-	 * Clean up class name
-	 *
-	 * @param    className    Class name to be cleaned
-	 * @return Cleaned class name
-	 */
-	private static String cleanupClassname(String className) {
-		String[] removeEachStrs = {"\t", " ", "=", "("};
-		className = UtilsString.cleanReference(className, "@class", removeEachStrs);
+    /**
+     * Clean up class name
+     *
+     * @param    className    Class name to be cleaned
+     * @return Cleaned class name
+     */
+    private static String cleanupClassname(String className) {
+        String[] removeEachStrs = {"\t", " ", "=", "("};
+        className = UtilsString.cleanReference(className, "@class", removeEachStrs);
 
-		className = className.replace("Class.create", "");
+        className = className.replace("Class.create", "");
 
-		return className.trim();
-	}
+        return className.trim();
+    }
 }

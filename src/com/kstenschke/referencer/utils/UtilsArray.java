@@ -25,8 +25,8 @@ public class UtilsArray {
 	/**
      * Merge the two given arrays of strings
 	 *
-	 * @param    strArr1        Array 1
-	 * @param    strArr2        Array 2
+	 * @param strArr1 Array 1
+	 * @param strArr2 Array 2
 	 * @return String[]    Array containing all the strings of strArr1 and strArr2
 	 */
 	public static String[] merge(String[] strArr1, String[] strArr2) {
