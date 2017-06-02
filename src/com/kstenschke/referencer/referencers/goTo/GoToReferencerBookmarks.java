@@ -60,7 +60,7 @@ public class GoToReferencerBookmarks extends GoToReferencer {
      */
     private static String[] buildReferencesArray(Document document, List<String> bookmarkItems, String documentText, List<Integer> bookmarkLineNumbers) {
         String[] referencesArr = null;
-        if (bookmarkLineNumbers.size() > 0) {
+        if (!bookmarkLineNumbers.isEmpty()) {
             int digits = Collections.max(bookmarkLineNumbers).toString().length();
             Integer[] lineNumbersArr = bookmarkLineNumbers.toArray(new Integer[bookmarkLineNumbers.size()]);
             Arrays.sort(lineNumbersArr);

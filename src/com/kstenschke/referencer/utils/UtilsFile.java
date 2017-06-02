@@ -31,16 +31,18 @@ public class UtilsFile {
      * @return PHP extension?
      */
     public static Boolean isPhpFileExtension(String fileExtension) {
-        if (fileExtension == null) return false;
+        if (fileExtension == null) {
+            return false;
+        }
 
         fileExtension = fileExtension.toLowerCase();
 
-        return fileExtension.equals("phpsh")
-                || fileExtension.equals("php")
-                || fileExtension.equals("php3")
-                || fileExtension.equals("php4")
-                || fileExtension.equals("php5")
-                || fileExtension.equals("phtml");
+        return "phpsh".equals(fileExtension)
+                || "php".equals(fileExtension)
+                || "php3".equals(fileExtension)
+                || "php4".equals(fileExtension)
+                || "php5".equals(fileExtension)
+                || "phtml".equals(fileExtension);
     }
 
     /**
@@ -50,11 +52,7 @@ public class UtilsFile {
      * @return JavaScript extension?
      */
     public static Boolean isJavaScriptFileExtension(String fileExtension) {
-        if (fileExtension == null) return false;
-
-        fileExtension = fileExtension.toLowerCase();
-
-        return fileExtension.equals("js");
+        return null != fileExtension && "js".equalsIgnoreCase(fileExtension);
     }
 
     /**

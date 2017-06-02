@@ -59,7 +59,7 @@ public class InsertOrCopyReferencerJavascript {
 			// Add namespace
 			String namespaceBefore = null;
 			List<String> allNamespaces = ParserJavaScript.getAllNamespaceInText(textBeforeCaret);
-			if (allNamespaces.size() > 0) {
+			if (!allNamespaces.isEmpty()) {
 				namespaceBefore = cleanupNamespaceName(allNamespaces.get(allNamespaces.size() - 1));
 				referenceItems.add(namespaceBefore);
 			}
@@ -67,7 +67,7 @@ public class InsertOrCopyReferencerJavascript {
 			// Add classname
 			String classnameBefore = null;
 			List<String> allClassnames = ParserJavaScript.getAllClassNamesInText(textBeforeCaret);
-			if (allClassnames.size() > 0) {
+			if (!allClassnames.isEmpty()) {
 				classnameBefore = cleanupClassname(allClassnames.get(allClassnames.size() - 1));
 				referenceItems.add(classnameBefore);
 			}
@@ -81,13 +81,13 @@ public class InsertOrCopyReferencerJavascript {
 			// Add method before caret
 			String methodBefore = null;
 			List<String> allMethodsBeforeCaret = ParserJavaScript.getAllMethodsInText(textBeforeCaret);
-			if (allMethodsBeforeCaret.size() > 0) {
+			if (!allMethodsBeforeCaret.isEmpty()) {
 				methodBefore = cleanupMethodName(allMethodsBeforeCaret.get(allMethodsBeforeCaret.size() - 1));
 			}
 			// Add method after caret
 			String methodAfter = null;
 			List<String> allMethodsAfterCaret = ParserJavaScript.getAllMethodsInText(textAfterCaret);
-			if (allMethodsAfterCaret.size() > 0) {
+			if (!allMethodsAfterCaret.isEmpty()) {
 				methodAfter = cleanupMethodName(allMethodsAfterCaret.get(0));
 			}
 
@@ -101,10 +101,12 @@ public class InsertOrCopyReferencerJavascript {
 				referenceItems.add(classnameBefore + "." + methodBefore);
 			}
 
-
-			if (methodBefore != null) referenceItems.add(methodBefore);
-			if (methodAfter != null) referenceItems.add(methodAfter);
-
+			if (null != methodBefore) {
+				referenceItems.add(methodBefore);
+			}
+			if (null != methodAfter) {
+				referenceItems.add(methodAfter);
+			}
 
 			// Convert path to namespace (slashes to dots)
 			String namespaceFromFilepath = filePath.replace("/", ".").replaceFirst("\\.", "");

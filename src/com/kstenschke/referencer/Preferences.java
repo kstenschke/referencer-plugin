@@ -88,8 +88,6 @@ public class Preferences {
         String preferenceIdentifier = getPropertyIdentifierByFileExtension(fileExtension);
 
         String preferredIndex = PropertiesComponent.getInstance().getValue(preferenceIdentifier);
-        if (preferredIndex == null || preferredIndex.equals("")) return 0;
-
-        return Integer.parseInt(preferredIndex);
+        return preferredIndex == null || "".equals(preferredIndex) ? 0 : Integer.parseInt(preferredIndex);
     }
 }

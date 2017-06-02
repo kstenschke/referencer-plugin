@@ -55,35 +55,35 @@ class InsertOrCopyReferencerPhp {
 			// Add class before caret
 			String classBefore = null;
 			List<String> allClassBeforeCaret = ParserPhp.getAllClassNamesInText(textBeforeCaret);
-			if (allClassBeforeCaret.size() > 0) {
+			if (!allClassBeforeCaret.isEmpty()) {
 				classBefore = cleanupClassName(allClassBeforeCaret.get(allClassBeforeCaret.size() - 1));
 				referenceItems.add(classBefore);
 			}
 			// Add class after caret
 			String classAfter;
 			List<String> allClassAfterCaret = ParserPhp.getAllClassNamesInText(textAfterCaret);
-			if (allClassAfterCaret.size() > 0) {
+			if (!allClassAfterCaret.isEmpty()) {
 				classAfter = cleanupClassName(allClassAfterCaret.get(0));
 				referenceItems.add(classAfter);
 			}
 			// Add method before caret
 			String methodBefore = null;
 			List<String> allMethodsBeforeCaret = ParserPhp.getAllMethodsInText(textBeforeCaret);
-			if (allMethodsBeforeCaret.size() > 0) {
+			if (!allMethodsBeforeCaret.isEmpty()) {
 				methodBefore = cleanupMethodName(allMethodsBeforeCaret.get(allMethodsBeforeCaret.size() - 1));
 				referenceItems.add(methodBefore);
 			}
 			// Add method after caret
 			String methodAfter;
 			List<String> allMethodsAfterCaret = ParserPhp.getAllMethodsInText(textAfterCaret);
-			if (allMethodsAfterCaret.size() > 0) {
+			if (!allMethodsAfterCaret.isEmpty()) {
 				methodAfter = cleanupMethodName(allMethodsAfterCaret.get(0));
 				referenceItems.add(methodAfter);
 			}
 			// Add method before caret / prev. variable
 			String varBefore = null;
 			List<String> allVarsBeforeCaret = ParserPhp.getAllVariablesInText(textBeforeCaret);
-			if (allVarsBeforeCaret.size() > 0) {
+			if (!allVarsBeforeCaret.isEmpty()) {
 				varBefore = allVarsBeforeCaret.get(allVarsBeforeCaret.size() - 1);
 				if (methodBefore != null && varBefore != null) {
 					referenceItems.add(methodBefore + " / " + varBefore);
@@ -102,7 +102,7 @@ class InsertOrCopyReferencerPhp {
 			// Add variable after caret
 			String varAfter;
 			List<String> allVarsAfterCaret = ParserPhp.getAllVariablesInText(textAfterCaret);
-			if (allVarsAfterCaret.size() > 0) {
+			if (!allVarsAfterCaret.isEmpty()) {
 				varAfter = allVarsAfterCaret.get(0);
 				if (!varAfter.equals(varBefore)) {
 					referenceItems.add(varAfter);

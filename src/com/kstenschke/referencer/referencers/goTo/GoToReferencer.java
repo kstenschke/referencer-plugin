@@ -46,7 +46,7 @@ public class GoToReferencer {
         int index;
         index = 0;
         for (String item : referencesArr) {
-            int splitPos = item.lastIndexOf(":");
+            int splitPos = item.lastIndexOf(':');
             String beginning = item.substring(0, splitPos);
             String ending = item.substring(splitPos + 1);
 

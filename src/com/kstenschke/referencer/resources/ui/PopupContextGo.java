@@ -83,6 +83,7 @@ public class PopupContextGo {
         /**
          * @param e
          */
+        @Override
         public void mousePressed(MouseEvent e) {
             maybeShowPopup(e);
         }
@@ -90,6 +91,7 @@ public class PopupContextGo {
         /**
          * @param e
          */
+        @Override
         public void mouseReleased(MouseEvent e) {
             maybeShowPopup(e);
         }

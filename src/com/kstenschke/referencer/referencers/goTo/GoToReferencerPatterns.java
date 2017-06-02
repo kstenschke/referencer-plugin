@@ -48,7 +48,7 @@ public class GoToReferencerPatterns extends GoToReferencer {
      * @return String      The label, or the whole definition if no colon-separated label prefix is found
      */
     private static String getLabelFromPatternDefinition(String pattern) {
-        int splitPosition = pattern.indexOf(":");
+        int splitPosition = pattern.indexOf(':');
         String label = splitPosition == -1 ? pattern : pattern.substring(0, splitPosition);
 
         return label.trim();
@@ -59,7 +59,7 @@ public class GoToReferencerPatterns extends GoToReferencer {
      * @return String      The label, or the whole definition if no colon-separated label prefix is found
      */
     private static String getPatternFromPatternDefinition(String pattern) {
-        int splitPosition = pattern.indexOf(":");
+        int splitPosition = pattern.indexOf(':');
 
         return splitPosition == -1 ? pattern : pattern.substring(splitPosition + 1);
     }
@@ -90,7 +90,7 @@ public class GoToReferencerPatterns extends GoToReferencer {
     private static String[] buildReferencesArray(Document document, String documentText, List<Integer> methodLineNumbers, String label) {
         List<String> methodItems = new ArrayList<String>();
         String[] referencesArr = null;
-        if (methodLineNumbers.size() > 0) {
+        if (!methodLineNumbers.isEmpty()) {
             int digits = Collections.max(methodLineNumbers).toString().length();
             Integer[] lineNumbersArr = methodLineNumbers.toArray(new Integer[methodLineNumbers.size()]);
             Arrays.sort(lineNumbersArr);

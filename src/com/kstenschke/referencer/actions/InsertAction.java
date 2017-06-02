@@ -62,7 +62,9 @@ public class InsertAction extends AnAction {
 
                 // Preselect item from preferences
                 Integer selectedIndex = Preferences.getSelectedIndex(fileExtension);
-                if (selectedIndex > refArr.length) selectedIndex = 0;
+                if (selectedIndex > refArr.length) {
+                    selectedIndex = 0;
+                }
 
                 referencesList.setSelectedIndex(selectedIndex);
 
@@ -82,12 +84,15 @@ public class InsertAction extends AnAction {
     private void buildAndShowPopup(final Project project, final Editor editor, final Object[] refArr, final JList referencesList, final String fileExtension) {
         PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
         popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_INSERT).setItemChoosenCallback(new Runnable() {
+            @Override
             public void run() {
                 ApplicationManager.getApplication().runWriteAction(new Runnable() {
+                    @Override
                     public void run() {
 
                         // Callback when item chosen
                         CommandProcessor.getInstance().executeCommand(project, new Runnable() {
+                                    @Override
                                     public void run() {
                                         final int index = referencesList.getSelectedIndex();
 

@@ -34,7 +34,7 @@ public class GoToReferencerMethods extends GoToReferencer {
         boolean isJavaScript = UtilsFile.isJavaScriptFileExtension(fileExtension);
         boolean isPhp = UtilsFile.isPhpFileExtension(fileExtension);
 
-        if ((!isJavaScript && !isPhp)) {
+        if (!isJavaScript && !isPhp) {
             return null;
         }
 
@@ -56,7 +56,7 @@ public class GoToReferencerMethods extends GoToReferencer {
         String[] referencesArr = null;
         List<String> methodItems = new ArrayList<String>();
 
-        if (methodLineNumbers.size() > 0) {
+        if (!methodLineNumbers.isEmpty()) {
             int digits = Collections.max(methodLineNumbers).toString().length();
             Integer[] lineNumbersArr = methodLineNumbers.toArray(new Integer[methodLineNumbers.size()]);
             Arrays.sort(lineNumbersArr);

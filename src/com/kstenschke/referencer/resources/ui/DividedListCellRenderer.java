@@ -15,7 +15,6 @@
  */
 package com.kstenschke.referencer.resources.ui;
 
-import com.intellij.ui.JBColor;
 import com.intellij.util.ui.UIUtil;
 import com.kstenschke.referencer.resources.StaticTexts;
 
@@ -26,7 +25,7 @@ import java.awt.*;
 /**
  * List cell renderer with a separator, items with "_" as text are displayed as separators dividing item groups
  */
-public class DividedListCellRenderer extends DefaultListCellRenderer { //implements ListCellRenderer {
+public class DividedListCellRenderer extends DefaultListCellRenderer {
 
     private final Border separatorBorder;
     private final Border separatorBorderTopMost;
@@ -72,6 +71,7 @@ public class DividedListCellRenderer extends DefaultListCellRenderer { //impleme
      * @param    isSelected            Item currently selected?
      * @param    cellHasFocus        Item currently has focus?
      */
+    @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
         if (value != null) {
             String valueStr = value.toString();

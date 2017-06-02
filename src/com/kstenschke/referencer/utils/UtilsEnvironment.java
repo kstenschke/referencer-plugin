@@ -64,6 +64,7 @@ public class UtilsEnvironment {
 
             // Run notification thread
             Thread statusBarNotifyThread = new Thread() {
+                @Override
                 public void run() {
                     try {
                         SwingUtilities.invokeAndWait(new Runnable() {
@@ -75,7 +76,6 @@ public class UtilsEnvironment {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-//                    System.out.println("Finished on " + Thread.currentThread());
                 }
             };
             statusBarNotifyThread.start();

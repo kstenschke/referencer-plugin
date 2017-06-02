@@ -37,6 +37,7 @@ public class DividedListSelectionListener extends JFrame implements ListSelectio
      *
      * @param    e    Selection event
      */
+    @Override
     public void valueChanged(ListSelectionEvent e) {
         JList list = (JList) e.getSource();
 
@@ -62,6 +63,6 @@ public class DividedListSelectionListener extends JFrame implements ListSelectio
      */
     private boolean isSeparatorOrSection(String valueStr, Integer index) {
         return index == 0
-            || valueStr.equals("_") || valueStr.startsWith(StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE);
+            || "_".equals(valueStr) || valueStr.startsWith(StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE);
     }
 }

@@ -105,7 +105,7 @@ public class GoToAction extends AnAction {
                 popupGo.showCenteredInCurrentWindow(project);
             }
 
-            if ((refArr == null || refArr.length == 0)) {
+            if (refArr == null || refArr.length == 0) {
                 UtilsEnvironment.notify(StaticTexts.NOTIFY_GOTO_NONE_FOUND);
             }
         }
@@ -120,11 +120,14 @@ public class GoToAction extends AnAction {
         PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
 
         return popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_GO).setItemChoosenCallback(new Runnable() {
+            @Override
             public void run() {
                 ApplicationManager.getApplication().runWriteAction(new Runnable() {
+                    @Override
                     public void run() {
                         // Callback when item chosen
                         CommandProcessor.getInstance().executeCommand(project, new Runnable() {
+                            @Override
                             public void run() {
                                 Preferences.saveSelectedIndex(fileExtension, referencesList.getSelectedIndex());
 

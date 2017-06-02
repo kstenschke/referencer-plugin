@@ -98,7 +98,9 @@ public class UtilsString {
      * @return The extracted word or null
      */
     private static String grabWord(CharSequence text, int cursorOffset, boolean expandWordBoundaryRight) {
-        if (text.length() == 0 || cursorOffset >= text.length()) return null;
+        if (text.length() == 0 || cursorOffset >= text.length()) {
+            return null;
+        }
 
         while (cursorOffset > 0 && cursorOffset < text.length() - 1
                 && !Character.isJavaIdentifierPart(text.charAt(cursorOffset))
@@ -149,7 +151,9 @@ public class UtilsString {
      * @return The extracted word or null
      */
     private static String grabString(CharSequence text, int cursorOffset, boolean expandWordBoundaryRight) {
-        if (text.length() == 0 || cursorOffset >= text.length()) return null;
+        if (text.length() == 0 || cursorOffset >= text.length()) {
+            return null;
+        }
 
         while (cursorOffset > 0 && cursorOffset < (text.length() - 1)
                 && !Character.isWhitespace(text.charAt(cursorOffset))
@@ -214,7 +218,7 @@ public class UtilsString {
      * @return The cleaned string
      */
     public static String cleanReference(String referenceStr, String removeOnceStr) {
-        if (!removeOnceStr.equals("") && referenceStr.contains(removeOnceStr)) {
+        if (!"".equals(removeOnceStr) && referenceStr.contains(removeOnceStr)) {
             return referenceStr.replaceFirst(removeOnceStr, "").trim();
         }
 

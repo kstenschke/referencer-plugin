@@ -84,9 +84,11 @@ public class CopyAction extends AnAction {
     private void buildAndShowPopup(final Project project, final Object[] refArr, final JList referencesList, final String fileExtension) {
         PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
         popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_COPY).setItemChoosenCallback(new Runnable() {
+            @Override
             public void run() {
                 // Callback when item chosen
                 CommandProcessor.getInstance().executeCommand(project, new Runnable() {
+                    @Override
                     public void run() {
                         final int index = referencesList.getSelectedIndex();
 

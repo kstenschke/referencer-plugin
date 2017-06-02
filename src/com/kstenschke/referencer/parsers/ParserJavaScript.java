@@ -43,7 +43,7 @@ public class ParserJavaScript {
         }
 
         // No matches found? look for OOP style methods, ala: "methodname: function("
-        if (allMatches.size() == 0) {
+        if (allMatches.isEmpty()) {
             m = Pattern.compile("[a-zA-Z0-9_]+:(\\s)*function.*\\(").matcher(text);
 
             while (m.find()) {
@@ -71,7 +71,7 @@ public class ParserJavaScript {
             }
         }
         // Nothing found? look for "...Class.create("
-        if (allMatches.size() == 0) {
+        if (allMatches.isEmpty()) {
             m = Pattern.compile("[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*\\s*=\\s*Class\\.create\\(").matcher(text);
 
             while (m.find()) {
