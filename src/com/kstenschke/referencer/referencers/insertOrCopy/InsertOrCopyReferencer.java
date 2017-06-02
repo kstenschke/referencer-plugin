@@ -163,11 +163,9 @@ public class InsertOrCopyReferencer {
 	 * @param    itemString                        Selected references list item value
 	 */
 	public static String fixReferenceValue(Project project, String itemString) {
-		if (itemString.equals(StaticTexts.POPUP_ITEM_OPEN_FILES)) {
-			return InsertOrCopyReferencerFilesFolders.getAllOpenedFiles(FileEditorManager.getInstance(project));
-		}
-
-		return itemString;
+		return StaticTexts.POPUP_ITEM_OPEN_FILES.equals(itemString)
+			? InsertOrCopyReferencerFilesFolders.getAllOpenedFiles(FileEditorManager.getInstance(project))
+			: itemString;
 	}
 
 }

@@ -37,20 +37,17 @@ class InsertOrCopyReferencerPhp {
 	public static List<String> getReferenceItems(AnActionEvent e) {
 		List<String> referenceItems = new ArrayList<String>();
 
-
 		final Project project = e.getData(PlatformDataKeys.PROJECT);
 		Editor editor = e.getData(PlatformDataKeys.EDITOR);
 
 		if (project != null && editor != null) {
 			final Document document = editor.getDocument();
 
-
 			// Get line number the caret is in
 			int caretOffset = editor.getCaretModel().getOffset();
 			String textFull = document.getText();
 			String textBeforeCaret = textFull.substring(0, caretOffset);
 			String textAfterCaret = textFull.substring(caretOffset);
-
 
 			// Add class before caret
 			String classBefore = null;

@@ -46,7 +46,6 @@ class InsertOrCopyReferencerFilesFolders {
 		if (project != null && editor != null) {
 			final Document document = editor.getDocument();
 
-
 			// Get line number the caret is in
 			int caretOffset = editor.getCaretModel().getOffset();
 			int lineNumber = document.getLineNumber(caretOffset);
@@ -55,7 +54,6 @@ class InsertOrCopyReferencerFilesFolders {
 			VirtualFile file = FileDocumentManager.getInstance().getFile(document);
 			String filePath = (file != null) ? file.getPath() : "";
 			String filename = (file != null) ? file.getName() : "";
-
 
 			// Add items
 			FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);

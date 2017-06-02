@@ -109,26 +109,25 @@ public class UtilsString {
             cursorOffset--;
         }
 
-        if (cursorOffset >= 0 && Character.isJavaIdentifierPart(text.charAt(cursorOffset))) {
-            int start = cursorOffset;
-            int end = cursorOffset;
-
-
-            while (start > 0 && Character.isJavaIdentifierPart(text.charAt(start - 1))) {
-                start--;
-            }
-
-            if (expandWordBoundaryRight) {
-                // Find ending of word by expanding boundary until first non-whitespace to the right
-                while (end < text.length() && !Character.isWhitespace(text.charAt(end))) {
-                    end++;
-                }
-            }
-
-            return text.subSequence(start, end).toString();
+        if (cursorOffset < 0 || !Character.isJavaIdentifierPart(text.charAt(cursorOffset))) {
+            return null;
         }
 
-        return null;
+        int start = cursorOffset;
+        int end = cursorOffset;
+
+        while (start > 0 && Character.isJavaIdentifierPart(text.charAt(start - 1))) {
+            start--;
+        }
+
+        if (expandWordBoundaryRight) {
+            // Find ending of word by expanding boundary until first non-whitespace to the right
+            while (end < text.length() && !Character.isWhitespace(text.charAt(end))) {
+                end++;
+            }
+        }
+
+        return text.subSequence(start, end).toString();
     }
 
     /**
@@ -162,25 +161,24 @@ public class UtilsString {
             cursorOffset--;
         }
 
-        if (cursorOffset >= 0 && Character.isWhitespace(text.charAt(cursorOffset))) {
-            int start = cursorOffset;
-            int end = cursorOffset;
-
-
-            while (start > 0 && Character.isWhitespace(text.charAt(start - 1))) {
-                start--;
-            }
-
-            if (expandWordBoundaryRight) {
-                while (end < text.length() && !Character.isWhitespace(text.charAt(end))) {
-                    end++;
-                }
-            }
-
-            return text.subSequence(start, end).toString();
+        if (cursorOffset < 0 || !Character.isWhitespace(text.charAt(cursorOffset))) {
+            return null;
         }
 
-        return null;
+        int start = cursorOffset;
+        int end = cursorOffset;
+
+        while (start > 0 && Character.isWhitespace(text.charAt(start - 1))) {
+            start--;
+        }
+
+        if (expandWordBoundaryRight) {
+            while (end < text.length() && !Character.isWhitespace(text.charAt(end))) {
+                end++;
+            }
+        }
+
+        return text.subSequence(start, end).toString();
     }
 
     /**
@@ -188,11 +186,7 @@ public class UtilsString {
      * @param maxLen
      */
     public static String crop(String str, Integer maxLen) {
-        if (str.length() > maxLen) {
-            str = str.substring(0, maxLen) + "...";
-        }
-
-        return str;
+        return str.length() > maxLen ? str.substring(0, maxLen) + "..." : str;
     }
 
     /**
@@ -218,11 +212,9 @@ public class UtilsString {
      * @return The cleaned string
      */
     public static String cleanReference(String referenceStr, String removeOnceStr) {
-        if (!"".equals(removeOnceStr) && referenceStr.contains(removeOnceStr)) {
-            return referenceStr.replaceFirst(removeOnceStr, "").trim();
-        }
-
-        return referenceStr.trim();
+        return "".equals(removeOnceStr) || !referenceStr.contains(removeOnceStr)
+            ? referenceStr.trim()
+            : referenceStr.replaceFirst(removeOnceStr, "").trim();
     }
 
     /**

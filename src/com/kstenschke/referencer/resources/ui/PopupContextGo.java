@@ -75,7 +75,6 @@ public class PopupContextGo {
         return new PopupListener();
     }
 
-
     /**
      * PopupListener
      */

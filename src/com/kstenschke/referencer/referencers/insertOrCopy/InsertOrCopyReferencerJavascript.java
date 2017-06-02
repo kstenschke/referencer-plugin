@@ -45,7 +45,6 @@ public class InsertOrCopyReferencerJavascript {
 		if (project != null && editor != null) {
 			final Document document = editor.getDocument();
 
-
 			// Get line number the caret is in
 			int caretOffset = editor.getCaretModel().getOffset();
 			String textFull = document.getText();
