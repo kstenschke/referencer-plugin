@@ -30,7 +30,7 @@ public class UtilsEnvironment {
     /**
      * @return The currently opened project
      */
-    public static Project getOpenProject() {
+    private static Project getOpenProject() {
         Project[] projects = ProjectManager.getInstance().getOpenProjects();
 
         return (projects.length > 0) ? projects[0] : null;
@@ -40,7 +40,7 @@ public class UtilsEnvironment {
      * @param message
      */
     public static void notify(String message) {
-        Project project = UtilsEnvironment.getOpenProject();
+        Project project = getOpenProject();
         final StatusBar statusBar = WindowManager.getInstance().getStatusBar(project);
 
         if (statusBar != null) {

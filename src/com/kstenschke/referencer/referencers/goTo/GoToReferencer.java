@@ -20,9 +20,9 @@ import com.kstenschke.referencer.utils.UtilsString;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GoToReferencer {
+class GoToReferencer {
 
-    protected static List<Integer> collectLineNumbers(String documentText, List<String> methods) {
+    static List<Integer> collectLineNumbers(String documentText, List<String> methods) {
         List<Integer> methodLineNumbers = new ArrayList<Integer>();
 
         Integer lineOffset = 0;
@@ -42,7 +42,7 @@ public class GoToReferencer {
     /**
      * @param referencesArr
      */
-    protected static void ReformItemsMovePostfixToFront(String[] referencesArr) {
+    static void reformItemsMovePostfixToFront(String[] referencesArr) {
         int index;
         index = 0;
         for (String item : referencesArr) {
@@ -59,7 +59,9 @@ public class GoToReferencer {
      * @param lineText
      * @return String
      */
-    protected static String getLineSummary(String lineText) {
-        return lineText.isEmpty() ? "" : UtilsString.crop(lineText.trim().replace("\t", " ").replace("  ", " "), 80);
+    static String getLineSummary(String lineText) {
+        return lineText.isEmpty()
+            ? ""
+            : UtilsString.crop(lineText.trim().replace("\t", " ").replace("  ", " "), 80);
     }
 }

@@ -33,15 +33,13 @@ public class DividedListCellRenderer extends DefaultListCellRenderer {
     private final Color separatorColorBackground;
     private final Color separatorColorForeground;
 
-    private final boolean isUnderDarcula;
-
     /**
      * Constructor
      *
      * @param list
      */
     public DividedListCellRenderer(JList list) {
-        this.isUnderDarcula = UIUtil.isUnderDarcula();
+        boolean isUnderDarcula = UIUtil.isUnderDarcula();
 
         separatorBorderTopMost = isUnderDarcula
                 ? BorderFactory.createMatteBorder(0, 0, 1, 0, Color.DARK_GRAY)

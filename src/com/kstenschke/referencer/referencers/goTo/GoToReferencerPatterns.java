@@ -111,7 +111,7 @@ public class GoToReferencerPatterns extends GoToReferencer {
             referencesArr = methodItems.toArray(new String[methodItems.size()]);
             Arrays.sort(referencesArr, String.CASE_INSENSITIVE_ORDER);
             // Move line numbers to front
-            ReformItemsMovePostfixToFront(referencesArr);
+            reformItemsMovePostfixToFront(referencesArr);
             // Add section header
             referencesArr = UtilsArray.addToBeginning(referencesArr, StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE + " " + label);
         }

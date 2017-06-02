@@ -28,7 +28,7 @@ import com.kstenschke.referencer.utils.UtilsString;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InsertOrCopyReferencerJavascript {
+class InsertOrCopyReferencerJavascript {
 
     /**
      * Parse document of given event for JavaScript references and return them
