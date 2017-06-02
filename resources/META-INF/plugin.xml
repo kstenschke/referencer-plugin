@@ -92,6 +92,7 @@
   <ul>
     <li>1.2.0
         <ul>
+            <li>Updated plugin settings implementation to be compatible w/ recent Open API</li>
             <li>Added option to copy or insert list of all methods in current file</li>
             <li>Improved PHP file methods indexer</li>
             <li>Improved Darcula compatibility</li>
@@ -124,17 +125,13 @@
   <a href="https://github.com/kstenschke/referencer-plugin/blob/master/CHANGELOG.textile" target="_blank">...Read full changelog on github</a>
   ]]></change-notes>
 
-  <application-components>
-    <!-- Add your application components here -->
-  </application-components>
+  <application-components/>
 
-  <project-components>
-    <!-- Add your project components here -->
-      <component>
-          <implementation-class>com.kstenschke.referencer.ReferencerSettingsComponent</implementation-class>
-          <loadForDefaultProject/>
-      </component>
-  </project-components>
+  <project-components/>
+
+  <extensions defaultExtensionNs="com.intellij">
+      <applicationConfigurable id="Referencer" displayName="Referencer" instance="com.kstenschke.referencer.ReferencerConfigurable"/>
+  </extensions>
 
   <actions>
       <action id="CopyAction" class="com.kstenschke.referencer.actions.CopyAction" text="Copy Reference" description="Copy a selectable references">

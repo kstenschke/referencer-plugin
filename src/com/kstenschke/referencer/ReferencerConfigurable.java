@@ -15,42 +15,30 @@
  */
 package com.kstenschke.referencer;
 
-import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
-import com.intellij.openapi.project.Project;
-import com.kstenschke.referencer.Preferences;
 import com.kstenschke.referencer.resources.StaticTexts;
 import com.kstenschke.referencer.resources.forms.PluginConfiguration;
 import org.jetbrains.annotations.Nls;
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-public class ReferencerSettingsComponent implements ProjectComponent, Configurable {
+public class ReferencerConfigurable implements Configurable {
 
     private PluginConfiguration settingsPanel = null;
 
-    /**
-     * Constructor
-     *
-     * @param project
-     */
-    public ReferencerSettingsComponent(Project project) {
-
+    @Nullable
+    @NonNls
+    public String getHelpTopic() {
+        return null;
     }
 
     @Nls
     @Override
     public String getDisplayName() {
         return StaticTexts.SETTINGS_DISPLAY_NAME;
-    }
-
-    @Nullable
-    @Override
-    public String getHelpTopic() {
-        return null;
     }
 
     @Nullable
@@ -80,32 +68,13 @@ public class ReferencerSettingsComponent implements ProjectComponent, Configurab
 
     @Override
     public void reset() {
-
+        if (settingsPanel != null) {
+            //settingsPanel.initFormValues();
+        }
     }
 
     @Override
     public void disposeUIResources() {
-
-    }
-
-    public void initComponent() {
-
-    }
-
-    public void disposeComponent() {
-
-    }
-
-    @NotNull
-    public String getComponentName() {
-        return StaticTexts.SETTINGS_COMPONENT_NAME;
-    }
-
-    public void projectOpened() {
-        // called when project is opened
-    }
-
-    public void projectClosed() {
-        // called when project is being closed
+        settingsPanel = null;
     }
 }
