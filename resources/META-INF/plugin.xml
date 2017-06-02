@@ -55,6 +55,7 @@
         <li>When having a multi-line selection: File path / selection: line num. sel. start - line num. sel. end</li>
         <li>When having opened more than one file: list of paths to all opened files</li>
     </ul><ul>
+        <li>PHP files: list of method names in current file</li>
         <li>PHP files: previous classname::previous method name</li>
         <li>PHP files: previous classname::line number</li>
         <li>PHP files: previous classname</li>

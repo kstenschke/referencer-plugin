@@ -44,6 +44,7 @@ from the caret position. Some references are only specifically available for cer
 * When having a multi-line selection: File path / selection: line num. sel. start - line num. sel. end
 * When having opened more than one file: list of paths to all opened files
 
+* PHP files: list of method names in current file
 * PHP files: previous classname::previous method name
 * PHP files: previous classname::line number
 * PHP files: previous classname
