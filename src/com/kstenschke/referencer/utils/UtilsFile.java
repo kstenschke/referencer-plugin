@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 Kay Stenschke
+ * Copyright 2012-2017 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,15 +27,15 @@ public class UtilsFile {
     /**
      * Compare given extension against known PHP extensions
      *
-     * @param	fileExtension	Extension to be checked
-     * @return					PHP extension?
+     * @param    fileExtension    Extension to be checked
+     * @return PHP extension?
      */
     public static Boolean isPhpFileExtension(String fileExtension) {
-        if( fileExtension == null) return false;
+        if (fileExtension == null) return false;
 
-        fileExtension	= fileExtension.toLowerCase();
+        fileExtension = fileExtension.toLowerCase();
 
-        return     fileExtension.equals("phpsh")
+        return fileExtension.equals("phpsh")
                 || fileExtension.equals("php")
                 || fileExtension.equals("php3")
                 || fileExtension.equals("php4")
@@ -46,30 +46,29 @@ public class UtilsFile {
     /**
      * Compare given extension against known JavaScript extensions
      *
-     * @param	fileExtension	Extension to be checked
-     * @return					JavaScript extension?
+     * @param    fileExtension    Extension to be checked
+     * @return JavaScript extension?
      */
     public static Boolean isJavaScriptFileExtension(String fileExtension) {
-        if( fileExtension == null) return false;
+        if (fileExtension == null) return false;
 
-        fileExtension	= fileExtension.toLowerCase();
+        fileExtension = fileExtension.toLowerCase();
 
-        return fileExtension.equals("js" );
+        return fileExtension.equals("js");
     }
 
     /**
-     * @param   document
-     * @return  String
+     * @param document
+     * @return String
      */
     public static String getExtensionByDocument(Document document) {
-        VirtualFile file	  = FileDocumentManager.getInstance().getFile(document);
-        String fileExtension	= file != null ? file.getExtension() : "";
+        VirtualFile file = FileDocumentManager.getInstance().getFile(document);
+        String fileExtension = file != null ? file.getExtension() : "";
 
-        if(fileExtension != null && !fileExtension.isEmpty()) {
+        if (fileExtension != null && !fileExtension.isEmpty()) {
             fileExtension = fileExtension.toLowerCase();
         }
 
         return fileExtension;
     }
-
 }

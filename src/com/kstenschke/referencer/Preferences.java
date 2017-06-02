@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 Kay Stenschke
+ * Copyright 2012-2017 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NonNls;
  */
 public class Preferences {
 
-		//  @NonNls = element is not a string requiring internationalization and it does not contain such strings.
+    //  @NonNls = element is not a string requiring internationalization and it does not contain such strings.
     @NonNls
     private static final String PROPERTY_GOTO_PATTERNS = "PluginReferencer.GoToPatterns";
     @NonNls
@@ -36,17 +36,17 @@ public class Preferences {
     private static final String PROPERTY_REFERENCER_INDEX_JS = "PluginReferencer.SelectedIndexJS";
 
     /**
-     * @param   patterns
+     * @param patterns
      */
     public static void saveGoToPatterns(String patterns) {
         PropertiesComponent.getInstance().setValue(PROPERTY_GOTO_PATTERNS, patterns);
     }
 
     /**
-     * @return  String
+     * @return String
      */
     public static String getGoToPatterns() {
-        String patterns	= PropertiesComponent.getInstance().getValue( PROPERTY_GOTO_PATTERNS );
+        String patterns = PropertiesComponent.getInstance().getValue(PROPERTY_GOTO_PATTERNS);
 
         return patterns != null ? patterns : "";
     }
@@ -54,8 +54,8 @@ public class Preferences {
     /**
      * Store referencer preferences: selected index per supported file type
      *
-     * @param   fileExtension       File extension of file open while using referencer
-     * @param   selectedIndex       Selected item index
+     * @param fileExtension File extension of file open while using referencer
+     * @param selectedIndex Selected item index
      */
     public static void saveSelectedIndex(String fileExtension, Integer selectedIndex) {
         String preferenceIdentifier = getPropertyIdentifierByFileExtension(fileExtension);
@@ -66,31 +66,30 @@ public class Preferences {
     /**
      * Get identifier for referencer preference of given file extension
      *
-     * @param   fileExtension       File extension of file open while using referencer
-     * @return                      Preference identifier
+     * @param fileExtension File extension of file open while using referencer
+     * @return Preference identifier
      */
     private static String getPropertyIdentifierByFileExtension(String fileExtension) {
-        if( UtilsFile.isPhpFileExtension(fileExtension) ) {
+        if (UtilsFile.isPhpFileExtension(fileExtension)) {
             return PROPERTY_REFERENCER_INDEX_PHP;
-        } else if( UtilsFile.isJavaScriptFileExtension(fileExtension) ) {
+        } else if (UtilsFile.isJavaScriptFileExtension(fileExtension)) {
             return PROPERTY_REFERENCER_INDEX_JS;
         }
 
-            // Default
+        // Default
         return PROPERTY_REFERENCER_INDEX;
     }
 
     /**
-     * @param   fileExtension   Extension of file open while invoking referencer
-     * @return                  Integer
+     * @param fileExtension Extension of file open while invoking referencer
+     * @return Integer
      */
     public static Integer getSelectedIndex(String fileExtension) {
-        String preferenceIdentifier	= getPropertyIdentifierByFileExtension(fileExtension);
+        String preferenceIdentifier = getPropertyIdentifierByFileExtension(fileExtension);
 
-        String preferredIndex	= PropertiesComponent.getInstance().getValue(preferenceIdentifier);
-        if( preferredIndex == null || preferredIndex.equals("")  ) return 0;
+        String preferredIndex = PropertiesComponent.getInstance().getValue(preferenceIdentifier);
+        if (preferredIndex == null || preferredIndex.equals("")) return 0;
 
         return Integer.parseInt(preferredIndex);
     }
-
 }

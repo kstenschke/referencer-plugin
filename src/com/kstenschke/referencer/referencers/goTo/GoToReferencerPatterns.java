@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 Kay Stenschke
+ * Copyright 2012-2017 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,22 +30,22 @@ import java.util.List;
 public class GoToReferencerPatterns extends GoToReferencer {
 
     /**
-     * @return  Any patterns defined?
+     * @return Any patterns defined?
      */
-    public static boolean hasPatternDefinitions(){
+    public static boolean hasPatternDefinitions() {
         return Preferences.getGoToPatterns().length() > 0;
     }
 
     /**
-     * @return  String[]    Pattern definitions (containing label+pattern each)
+     * @return String[]    Pattern definitions (containing label+pattern each)
      */
     public static String[] getPatternDefinitions() {
         return Preferences.getGoToPatterns().split("\n");
     }
 
     /**
-     * @param   pattern
-     * @return  String      The label, or the whole definition if no colon-separated label prefix is found
+     * @param pattern
+     * @return String      The label, or the whole definition if no colon-separated label prefix is found
      */
     private static String getLabelFromPatternDefinition(String pattern) {
         int splitPosition = pattern.indexOf(":");
@@ -55,23 +55,23 @@ public class GoToReferencerPatterns extends GoToReferencer {
     }
 
     /**
-     * @param   pattern
-     * @return  String      The label, or the whole definition if no colon-separated label prefix is found
+     * @param pattern
+     * @return String      The label, or the whole definition if no colon-separated label prefix is found
      */
     private static String getPatternFromPatternDefinition(String pattern) {
         int splitPosition = pattern.indexOf(":");
 
-        return splitPosition == -1 ? pattern : pattern.substring(splitPosition+1);
+        return splitPosition == -1 ? pattern : pattern.substring(splitPosition + 1);
     }
 
     /**
-     * @param   document
-     * @param   patternDefinition
-     * @return  String[]
+     * @param document
+     * @param patternDefinition
+     * @return String[]
      */
     public static String[] getItems(Document document, String patternDefinition) {
-        String label    = getLabelFromPatternDefinition(patternDefinition);
-        String pattern  = getPatternFromPatternDefinition(patternDefinition);
+        String label = getLabelFromPatternDefinition(patternDefinition);
+        String pattern = getPatternFromPatternDefinition(patternDefinition);
 
         String documentText = document.getText();
 
@@ -82,38 +82,38 @@ public class GoToReferencerPatterns extends GoToReferencer {
     }
 
     /**
-     * @param   document
-     * @param   documentText
-     * @param   methodLineNumbers
-     * @return  String[]
+     * @param document
+     * @param documentText
+     * @param methodLineNumbers
+     * @return String[]
      */
     private static String[] buildReferencesArray(Document document, String documentText, List<Integer> methodLineNumbers, String label) {
-        List<String> methodItems= new ArrayList<String>();
-        String[] referencesArr  = null;
-        if( methodLineNumbers.size() > 0 ) {
-            int digits  = Collections.max(methodLineNumbers).toString().length();
-            Integer[] lineNumbersArr= methodLineNumbers.toArray( new Integer[methodLineNumbers.size()] );
+        List<String> methodItems = new ArrayList<String>();
+        String[] referencesArr = null;
+        if (methodLineNumbers.size() > 0) {
+            int digits = Collections.max(methodLineNumbers).toString().length();
+            Integer[] lineNumbersArr = methodLineNumbers.toArray(new Integer[methodLineNumbers.size()]);
             Arrays.sort(lineNumbersArr);
 
-                // Assemble items with line summary, and post-fixed with line number
-            int index   = 0;
-            for( Integer curLineNum : lineNumbersArr ) {
-                if( curLineNum > 0 ) {
+            // Assemble items with line summary, and post-fixed with line number
+            int index = 0;
+            for (Integer curLineNum : lineNumbersArr) {
+                if (curLineNum > 0) {
                     int offsetLineStart = document.getLineStartOffset(curLineNum);
-                    int offsetLineEnd   = document.getLineEndOffset(curLineNum);
+                    int offsetLineEnd = document.getLineEndOffset(curLineNum);
 
                     String lineSummary = GoToReferencer.getLineSummary(documentText.substring(offsetLineStart, offsetLineEnd));
-                    methodItems.add( index, lineSummary + ":" + UtilsString.makeMinLen(Integer.toString(curLineNum + 1), digits) );
+                    methodItems.add(index, lineSummary + ":" + UtilsString.makeMinLen(Integer.toString(curLineNum + 1), digits));
                     index++;
                 }
             }
-                // Sort alphabetical
-            referencesArr = methodItems.toArray( new String[methodItems.size()] );
+            // Sort alphabetical
+            referencesArr = methodItems.toArray(new String[methodItems.size()]);
             Arrays.sort(referencesArr, String.CASE_INSENSITIVE_ORDER);
-                // Move line numbers to front
+            // Move line numbers to front
             ReformItemsMovePostfixToFront(referencesArr);
-                // Add section header
-            referencesArr   = UtilsArray.addToBeginning(referencesArr, StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE + " " + label);
+            // Add section header
+            referencesArr = UtilsArray.addToBeginning(referencesArr, StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE + " " + label);
         }
 
         return referencesArr;

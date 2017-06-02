@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 Kay Stenschke
+ * Copyright 2012-2017 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,20 +42,20 @@ public class PopupContextGo {
     public PopupContextGo(final JBPopup popupGo, final Project curProject) {
         this.popup = new JPopupMenu();
 
-            // Remove all bookmarks from current file
-        JMenuItem menuItemSelectedBookmarkAdd    = new JMenuItem(StaticTexts.POPUP_GO_REMOVE_ALL_BOOKMARKS);
+        // Remove all bookmarks from current file
+        JMenuItem menuItemSelectedBookmarkAdd = new JMenuItem(StaticTexts.POPUP_GO_REMOVE_ALL_BOOKMARKS);
         menuItemSelectedBookmarkAdd.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 BookmarkManager bookmarkManager = BookmarkManager.getInstance(curProject);
-                List<Bookmark> bookmarks    = bookmarkManager.getValidBookmarks();
-                if( !bookmarks.isEmpty() ) {
+                List<Bookmark> bookmarks = bookmarkManager.getValidBookmarks();
+                if (!bookmarks.isEmpty()) {
                     FileEditorManager fileEditorManager = FileEditorManager.getInstance(curProject);
-                    Editor editor   = fileEditorManager.getSelectedTextEditor();
-                    if( editor != null ) {
-                        VirtualFile currentFile	= FileDocumentManager.getInstance().getFile(editor.getDocument());
-                        for(Bookmark curBookmark : bookmarks) {
-                            if( curBookmark.getFile().equals(currentFile) ) {
+                    Editor editor = fileEditorManager.getSelectedTextEditor();
+                    if (editor != null) {
+                        VirtualFile currentFile = FileDocumentManager.getInstance().getFile(editor.getDocument());
+                        for (Bookmark curBookmark : bookmarks) {
+                            if (curBookmark.getFile().equals(currentFile)) {
                                 bookmarkManager.removeBookmark(curBookmark);
                             }
                         }
@@ -69,12 +69,11 @@ public class PopupContextGo {
     }
 
     /**
-     * @return  PopupListener
+     * @return PopupListener
      */
     public PopupListener getPopupListener() {
         return new PopupListener();
     }
-
 
 
     /**
@@ -82,24 +81,24 @@ public class PopupContextGo {
      */
     class PopupListener extends MouseAdapter {
         /**
-         * @param   e
+         * @param e
          */
         public void mousePressed(MouseEvent e) {
             maybeShowPopup(e);
         }
 
         /**
-         * @param   e
+         * @param e
          */
         public void mouseReleased(MouseEvent e) {
             maybeShowPopup(e);
         }
 
         /**
-         * @param   e
+         * @param e
          */
         private void maybeShowPopup(MouseEvent e) {
-            if( e.isPopupTrigger() ) {
+            if (e.isPopupTrigger()) {
                 popup.show(e.getComponent(), e.getX(), e.getY());
             }
         }

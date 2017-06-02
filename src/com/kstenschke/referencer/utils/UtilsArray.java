@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 Kay Stenschke
+ * Copyright 2012-2017 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,44 +23,49 @@ import java.util.*;
 public class UtilsArray {
 
 	/**
-	 * Merge the two given arrays of strings
+     * Merge the two given arrays of strings
 	 *
-	 * @param	strArr1		Array 1
-	 * @param	strArr2		Array 2
-	 * @return	String[]	Array containing all the strings of strArr1 and strArr2
+	 * @param    strArr1        Array 1
+	 * @param    strArr2        Array 2
+	 * @return String[]    Array containing all the strings of strArr1 and strArr2
 	 */
 	public static String[] merge(String[] strArr1, String[] strArr2) {
-		if( strArr1 == null && strArr2 != null ) return strArr2;
-		if( strArr2 == null && strArr1 != null ) return strArr1;
-		if( strArr1 == null ) return null;
+		if (strArr1 == null && strArr2 != null) {
+			return strArr2;
+		}
+		if (strArr2 == null && strArr1 != null) {
+			return strArr1;
+		}
+		if (strArr1 == null) {
+			return null;
+		}
 
 		List<String> list = new ArrayList<String>(Arrays.asList(strArr1));
 		list.addAll(Arrays.asList(strArr2));
 
-		Object[] strObjects	= list.toArray();
+		Object[] strObjects = list.toArray();
 
 		String[] merged = {};
 
-		int count	= 0;
-		for(Object strObject : strObjects) {
-			merged[count]	= strObject.toString();
-		    count++;
+		int count = 0;
+		for (Object strObject : strObjects) {
+			merged[count] = strObject.toString();
+			count++;
 		}
 
 		return merged;
 	}
 
-    /**
-     * @param   arr
-     * @param   item
-     * @return  String[]
-     */
-    public static String[] addToBeginning(String[] arr, String item) {
-        String[] a2 = new String[arr.length + 1];
-        a2[0] = item;
-        System.arraycopy(arr, 0, a2, 1, arr.length);
+	/**
+	 * @param arr
+	 * @param item
+	 * @return String[]
+	 */
+	public static String[] addToBeginning(String[] arr, String item) {
+		String[] a2 = new String[arr.length + 1];
+		a2[0] = item;
+		System.arraycopy(arr, 0, a2, 1, arr.length);
 
-        return a2;
-    }
-
+		return a2;
+	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 Kay Stenschke
+ * Copyright 2012-2017 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,42 +33,44 @@ import com.kstenschke.referencer.resources.StaticTexts;
 import com.kstenschke.referencer.Preferences;
 import com.kstenschke.referencer.utils.UtilsFile;
 
+import javax.swing.*;
+
 /**
  * Insert Action
  */
 public class InsertAction extends AnAction {
 
-	/**
-	 * Show list with possible references and insert chosen item into document at caret position
-	 *
-	 * @param	e	Action system event
-	 */
-	public void actionPerformed(final AnActionEvent e) {
-		final Project project	= e.getData(PlatformDataKeys.PROJECT);
-		final Editor editor		= e.getData(PlatformDataKeys.EDITOR);
+    /**
+     * Show list with possible references and insert chosen item into document at caret position
+     *
+     * @param e Action system event
+     */
+    public void actionPerformed(final AnActionEvent e) {
+        final Project project = e.getData(PlatformDataKeys.PROJECT);
+        final Editor editor = e.getData(PlatformDataKeys.EDITOR);
 
-		if( project != null && editor != null ) {
-			final Object[] refArr = InsertOrCopyReferencer.getItems(e);
-			if( refArr != null ) {
+        if (project != null && editor != null) {
+            final Object[] refArr = InsertOrCopyReferencer.getItems(e);
+            if (refArr != null) {
 
-				final JBList referencesList = new JBList(refArr);
-				referencesList.setCellRenderer(new DividedListCellRenderer(referencesList) );
-				referencesList.addListSelectionListener(new DividedListSelectionListener());
+                final JList referencesList = new JBList(refArr);
+                referencesList.setCellRenderer(new DividedListCellRenderer(referencesList));
+                referencesList.addListSelectionListener(new DividedListSelectionListener());
 
-				final Document document     = editor.getDocument();
-				final String fileExtension	= UtilsFile.getExtensionByDocument(document);
+                final Document document = editor.getDocument();
+                final String fileExtension = UtilsFile.getExtensionByDocument(document);
 
-					// Preselect item from preferences
-				Integer selectedIndex	= Preferences.getSelectedIndex(fileExtension);
-				if( selectedIndex > refArr.length ) selectedIndex	= 0;
+                // Preselect item from preferences
+                Integer selectedIndex = Preferences.getSelectedIndex(fileExtension);
+                if (selectedIndex > refArr.length) selectedIndex = 0;
 
-				referencesList.setSelectedIndex(selectedIndex);
+                referencesList.setSelectedIndex(selectedIndex);
 
-                    // Build and show popup
+                // Build and show popup
                 buildAndShowPopup(project, editor, refArr, referencesList, fileExtension);
-			}
-		}
-	}
+            }
+        }
+    }
 
     /**
      * @param project
@@ -77,35 +79,34 @@ public class InsertAction extends AnAction {
      * @param referencesList
      * @param fileExtension
      */
-    private void buildAndShowPopup(final Project project, final Editor editor, final Object[] refArr, final JBList referencesList, final String fileExtension) {
+    private void buildAndShowPopup(final Project project, final Editor editor, final Object[] refArr, final JList referencesList, final String fileExtension) {
         PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
         popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_INSERT).setItemChoosenCallback(new Runnable() {
             public void run() {
                 ApplicationManager.getApplication().runWriteAction(new Runnable() {
                     public void run() {
 
-                            // Callback when item chosen
+                        // Callback when item chosen
                         CommandProcessor.getInstance().executeCommand(project, new Runnable() {
-                            public void run() {
-                                final int index = referencesList.getSelectedIndex();
+                                    public void run() {
+                                        final int index = referencesList.getSelectedIndex();
 
-                                    // Store preferences
-                                Preferences.saveSelectedIndex(fileExtension, index);
+                                        // Store preferences
+                                        Preferences.saveSelectedIndex(fileExtension, index);
 
-                                final Document document = editor.getDocument();
-                                int caretOffset	= editor.getCaretModel().getOffset();
+                                        final Document document = editor.getDocument();
+                                        int caretOffset = editor.getCaretModel().getOffset();
 
-                                String insertString = InsertOrCopyReferencer.fixReferenceValue(project, refArr[index].toString());
-                                document.insertString(caretOffset, insertString );
-                                editor.getCaretModel().moveToOffset( caretOffset + insertString.length() );
-                            }
-                        },
-                        null, null);
+                                        String insertString = InsertOrCopyReferencer.fixReferenceValue(project, refArr[index].toString());
+                                        document.insertString(caretOffset, insertString);
+                                        editor.getCaretModel().moveToOffset(caretOffset + insertString.length());
+                                    }
+                                },
+                                null, null);
 
                     }
                 });
             }
         }).setMovable(true).createPopup().showCenteredInCurrentWindow(project);
     }
-
 }

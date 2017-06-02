@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 Kay Stenschke
+ * Copyright 2012-2017 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,18 +22,19 @@ import com.kstenschke.referencer.resources.StaticTexts;
 import com.kstenschke.referencer.utils.UtilsArray;
 import com.kstenschke.referencer.utils.UtilsFile;
 import com.kstenschke.referencer.utils.UtilsString;
+
 import java.util.*;
 
 public class GoToReferencerMethods extends GoToReferencer {
 
     /**
-     * @return  String[]
+     * @return String[]
      */
     public static String[] getItems(Document document, String fileExtension) {
         boolean isJavaScript = UtilsFile.isJavaScriptFileExtension(fileExtension);
         boolean isPhp = UtilsFile.isPhpFileExtension(fileExtension);
 
-        if( (!isJavaScript && !isPhp) ) {
+        if ((!isJavaScript && !isPhp)) {
             return null;
         }
 
@@ -46,42 +47,42 @@ public class GoToReferencerMethods extends GoToReferencer {
     }
 
     /**
-     * @param   document
-     * @param   documentText
-     * @param   methodLineNumbers
-     * @return  String[]
+     * @param document
+     * @param documentText
+     * @param methodLineNumbers
+     * @return String[]
      */
     private static String[] buildReferencesArray(Document document, String documentText, List<Integer> methodLineNumbers) {
-        String[] referencesArr  = null;
-        List<String> methodItems= new ArrayList<String>();
+        String[] referencesArr = null;
+        List<String> methodItems = new ArrayList<String>();
 
-        if( methodLineNumbers.size() > 0 ) {
-            int digits  = Collections.max(methodLineNumbers).toString().length();
-            Integer[] lineNumbersArr= methodLineNumbers.toArray( new Integer[methodLineNumbers.size()] );
+        if (methodLineNumbers.size() > 0) {
+            int digits = Collections.max(methodLineNumbers).toString().length();
+            Integer[] lineNumbersArr = methodLineNumbers.toArray(new Integer[methodLineNumbers.size()]);
             Arrays.sort(lineNumbersArr);
 
-                // Assemble items with line summary, and post-fixed with line number
-            int index   = 0;
-            for( Integer curLineNum : lineNumbersArr ) {
-                if( curLineNum > 0 ) {
+            // Assemble items with line summary, and post-fixed with line number
+            int index = 0;
+            for (Integer curLineNum : lineNumbersArr) {
+                if (curLineNum > 0) {
                     int offsetLineStart = document.getLineStartOffset(curLineNum);
-                    int offsetLineEnd   = document.getLineEndOffset(curLineNum);
+                    int offsetLineEnd = document.getLineEndOffset(curLineNum);
 
                     String lineSummary = GoToReferencer.getLineSummary(documentText.substring(offsetLineStart, offsetLineEnd));
-                    methodItems.add( index,
+                    methodItems.add(index,
                             lineSummary + ":"
-                          + UtilsString.makeMinLen(Integer.toString(curLineNum + 1), digits)
+                                    + UtilsString.makeMinLen(Integer.toString(curLineNum + 1), digits)
                     );
                     index++;
                 }
             }
-                // Sort alphabetical
-            referencesArr = methodItems.toArray( new String[methodItems.size()] );
+            // Sort alphabetical
+            referencesArr = methodItems.toArray(new String[methodItems.size()]);
             Arrays.sort(referencesArr, String.CASE_INSENSITIVE_ORDER);
-                // Move line numbers to front
+            // Move line numbers to front
             ReformItemsMovePostfixToFront(referencesArr);
-                // Add section header
-            referencesArr   = UtilsArray.addToBeginning(referencesArr, StaticTexts.POPUP_SECTION_FUNCTIONS);
+            // Add section header
+            referencesArr = UtilsArray.addToBeginning(referencesArr, StaticTexts.POPUP_SECTION_FUNCTIONS);
         }
 
         return referencesArr;

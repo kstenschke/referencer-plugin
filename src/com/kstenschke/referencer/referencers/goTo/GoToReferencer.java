@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 Kay Stenschke
+ * Copyright 2012-2017 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,11 +26,11 @@ public class GoToReferencer {
         List<Integer> methodLineNumbers = new ArrayList<Integer>();
 
         Integer lineOffset = 0;
-        if( methods != null ) {
-            for( String curMethodName : methods ) {
-                Integer curLineNumber   = UtilsString.getLineNumberOfString(documentText, curMethodName, lineOffset);
-                if( curLineNumber != null ) {
-                    methodLineNumbers.add( curLineNumber );
+        if (methods != null) {
+            for (String curMethodName : methods) {
+                Integer curLineNumber = UtilsString.getLineNumberOfString(documentText, curMethodName, lineOffset);
+                if (curLineNumber != null) {
+                    methodLineNumbers.add(curLineNumber);
                 }
                 lineOffset = curLineNumber;
             }
@@ -45,10 +45,10 @@ public class GoToReferencer {
     protected static void ReformItemsMovePostfixToFront(String[] referencesArr) {
         int index;
         index = 0;
-        for(String item : referencesArr) {
-            int splitPos    = item.lastIndexOf(":");
-            String beginning= item.substring(0, splitPos);
-            String ending   = item.substring(splitPos+1);
+        for (String item : referencesArr) {
+            int splitPos = item.lastIndexOf(":");
+            String beginning = item.substring(0, splitPos);
+            String ending = item.substring(splitPos + 1);
 
             referencesArr[index] = ending + ": " + beginning;
             index++;
@@ -56,8 +56,8 @@ public class GoToReferencer {
     }
 
     /**
-     * @param   lineText
-     * @return  String
+     * @param lineText
+     * @return String
      */
     protected static String getLineSummary(String lineText) {
         return lineText.isEmpty() ? "" : UtilsString.crop(lineText.trim().replace("\t", " ").replace("  ", " "), 80);

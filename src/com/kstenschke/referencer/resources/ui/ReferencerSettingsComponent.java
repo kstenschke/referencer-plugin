@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 Kay Stenschke
+ * Copyright 2012-2017 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -74,7 +74,7 @@ public class ReferencerSettingsComponent implements ProjectComponent, Configurab
     @Override
     public void apply() throws ConfigurationException {
         if (settingsPanel != null) {
-            Preferences.saveGoToPatterns( settingsPanel.getGoToPatterns() );
+            Preferences.saveGoToPatterns(settingsPanel.getGoToPatterns());
         }
     }
 

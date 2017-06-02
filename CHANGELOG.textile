@@ -1,3 +1,6 @@
+* 1.2.0
+    ** Improved Darcula compatibility
+    ** Modernized source code
 * 1.1.1
     ** Sorted "Go To..." jump destination from configured patterns alphabetically
     ** Sorted "Go To..." methods alphabetically

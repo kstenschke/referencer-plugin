@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 Kay Stenschke
+ * Copyright 2012-2017 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,9 +23,9 @@ import java.util.List;
 class InsertOrCopyReferencerDateTime {
 
 	/**
-	 * Get date / time items
+     * Get date / time items
 	 *
-	 * @return		List of PHP items
+	 * @return List of PHP items
 	 */
 	public static List<String> getReferenceItems() {
 		List<String> referenceItems = new ArrayList<String>();
@@ -34,9 +34,9 @@ class InsertOrCopyReferencerDateTime {
 
 		referenceItems.add(new SimpleDateFormat("yyyy-MM-dd").format(date));
 		referenceItems.add(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date));
-			// Current UNIX timestamp
-		referenceItems.add( Long.toString( System.currentTimeMillis() ) );
-		referenceItems.add( Long.toString( System.currentTimeMillis() / 1000) );
+		// Current UNIX timestamp
+		referenceItems.add(Long.toString(System.currentTimeMillis()));
+		referenceItems.add(Long.toString(System.currentTimeMillis() / 1000));
 
 		return referenceItems;
 	}

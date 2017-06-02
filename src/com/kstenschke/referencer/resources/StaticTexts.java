@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 Kay Stenschke
+ * Copyright 2012-2017 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +24,7 @@ public class StaticTexts {
     @NonNls
     public static final String SETTINGS_COMPONENT_NAME = "Referencer Settings";
 
-        // Popup titles
+    // Popup titles
     @NonNls
     public static final String POPUP_TITLE_ACTION_COPY = "Select what to copy";
     @NonNls
@@ -32,11 +32,11 @@ public class StaticTexts {
     @NonNls
     public static final String POPUP_TITLE_ACTION_GO = "Select where to go";
 
-        // Popup items
+    // Popup items
     @NonNls
     public static final String POPUP_ITEM_OPEN_FILES = "List of currently opened files";
 
-        // Popup section titles
+    // Popup section titles
     @NonNls
     public static final String POPUP_ITEM_PREFIX_SECTION_TITLE = "SECTIONTITLE:";
     @NonNls
@@ -50,16 +50,15 @@ public class StaticTexts {
     @NonNls
     public static final String POPUP_SECTION_TITLE_TEXT_COMPLETIONS = "SECTIONTITLE: Text Completions";
     @NonNls
-    public static final String POPUP_SECTION_BOOKMARKS= "SECTIONTITLE: Bookmarks";
+    public static final String POPUP_SECTION_BOOKMARKS = "SECTIONTITLE: Bookmarks";
     @NonNls
-    public static final String POPUP_SECTION_FUNCTIONS= "SECTIONTITLE: Methods";
+    public static final String POPUP_SECTION_FUNCTIONS = "SECTIONTITLE: Methods";
 
-        // Go action context menu
+    // Go action context menu
     @NonNls
     public static final String POPUP_GO_REMOVE_ALL_BOOKMARKS = "Remove all Bookmarks from this File";
 
-        // Notifications
+    // Notifications
     @NonNls
     public static final String NOTIFY_GOTO_NONE_FOUND = "No \"Go To...\" destinations found";
-
 }

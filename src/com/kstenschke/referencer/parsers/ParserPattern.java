@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 Kay Stenschke
+ * Copyright 2012-2017 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,15 +26,15 @@ public class ParserPattern {
      * Get all occurrences of the given regex pattern
      * in the order of their appearance in the given text
      *
-     * @param	text	Code to be searched in
-     * @return			Found pattern occurrences
+     * @param    text    Code to be searched in
+     * @return Found pattern occurrences
      */
     public static List<String> getAllOccurrencesInText(String text, String pattern) {
         List<String> allMatches = new ArrayList<String>();
         Matcher m = Pattern.compile(pattern + ".*").matcher(text);
 
         while (m.find()) {
-            allMatches.add( m.group().trim() );
+            allMatches.add(m.group().trim());
         }
 
         return allMatches;

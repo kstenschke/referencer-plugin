@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 Kay Stenschke
+ * Copyright 2012-2017 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,31 +35,33 @@ public class DividedListSelectionListener extends JFrame implements ListSelectio
     /**
      * Detect when a separator is selected via cursor keys, select previous/next item than
      *
-     * @param	e	Selection event
+     * @param    e    Selection event
      */
     public void valueChanged(ListSelectionEvent e) {
-        JList list	            = (JList) e.getSource();
+        JList list = (JList) e.getSource();
 
-        if( list.getSelectedValue() != null && list.isVisible() ) {
-            int selectedIndex   = list.getSelectedIndex();
+        Integer selectedIndex = list.getSelectedIndex();
+        if (selectedIndex >= 0 && list.isVisible()) {
 
-            if( isSeparatorOrSection(list.getSelectedValue().toString()) ) {
-                if( selectedIndex > this.prevSelectedIndex ) {
-                    list.setSelectedIndex( list.getSelectedIndex() + 1 );
-                } else {
-                    list.setSelectedIndex( list.getSelectedIndex() - 1 );
-                }
+            if (isSeparatorOrSection(list.getSelectedValue().toString(), selectedIndex)) {
+                boolean isMovingDown = selectedIndex > this.prevSelectedIndex;
+                int newIndex = isMovingDown
+                    ? selectedIndex + 1
+                    : selectedIndex - 1;
+
+                list.setSelectedIndex(newIndex);
             }
 
-            this.prevSelectedIndex  = list.getSelectedIndex();
+            this.prevSelectedIndex = list.getSelectedIndex();
         }
     }
 
     /**
-     * @param   valueStr
-     * @return  Boolean
+     * @param valueStr
+     * @return Boolean
      */
-    private boolean isSeparatorOrSection(String valueStr) {
-        return valueStr.equals("_") || valueStr.startsWith(StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE);
+    private boolean isSeparatorOrSection(String valueStr, Integer index) {
+        return index == 0
+            || valueStr.equals("_") || valueStr.startsWith(StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE);
     }
 }

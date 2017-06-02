@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 Kay Stenschke
+ * Copyright 2012-2017 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -35,135 +35,135 @@ import java.util.regex.Pattern;
 public class InsertOrCopyReferencer {
 
 	/**
-	 * @param	e	Action system event
-	 * @return		Items of the events context
+     * @param    e    Action system event
+	 * @return Items of the events context
 	 */
 	public static String[] getItems(AnActionEvent e) {
 		String[] referencesArr;
 
-		final Project project	= e.getData(PlatformDataKeys.PROJECT);
-		Editor editor			= e.getData(PlatformDataKeys.EDITOR);
+		final Project project = e.getData(PlatformDataKeys.PROJECT);
+		Editor editor = e.getData(PlatformDataKeys.EDITOR);
 
-		if( project != null && editor != null ) {
+		if (project != null && editor != null) {
 			final Document document = editor.getDocument();
 
-				// File path and name
-			VirtualFile file	= FileDocumentManager.getInstance().getFile(document);
-			String filePath		= (file != null) ? file.getPath() : "";
-			String fileExtension= UtilsFile.getExtensionByDocument(document);
+			// File path and name
+			VirtualFile file = FileDocumentManager.getInstance().getFile(document);
+			String filePath = (file != null) ? file.getPath() : "";
+			String fileExtension = UtilsFile.getExtensionByDocument(document);
 
-				// Get line number the caret is in
-			int caretOffset	= editor.getCaretModel().getOffset();
+			// Get line number the caret is in
+			int caretOffset = editor.getCaretModel().getOffset();
 
-			SelectionModel selectionModel	= editor.getSelectionModel();
-			int selStart= selectionModel.getSelectionStart();
-			int selEnd	= selectionModel.getSelectionEnd();
+			SelectionModel selectionModel = editor.getSelectionModel();
+			int selStart = selectionModel.getSelectionStart();
+			int selEnd = selectionModel.getSelectionEnd();
 
-			int lineSelStart	= document.getLineNumber(selStart);
-			int lineSelEnd		= document.getLineNumber(selEnd);
+			int lineSelStart = document.getLineNumber(selStart);
+			int lineSelEnd = document.getLineNumber(selEnd);
 
-				// Grab the "word" to the left of the caret - all java identifier characters
-			String wordLeftOfCaret	= UtilsString.getWordLeftOfOffset(document.getCharsSequence(), caretOffset);
-				// Grab the "string" to the left of the caret - all non white-space characters
-			String stringLeftOfCaret	= UtilsString.getStringLeftOfOffset(document.getCharsSequence(), caretOffset);
+			// Grab the "word" to the left of the caret - all java identifier characters
+			String wordLeftOfCaret = UtilsString.getWordLeftOfOffset(document.getCharsSequence(), caretOffset);
+			// Grab the "string" to the left of the caret - all non white-space characters
+			String stringLeftOfCaret = UtilsString.getStringLeftOfOffset(document.getCharsSequence(), caretOffset);
 
-				// Setup list of items
+			// Setup list of items
 			List<String> referenceItems = new ArrayList<String>();
 
-				// Add date/timestamps
+			// Add date/timestamps
 			referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_DATE_TIME);
 			referenceItems.addAll(InsertOrCopyReferencerDateTime.getReferenceItems());
 
-				// Add file / path items
+			// Add file / path items
 			referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_FILES_PATHS);
 			referenceItems.addAll(InsertOrCopyReferencerFilesFolders.getReferenceItems(e));
 
-				// Add selection info
-			if( selectionModel.hasSelection() && lineSelEnd > lineSelStart ) {
-				referenceItems.add(filePath + " / Selection: " + (lineSelStart+1) + " - " + (lineSelEnd+1));
+			// Add selection info
+			if (selectionModel.hasSelection() && lineSelEnd > lineSelStart) {
+				referenceItems.add(filePath + " / Selection: " + (lineSelStart + 1) + " - " + (lineSelEnd + 1));
 			}
 
-				// Add JavaScript items
-			if( UtilsFile.isJavaScriptFileExtension("js") ) {
+			// Add JavaScript items
+			if (UtilsFile.isJavaScriptFileExtension("js")) {
 				referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_JAVASCRIPT);
 				referenceItems.addAll(InsertOrCopyReferencerJavascript.getReferenceItems(e));
-			} else if( UtilsFile.isPhpFileExtension(fileExtension) ) {
-                    // Add PHP items
+			} else if (UtilsFile.isPhpFileExtension(fileExtension)) {
+				// Add PHP items
 				referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_PHP);
 				referenceItems.addAll(InsertOrCopyReferencerPhp.getReferenceItems(e));
 			}
 
-				// Add all line-parts in current document that begin the same as the word at the caret
-			if( 	(wordLeftOfCaret!= null && !wordLeftOfCaret.isEmpty() && wordLeftOfCaret.length() > 1)
-			    ||  (stringLeftOfCaret!= null && !stringLeftOfCaret.isEmpty() && stringLeftOfCaret.length() > 2)
-			) {
-				String docText	       = document.getText();
+			// Add all line-parts in current document that begin the same as the word at the caret
+			if ((wordLeftOfCaret != null && !wordLeftOfCaret.isEmpty() && wordLeftOfCaret.length() > 1)
+					|| (stringLeftOfCaret != null && !stringLeftOfCaret.isEmpty() && stringLeftOfCaret.length() > 2)
+					) {
+				String docText = document.getText();
 				String[] wordLineParts = null;
-				if( wordLeftOfCaret != null && !wordLeftOfCaret.isEmpty() ) {
-					wordLineParts	= docText.split(wordLeftOfCaret);
+				if (wordLeftOfCaret != null && !wordLeftOfCaret.isEmpty()) {
+					wordLineParts = docText.split(wordLeftOfCaret);
 				}
 
 				String[] allLineParts;
-				if( stringLeftOfCaret != null && !stringLeftOfCaret.isEmpty() ) {
-					String[] stringLineParts= docText.split( Pattern.quote(stringLeftOfCaret) );
-					allLineParts 	= UtilsArray.merge(wordLineParts, stringLineParts);
+				if (stringLeftOfCaret != null && !stringLeftOfCaret.isEmpty()) {
+					String[] stringLineParts = docText.split(Pattern.quote(stringLeftOfCaret));
+					allLineParts = UtilsArray.merge(wordLineParts, stringLineParts);
 				} else {
-					allLineParts	= wordLineParts;
+					allLineParts = wordLineParts;
 				}
 
-				if( allLineParts != null && allLineParts.length > 0 ) {
+				if (allLineParts != null && allLineParts.length > 0) {
 					List<String> listLineParts = Arrays.asList(allLineParts);
-                    addReferenceItems(referenceItems, listLineParts);
+					addReferenceItems(referenceItems, listLineParts);
 				}
 			}
 
-			referencesArr = referenceItems.toArray( new String[referenceItems.size()] );
+			referencesArr = referenceItems.toArray(new String[referenceItems.size()]);
 		} else {
-			referencesArr	= null;
+			referencesArr = null;
 		}
 
 		return referencesArr;
 	}
 
-    /**
-     * @param   referenceItems
-     * @param   listLineParts
-     */
-    private static void addReferenceItems(List<String> referenceItems, List<String> listLineParts) {
-        int count	= 0;
-        for (String listLinePart : listLineParts) {
-            if(count > 0 ) {
-                listLinePart	= listLinePart.split("\\n")[0];
+	/**
+	 * @param referenceItems
+	 * @param listLineParts
+	 */
+	private static void addReferenceItems(List<String> referenceItems, List<String> listLineParts) {
+		int count = 0;
+		for (String listLinePart : listLineParts) {
+			if (count > 0) {
+				listLinePart = listLinePart.split("\\n")[0];
 
-                if( listLinePart.length() > 1 ) {
-                    listLinePart	= listLinePart.substring(1);
+				if (listLinePart.length() > 1) {
+					listLinePart = listLinePart.substring(1);
 
-                    if( 	listLinePart.trim().length() > 1
-                        &&	!referenceItems.contains(listLinePart)
-                    ) {
-                        if( ! listLinePart.isEmpty() && !referenceItems.contains(StaticTexts.POPUP_SECTION_TITLE_TEXT_COMPLETIONS) ) {
-                            referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_TEXT_COMPLETIONS);
-                        }
+					if (listLinePart.trim().length() > 1
+							&& !referenceItems.contains(listLinePart)
+							) {
+						if (!listLinePart.isEmpty() && !referenceItems.contains(StaticTexts.POPUP_SECTION_TITLE_TEXT_COMPLETIONS)) {
+							referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_TEXT_COMPLETIONS);
+						}
 
-                        if( ! listLinePart.isEmpty()  ) {
-                            referenceItems.add(listLinePart);
-                        }
-                    }
-                }
-            }
-            count++;
-        }
-    }
+						if (!listLinePart.isEmpty()) {
+							referenceItems.add(listLinePart);
+						}
+					}
+				}
+			}
+			count++;
+		}
+	}
 
-    /**
+	/**
 	 * Process given reference item - if it's a type description "translate" to the respective value
 	 *
-	 * @param	project							IDEA project
-	 * @param	itemString						Selected references list item value
-	 * @return  String to be inserted/copied
+	 * @return String to be inserted/copied
+	 * @param    project                            IDEA project
+	 * @param    itemString                        Selected references list item value
 	 */
 	public static String fixReferenceValue(Project project, String itemString) {
-		if( itemString.equals(StaticTexts.POPUP_ITEM_OPEN_FILES) ) {
+		if (itemString.equals(StaticTexts.POPUP_ITEM_OPEN_FILES)) {
 			return InsertOrCopyReferencerFilesFolders.getAllOpenedFiles(FileEditorManager.getInstance(project));
 		}
 

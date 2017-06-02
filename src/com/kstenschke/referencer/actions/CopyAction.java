@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 Kay Stenschke
+ * Copyright 2012-2017 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,6 +32,7 @@ import com.kstenschke.referencer.resources.StaticTexts;
 import com.kstenschke.referencer.Preferences;
 import com.kstenschke.referencer.utils.UtilsFile;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
@@ -44,26 +45,28 @@ public class CopyAction extends AnAction {
     /**
      * Show list with possible references and copy chosen item to clipboard
      *
-     * @param	e	Action system event
+     * @param e Action system event
      */
     public void actionPerformed(final AnActionEvent e) {
-        final Project project	= e.getData(PlatformDataKeys.PROJECT);
-        Editor editor			= e.getData(PlatformDataKeys.EDITOR);
+        final Project project = e.getData(PlatformDataKeys.PROJECT);
+        Editor editor = e.getData(PlatformDataKeys.EDITOR);
 
-        if( project != null && editor != null ) {
+        if (project != null && editor != null) {
             final Object[] refArr = InsertOrCopyReferencer.getItems(e);
 
-            if( refArr != null ) {
-                final JBList referencesList = new JBList(refArr);
-                referencesList.setCellRenderer(new DividedListCellRenderer(referencesList) );
+            if (refArr != null) {
+                final JList referencesList = new JBList(refArr);
+                referencesList.setCellRenderer(new DividedListCellRenderer(referencesList));
                 referencesList.addListSelectionListener(new DividedListSelectionListener());
 
-                final Document document     = editor.getDocument();
-                final String fileExtension	= UtilsFile.getExtensionByDocument(document);
+                final Document document = editor.getDocument();
+                final String fileExtension = UtilsFile.getExtensionByDocument(document);
 
                 // Preselect item from preferences
-                Integer selectedIndex	= Preferences.getSelectedIndex(fileExtension);
-                if( selectedIndex > refArr.length ) selectedIndex	= 0;
+                Integer selectedIndex = Preferences.getSelectedIndex(fileExtension);
+                if (selectedIndex > refArr.length) {
+                    selectedIndex = 1;
+                }
                 referencesList.setSelectedIndex(selectedIndex);
 
                 // Build and show popup
@@ -78,21 +81,21 @@ public class CopyAction extends AnAction {
      * @param referencesList
      * @param fileExtension
      */
-    private void buildAndShowPopup(final Project project, final Object[] refArr, final JBList referencesList, final String fileExtension) {
+    private void buildAndShowPopup(final Project project, final Object[] refArr, final JList referencesList, final String fileExtension) {
         PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
         popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_COPY).setItemChoosenCallback(new Runnable() {
             public void run() {
-                    // Callback when item chosen
+                // Callback when item chosen
                 CommandProcessor.getInstance().executeCommand(project, new Runnable() {
                     public void run() {
                         final int index = referencesList.getSelectedIndex();
 
-                            // Store preferences
+                        // Store preferences
                         Preferences.saveSelectedIndex(fileExtension, index);
 
-                            // Copy item to clipboard
-                        StringSelection clipString	= new StringSelection( InsertOrCopyReferencer.fixReferenceValue(project, refArr[index].toString()) );
-                        Clipboard clipboard			= Toolkit.getDefaultToolkit().getSystemClipboard();
+                        // Copy item to clipboard
+                        StringSelection clipString = new StringSelection(InsertOrCopyReferencer.fixReferenceValue(project, refArr[index].toString()));
+                        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 
                         clipboard.setContents(clipString, null);
                     }
@@ -100,5 +103,4 @@ public class CopyAction extends AnAction {
             }
         }).setMovable(true).createPopup().showCenteredInCurrentWindow(project);
     }
-
 }

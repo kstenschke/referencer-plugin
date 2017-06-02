@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 Kay Stenschke
+ * Copyright 2012-2017 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,7 +28,7 @@ import java.awt.*;
 public class UtilsEnvironment {
 
     /**
-     * @return  The currently opened project
+     * @return The currently opened project
      */
     public static Project getOpenProject() {
         Project[] projects = ProjectManager.getInstance().getOpenProjects();
@@ -37,21 +37,21 @@ public class UtilsEnvironment {
     }
 
     /**
-     * @param   message
+     * @param message
      */
     public static void notify(String message) {
         Project project = UtilsEnvironment.getOpenProject();
         final StatusBar statusBar = WindowManager.getInstance().getStatusBar(project);
 
-        if( statusBar != null ) {
+        if (statusBar != null) {
             // Create notification message UI
-            final JPanel  panel = new JPanel();
+            final JPanel panel = new JPanel();
             panel.setOpaque(false);
 
-            if( message.contains("\n")) {
-                String[] messageLines   = message.split("\n");
-                for(String curLine : messageLines) {
-                    panel.add( new JBLabel(curLine) );
+            if (message.contains("\n")) {
+                String[] messageLines = message.split("\n");
+                for (String curLine : messageLines) {
+                    panel.add(new JBLabel(curLine));
                 }
                 panel.setSize(new Dimension(panel.getWidth(), messageLines.length * 16));
             } else {
@@ -72,16 +72,13 @@ public class UtilsEnvironment {
                                 statusBar.fireNotificationPopup(panel, JBColor.WHITE);
                             }
                         });
-                    }
-                    catch (Exception e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
 //                    System.out.println("Finished on " + Thread.currentThread());
                 }
             };
             statusBarNotifyThread.start();
-
         }
     }
-
 }

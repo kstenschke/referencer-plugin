@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2014 Kay Stenschke
+ * Copyright 2012-2017 Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,15 +21,15 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @todo    change into PSI based parser one day
+ * @todo change into PSI based parser one day
  */
 public class ParserJavaScript {
 
     /**
      * Get all JavaScript method names in the order of their appearance in the given text, but each item only once
      *
-     * @param	text	Source code to be searched
-     * @return			All found PHP method names
+     * @param    text    Source code to be searched
+     * @return All found PHP method names
      */
     public static List<String> getAllMethodsInText(String text) {
         // 1. Find matches ala: "function methodname(", if any found return it
@@ -37,17 +37,17 @@ public class ParserJavaScript {
         Matcher m = Pattern.compile("function.*[a-zA-Z0-9_]+\\(").matcher(text);
 
         while (m.find()) {
-            if( !allMatches.contains(m.group())) {
+            if (!allMatches.contains(m.group())) {
                 allMatches.add(m.group());
             }
         }
 
         // No matches found? look for OOP style methods, ala: "methodname: function("
-        if( allMatches.size() == 0) {
+        if (allMatches.size() == 0) {
             m = Pattern.compile("[a-zA-Z0-9_]+:(\\s)*function.*\\(").matcher(text);
 
             while (m.find()) {
-                if( !allMatches.contains(m.group())) {
+                if (!allMatches.contains(m.group())) {
                     allMatches.add(m.group());
                 }
             }
@@ -57,8 +57,8 @@ public class ParserJavaScript {
     }
 
     /**
-     * @param   text    Source code to be searched
-     * @return          All found PHP class names
+     * @param text Source code to be searched
+     * @return All found PHP class names
      */
     public static List<String> getAllClassNamesInText(String text) {
         // Look for "@class" annotations
@@ -66,16 +66,16 @@ public class ParserJavaScript {
         Matcher m = Pattern.compile("@class(\\s)*([a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*)").matcher(text);
 
         while (m.find()) {
-            if( !allMatches.contains(m.group())) {
+            if (!allMatches.contains(m.group())) {
                 allMatches.add(m.group());
             }
         }
         // Nothing found? look for "...Class.create("
-        if( allMatches.size() == 0 ) {
+        if (allMatches.size() == 0) {
             m = Pattern.compile("[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*\\s*=\\s*Class\\.create\\(").matcher(text);
 
             while (m.find()) {
-                if( !allMatches.contains(m.group())) {
+                if (!allMatches.contains(m.group())) {
                     allMatches.add(m.group());
                 }
             }
@@ -87,15 +87,15 @@ public class ParserJavaScript {
     /**
      * Get all JS namespace in the order of their appearance, defined as doc-annotations in the given text, but each item only once
      *
-     * @param	text	Source code to be searched
-     * @return			All found PHP class names
+     * @param    text    Source code to be searched
+     * @return All found PHP class names
      */
     public static List<String> getAllNamespaceInText(String text) {
         List<String> allMatches = new ArrayList<String>();
         Matcher m = Pattern.compile("@namespace(\\s)*([a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*)").matcher(text);
 
         while (m.find()) {
-            if( !allMatches.contains(m.group())) {
+            if (!allMatches.contains(m.group())) {
                 allMatches.add(m.group());
             }
         }
