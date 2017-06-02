@@ -1,6 +1,6 @@
 * 1.2.0
     ** Updated plugin settings implementation to be compatible w/ recent Open API
-    ** Added option to copy or insert list of all methods in current file
+    ** Added option to copy or insert list of all method names from current file
     ** Improved PHP file methods indexer
     ** Improved Darcula compatibility
     ** Modernized source code

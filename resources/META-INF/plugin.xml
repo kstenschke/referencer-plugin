@@ -93,7 +93,7 @@
     <li>1.2.0
         <ul>
             <li>Updated plugin settings implementation to be compatible w/ recent Open API</li>
-            <li>Added option to copy or insert list of all methods in current file</li>
+            <li>Added option to copy or insert list of all method names from current file</li>
             <li>Improved PHP file methods indexer</li>
             <li>Improved Darcula compatibility</li>
             <li>Modernized source code</li>
