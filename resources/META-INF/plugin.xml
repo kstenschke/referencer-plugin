@@ -14,7 +14,7 @@
   ~ limitations under the License.
 -->
 <idea-plugin>
-  <id>com.kstenschke.referencer</id>
+  <id>Referencer</id>
   <name>Referencer</name>
   <version>1.2.1</version>
   <vendor email="info@stenschke.com" url="https://github.com/kstenschke">Kay Stenschke</vendor>
