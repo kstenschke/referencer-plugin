@@ -1,11 +1,21 @@
-h1. Referencer Plugin
+# Referencer Plugin
 
 Source code of the intellij IDEA "Referencer plugin":http://plugins.intellij.net/plugin?pr=&pluginId=7104
 This is a plugin for the various intellij IDEs, working in IntelliJ IDEA Ultimate and Community Edition, 
-RubyMine, WebStorm, PhpStorm, PyCharm, PyCharm CE, AppCode, Android Studio and 0xDBE.
+CLion, RubyMine, WebStorm, PhpStorm, PyCharm, PyCharm CE, AppCode, Android Studio, etc.
 
 
-h2. Description
+## Table of Contents
+
+* [What does it do?](#what-does-it-do)
+* [Keyboard Shortcuts](#keyboard-shortcut)
+* [Types of references to copy or insert](#types-of-references-to-copy-or-insert)
+* [Types of references to go to](#types-of-references-to-go-to)
+* [Changelog](#changelog)
+* [Author and License](#author-and-license)
+
+
+## What does it do?
 
 The plugin implements an additional list of code-completion suggestions into the editor, taken from various
 contexts, such as: opened file(s), selection and caret position in the editor, date and time and more.
@@ -17,18 +27,18 @@ Additionally the plugin provides an option to navigate to bookmarked lines in th
 The context menu of the bookmarks list allows to remove all bookmarks in the current file.
 
 
-h2. Keyboard Shortcut
+## Keyboard Shortcut
 
 * Ctrl+Shift+Alt+C twice - Open list of references for copying to clipboard
 * Ctrl+Shift+Alt+V twice - Open list of references for inserting into the current document
 * Ctrl+Shift+Alt+G twice - Open list of jump destinations in the current file for going to
 
-*Mac Users:* On Macs, the keyboard shortcuts are Shift+Alt+Cmd+C twice (copy), Shift+Alt+Cmd+V twice (paste) or Shift+Alt+Cmd+G twice (go)
+**Mac Users:** On Macs, the keyboard shortcuts are Shift+Alt+Cmd+C twice (copy), Shift+Alt+Cmd+V twice (paste) or Shift+Alt+Cmd+G twice (go)
 
 The list can be cancelled via Esc key, navigated using cursor keys and items are selected using Enter.
 
 
-h2. Types of references to copy or insert
+## Types of references to copy or insert
 
 All parsed items in the following list are relative to the current caret position,
 for example "previous classname" refers to the first classname found when searching backwards starting
@@ -60,19 +70,19 @@ from the caret position. Some references are only specifically available for cer
 * General word-completions: all continuations to the word to the left of the caret, found in the current file
 
 
-h2. Types of references to go to:<br/>
+## Types of references to go to
 
 * All lines with bookmarks in the current file
 * All lines with PHP or JavaScript method declarations in the current file
 * All lines with occurrences of any of the configured dynamic jump patterns in the current file
 
 
-h2. Changelog
+## Changelog
 
-Read full changelog: https://github.com/kstenschke/referencer-plugin/blob/master/CHANGELOG.textile
+See [CHANGELOG.md](https://github.com/kstenschke/referencer-plugin/blob/master/CHANGELOG.md)
 
 
-h2. License
+## Author and License
 
 Copyright 2012-2017 Kay Stenschke
 
