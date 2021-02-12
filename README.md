@@ -1,4 +1,4 @@
-# Referencer Plugin}
+# Referencer Plugin
 
 Source code of the [Referencer plugin](http://plugins.intellij.net/plugin?pr=&pluginId=7104).
 A plugin for the various intellij IDEs (working in IntelliJ IDEA Ultimate and Community Edition, 
