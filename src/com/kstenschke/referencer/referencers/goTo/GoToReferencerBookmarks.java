@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2017 Kay Stenschke
+ * Copyright Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,19 +29,17 @@ import java.util.List;
 
 public class GoToReferencerBookmarks extends GoToReferencer {
 
-    /**
-     * @return String[]
-     */
     public static String[] getItems(Project project, Document document, VirtualFile file) {
-        com.intellij.ide.bookmarks.BookmarkManager bookmarkManager = com.intellij.ide.bookmarks.BookmarkManager.getInstance(project);
+        com.intellij.ide.bookmarks.BookmarkManager bookmarkManager =
+                com.intellij.ide.bookmarks.BookmarkManager.getInstance(project);
 
-        List<String> bookmarkItems = new ArrayList<String>();
+        List<String> bookmarkItems = new ArrayList<>();
         bookmarkItems.add(StaticTexts.POPUP_SECTION_BOOKMARKS);
 
         List<Bookmark> bookmarks = bookmarkManager.getValidBookmarks();
         String documentText = document.getText();
 
-        List<Integer> bookmarkLineNumbers = new ArrayList<Integer>();
+        List<Integer> bookmarkLineNumbers = new ArrayList<>();
         for (Bookmark curBookmark : bookmarks) {
             if (curBookmark.getFile().equals(file)) {
                 bookmarkLineNumbers.add(curBookmark.getLine());
@@ -51,14 +49,8 @@ public class GoToReferencerBookmarks extends GoToReferencer {
         return buildReferencesArray(document, bookmarkItems, documentText, bookmarkLineNumbers);
     }
 
-    /**
-     * @param document
-     * @param bookmarkItems
-     * @param documentText
-     * @param bookmarkLineNumbers
-     * @return String[]
-     */
-    private static String[] buildReferencesArray(Document document, List<String> bookmarkItems, String documentText, List<Integer> bookmarkLineNumbers) {
+    private static String[] buildReferencesArray(Document document, List<String> bookmarkItems, String documentText,
+                                                 List<Integer> bookmarkLineNumbers) {
         String[] referencesArr = null;
         if (!bookmarkLineNumbers.isEmpty()) {
             int digits = Collections.max(bookmarkLineNumbers).toString().length();
@@ -71,7 +63,8 @@ public class GoToReferencerBookmarks extends GoToReferencer {
                     int offsetLineStart = document.getLineStartOffset(curLineNum);
                     int offsetLineEnd = document.getLineEndOffset(curLineNum);
                     String lineSummary = getLineSummary(documentText.substring(offsetLineStart, offsetLineEnd));
-                    bookmarkItems.add(index, UtilsString.makeMinLen(Integer.toString(curLineNum + 1), digits) + ": " + lineSummary);
+                    bookmarkItems.add(index,
+                            UtilsString.makeMinLen(Integer.toString(curLineNum + 1), digits) + ": " + lineSummary);
                     index++;
                 }
             }
@@ -81,5 +74,4 @@ public class GoToReferencerBookmarks extends GoToReferencer {
 
         return referencesArr;
     }
-
 }

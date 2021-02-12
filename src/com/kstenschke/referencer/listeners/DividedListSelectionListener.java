@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2017 Kay Stenschke
+ * Copyright Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,25 +25,20 @@ public class DividedListSelectionListener extends JFrame implements ListSelectio
 
     private int prevSelectedIndex = 0;
 
-    /**
-     * Constructor
-     */
     public DividedListSelectionListener() {
-
     }
 
     /**
      * Detect when a separator is selected via cursor keys, select previous/next item than
      *
-     * @param    e    Selection event
+     * @param e Selection event
      */
     @Override
     public void valueChanged(ListSelectionEvent e) {
         JList list = (JList) e.getSource();
 
-        Integer selectedIndex = list.getSelectedIndex();
+        int selectedIndex = list.getSelectedIndex();
         if (selectedIndex >= 0 && list.isVisible()) {
-
             if (isSeparatorOrSection(list.getSelectedValue().toString(), selectedIndex)) {
                 boolean isMovingDown = selectedIndex > this.prevSelectedIndex;
                 int newIndex = isMovingDown
@@ -57,10 +52,6 @@ public class DividedListSelectionListener extends JFrame implements ListSelectio
         }
     }
 
-    /**
-     * @param valueStr
-     * @return Boolean
-     */
     private boolean isSeparatorOrSection(String valueStr, Integer index) {
         return index == 0
             || "_".equals(valueStr) || valueStr.startsWith(StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE);

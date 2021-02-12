@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2017 Kay Stenschke
+ * Copyright Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,15 +64,15 @@ public class GoToAction extends AnAction {
             VirtualFile file = FileDocumentManager.getInstance().getFile(document);
             String fileExtension = UtilsFile.getExtensionByDocument(this.document);
 
-            // Get bookmarks
-            Object[] refArr = GoToReferencerBookmarks.getItems(this.project, this.document, file);
-            // Add JS or PHP methods
+            Object[] refArr = GoToReferencerBookmarks.getItems(this.project, this.document, file);  /* Get bookmarks */
+
+            /* Add JS or PHP methods */
             String[] methodItems = GoToReferencerMethods.getItems(this.document, fileExtension);
             if (methodItems != null && methodItems.length > 1) {
                 refArr = ArrayUtils.addAll(refArr, methodItems);
             }
-            // Add dynamical jump destination patterns
-            if (GoToReferencerPatterns.hasPatternDefinitions()) {
+
+            if (GoToReferencerPatterns.hasPatternDefinitions()) {       /* Add dynamical jump destination patterns */
                 String[] patternDefinitions = GoToReferencerPatterns.getPatternDefinitions();
                 for (String curPatterDefinition : patternDefinitions) {
                     String[] curPatternItems = GoToReferencerPatterns.getItems(this.document, curPatterDefinition);
@@ -88,17 +88,16 @@ public class GoToAction extends AnAction {
                 referencesList.addListSelectionListener(new DividedListSelectionListener());
 
                 // Preselect item from preferences
-                Integer selectedIndex = Preferences.getSelectedIndex(fileExtension);
+                int selectedIndex = Preferences.getSelectedIndex(fileExtension);
                 if (selectedIndex > refArr.length || selectedIndex == 0) {
                     selectedIndex = 1;
                 }
 
                 referencesList.setSelectedIndex(selectedIndex);
 
-                // Build and show popup
-                JBPopup popupGo = buildPopup(fileExtension, referencesList);
+                JBPopup popupGo = buildPopup(fileExtension, referencesList);        /* Build and show popup */
 
-                // Add context menu
+                /* Add context menu */
                 PopupContextGo contextMenu = new PopupContextGo(popupGo, this.project);
                 referencesList.addMouseListener(contextMenu.getPopupListener());
 
@@ -111,35 +110,21 @@ public class GoToAction extends AnAction {
         }
     }
 
-    /**
-     * @param fileExtension
-     * @param referencesList
-     * @return JBPopup
-     */
     private JBPopup buildPopup(final String fileExtension, final JList referencesList) {
         PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
 
-        return popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_GO).setItemChoosenCallback(new Runnable() {
-            @Override
-            public void run() {
-                ApplicationManager.getApplication().runWriteAction(new Runnable() {
-                    @Override
-                    public void run() {
-                        // Callback when item chosen
-                        CommandProcessor.getInstance().executeCommand(project, new Runnable() {
-                            @Override
-                            public void run() {
-                                Preferences.saveSelectedIndex(fileExtension, referencesList.getSelectedIndex());
+        return popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_GO).setItemChoosenCallback(()
+                -> ApplicationManager.getApplication().runWriteAction(() -> {
+            // Callback when item chosen
+            CommandProcessor.getInstance().executeCommand(project, () -> {
+                Preferences.saveSelectedIndex(fileExtension, referencesList.getSelectedIndex());
 
-                                Integer lineNumber = Integer.parseInt(referencesList.getSelectedValue().toString().split(":")[0]);
-                                editor.getCaretModel().moveToOffset(document.getLineStartOffset(lineNumber - 1), true);
-                                editor.getScrollingModel().scrollToCaret(ScrollType.CENTER);
-                            }
-                        }, null, null);
-                    }
-                });
+                int lineNumber =
+                        Integer.parseInt(referencesList.getSelectedValue().toString().split(":")[0]);
 
-            }
-        }).setMovable(true).createPopup();
+                editor.getCaretModel().moveToOffset(document.getLineStartOffset(lineNumber - 1), true);
+                editor.getScrollingModel().scrollToCaret(ScrollType.CENTER);
+            }, null, null);
+        })).setMovable(true).createPopup();
     }
 }

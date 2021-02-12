@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2017 Kay Stenschke
+ * Copyright Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -37,9 +37,6 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 
-/**
- * Copy Action
- */
 public class CopyAction extends AnAction {
 
     /**
@@ -62,26 +59,20 @@ public class CopyAction extends AnAction {
                 final Document document = editor.getDocument();
                 final String fileExtension = UtilsFile.getExtensionByDocument(document);
 
-                // Preselect item from preferences
-                Integer selectedIndex = Preferences.getSelectedIndex(fileExtension);
+                /* Preselect item from preferences */
+                int selectedIndex = Preferences.getSelectedIndex(fileExtension);
                 if (selectedIndex > refArr.length || selectedIndex == 0) {
                     selectedIndex = 1;
                 }
                 referencesList.setSelectedIndex(selectedIndex);
 
-                // Build and show popup
                 buildAndShowPopup(project, editor, refArr, referencesList, fileExtension);
             }
         }
     }
 
-    /**
-     * @param project
-     * @param refArr
-     * @param referencesList
-     * @param fileExtension
-     */
-    private void buildAndShowPopup(final Project project, final Editor editor, final Object[] refArr, final JList referencesList, final String fileExtension) {
+    private void buildAndShowPopup(final Project project, final Editor editor, final Object[] refArr,
+                                   final JList referencesList, final String fileExtension) {
         PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
         popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_COPY).setItemChoosenCallback(new Runnable() {
             @Override
@@ -96,7 +87,12 @@ public class CopyAction extends AnAction {
                         Preferences.saveSelectedIndex(fileExtension, index);
 
                         // Copy item to clipboard
-                        StringSelection clipString = new StringSelection(InsertOrCopyReferencer.fixReferenceValue(project, editor, refArr[index].toString()));
+                        StringSelection clipString =
+                                new StringSelection(InsertOrCopyReferencer.fixReferenceValue(
+                                        project,
+                                        editor,
+                                        refArr[index].toString()));
+
                         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 
                         clipboard.setContents(clipString, null);

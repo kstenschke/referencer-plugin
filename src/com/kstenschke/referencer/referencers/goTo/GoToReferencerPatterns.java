@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2017 Kay Stenschke
+ * Copyright Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -64,11 +64,6 @@ public class GoToReferencerPatterns extends GoToReferencer {
         return splitPosition == -1 ? pattern : pattern.substring(splitPosition + 1);
     }
 
-    /**
-     * @param document
-     * @param patternDefinition
-     * @return String[]
-     */
     public static String[] getItems(Document document, String patternDefinition) {
         String label = getLabelFromPatternDefinition(patternDefinition);
         String pattern = getPatternFromPatternDefinition(patternDefinition);
@@ -81,42 +76,45 @@ public class GoToReferencerPatterns extends GoToReferencer {
         return buildReferencesArray(document, documentText, occurrenceLineNumbers, label);
     }
 
-    /**
-     * @param document
-     * @param documentText
-     * @param methodLineNumbers
-     * @return String[]
-     */
-    private static String[] buildReferencesArray(Document document, String documentText, List<Integer> methodLineNumbers, String label) {
-        List<String> methodItems = new ArrayList<String>();
+    private static String[] buildReferencesArray(Document document, String documentText, List<Integer> methodLineNumbers,
+                                                 String label) {
+        List<String> methodItems = new ArrayList<>();
         String[] referencesArr = null;
         if (!methodLineNumbers.isEmpty()) {
             int digits = Collections.max(methodLineNumbers).toString().length();
             Integer[] lineNumbersArr = methodLineNumbers.toArray(new Integer[methodLineNumbers.size()]);
             Arrays.sort(lineNumbersArr);
 
-            // Assemble items with line summary, and post-fixed with line number
+            /* Assemble items with line summary, and post-fixed with line number */
             int index = 0;
             for (Integer curLineNum : lineNumbersArr) {
                 if (curLineNum > 0) {
                     int offsetLineStart = document.getLineStartOffset(curLineNum);
                     int offsetLineEnd = document.getLineEndOffset(curLineNum);
 
-                    String lineSummary = GoToReferencer.getLineSummary(documentText.substring(offsetLineStart, offsetLineEnd));
-                    methodItems.add(index, lineSummary + ":" + UtilsString.makeMinLen(Integer.toString(curLineNum + 1), digits));
+                    String lineSummary =
+                            GoToReferencer.getLineSummary(documentText.substring(offsetLineStart, offsetLineEnd));
+
+                    methodItems.add(index,
+                            lineSummary + ":" + UtilsString.makeMinLen(Integer.toString(curLineNum + 1), digits)
+                    );
+
                     index++;
                 }
             }
-            // Sort alphabetical
+
+            /* Sort alphabetical */
             referencesArr = methodItems.toArray(new String[methodItems.size()]);
             Arrays.sort(referencesArr, String.CASE_INSENSITIVE_ORDER);
-            // Move line numbers to front
-            reformItemsMovePostfixToFront(referencesArr);
-            // Add section header
-            referencesArr = UtilsArray.addToBeginning(referencesArr, StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE + " " + label);
+
+            reformItemsMovePostfixToFront(referencesArr);       /* Move line numbers to front */
+
+            /* Add section header */
+            referencesArr = UtilsArray.addToBeginning(
+                    referencesArr,
+                    StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE + " " + label);
         }
 
         return referencesArr;
     }
-
 }

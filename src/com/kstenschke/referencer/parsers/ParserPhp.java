@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2017 Kay Stenschke
+ * Copyright Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -32,7 +32,7 @@ public class ParserPhp {
      * @return All found PHP variables
      */
     public static List<String> getAllVariablesInText(String text) {
-        List<String> allMatches = new ArrayList<String>();
+        List<String> allMatches = new ArrayList<>();
         Matcher m = Pattern.compile("\\$[a-zA-Z0-9_]+").matcher(text);
 
         while (m.find()) {
@@ -51,7 +51,7 @@ public class ParserPhp {
      * @return All found PHP method names
      */
     public static List<String> getAllMethodsInText(String text) {
-        List<String> allMatches = new ArrayList<String>();
+        List<String> allMatches = new ArrayList<>();
         Matcher m = Pattern.compile("function\\s*[a-zA-Z0-9_]+\\s*\\(").matcher(text);
 
         while (m.find()) {
@@ -70,7 +70,7 @@ public class ParserPhp {
      * @return All found PHP class names
      */
     public static List<String> getAllClassNamesInText(String text) {
-        List<String> allMatches = new ArrayList<String>();
+        List<String> allMatches = new ArrayList<>();
         Matcher m = Pattern.compile("class\\s*[a-zA-Z0-9_]+").matcher(text);
 
         while (m.find()) {

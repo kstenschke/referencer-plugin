@@ -3,7 +3,7 @@
 Source code of the [Referencer plugin](http://plugins.intellij.net/plugin?pr=&pluginId=7104).
 A plugin for the various intellij IDEs (working in IntelliJ IDEA Ultimate and Community Edition, 
 CLion, RubyMine, WebStorm, PhpStorm, PyCharm, PyCharm CE, AppCode, Android Studio, etc) that
-implements language-independent tools for code-completion and -copying and 
+implements additional language-independent and specific tools for code-completion and -copying and 
 quick navigation to code sections found by custom fulltext-filters.
 
 
@@ -74,9 +74,9 @@ from the caret position. Some references are only specifically available for cer
 
 ## Types of references to go to
 
-* All lines with bookmarks in the current file
-* All lines with PHP or JavaScript method declarations in the current file
-* All lines with occurrences of any of the configured dynamic jump patterns in the current file
+* All lines w/ bookmarks in the current file
+* All lines w/ PHP or JavaScript method declarations in the current file
+* All lines w/ occurrences of any of the configured dynamic jump patterns in the current file
 
 
 ## Changelog
@@ -86,13 +86,13 @@ See [CHANGELOG.md](https://github.com/kstenschke/referencer-plugin/blob/master/C
 
 ## Author and License
 
-Copyright 2012-2017 Kay Stenschke
+Copyright Kay Stenschke
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
 
-"http://www.apache.org/licenses/LICENSE-2.0":http://www.apache.org/licenses/LICENSE-2.0
+[http://www.apache.org/licenses/LICENSE-2.0](http://www.apache.org/licenses/LICENSE-2.0)
 
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,

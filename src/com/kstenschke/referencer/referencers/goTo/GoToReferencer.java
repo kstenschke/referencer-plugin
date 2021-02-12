@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2017 Kay Stenschke
+ * Copyright Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +23,7 @@ import java.util.List;
 class GoToReferencer {
 
     static List<Integer> collectLineNumbers(String documentText, List<String> methods) {
-        List<Integer> methodLineNumbers = new ArrayList<Integer>();
+        List<Integer> methodLineNumbers = new ArrayList<>();
 
         Integer lineOffset = 0;
         if (methods != null) {
@@ -39,9 +39,6 @@ class GoToReferencer {
         return methodLineNumbers;
     }
 
-    /**
-     * @param referencesArr
-     */
     static void reformItemsMovePostfixToFront(String[] referencesArr) {
         int index;
         index = 0;
@@ -55,10 +52,6 @@ class GoToReferencer {
         }
     }
 
-    /**
-     * @param lineText
-     * @return String
-     */
     static String getLineSummary(String lineText) {
         return lineText.isEmpty()
             ? ""

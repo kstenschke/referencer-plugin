@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2017 Kay Stenschke
+ * Copyright Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -55,10 +55,6 @@ public class UtilsFile {
         return null != fileExtension && "js".equalsIgnoreCase(fileExtension);
     }
 
-    /**
-     * @param document
-     * @return String
-     */
     public static String getExtensionByDocument(Document document) {
         VirtualFile file = FileDocumentManager.getInstance().getFile(document);
         String fileExtension = file != null ? file.getExtension() : "";

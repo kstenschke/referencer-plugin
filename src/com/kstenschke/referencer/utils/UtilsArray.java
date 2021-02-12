@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2017 Kay Stenschke
+ * Copyright Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -56,11 +56,6 @@ public class UtilsArray {
 		return merged;
 	}
 
-	/**
-	 * @param arr
-	 * @param item
-	 * @return String[]
-	 */
 	public static String[] addToBeginning(String[] arr, String item) {
 		String[] a2 = new String[arr.length + 1];
 		a2[0] = item;

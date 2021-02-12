@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2017 Kay Stenschke
+ * Copyright Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NonNls;
  */
 public class Preferences {
 
-    //  @NonNls = element is not a string requiring internationalization and it does not contain such strings.
+    /*  @NonNls = element is not a string requiring internationalization and it does not contain such strings. */
     @NonNls
     private static final String PROPERTY_GOTO_PATTERNS = "PluginReferencer.GoToPatterns";
     @NonNls
@@ -35,16 +35,10 @@ public class Preferences {
     @NonNls
     private static final String PROPERTY_REFERENCER_INDEX_JS = "PluginReferencer.SelectedIndexJS";
 
-    /**
-     * @param patterns
-     */
     public static void saveGoToPatterns(String patterns) {
         PropertiesComponent.getInstance().setValue(PROPERTY_GOTO_PATTERNS, patterns);
     }
 
-    /**
-     * @return String
-     */
     public static String getGoToPatterns() {
         String patterns = PropertiesComponent.getInstance().getValue(PROPERTY_GOTO_PATTERNS);
 
@@ -72,11 +66,12 @@ public class Preferences {
     private static String getPropertyIdentifierByFileExtension(String fileExtension) {
         if (UtilsFile.isPhpFileExtension(fileExtension)) {
             return PROPERTY_REFERENCER_INDEX_PHP;
-        } else if (UtilsFile.isJavaScriptFileExtension(fileExtension)) {
+        }
+
+        if (UtilsFile.isJavaScriptFileExtension(fileExtension)) {
             return PROPERTY_REFERENCER_INDEX_JS;
         }
 
-        // Default
         return PROPERTY_REFERENCER_INDEX;
     }
 

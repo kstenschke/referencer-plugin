@@ -1,5 +1,5 @@
 /*
- * Copyright 2012-2017 Kay Stenschke
+ * Copyright Kay Stenschke
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -61,21 +61,12 @@ public class UtilsString {
         return haystack;
     }
 
-    /**
-     * @param string
-     * @param toReplace
-     * @param replacement
-     * @return String
-     */
     public static String replaceLast(String string, String toReplace, String replacement) {
         int pos = string.lastIndexOf(toReplace);
-        if (pos > -1) {
-            return string.substring(0, pos)
-                    + replacement
-                    + string.substring(pos + toReplace.length(), string.length());
-        } else {
-            return string;
-        }
+
+        return pos > -1
+                ? string.substring(0, pos) + replacement + string.substring(pos + toReplace.length(), string.length())
+                : string;
     }
 
     /**
@@ -181,19 +172,10 @@ public class UtilsString {
         return text.subSequence(start, end).toString();
     }
 
-    /**
-     * @param str
-     * @param maxLen
-     */
     public static String crop(String str, Integer maxLen) {
         return str.length() > maxLen ? str.substring(0, maxLen) + "..." : str;
     }
 
-    /**
-     * @param str
-     * @param len
-     * @param fillChar
-     */
     private static String makeMinLen(String str, Integer len, String fillChar) {
         while (str.length() < len) {
             str = fillChar + str;
