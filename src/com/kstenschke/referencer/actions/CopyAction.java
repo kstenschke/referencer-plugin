@@ -25,11 +25,11 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.ui.components.JBList;
-import com.kstenschke.referencer.referencers.insertOrCopy.InsertOrCopyReferencer;
-import com.kstenschke.referencer.resources.ui.DividedListCellRenderer;
-import com.kstenschke.referencer.listeners.DividedListSelectionListener;
-import com.kstenschke.referencer.resources.StaticTexts;
 import com.kstenschke.referencer.Preferences;
+import com.kstenschke.referencer.listeners.DividedListSelectionListener;
+import com.kstenschke.referencer.referencers.insertOrCopy.InsertOrCopyReferencer;
+import com.kstenschke.referencer.resources.StaticTexts;
+import com.kstenschke.referencer.resources.ui.DividedListCellRenderer;
 import com.kstenschke.referencer.utils.UtilsFile;
 
 import javax.swing.*;

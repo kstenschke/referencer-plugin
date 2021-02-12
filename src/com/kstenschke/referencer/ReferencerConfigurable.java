@@ -16,7 +16,6 @@
 package com.kstenschke.referencer;
 
 import com.intellij.openapi.options.Configurable;
-import com.intellij.openapi.options.ConfigurationException;
 import com.kstenschke.referencer.resources.StaticTexts;
 import com.kstenschke.referencer.resources.forms.PluginConfiguration;
 import org.jetbrains.annotations.Nls;

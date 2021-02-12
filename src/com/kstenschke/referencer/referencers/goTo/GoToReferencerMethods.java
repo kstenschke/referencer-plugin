@@ -23,7 +23,10 @@ import com.kstenschke.referencer.utils.UtilsArray;
 import com.kstenschke.referencer.utils.UtilsFile;
 import com.kstenschke.referencer.utils.UtilsString;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class GoToReferencerMethods extends GoToReferencer {
 

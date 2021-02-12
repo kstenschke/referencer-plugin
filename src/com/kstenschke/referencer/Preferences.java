@@ -46,9 +46,9 @@ public class Preferences {
     }
 
     /**
-     * Store referencer preferences: selected index per supported file type
+     * Store com.kstenschke.referencer preferences: selected index per supported file type
      *
-     * @param fileExtension File extension of file open while using referencer
+     * @param fileExtension File extension of file open while using com.kstenschke.referencer
      * @param selectedIndex Selected item index
      */
     public static void saveSelectedIndex(String fileExtension, Integer selectedIndex) {
@@ -58,9 +58,9 @@ public class Preferences {
     }
 
     /**
-     * Get identifier for referencer preference of given file extension
+     * Get identifier for com.kstenschke.referencer preference of given file extension
      *
-     * @param fileExtension File extension of file open while using referencer
+     * @param fileExtension File extension of file open while using com.kstenschke.referencer
      * @return Preference identifier
      */
     private static String getPropertyIdentifierByFileExtension(String fileExtension) {
@@ -76,7 +76,7 @@ public class Preferences {
     }
 
     /**
-     * @param fileExtension Extension of file open while invoking referencer
+     * @param fileExtension Extension of file open while invoking com.kstenschke.referencer
      * @return Integer
      */
     public static Integer getSelectedIndex(String fileExtension) {

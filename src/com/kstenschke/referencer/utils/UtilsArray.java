@@ -15,7 +15,9 @@
  */
 package com.kstenschke.referencer.utils;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Array utility methods

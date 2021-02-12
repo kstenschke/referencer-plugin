@@ -13,8 +13,12 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
 -->
-<idea-plugin version="2">
+<idea-plugin>
+  <id>com.kstenschke.referencer</id>
   <name>Referencer</name>
+  <version>1.2.1</version>
+  <vendor email="info@stenschke.com" url="https://github.com/kstenschke">Kay Stenschke</vendor>
+
   <description><![CDATA[
     The plugin adds three new tools for inserting, copying and navigating among references out of the edited file(s) and
     other contexts. To copy and insert items, a list suggestions is added to the editor, taken from various contexts:
@@ -76,10 +80,7 @@
     Please note: This plugin is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
     either express or implied.
   ]]></description>
-  <vendor url="https://github.com/kstenschke" email="info@stenschke.com">Kay Stenschke</vendor>
-  <version>1.2.1</version>
-  <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
-  <idea-version since-build="8000"/>
+
   <change-notes><![CDATA[
   <ul>
     <li>1.2.0 - 2017-07-03
@@ -114,33 +115,38 @@
         </ul>
     </li>
   </ul><br />
-  <a href="https://github.com/kstenschke/referencer-plugin/blob/master/CHANGELOG.textile"
+  <a href="https://github.com/kstenschke/com.kstenschke.referencer-plugin/blob/master/CHANGELOG.textile"
      target="_blank">Read full changelog on github</a>
   ]]></change-notes>
-  <application-components/>
-  <project-components/>
-  <extensions defaultExtensionNs="com.intellij">
-      <applicationConfigurable id="Referencer" displayName="Referencer"
-                               instance="com.kstenschke.referencer.ReferencerConfigurable"/>
-  </extensions>
-  <actions>
-      <action id="CopyAction" class="com.kstenschke.referencer.actions.CopyAction" text="Copy Reference"
-              description="Copy a selectable references">
-          <add-to-group group-id="EditorPopupMenu" anchor="before" relative-to-action="CopyReference"/>
-          <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt C" second-keystroke="shift ctrl alt C"/>
-      </action>
 
-      <action id="InsertAction" class="com.kstenschke.referencer.actions.InsertAction" text="Insert Reference"
-              description="Insert reference from list">
-          <add-to-group group-id="EditorActions" anchor="after" relative-to-action="EditorPaste"/>
-          <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt V" second-keystroke="shift ctrl alt V"/>
-      </action>
-      <action id="GoAction" class="com.kstenschke.referencer.actions.GoToAction" text="Go to Bookmark"
-              description="Go to Bookmark in current File">
-          <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt G" second-keystroke="shift ctrl alt G"/>
-      </action>
-  </actions>
+  <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
+  <idea-version since-build="173.0"/>
+
+  <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+       on how to target different products -->
+  <depends>com.intellij.modules.platform</depends>
+
   <extensions defaultExtensionNs="com.intellij">
+    <applicationConfigurable id="Referencer" displayName="Referencer"
+                             instance="com.kstenschke.referencer.ReferencerConfigurable"/>
   </extensions>
-  <depends>com.intellij.modules.lang</depends>
+
+  <actions>
+    <action id="CopyAction" class="com.kstenschke.referencer.actions.CopyAction" text="Copy Reference"
+            description="Copy a selectable references">
+      <add-to-group group-id="EditorPopupMenu" anchor="before" relative-to-action="CopyReference"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt C" second-keystroke="shift ctrl alt C"/>
+    </action>
+
+    <action id="InsertAction" class="com.kstenschke.referencer.actions.InsertAction" text="Insert Reference"
+            description="Insert reference from list">
+      <add-to-group group-id="EditorActions" anchor="after" relative-to-action="EditorPaste"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt V" second-keystroke="shift ctrl alt V"/>
+    </action>
+    <action id="GoAction" class="com.kstenschke.referencer.actions.GoToAction" text="Go to Bookmark"
+            description="Go to Bookmark in current File">
+      <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt G" second-keystroke="shift ctrl alt G"/>
+    </action>
+  </actions>
+
 </idea-plugin>
