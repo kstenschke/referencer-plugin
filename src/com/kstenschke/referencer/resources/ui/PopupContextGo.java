@@ -22,6 +22,7 @@ import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.popup.JBPopup;
+import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.kstenschke.referencer.resources.StaticTexts;
 
@@ -34,7 +35,7 @@ public class PopupContextGo {
 
     private final JPopupMenu popup;
 
-    public PopupContextGo(final JBPopup popupGo, final Project curProject) {
+    public PopupContextGo(final PopupChooserBuilder<Object> popupGo, final Project curProject) {
         this.popup = new JPopupMenu();
 
         // Remove all bookmarks from current file
@@ -52,8 +53,7 @@ public class PopupContextGo {
                             bookmarkManager.removeBookmark(curBookmark);
                         }
                     }
-
-                    popupGo.cancel();
+                    //popupGo.cancel();
                 }
             }
         });
@@ -61,36 +61,21 @@ public class PopupContextGo {
         this.popup.add(menuItemSelectedBookmarkAdd);
     }
 
-    /**
-     * @return PopupListener
-     */
     public PopupListener getPopupListener() {
         return new PopupListener();
     }
 
-    /**
-     * PopupListener
-     */
     class PopupListener extends MouseAdapter {
-        /**
-         * @param e
-         */
         @Override
         public void mousePressed(MouseEvent e) {
             maybeShowPopup(e);
         }
 
-        /**
-         * @param e
-         */
         @Override
         public void mouseReleased(MouseEvent e) {
             maybeShowPopup(e);
         }
 
-        /**
-         * @param e
-         */
         private void maybeShowPopup(MouseEvent e) {
             if (e.isPopupTrigger()) {
                 popup.show(e.getComponent(), e.getX(), e.getY());

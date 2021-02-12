@@ -1,3 +1,6 @@
+**1.2.1 - Not tagged yet**
+* Ensure editor re-grabs focus after using referencer
+
 **1.2.1 - 2021-02-12**
 * Change README and CHANGELOG format from textile to markdown
 * Add Markdown headlines to "Go To" destinations

@@ -12,7 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- */
+ */// Popup titles
 package com.kstenschke.referencer.referencers.goTo;
 
 import com.intellij.openapi.editor.Document;

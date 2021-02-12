@@ -15,73 +15,20 @@
  */
 package com.kstenschke.referencer.actions;
 
-import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
-import com.intellij.openapi.command.CommandProcessor;
-import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.popup.JBPopupFactory;
-import com.intellij.openapi.ui.popup.PopupChooserBuilder;
-import com.intellij.ui.components.JBList;
-import com.kstenschke.referencer.Preferences;
-import com.kstenschke.referencer.listeners.DividedListSelectionListener;
 import com.kstenschke.referencer.referencers.insertOrCopy.InsertOrCopyReferencer;
-import com.kstenschke.referencer.resources.StaticTexts;
-import com.kstenschke.referencer.resources.ui.DividedListCellRenderer;
-import com.kstenschke.referencer.utils.UtilsFile;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.StringSelection;
-
-public class CopyAction extends AnAction {
+public class CopyAction extends ReferencePopupableAction {
 
     public void actionPerformed(final AnActionEvent e) {
         final Project project = e.getData(PlatformDataKeys.PROJECT);
-        Editor editor = e.getData(PlatformDataKeys.EDITOR);
+        final Editor editor = e.getData(PlatformDataKeys.EDITOR);
 
         if (project != null && editor != null) {
-            final Object[] refArr = InsertOrCopyReferencer.getItems(e);
-
-            if (refArr != null) {
-                final JBList<Object> referencesList = new JBList<>(refArr);
-                referencesList.setCellRenderer(new DividedListCellRenderer(referencesList));
-                referencesList.addListSelectionListener(new DividedListSelectionListener());
-
-                final Document document = editor.getDocument();
-                final String fileExtension = UtilsFile.getExtensionByDocument(document);
-
-                /* Preselect item from preferences */
-                int selectedIndex = Preferences.getSelectedIndex(fileExtension);
-                if (selectedIndex > refArr.length || selectedIndex == 0) {
-                    selectedIndex = 1;
-                }
-                referencesList.setSelectedIndex(selectedIndex);
-
-                buildAndShowPopup(project, editor, refArr, referencesList, fileExtension);
-            }
+            launchPopup(InsertOrCopyReferencer.getItems(e), project, editor, MODE_COPY);
         }
-    }
-
-    private void buildAndShowPopup(final Project project, final Editor editor, final Object[] refArr,
-                                   final JList<Object> referencesList, final String fileExtension) {
-        PopupChooserBuilder<Object> popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
-        popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_COPY).setItemChoosenCallback(() -> {
-            /* Callback when item chosen */
-            CommandProcessor.getInstance().executeCommand(project, () -> {
-                final int index = referencesList.getSelectedIndex();
-                Preferences.saveSelectedIndex(fileExtension, index);        /* Store preferences */
-                StringSelection clipString =                                /* Copy item to clipboard */
-                        new StringSelection(InsertOrCopyReferencer.fixReferenceValue(
-                                project,
-                                editor,
-                                refArr[index].toString()));
-                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-                clipboard.setContents(clipString, null);
-            }, null, null);
-        }).setMovable(true).createPopup().showCenteredInCurrentWindow(project);
     }
 }
