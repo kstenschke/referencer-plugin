@@ -82,39 +82,40 @@
   ]]></description>
 
   <change-notes><![CDATA[
+  Recent five releases here,
+  <a href="https://github.com/kstenschke/referencer-plugin/blob/master/CHANGELOG.md">complete changelog on github</a>
+  <br/><br/>
+  <strong>1.2.0 - 2017-07-03</strong>
   <ul>
-    <li>1.2.0 - 2017-07-03
-        <ul>
-            <li>Update plugin settings implementation to be compatible w/ recent Open API</li>
-            <li>Add option to copy or insert list of all method names from current file</li>
-            <li>Improve PHP file methods indexer</li>
-            <li>Improve Darcula compatibility</li>
-            <li>Modernize source code</li>
-        </ul>
-    <li>1.1.1 - 2014-08-04
-        <ul>
-            <li>Sort "Go To..." jump destination from configured patterns alphabetically</li>
-            <li>Sort "Go To..." methods alphabetically</li>
-            <li>Made section headers within options popup more visually obvious</li>
-            <li>Bugfix: Destination patterns were utilized even if not yet stored (= would list all lines)</li>
-         </ul>
-    </li>
-    <li>1.1.0 - 2014-08-02
-        <ul>
-            <li>Add plugin settings with dynamic "Go To..." jump patterns</li>
-            <li>Add PHP and JavaScript methods listing in "Go To..." menu</li>
-            <li>Bugfix: IndexOutOfBoundsException in go to bookmark action</li>
-            <li>Reduce changelog to previous five versions, added separate full changelog</li>
-         </ul>
-    </li>
-    <li>1.0.12 - 2013-12-03: Bugfix: Opening Referencer on first character of document caused IndexOutOfBoundsException</li>
-    <li>1.0.11 - 2013-11-28
-        <ul>
-            <li>Add notification when there are no bookmarks for going to</li>
-            <li>Improve compatibility: Compiled with JDK target bytecode version 1.6 (was 1.7)</li>
-        </ul>
-    </li>
-  </ul><br />
+      <li>Update plugin settings implementation to be compatible w/ recent Open API</li>
+      <li>Add option to copy or insert list of all method names from current file</li>
+      <li>Improve PHP file methods indexer</li>
+      <li>Improve Darcula compatibility</li>
+      <li>Modernize source code</li>
+  </ul>
+  <strong>1.1.1 - 2014-08-04</strong>
+  <ul>
+      <li>Sort "Go To..." jump destination from configured patterns alphabetically</li>
+      <li>Sort "Go To..." methods alphabetically</li>
+      <li>Made section headers within options popup more visually obvious</li>
+      <li>Bugfix: Destination patterns were utilized even if not yet stored (= would list all lines)</li>
+   </ul>
+  <strong>1.1.0 - 2014-08-02</strong>
+  <ul>
+      <li>Add plugin settings with dynamic "Go To..." jump patterns</li>
+      <li>Add PHP and JavaScript methods listing in "Go To..." menu</li>
+      <li>Bugfix: IndexOutOfBoundsException in go to bookmark action</li>
+      <li>Reduce changelog to previous five versions, added separate full changelog</li>
+   </ul>
+  <strong>1.0.12 - 2013-12-03:</strong>
+  Bugfix: Opening Referencer on first character of document caused IndexOutOfBoundsException
+  <br/><br/>
+  <strong>1.0.11 - 2013-11-28</strong>
+  <ul>
+      <li>Add notification when there are no bookmarks for going to</li>
+      <li>Improve compatibility: Compiled with JDK target bytecode version 1.6 (was 1.7)</li>
+  </ul>
+  <br />
   <a href="https://github.com/kstenschke/com.kstenschke.referencer-plugin/blob/master/CHANGELOG.textile"
      target="_blank">Read full changelog on github</a>
   ]]></change-notes>
