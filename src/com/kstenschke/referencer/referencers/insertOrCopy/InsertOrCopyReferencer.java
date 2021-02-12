@@ -70,7 +70,7 @@ public class InsertOrCopyReferencer {
             String stringLeftOfCaret = UtilsString.getStringLeftOfOffset(document.getCharsSequence(), caretOffset);
 
             // Setup list of items
-            List<String> referenceItems = new ArrayList<String>();
+            List<String> referenceItems = new ArrayList<>();
 
             // Add date/timestamps
             referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_DATE_TIME);

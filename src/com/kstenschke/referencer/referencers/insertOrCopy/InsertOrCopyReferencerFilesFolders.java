@@ -38,7 +38,7 @@ class InsertOrCopyReferencerFilesFolders {
      * @return List of PHP items
      */
     public static List<String> getReferenceItems(AnActionEvent e) {
-        List<String> referenceItems = new ArrayList<String>();
+        List<String> referenceItems = new ArrayList<>();
 
         final Project project = e.getData(PlatformDataKeys.PROJECT);
         Editor editor = e.getData(PlatformDataKeys.EDITOR);
@@ -77,14 +77,14 @@ class InsertOrCopyReferencerFilesFolders {
      * @return String with concatenated list of all files that are opened currently
      */
     public static String getAllOpenedFiles(FileEditorManager fileEditorManager) {
-        String allOpenFiles = "";
+        StringBuilder allOpenFiles = new StringBuilder();
 
-        List<VirtualFile> openFiles = Arrays.asList(fileEditorManager.getOpenFiles());
+        VirtualFile[] openFiles = fileEditorManager.getOpenFiles();
         for (VirtualFile iteratedOpenFile : openFiles) {
             String curFilePath = iteratedOpenFile.toString().replace("file://", "");
-            allOpenFiles = allOpenFiles + "\n" + curFilePath;
+            allOpenFiles.append("\n").append(curFilePath);
         }
 
-        return allOpenFiles;
+        return allOpenFiles.toString();
     }
 }

@@ -20,12 +20,12 @@ quick navigation to code sections found by custom fulltext-filters.
 ## What does it do?
 
 The plugin implements an additional list of code-completion suggestions into the editor, taken from various
-contexts, such as: opened file(s), selection and caret position in the editor, date and time and more.
+contexts, such as: the opened file(s), selection and caret position in the editor, date and time and more.
 
 When evoking the referencer plugin, a list of reference items, taken from the current contexts, is opened.
 The references can be inserted into the current document or copied to the clipboard.
 
-Additionally the plugin provides an option to navigate to bookmarked lines in the current file.
+Additionally, the plugin provides an option to navigate to bookmarked lines in the current file.
 The context menu of the bookmarks list allows to remove all bookmarks in the current file.
 
 
@@ -35,7 +35,8 @@ The context menu of the bookmarks list allows to remove all bookmarks in the cur
 * Ctrl+Shift+Alt+V twice - Open list of references for inserting into the current document
 * Ctrl+Shift+Alt+G twice - Open list of jump destinations in the current file for going to
 
-**Mac Users:** On Macs, the keyboard shortcuts are Shift+Alt+Cmd+C twice (copy), Shift+Alt+Cmd+V twice (paste) or Shift+Alt+Cmd+G twice (go)
+**Mac Users:** On Macs, the keyboard shortcuts are Shift+Alt+Cmd+C twice (copy), Shift+Alt+Cmd+V twice (paste) 
+or Shift+Alt+Cmd+G twice (go)
 
 The list can be cancelled via Esc key, navigated using cursor keys and items are selected using Enter.
 
@@ -50,8 +51,8 @@ from the caret position. Some references are only specifically available for cer
 * Current UNIX timestamp in seconds and milliseconds
 
 * Path to current file
-* Current filename
-* Current filename::line number
+* Filename
+* Filename::line number
 * Path to current file::line number
 * When having a multi-line selection: File path / selection: line num. sel. start - line num. sel. end
 * When having opened more than one file: list of paths to all opened files
@@ -76,7 +77,7 @@ from the caret position. Some references are only specifically available for cer
 
 * All lines w/ bookmarks in the current file
 * All lines w/ PHP or JavaScript method declarations in the current file
-* All lines w/ occurrences of any of the configured dynamic jump patterns in the current file
+* All lines w/ occurrences of the configured dynamic jump patterns in the current file
 
 
 ## Changelog

@@ -65,7 +65,7 @@ public class UtilsString {
         int pos = string.lastIndexOf(toReplace);
 
         return pos > -1
-                ? string.substring(0, pos) + replacement + string.substring(pos + toReplace.length(), string.length())
+                ? string.substring(0, pos) + replacement + string.substring(pos + toReplace.length())
                 : string;
     }
 
@@ -77,7 +77,7 @@ public class UtilsString {
      * @return The extracted word or null
      */
     public static String getWordLeftOfOffset(CharSequence text, int cursorOffset) {
-        return grabWord(text, cursorOffset - 1, false);
+        return grabWord(text, cursorOffset - 1);
     }
 
     /**
@@ -85,10 +85,9 @@ public class UtilsString {
      *
      * @param text                    The full text
      * @param cursorOffset            Character offset of caret
-     * @param expandWordBoundaryRight Detect string boundary by expanding to the right?
      * @return The extracted word or null
      */
-    private static String grabWord(CharSequence text, int cursorOffset, boolean expandWordBoundaryRight) {
+    private static String grabWord(CharSequence text, int cursorOffset) {
         if (text.length() == 0 || cursorOffset >= text.length()) {
             return null;
         }
@@ -111,13 +110,6 @@ public class UtilsString {
             start--;
         }
 
-        if (expandWordBoundaryRight) {
-            // Find ending of word by expanding boundary until first non-whitespace to the right
-            while (end < text.length() && !Character.isWhitespace(text.charAt(end))) {
-                end++;
-            }
-        }
-
         return text.subSequence(start, end).toString();
     }
 
@@ -129,7 +121,7 @@ public class UtilsString {
      * @return The extracted word or null
      */
     public static String getStringLeftOfOffset(CharSequence text, int cursorOffset) {
-        return grabString(text, cursorOffset - 1, false);
+        return grabString(text, cursorOffset - 1);
     }
 
     /**
@@ -137,10 +129,9 @@ public class UtilsString {
      *
      * @param text                    The full text
      * @param cursorOffset            Character offset of caret
-     * @param expandWordBoundaryRight Detect string boundary by expanding to the right?
      * @return The extracted word or null
      */
-    private static String grabString(CharSequence text, int cursorOffset, boolean expandWordBoundaryRight) {
+    private static String grabString(CharSequence text, int cursorOffset) {
         if (text.length() == 0 || cursorOffset >= text.length()) {
             return null;
         }
@@ -163,12 +154,6 @@ public class UtilsString {
             start--;
         }
 
-        if (expandWordBoundaryRight) {
-            while (end < text.length() && !Character.isWhitespace(text.charAt(end))) {
-                end++;
-            }
-        }
-
         return text.subSequence(start, end).toString();
     }
 
@@ -176,16 +161,13 @@ public class UtilsString {
         return str.length() > maxLen ? str.substring(0, maxLen) + "..." : str;
     }
 
-    private static String makeMinLen(String str, Integer len, String fillChar) {
-        while (str.length() < len) {
-            str = fillChar + str;
+    public static String makeMinLen(String str, Integer len) {
+        StringBuilder strBuilder = new StringBuilder(str);
+        while (strBuilder.length() < len) {
+            strBuilder.insert(0, "0");
         }
 
-        return str;
-    }
-
-    public static String makeMinLen(String str, Integer len) {
-        return makeMinLen(str, len, "0");
+        return strBuilder.toString();
     }
 
     /**

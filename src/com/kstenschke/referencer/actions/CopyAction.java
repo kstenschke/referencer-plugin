@@ -74,31 +74,24 @@ public class CopyAction extends AnAction {
     private void buildAndShowPopup(final Project project, final Editor editor, final Object[] refArr,
                                    final JList referencesList, final String fileExtension) {
         PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
-        popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_COPY).setItemChoosenCallback(new Runnable() {
-            @Override
-            public void run() {
-                // Callback when item chosen
-                CommandProcessor.getInstance().executeCommand(project, new Runnable() {
-                    @Override
-                    public void run() {
-                        final int index = referencesList.getSelectedIndex();
+        popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_COPY).setItemChoosenCallback(() -> {
+            /* Callback when item chosen */
+            CommandProcessor.getInstance().executeCommand(project, () -> {
+                final int index = referencesList.getSelectedIndex();
 
-                        // Store preferences
-                        Preferences.saveSelectedIndex(fileExtension, index);
+                Preferences.saveSelectedIndex(fileExtension, index);        /* Store preferences */
 
-                        // Copy item to clipboard
-                        StringSelection clipString =
-                                new StringSelection(InsertOrCopyReferencer.fixReferenceValue(
-                                        project,
-                                        editor,
-                                        refArr[index].toString()));
+                /* Copy item to clipboard */
+                StringSelection clipString =
+                        new StringSelection(InsertOrCopyReferencer.fixReferenceValue(
+                                project,
+                                editor,
+                                refArr[index].toString()));
 
-                        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+                Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
 
-                        clipboard.setContents(clipString, null);
-                    }
-                }, null, null);
-            }
+                clipboard.setContents(clipString, null);
+            }, null, null);
         }).setMovable(true).createPopup().showCenteredInCurrentWindow(project);
     }
 }

@@ -13,37 +13,30 @@
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
 -->
-
 <idea-plugin version="2">
   <name>Referencer</name>
   <description><![CDATA[
-    The plugin adds three new tools for inserting, copying and navigating among references out of the edited file(s) and other contexts.
-    To copy and insert items, a list suggestions is added to the editor, taken from various contexts:
+    The plugin adds three new tools for inserting, copying and navigating among references out of the edited file(s) and
+    other contexts. To copy and insert items, a list suggestions is added to the editor, taken from various contexts:
     <ul>
         <li>File(s)</li>
         <li>Text selection</li>
         <li>Caret position in the editor</li>
         <li>Date and time</li>
         <li>And more....</li>
-    </ul>
-    <br/>
-    When evoking the referencer plugin, a list of reference items taken from the current contexts is opened.
-    <br/>
-    KEYBOARD SHORTCUTS
-    <br/>
+    </ul><br/>
+    When invoking the referencer plugin, a list of reference items taken from the current contexts is opened.<br/>
+    KEYBOARD SHORTCUTS<br/>
     <ul>
         <li>Ctrl+Shift+Alt+V twice - Open list of references for inserting into the current document</li>
         <li>Ctrl+Shift+Alt+C twice - Open list of references for copying to clipboard</li>
         <li>Ctrl+Shift+Alt+G twice - Open list of jump destinations in current file for going to</li>
-    </ul>
-
-    <br/>
-    TYPES OF REFERENCES TO INSERT/COPY
-    <br/>
+    </ul><br/>
+    TYPES OF REFERENCES TO INSERT/COPY<br/>
     All parsed items in the following list are relative to the current caret position,
     for example "previous classname" refers to the first classname found when searching backwards starting
-    from the caret position. Some references are only specifically available for certain file types.<br/>
-    <br/>
+    from the caret position. Some references are only specifically available for certain file types.
+    <br/><br/>
     <ul>
         <li>Current date/time formatted as YYYY-MM-DD and YYYY-MM-DD HH:MM:SS</li>
         <li>Current UNIX timestamp in seconds and milliseconds</li>
@@ -68,9 +61,9 @@
         <li>JavaScript files: previous/next method name</li>
         <li>JavaScript files: filepath formatted as namespace</li>
     </ul><ul>
-        <li>General word-completions: all continuations to the word to the left of the caret, found in the current file</li>
+        <li>General word-completions: all continuations to the word to the left of the caret, found in the current file
+        </li>
     </ul>
-
     <br/>
     TYPES OF REFERENCES TO GO TO
     <br/>
@@ -80,64 +73,70 @@
         <li>All lines with occurrences of any of the configured dynamic jump patterns in the current file</li>
     </ul>
     <br/>
-    Please note: This plugin is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    Please note: This plugin is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
+    either express or implied.
   ]]></description>
-  <vendor url="" email="info@stenschke.com">Kay Stenschke</vendor>
+  <vendor url="https://github.com/kstenschke" email="info@stenschke.com">Kay Stenschke</vendor>
   <version>1.2.1</version>
   <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
   <idea-version since-build="8000"/>
   <change-notes><![CDATA[
   <ul>
-    <li>1.2.0
+    <li>1.2.0 - 2017-07-03
         <ul>
-            <li>Updated plugin settings implementation to be compatible w/ recent Open API</li>
-            <li>Added option to copy or insert list of all method names from current file</li>
-            <li>Improved PHP file methods indexer</li>
-            <li>Improved Darcula compatibility</li>
-            <li>Modernized source code</li>
+            <li>Update plugin settings implementation to be compatible w/ recent Open API</li>
+            <li>Add option to copy or insert list of all method names from current file</li>
+            <li>Improve PHP file methods indexer</li>
+            <li>Improve Darcula compatibility</li>
+            <li>Modernize source code</li>
         </ul>
-    <li>1.1.1
+    <li>1.1.1 - 2014-08-04
         <ul>
-            <li>Sorted "Go To..." jump destination from configured patterns alphabetically</li>
-            <li>Sorted "Go To..." methods alphabetically</li>
+            <li>Sort "Go To..." jump destination from configured patterns alphabetically</li>
+            <li>Sort "Go To..." methods alphabetically</li>
             <li>Made section headers within options popup more visually obvious</li>
             <li>Bugfix: Destination patterns were utilized even if not yet stored (= would list all lines)</li>
          </ul>
     </li>
-    <li>1.1.0
+    <li>1.1.0 - 2014-08-02
         <ul>
-            <li>Added: plugin settings with dynamic "Go To..." jump patterns</li>
-            <li>Added: PHP and JavaScript methods listing in "Go To..." menu</li>
+            <li>Add plugin settings with dynamic "Go To..." jump patterns</li>
+            <li>Add PHP and JavaScript methods listing in "Go To..." menu</li>
             <li>Bugfix: IndexOutOfBoundsException in go to bookmark action</li>
-            <li>Reduced changelog to previous five versions, added separate full changelog</li>
+            <li>Reduce changelog to previous five versions, added separate full changelog</li>
          </ul>
     </li>
-    <li>1.0.12 Bugfix: Opening Referencer on first character of document caused IndexOutOfBoundsException</li>
-    <li>1.0.11
+    <li>1.0.12 - 2013-12-03: Bugfix: Opening Referencer on first character of document caused IndexOutOfBoundsException</li>
+    <li>1.0.11 - 2013-11-28
         <ul>
-            <li>Added: notification when there are no bookmarks for going to</li>
-            <li>Improved compatibility: Compiled with JDK target bytecode version 1.6 (was 1.7)</li>
+            <li>Add notification when there are no bookmarks for going to</li>
+            <li>Improve compatibility: Compiled with JDK target bytecode version 1.6 (was 1.7)</li>
         </ul>
     </li>
   </ul><br />
-  <a href="https://github.com/kstenschke/referencer-plugin/blob/master/CHANGELOG.textile" target="_blank">...Read full changelog on github</a>
+  <a href="https://github.com/kstenschke/referencer-plugin/blob/master/CHANGELOG.textile"
+     target="_blank">Read full changelog on github</a>
   ]]></change-notes>
   <application-components/>
   <project-components/>
   <extensions defaultExtensionNs="com.intellij">
-      <applicationConfigurable id="Referencer" displayName="Referencer" instance="com.kstenschke.referencer.ReferencerConfigurable"/>
+      <applicationConfigurable id="Referencer" displayName="Referencer"
+                               instance="com.kstenschke.referencer.ReferencerConfigurable"/>
   </extensions>
   <actions>
-      <action id="CopyAction" class="com.kstenschke.referencer.actions.CopyAction" text="Copy Reference" description="Copy a selectable references">
+      <action id="CopyAction" class="com.kstenschke.referencer.actions.CopyAction" text="Copy Reference"
+              description="Copy a selectable references">
           <add-to-group group-id="EditorPopupMenu" anchor="before" relative-to-action="CopyReference"/>
           <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt C" second-keystroke="shift ctrl alt C"/>
       </action>
 
-      <action id="InsertAction" class="com.kstenschke.referencer.actions.InsertAction" text="Insert Reference" description="Insert Reference from List">
+      <action id="InsertAction" class="com.kstenschke.referencer.actions.InsertAction" text="Insert Reference"
+              description="Insert reference from list">
           <add-to-group group-id="EditorActions" anchor="after" relative-to-action="EditorPaste"/>
           <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt V" second-keystroke="shift ctrl alt V"/>
       </action>
-      <action id="GoAction" class="com.kstenschke.referencer.actions.GoToAction" text="Go to Bookmark" description="Go to Bookmark in current File">
+      <action id="GoAction" class="com.kstenschke.referencer.actions.GoToAction" text="Go to Bookmark"
+              description="Go to Bookmark in current File">
           <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt G" second-keystroke="shift ctrl alt G"/>
       </action>
   </actions>

@@ -36,35 +36,30 @@ public class PopupContextGo {
 
     private final JPopupMenu popup;
 
-    /**
-     * Constructor
-     */
     public PopupContextGo(final JBPopup popupGo, final Project curProject) {
         this.popup = new JPopupMenu();
 
         // Remove all bookmarks from current file
         JMenuItem menuItemSelectedBookmarkAdd = new JMenuItem(StaticTexts.POPUP_GO_REMOVE_ALL_BOOKMARKS);
-        menuItemSelectedBookmarkAdd.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                BookmarkManager bookmarkManager = BookmarkManager.getInstance(curProject);
-                List<Bookmark> bookmarks = bookmarkManager.getValidBookmarks();
-                if (!bookmarks.isEmpty()) {
-                    FileEditorManager fileEditorManager = FileEditorManager.getInstance(curProject);
-                    Editor editor = fileEditorManager.getSelectedTextEditor();
-                    if (editor != null) {
-                        VirtualFile currentFile = FileDocumentManager.getInstance().getFile(editor.getDocument());
-                        for (Bookmark curBookmark : bookmarks) {
-                            if (curBookmark.getFile().equals(currentFile)) {
-                                bookmarkManager.removeBookmark(curBookmark);
-                            }
+        menuItemSelectedBookmarkAdd.addActionListener(e -> {
+            BookmarkManager bookmarkManager = BookmarkManager.getInstance(curProject);
+            List<Bookmark> bookmarks = bookmarkManager.getValidBookmarks();
+            if (!bookmarks.isEmpty()) {
+                FileEditorManager fileEditorManager = FileEditorManager.getInstance(curProject);
+                Editor editor = fileEditorManager.getSelectedTextEditor();
+                if (editor != null) {
+                    VirtualFile currentFile = FileDocumentManager.getInstance().getFile(editor.getDocument());
+                    for (Bookmark curBookmark : bookmarks) {
+                        if (curBookmark.getFile().equals(currentFile)) {
+                            bookmarkManager.removeBookmark(curBookmark);
                         }
-
-                        popupGo.cancel();
                     }
+
+                    popupGo.cancel();
                 }
             }
         });
+
         this.popup.add(menuItemSelectedBookmarkAdd);
     }
 

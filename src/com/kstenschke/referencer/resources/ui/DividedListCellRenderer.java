@@ -33,11 +33,6 @@ public class DividedListCellRenderer extends DefaultListCellRenderer {
     private final Color separatorColorBackground;
     private final Color separatorColorForeground;
 
-    /**
-     * Constructor
-     *
-     * @param list
-     */
     public DividedListCellRenderer(JList list) {
         boolean isUnderDarcula = UIUtil.isUnderDarcula();
 
@@ -70,7 +65,8 @@ public class DividedListCellRenderer extends DefaultListCellRenderer {
      * @param    cellHasFocus        Item currently has focus?
      */
     @Override
-    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
+                                                  boolean cellHasFocus) {
         if (value != null) {
             String valueStr = value.toString();
 
@@ -91,9 +87,6 @@ public class DividedListCellRenderer extends DefaultListCellRenderer {
         return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
     }
 
-    /**
-     * @param label
-     */
     private void setLabelUI(JLabel label, Boolean isTopMost) {
         label.setOpaque(true);
 

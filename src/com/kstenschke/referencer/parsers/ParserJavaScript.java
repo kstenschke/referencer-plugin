@@ -32,7 +32,7 @@ public class ParserJavaScript {
      * @return All found PHP method names
      */
     public static List<String> getAllMethodsInText(String text) {
-        // 1. Find matches ala: "function methodname(", if any found return it
+        /* 1. Find matches ala: "function methodName(", if any found return it */
         List<String> allMatches = new ArrayList<>();
         Matcher m = Pattern.compile("function\\s*[a-zA-Z0-9_]+\\s*\\(").matcher(text);
 
@@ -63,7 +63,7 @@ public class ParserJavaScript {
      */
     public static List<String> getAllClassNamesInText(String text) {
         /* Look for "@class" annotations */
-        List<String> allMatches = new ArrayList<String>();
+        List<String> allMatches = new ArrayList<>();
         Matcher m = Pattern.compile("@class\\s*([a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*)").matcher(text);
 
         while (m.find()) {
@@ -93,7 +93,7 @@ public class ParserJavaScript {
      * @return All found PHP class names
      */
     public static List<String> getAllNamespaceInText(String text) {
-        List<String> allMatches = new ArrayList<String>();
+        List<String> allMatches = new ArrayList<>();
         Matcher m = Pattern.compile("@namespace(\\s)*([a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*)").matcher(text);
 
         while (m.find()) {

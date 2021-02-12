@@ -40,7 +40,7 @@ public class UtilsArray {
 			return null;
 		}
 
-		List<String> list = new ArrayList<String>(Arrays.asList(strArr1));
+		List<String> list = new ArrayList<>(Arrays.asList(strArr1));
 		list.addAll(Arrays.asList(strArr2));
 
 		Object[] strObjects = list.toArray();

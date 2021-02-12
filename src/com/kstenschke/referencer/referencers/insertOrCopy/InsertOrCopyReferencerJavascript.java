@@ -37,7 +37,7 @@ class InsertOrCopyReferencerJavascript {
      * @return List of PHP items
      */
     public static List<String> getReferenceItems(AnActionEvent e) {
-        List<String> referenceItems = new ArrayList<String>();
+        List<String> referenceItems = new ArrayList<>();
 
         final Project project = e.getData(PlatformDataKeys.PROJECT);
         Editor editor = e.getData(PlatformDataKeys.EDITOR);
@@ -124,9 +124,9 @@ class InsertOrCopyReferencerJavascript {
      * @return Cleaned method name
      */
     private static String cleanupMethodName(String methodName) {
-        String[] removeEachStrs = {"(", ":"};
+        String[] removeStrings = {"(", ":"};
 
-        return UtilsString.cleanReference(methodName, "function", removeEachStrs, "();");
+        return UtilsString.cleanReference(methodName, "function", removeStrings, "();");
     }
 
     /**

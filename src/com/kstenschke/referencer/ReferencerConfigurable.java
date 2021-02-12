@@ -60,7 +60,7 @@ public class ReferencerConfigurable implements Configurable {
     }
 
     @Override
-    public void apply() throws ConfigurationException {
+    public void apply() {
         if (settingsPanel != null) {
             Preferences.saveGoToPatterns(settingsPanel.getGoToPatterns());
         }
@@ -68,9 +68,6 @@ public class ReferencerConfigurable implements Configurable {
 
     @Override
     public void reset() {
-        if (settingsPanel != null) {
-            //settingsPanel.initFormValues();
-        }
     }
 
     @Override

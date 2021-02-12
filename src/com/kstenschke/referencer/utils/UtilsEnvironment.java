@@ -48,7 +48,7 @@ public class UtilsEnvironment {
             return;
         }
 
-        // Create notification message UI
+        /* Create notification message UI */
         final JPanel panel = new JPanel();
         panel.setOpaque(false);
 
@@ -66,22 +66,13 @@ public class UtilsEnvironment {
             panel.setSize(new Dimension(panel.getWidth(), 16));
         }
 
-        // Run notification thread
-        Thread statusBarNotifyThread = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    SwingUtilities.invokeAndWait(new Runnable() {
-                        @Override
-                        public void run() {
-                            statusBar.fireNotificationPopup(panel, JBColor.WHITE);
-                        }
-                    });
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        Thread statusBarNotifyThread = new Thread(() -> {                   /* Run notification thread */
+            try {
+                SwingUtilities.invokeAndWait(() -> statusBar.fireNotificationPopup(panel, JBColor.WHITE));
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        };
+        });
         statusBarNotifyThread.start();
     }
 }

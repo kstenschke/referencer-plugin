@@ -36,7 +36,7 @@ class InsertOrCopyReferencerPhp {
      * @return List of PHP items
      */
     public static List<String> getReferenceItems(AnActionEvent e) {
-        List<String> referenceItems = new ArrayList<String>();
+        List<String> referenceItems = new ArrayList<>();
 
         final Project project = e.getData(PlatformDataKeys.PROJECT);
         Editor editor = e.getData(PlatformDataKeys.EDITOR);

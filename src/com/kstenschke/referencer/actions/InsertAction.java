@@ -61,7 +61,7 @@ public class InsertAction extends AnAction {
                 final String fileExtension = UtilsFile.getExtensionByDocument(document);
 
                 // Preselect item from preferences
-                Integer selectedIndex = Preferences.getSelectedIndex(fileExtension);
+                int selectedIndex = Preferences.getSelectedIndex(fileExtension);
                 if (selectedIndex > refArr.length || selectedIndex == 0) {
                     selectedIndex = 1;
                 }
@@ -74,44 +74,29 @@ public class InsertAction extends AnAction {
         }
     }
 
-    /**
-     * @param project
-     * @param editor
-     * @param refArr
-     * @param referencesList
-     * @param fileExtension
-     */
-    private void buildAndShowPopup(final Project project, final Editor editor, final Object[] refArr, final JList referencesList, final String fileExtension) {
+    private void buildAndShowPopup(final Project project, final Editor editor, final Object[] refArr,
+                                   final JList referencesList, final String fileExtension) {
         PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
-        popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_INSERT).setItemChoosenCallback(new Runnable() {
-            @Override
-            public void run() {
-                ApplicationManager.getApplication().runWriteAction(new Runnable() {
-                    @Override
-                    public void run() {
+        popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_INSERT).setItemChoosenCallback(()
+                -> ApplicationManager.getApplication().runWriteAction(() -> {
 
-                        // Callback when item chosen
-                        CommandProcessor.getInstance().executeCommand(project, new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        final int index = referencesList.getSelectedIndex();
+                    /* Callback when item chosen */
+                    CommandProcessor.getInstance().executeCommand(project, () -> {
+                        final int index = referencesList.getSelectedIndex();
 
-                                        // Store preferences
-                                        Preferences.saveSelectedIndex(fileExtension, index);
+                        Preferences.saveSelectedIndex(fileExtension, index);
 
-                                        final Document document = editor.getDocument();
-                                        int caretOffset = editor.getCaretModel().getOffset();
+                        final Document document = editor.getDocument();
+                        int caretOffset = editor.getCaretModel().getOffset();
 
-                                        String insertString = InsertOrCopyReferencer.fixReferenceValue(project, editor, refArr[index].toString());
-                                        document.insertString(caretOffset, insertString);
-                                        editor.getCaretModel().moveToOffset(caretOffset + insertString.length());
-                                    }
-                                },
-                                null, null);
+                        String insertString =
+                                InsertOrCopyReferencer.fixReferenceValue(project, editor, refArr[index].toString());
 
-                    }
-                });
-            }
-        }).setMovable(true).createPopup().showCenteredInCurrentWindow(project);
+                        document.insertString(caretOffset, insertString);
+                        editor.getCaretModel().moveToOffset(caretOffset + insertString.length());
+                    },
+                            null, null);
+
+                })).setMovable(true).createPopup().showCenteredInCurrentWindow(project);
     }
 }

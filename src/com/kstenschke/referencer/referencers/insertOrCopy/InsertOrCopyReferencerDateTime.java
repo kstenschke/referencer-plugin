@@ -28,7 +28,7 @@ class InsertOrCopyReferencerDateTime {
      * @return List of PHP items
      */
     public static List<String> getReferenceItems() {
-        List<String> referenceItems = new ArrayList<String>();
+        List<String> referenceItems = new ArrayList<>();
 
         Date date = new Date();
 
