@@ -1,8 +1,10 @@
 # Referencer Plugin
 
-Source code of the intellij IDEA "Referencer plugin":http://plugins.intellij.net/plugin?pr=&pluginId=7104
-This is a plugin for the various intellij IDEs, working in IntelliJ IDEA Ultimate and Community Edition, 
-CLion, RubyMine, WebStorm, PhpStorm, PyCharm, PyCharm CE, AppCode, Android Studio, etc.
+Source code of the [Referencer plugin](http://plugins.intellij.net/plugin?pr=&pluginId=7104).
+A plugin for the various intellij IDEs (working in IntelliJ IDEA Ultimate and Community Edition, 
+CLion, RubyMine, WebStorm, PhpStorm, PyCharm, PyCharm CE, AppCode, Android Studio, etc) that
+implements language-independent tools for code-completion and -copying and 
+quick navigation to code sections found by custom fulltext-filters.
 
 
 ## Table of Contents
