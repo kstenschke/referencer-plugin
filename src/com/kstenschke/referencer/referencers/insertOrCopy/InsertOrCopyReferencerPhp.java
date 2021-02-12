@@ -41,73 +41,78 @@ class InsertOrCopyReferencerPhp {
         final Project project = e.getData(PlatformDataKeys.PROJECT);
         Editor editor = e.getData(PlatformDataKeys.EDITOR);
 
-        if (project != null && editor != null) {
-            final Document document = editor.getDocument();
+        if (project == null || editor == null) {
+            return referenceItems;
+        }
 
-            // Get line number the caret is in
-            int caretOffset = editor.getCaretModel().getOffset();
-            String textFull = document.getText();
-            String textBeforeCaret = textFull.substring(0, caretOffset);
-            String textAfterCaret = textFull.substring(caretOffset);
+        final Document document = editor.getDocument();
 
-            // Add class before caret
-            String classBefore = null;
-            List<String> allClassBeforeCaret = ParserPhp.getAllClassNamesInText(textBeforeCaret);
-            if (!allClassBeforeCaret.isEmpty()) {
-                classBefore = cleanupClassName(allClassBeforeCaret.get(allClassBeforeCaret.size() - 1));
-                referenceItems.add(classBefore);
-            }
-            // Add class after caret
-            String classAfter;
-            List<String> allClassAfterCaret = ParserPhp.getAllClassNamesInText(textAfterCaret);
-            if (!allClassAfterCaret.isEmpty()) {
-                classAfter = cleanupClassName(allClassAfterCaret.get(0));
-                referenceItems.add(classAfter);
-            }
-            // Add item for all methods in file, newline-separated
-            referenceItems.add(StaticTexts.POPUP_ITEM_METHODS_IN_FILE);
+        /* Get line number the caret is in */
+        int caretOffset = editor.getCaretModel().getOffset();
+        String textFull = document.getText();
+        String textBeforeCaret = textFull.substring(0, caretOffset);
+        String textAfterCaret = textFull.substring(caretOffset);
 
-            // Add method before caret
-            String methodBefore = null;
-            List<String> allMethodsBeforeCaret = ParserPhp.getAllMethodsInText(textBeforeCaret);
-            if (!allMethodsBeforeCaret.isEmpty()) {
-                methodBefore = cleanupMethodName(allMethodsBeforeCaret.get(allMethodsBeforeCaret.size() - 1));
-                referenceItems.add(methodBefore);
-            }
-            // Add method after caret
-            String methodAfter;
-            List<String> allMethodsAfterCaret = ParserPhp.getAllMethodsInText(textAfterCaret);
-            if (!allMethodsAfterCaret.isEmpty()) {
-                methodAfter = cleanupMethodName(allMethodsAfterCaret.get(0));
-                referenceItems.add(methodAfter);
-            }
-            // Add method before caret / prev. variable
-            String varBefore = null;
-            List<String> allVarsBeforeCaret = ParserPhp.getAllVariablesInText(textBeforeCaret);
-            if (!allVarsBeforeCaret.isEmpty()) {
-                varBefore = allVarsBeforeCaret.get(allVarsBeforeCaret.size() - 1);
-                if (methodBefore != null && varBefore != null) {
-                    referenceItems.add(methodBefore + " / " + varBefore);
-                }
-            }
+        /* Add class before caret */
+        String classBefore = null;
+        List<String> allClassBeforeCaret = ParserPhp.getAllClassNamesInText(textBeforeCaret);
+        if (!allClassBeforeCaret.isEmpty()) {
+            classBefore = cleanClassName(allClassBeforeCaret.get(allClassBeforeCaret.size() - 1));
+            referenceItems.add(classBefore);
+        }
 
-            // Add classBefore::methodBefore caret
-            if (classBefore != null && methodBefore != null) {
-                referenceItems.add(classBefore + "::" + methodBefore);
-            }
+        /* Add class after caret */
+        String classAfter;
+        List<String> allClassAfterCaret = ParserPhp.getAllClassNamesInText(textAfterCaret);
+        if (!allClassAfterCaret.isEmpty()) {
+            classAfter = cleanClassName(allClassAfterCaret.get(0));
+            referenceItems.add(classAfter);
+        }
 
-            // Add variable before caret
-            if (varBefore != null) {
-                referenceItems.add(varBefore);
+        /* Add item for all methods in file, newline-separated */
+        referenceItems.add(StaticTexts.POPUP_ITEM_METHODS_IN_FILE);
+
+        /* Add method before caret */
+        String methodBefore = null;
+        List<String> allMethodsBeforeCaret = ParserPhp.getAllMethodsInText(textBeforeCaret);
+        if (!allMethodsBeforeCaret.isEmpty()) {
+            methodBefore = cleanMethodName(allMethodsBeforeCaret.get(allMethodsBeforeCaret.size() - 1));
+            referenceItems.add(methodBefore);
+        }
+
+        /* Add method after caret */
+        String methodAfter;
+        List<String> allMethodsAfterCaret = ParserPhp.getAllMethodsInText(textAfterCaret);
+        if (!allMethodsAfterCaret.isEmpty()) {
+            methodAfter = cleanMethodName(allMethodsAfterCaret.get(0));
+            referenceItems.add(methodAfter);
+        }
+
+        /* Add method before caret / prev. variable */
+        String varBefore = null;
+        List<String> allVarsBeforeCaret = ParserPhp.getAllVariablesInText(textBeforeCaret);
+        if (!allVarsBeforeCaret.isEmpty()) {
+            varBefore = allVarsBeforeCaret.get(allVarsBeforeCaret.size() - 1);
+            if (methodBefore != null && varBefore != null) {
+                referenceItems.add(methodBefore + " / " + varBefore);
             }
-            // Add variable after caret
-            String varAfter;
-            List<String> allVarsAfterCaret = ParserPhp.getAllVariablesInText(textAfterCaret);
-            if (!allVarsAfterCaret.isEmpty()) {
-                varAfter = allVarsAfterCaret.get(0);
-                if (!varAfter.equals(varBefore)) {
-                    referenceItems.add(varAfter);
-                }
+        }
+
+        if (classBefore != null && methodBefore != null) {      /* Add classBefore::methodBefore caret */
+            referenceItems.add(classBefore + "::" + methodBefore);
+        }
+
+        if (varBefore != null) {                                /* Add variable before caret */
+            referenceItems.add(varBefore);
+        }
+
+        /* Add variable after caret */
+        String varAfter;
+        List<String> allVarsAfterCaret = ParserPhp.getAllVariablesInText(textAfterCaret);
+        if (!allVarsAfterCaret.isEmpty()) {
+            varAfter = allVarsAfterCaret.get(0);
+            if (!varAfter.equals(varBefore)) {
+                referenceItems.add(varAfter);
             }
         }
 
@@ -120,7 +125,7 @@ class InsertOrCopyReferencerPhp {
      * @return Cleaned method name
      * @param    methodName    Method name to be cleaned
      */
-    private static String cleanupMethodName(String methodName) {
+    private static String cleanMethodName(String methodName) {
         String[] removeEachStrs = {"("};
 
         return UtilsString.cleanReference(methodName, "function", removeEachStrs, "();");
@@ -132,7 +137,7 @@ class InsertOrCopyReferencerPhp {
      * @param    className    Class name to be cleaned
      * @return Cleaned class name
      */
-    private static String cleanupClassName(String className) {
+    private static String cleanClassName(String className) {
         return UtilsString.cleanReference(className, "class");
     }
 }

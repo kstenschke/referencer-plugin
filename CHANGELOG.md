@@ -1,5 +1,7 @@
-**1.2.1 - Not tagged yet**
+**1.2.1 - 2021-02-12**
 * Change README and CHANGELOG format from textile to markdown
+* Add Markdown headlines to "Go To" destinations
+* Partly modernize source code
 
 **1.2.0 - 2017-07-03**
 * Update plugin settings implementation to be compatible w/ more recent Open API

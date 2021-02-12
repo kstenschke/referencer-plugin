@@ -37,7 +37,8 @@ public class UtilsFile {
 
         fileExtension = fileExtension.toLowerCase();
 
-        return "phpsh".equals(fileExtension)
+        return  "func".equals(fileExtension)
+                || "phpsh".equals(fileExtension)
                 || "php".equals(fileExtension)
                 || "php3".equals(fileExtension)
                 || "php4".equals(fileExtension)
@@ -52,7 +53,11 @@ public class UtilsFile {
      * @return JavaScript extension?
      */
     public static Boolean isJavaScriptFileExtension(String fileExtension) {
-        return null != fileExtension && "js".equalsIgnoreCase(fileExtension);
+        return "js".equalsIgnoreCase(fileExtension);
+    }
+
+    public static Boolean isMarkdownFileExtension(String fileExtension) {
+        return "md".equalsIgnoreCase(fileExtension);
     }
 
     public static String getExtensionByDocument(Document document) {

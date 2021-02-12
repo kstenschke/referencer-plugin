@@ -22,32 +22,31 @@ import java.util.List;
 
 class GoToReferencer {
 
-    static List<Integer> collectLineNumbers(String documentText, List<String> methods) {
-        List<Integer> methodLineNumbers = new ArrayList<>();
+    static List<Integer> collectLineNumbers(String documentText, List<String> items) {
+        List<Integer> lineNumbers = new ArrayList<>();
 
-        Integer lineOffset = 0;
-        if (methods != null) {
-            for (String curMethodName : methods) {
-                Integer curLineNumber = UtilsString.getLineNumberOfString(documentText, curMethodName, lineOffset);
+        if (items != null) {
+            Integer lineOffset = 0;
+            for (String currentItem : items) {
+                Integer curLineNumber = UtilsString.getLineNumberOfString(documentText, currentItem, lineOffset);
                 if (curLineNumber != null) {
-                    methodLineNumbers.add(curLineNumber);
+                    lineNumbers.add(curLineNumber);
                 }
                 lineOffset = curLineNumber;
             }
         }
 
-        return methodLineNumbers;
+        return lineNumbers;
     }
 
-    static void reformItemsMovePostfixToFront(String[] referencesArr) {
-        int index;
-        index = 0;
-        for (String item : referencesArr) {
+    static void reformItemsMovePostfixToFront(String[] references) {
+        int index = 0;
+        for (String item : references) {
             int splitPos = item.lastIndexOf(':');
             String beginning = item.substring(0, splitPos);
             String ending = item.substring(splitPos + 1);
 
-            referencesArr[index] = ending + ": " + beginning;
+            references[index] = ending + ": " + beginning;
             index++;
         }
     }
