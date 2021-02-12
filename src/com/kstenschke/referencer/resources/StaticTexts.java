@@ -20,7 +20,6 @@ import org.jetbrains.annotations.NonNls;
 public class StaticTexts {
 
     @NonNls public static final String SETTINGS_DISPLAY_NAME = "Referencer";
-    @NonNls public static final String SETTINGS_COMPONENT_NAME = "Referencer Settings";
 
     // Popup titles
     @NonNls public static final String POPUP_TITLE_ACTION_COPY = "Select what to copy";

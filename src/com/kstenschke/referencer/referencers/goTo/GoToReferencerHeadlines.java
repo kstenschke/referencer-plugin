@@ -16,16 +16,13 @@
 package com.kstenschke.referencer.referencers.goTo;
 
 import com.intellij.openapi.editor.Document;
-import com.kstenschke.referencer.parsers.ParserJavaScript;
 import com.kstenschke.referencer.parsers.ParserMarkdown;
-import com.kstenschke.referencer.parsers.ParserPhp;
 import com.kstenschke.referencer.resources.StaticTexts;
 import com.kstenschke.referencer.utils.UtilsArray;
 import com.kstenschke.referencer.utils.UtilsFile;
 import com.kstenschke.referencer.utils.UtilsString;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
