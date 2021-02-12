@@ -20,9 +20,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * @todo change into PSI based parser one day
- */
 public class ParserPhp {
 
     /**

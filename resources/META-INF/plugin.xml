@@ -27,7 +27,8 @@
         <li>Text selection</li>
         <li>Caret position in the editor</li>
         <li>Date and time</li>
-        <li>And more....</li>
+        <li>JavaScript and PHP methods</li>
+        <li>Markdown headlines</li>
     </ul><br/>
     When invoking the referencer plugin, a list of reference items taken from the current contexts is opened.<br/>
     KEYBOARD SHORTCUTS<br/>
@@ -85,6 +86,12 @@
   Recent five releases here,
   <a href="https://github.com/kstenschke/referencer-plugin/blob/master/CHANGELOG.md">complete changelog on github</a>
   <br/><br/>
+  <strong>1.2.1 - 2021-02-12</strong>
+  <ul>
+    <li>Add Markdown headlines to "Go To" destinations</li>
+    <li>Change README and CHANGELOG format from textile to markdown</li>
+    <li>Partly modernize source code</li>
+  </ul>
   <strong>1.2.0 - 2017-07-03</strong>
   <ul>
       <li>Update plugin settings implementation to be compatible w/ recent Open API</li>
@@ -109,15 +116,6 @@
    </ul>
   <strong>1.0.12 - 2013-12-03:</strong>
   Bugfix: Opening Referencer on first character of document caused IndexOutOfBoundsException
-  <br/><br/>
-  <strong>1.0.11 - 2013-11-28</strong>
-  <ul>
-      <li>Add notification when there are no bookmarks for going to</li>
-      <li>Improve compatibility: Compiled with JDK target bytecode version 1.6 (was 1.7)</li>
-  </ul>
-  <br />
-  <a href="https://github.com/kstenschke/com.kstenschke.referencer-plugin/blob/master/CHANGELOG.textile"
-     target="_blank">Read full changelog on github</a>
   ]]></change-notes>
 
   <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->

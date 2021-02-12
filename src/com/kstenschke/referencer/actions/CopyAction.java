@@ -39,11 +39,6 @@ import java.awt.datatransfer.StringSelection;
 
 public class CopyAction extends AnAction {
 
-    /**
-     * Show list with possible references and copy chosen item to clipboard
-     *
-     * @param e Action system event
-     */
     public void actionPerformed(final AnActionEvent e) {
         final Project project = e.getData(PlatformDataKeys.PROJECT);
         Editor editor = e.getData(PlatformDataKeys.EDITOR);
@@ -52,7 +47,7 @@ public class CopyAction extends AnAction {
             final Object[] refArr = InsertOrCopyReferencer.getItems(e);
 
             if (refArr != null) {
-                final JList referencesList = new JBList(refArr);
+                final JBList<Object> referencesList = new JBList<>(refArr);
                 referencesList.setCellRenderer(new DividedListCellRenderer(referencesList));
                 referencesList.addListSelectionListener(new DividedListSelectionListener());
 
@@ -72,24 +67,19 @@ public class CopyAction extends AnAction {
     }
 
     private void buildAndShowPopup(final Project project, final Editor editor, final Object[] refArr,
-                                   final JList referencesList, final String fileExtension) {
-        PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
+                                   final JList<Object> referencesList, final String fileExtension) {
+        PopupChooserBuilder<Object> popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
         popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_COPY).setItemChoosenCallback(() -> {
             /* Callback when item chosen */
             CommandProcessor.getInstance().executeCommand(project, () -> {
                 final int index = referencesList.getSelectedIndex();
-
                 Preferences.saveSelectedIndex(fileExtension, index);        /* Store preferences */
-
-                /* Copy item to clipboard */
-                StringSelection clipString =
+                StringSelection clipString =                                /* Copy item to clipboard */
                         new StringSelection(InsertOrCopyReferencer.fixReferenceValue(
                                 project,
                                 editor,
                                 refArr[index].toString()));
-
                 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-
                 clipboard.setContents(clipString, null);
             }, null, null);
         }).setMovable(true).createPopup().showCenteredInCurrentWindow(project);

@@ -109,8 +109,7 @@ public class GoToReferencerPatterns extends GoToReferencer {
 
             reformItemsMovePostfixToFront(referencesArr);       /* Move line numbers to front */
 
-            /* Add section header */
-            referencesArr = UtilsArray.addToBeginning(
+            referencesArr = UtilsArray.addToBeginning(          /* Add section header */
                     referencesArr,
                     StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE + " " + label);
         }

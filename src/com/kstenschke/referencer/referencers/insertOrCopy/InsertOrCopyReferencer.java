@@ -129,10 +129,6 @@ public class InsertOrCopyReferencer {
         return referencesArr;
     }
 
-    /**
-     * @param referenceItems
-     * @param listLineParts
-     */
     private static void addReferenceItems(List<String> referenceItems, List<String> listLineParts) {
         int count = 0;
         for (String listLinePart : listLineParts) {
@@ -142,16 +138,12 @@ public class InsertOrCopyReferencer {
                 if (listLinePart.length() > 1) {
                     listLinePart = listLinePart.substring(1);
 
-                    if (listLinePart.trim().length() > 1
-                            && !referenceItems.contains(listLinePart)
-                            ) {
-                        if (!listLinePart.isEmpty() && !referenceItems.contains(StaticTexts.POPUP_SECTION_TITLE_TEXT_COMPLETIONS)) {
+                    if (listLinePart.trim().length() > 1 && !referenceItems.contains(listLinePart)) {
+                        if (!referenceItems.contains(StaticTexts.POPUP_SECTION_TITLE_TEXT_COMPLETIONS)) {
                             referenceItems.add(StaticTexts.POPUP_SECTION_TITLE_TEXT_COMPLETIONS);
                         }
 
-                        if (!listLinePart.isEmpty()) {
-                            referenceItems.add(listLinePart);
-                        }
+                        referenceItems.add(listLinePart);
                     }
                 }
             }
@@ -174,7 +166,7 @@ public class InsertOrCopyReferencer {
             return methodsList.replaceAll("function ", "").replaceAll("\\(", "").replaceAll(" ", "");
         }
         return StaticTexts.POPUP_ITEM_OPEN_FILES.equals(itemString)
-                ? InsertOrCopyReferencerFilesFolders.getAllOpenedFiles(FileEditorManager.getInstance(project))
+                ? InsertOrCopyReferencerFilesFolders.getOpenFiles(FileEditorManager.getInstance(project))
                 : itemString;
     }
 

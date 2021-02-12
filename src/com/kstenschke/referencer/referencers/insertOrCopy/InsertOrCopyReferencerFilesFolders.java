@@ -42,31 +42,33 @@ class InsertOrCopyReferencerFilesFolders {
         final Project project = e.getData(PlatformDataKeys.PROJECT);
         Editor editor = e.getData(PlatformDataKeys.EDITOR);
 
-        if (project != null && editor != null) {
-            final Document document = editor.getDocument();
-
-            // Get line number the caret is in
-            int caretOffset = editor.getCaretModel().getOffset();
-            int lineNumber = document.getLineNumber(caretOffset);
-
-            // File path and name
-            VirtualFile file = FileDocumentManager.getInstance().getFile(document);
-            String filePath = (file != null) ? file.getPath() : "";
-            String filename = (file != null) ? file.getName() : "";
-
-            // Add items
-            FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);
-            int amountOpenFiles = fileEditorManager.getOpenFiles().length;
-            if (amountOpenFiles > 1) {
-                referenceItems.add(StaticTexts.POPUP_ITEM_OPEN_FILES);
-            }
-
-            referenceItems.add(filePath);
-            referenceItems.add(filePath + "::" + (lineNumber + 1));
-
-            referenceItems.add(filename);
-            referenceItems.add(filename + "::" + (lineNumber + 1));
+        if (project == null || editor == null) {
+            return referenceItems;
         }
+
+        final Document document = editor.getDocument();
+
+        /* Get line number the caret is in */
+        int caretOffset = editor.getCaretModel().getOffset();
+        int lineNumber = document.getLineNumber(caretOffset);
+
+        /* File path and name */
+        VirtualFile file = FileDocumentManager.getInstance().getFile(document);
+        String filePath = (file != null) ? file.getPath() : "";
+        String filename = (file != null) ? file.getName() : "";
+
+        /* Add items */
+        FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);
+        int amountOpenFiles = fileEditorManager.getOpenFiles().length;
+        if (amountOpenFiles > 1) {
+            referenceItems.add(StaticTexts.POPUP_ITEM_OPEN_FILES);
+        }
+
+        referenceItems.add(filePath);
+        referenceItems.add(filePath + "::" + (lineNumber + 1));
+
+        referenceItems.add(filename);
+        referenceItems.add(filename + "::" + (lineNumber + 1));
 
         return referenceItems;
     }
@@ -75,7 +77,7 @@ class InsertOrCopyReferencerFilesFolders {
      * @param fileEditorManager FileEditorManager
      * @return String with concatenated list of all files that are opened currently
      */
-    public static String getAllOpenedFiles(FileEditorManager fileEditorManager) {
+    public static String getOpenFiles(FileEditorManager fileEditorManager) {
         StringBuilder allOpenFiles = new StringBuilder();
 
         VirtualFile[] openFiles = fileEditorManager.getOpenFiles();

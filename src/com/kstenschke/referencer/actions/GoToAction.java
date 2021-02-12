@@ -33,6 +33,7 @@ import com.intellij.ui.components.JBList;
 import com.kstenschke.referencer.*;
 import com.kstenschke.referencer.listeners.DividedListSelectionListener;
 import com.kstenschke.referencer.referencers.goTo.GoToReferencerBookmarks;
+import com.kstenschke.referencer.referencers.goTo.GoToReferencerHeadlines;
 import com.kstenschke.referencer.referencers.goTo.GoToReferencerMethods;
 import com.kstenschke.referencer.referencers.goTo.GoToReferencerPatterns;
 import com.kstenschke.referencer.resources.StaticTexts;
@@ -50,11 +51,6 @@ public class GoToAction extends AnAction {
     private Editor editor;
     private Document document;
 
-    /**
-     * Show list of bookmarks in current document to go to
-     *
-     * @param e Action system event
-     */
     public void actionPerformed(AnActionEvent e) {
         this.project = e.getData(PlatformDataKeys.PROJECT);
         this.editor = e.getData(PlatformDataKeys.EDITOR);
@@ -65,6 +61,11 @@ public class GoToAction extends AnAction {
             String fileExtension = UtilsFile.getExtensionByDocument(this.document);
 
             Object[] refArr = GoToReferencerBookmarks.getItems(this.project, this.document, file);  /* Get bookmarks */
+
+            String[] headlineItems = GoToReferencerHeadlines.getItems(this.document, fileExtension);
+            if (headlineItems != null && headlineItems.length > 1) {
+                refArr = ArrayUtils.addAll(refArr, headlineItems);
+            }
 
             /* Add JS or PHP methods */
             String[] methodItems = GoToReferencerMethods.getItems(this.document, fileExtension);
@@ -83,11 +84,11 @@ public class GoToAction extends AnAction {
             }
 
             if (refArr != null && refArr.length > 0) {
-                final JList referencesList = new JBList(refArr);
+                final JBList<Object> referencesList = new JBList<>(refArr);
                 referencesList.setCellRenderer(new DividedListCellRenderer(referencesList));
                 referencesList.addListSelectionListener(new DividedListSelectionListener());
 
-                // Preselect item from preferences
+                /* Preselect item from preferences */
                 int selectedIndex = Preferences.getSelectedIndex(fileExtension);
                 if (selectedIndex > refArr.length || selectedIndex == 0) {
                     selectedIndex = 1;
@@ -110,21 +111,18 @@ public class GoToAction extends AnAction {
         }
     }
 
-    private JBPopup buildPopup(final String fileExtension, final JList referencesList) {
-        PopupChooserBuilder popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
+    private JBPopup buildPopup(final String fileExtension, final JList<Object> referencesList) {
+        PopupChooserBuilder<Object> popup = JBPopupFactory.getInstance().createListPopupBuilder(referencesList);
 
         return popup.setTitle(StaticTexts.POPUP_TITLE_ACTION_GO).setItemChoosenCallback(()
-                -> ApplicationManager.getApplication().runWriteAction(() -> {
-            // Callback when item chosen
-            CommandProcessor.getInstance().executeCommand(project, () -> {
-                Preferences.saveSelectedIndex(fileExtension, referencesList.getSelectedIndex());
+                -> ApplicationManager.getApplication().runWriteAction(()
+                -> CommandProcessor.getInstance().executeCommand(project, () -> {      /* Callback when item chosen */
+                    Preferences.saveSelectedIndex(fileExtension, referencesList.getSelectedIndex());
 
-                int lineNumber =
-                        Integer.parseInt(referencesList.getSelectedValue().toString().split(":")[0]);
+                    int lineNumber = Integer.parseInt(referencesList.getSelectedValue().toString().split(":")[0]);
 
-                editor.getCaretModel().moveToOffset(document.getLineStartOffset(lineNumber - 1), true);
-                editor.getScrollingModel().scrollToCaret(ScrollType.CENTER);
-            }, null, null);
-        })).setMovable(true).createPopup();
+                    editor.getCaretModel().moveToOffset(document.getLineStartOffset(lineNumber - 1), true);
+                    editor.getScrollingModel().scrollToCaret(ScrollType.CENTER);
+                }, null, null))).setMovable(true).createPopup();
     }
 }

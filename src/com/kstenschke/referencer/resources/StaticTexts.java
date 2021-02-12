@@ -36,6 +36,7 @@ public class StaticTexts {
     @NonNls public static final String POPUP_SECTION_TITLE_DATE_TIME = "SECTIONTITLE: Date / Time";
     @NonNls public static final String POPUP_SECTION_TITLE_FILES_PATHS = "SECTIONTITLE: Files / Paths";
     @NonNls public static final String POPUP_SECTION_TITLE_JAVASCRIPT = "SECTIONTITLE: JavaScript";
+    @NonNls public static final String POPUP_SECTION_TITLE_MARKDOWN = "SECTIONTITLE: Markdown";
     @NonNls public static final String POPUP_SECTION_TITLE_PHP = "SECTIONTITLE: PHP";
     @NonNls public static final String POPUP_SECTION_TITLE_TEXT_COMPLETIONS = "SECTIONTITLE: Text Completions";
     @NonNls public static final String POPUP_SECTION_BOOKMARKS = "SECTIONTITLE: Bookmarks";

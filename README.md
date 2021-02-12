@@ -2,34 +2,19 @@
 
 Source code of the [Referencer plugin](http://plugins.intellij.net/plugin?pr=&pluginId=7104).
 A plugin for the various intellij IDEs (working in IntelliJ IDEA Ultimate and Community Edition, 
-CLion, RubyMine, WebStorm, PhpStorm, PyCharm, PyCharm CE, AppCode, Android Studio, etc) that
-implements additional language-independent and specific tools for code-completion and -copying and 
-quick navigation to code sections found by custom fulltext-filters.
+CLion, RubyMine, WebStorm, PhpStorm, PyCharm, PyCharm CE, AppCode, Android Studio, etc)
 
 
 ## Table of Contents
 
-* [What does it do?](#what-does-it-do)
-* [Keyboard Shortcuts](#keyboard-shortcut)
+* [Keyboard shortcuts and functionality](#keyboard-shortcuts-and-functionality)
 * [Types of references to copy or insert](#types-of-references-to-copy-or-insert)
 * [Types of references to go to](#types-of-references-to-go-to)
 * [Changelog](#changelog)
 * [Author and License](#author-and-license)
 
 
-## What does it do?
-
-The plugin implements an additional list of code-completion suggestions into the editor, taken from various
-contexts, such as: the opened file(s), selection and caret position in the editor, date and time and more.
-
-When evoking the com.kstenschke.referencer plugin, a list of reference items, taken from the current contexts, is opened.
-The references can be inserted into the current document or copied to the clipboard.
-
-Additionally, the plugin provides an option to navigate to bookmarked lines in the current file.
-The context menu of the bookmarks list allows to remove all bookmarks in the current file.
-
-
-## Keyboard Shortcut
+## Keyboard shortcuts and functionality
 
 * Ctrl+Shift+Alt+C twice - Open list of references for copying to clipboard
 * Ctrl+Shift+Alt+V twice - Open list of references for inserting into the current document
@@ -75,9 +60,10 @@ from the caret position. Some references are only specifically available for cer
 
 ## Types of references to go to
 
-* All lines w/ bookmarks in the current file
-* All lines w/ PHP or JavaScript method declarations in the current file
-* All lines w/ occurrences of the configured dynamic jump patterns in the current file
+* Bookmarks in the current file
+* PHP or JavaScript method declarations in the current file
+* Markdown headlines in the current file
+* Occurrences of the configured dynamic jump patterns in the current file
 
 
 ## Changelog
