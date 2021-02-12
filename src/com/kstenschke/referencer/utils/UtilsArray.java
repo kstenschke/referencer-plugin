@@ -19,9 +19,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Array utility methods
- */
 public class UtilsArray {
 
 	/**
@@ -47,7 +44,7 @@ public class UtilsArray {
 
 		Object[] strObjects = list.toArray();
 
-		String[] merged = {};
+		String[] merged = new String[strObjects.length];
 
 		int count = 0;
 		for (Object strObject : strObjects) {

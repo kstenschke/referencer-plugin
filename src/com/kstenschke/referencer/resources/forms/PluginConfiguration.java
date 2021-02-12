@@ -34,12 +34,18 @@ public class PluginConfiguration {
     }
 
     public boolean isModified() {
-        return ! getGoToPatterns().equals( Preferences.getGoToPatterns() );
+        return !getGoToPatterns().equals( Preferences.getGoToPatterns() );
     }
 
     public String getGoToPatterns() {
-        String text = textAreaGoToPatterns.getText().trim();
-        textAreaGoToPatterns.setText(text);
+        String text = textAreaGoToPatterns.getText();
+        String trimmed = text.trim();
+
+        if (!trimmed.equals(text)) {
+            int caretPosition = textAreaGoToPatterns.getCaretPosition();
+            textAreaGoToPatterns.setText(text);
+            textAreaGoToPatterns.setCaretPosition(caretPosition);
+        }
 
         return text;
     }

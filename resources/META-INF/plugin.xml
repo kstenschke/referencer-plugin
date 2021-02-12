@@ -90,6 +90,7 @@
   <ul>
     <li>Add Markdown headlines to "Go To" destinations</li>
     <li>Change README and CHANGELOG format from textile to markdown</li>
+    <li>Correct preferences textarea behavior (caret-offset was reset on modification)</li>
     <li>Partly modernize source code</li>
   </ul>
   <strong>1.2.0 - 2017-07-03</strong>

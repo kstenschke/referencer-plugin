@@ -19,9 +19,6 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.vfs.VirtualFile;
 
-/**
- * File helper methods
- */
 public class UtilsFile {
 
     /**
@@ -64,10 +61,8 @@ public class UtilsFile {
         VirtualFile file = FileDocumentManager.getInstance().getFile(document);
         String fileExtension = file != null ? file.getExtension() : "";
 
-        if (fileExtension != null && !fileExtension.isEmpty()) {
-            fileExtension = fileExtension.toLowerCase();
-        }
-
-        return fileExtension;
+        return fileExtension != null && !fileExtension.isEmpty()
+            ? fileExtension.toLowerCase()
+            : fileExtension;
     }
 }

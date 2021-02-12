@@ -17,9 +17,6 @@ package com.kstenschke.referencer.utils;
 
 import org.jetbrains.annotations.Nullable;
 
-/**
- * String utility methods
- */
 public class UtilsString {
 
     /**

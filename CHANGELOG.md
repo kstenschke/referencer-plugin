@@ -1,6 +1,7 @@
 **1.2.1 - 2021-02-12**
 * Change README and CHANGELOG format from textile to markdown
 * Add Markdown headlines to "Go To" destinations
+* Correct preferences textarea behavior (caret-offset was reset on modification)
 * Partly modernize source code
 
 **1.2.0 - 2017-07-03**

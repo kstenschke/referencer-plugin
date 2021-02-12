@@ -28,21 +28,15 @@ public class ReferencerConfigurable implements Configurable {
 
     private PluginConfiguration settingsPanel = null;
 
-    @Nullable
-    @NonNls
-    public String getHelpTopic() {
+    @Nullable @NonNls public String getHelpTopic() {
         return null;
     }
 
-    @Nls
-    @Override
-    public String getDisplayName() {
+    @Nls @Override public String getDisplayName() {
         return StaticTexts.SETTINGS_DISPLAY_NAME;
     }
 
-    @Nullable
-    @Override
-    public JComponent createComponent() {
+    @Nullable @Override public JComponent createComponent() {
         if (settingsPanel == null) {
             settingsPanel = new PluginConfiguration();
         }
@@ -52,25 +46,20 @@ public class ReferencerConfigurable implements Configurable {
         return settingsPanel.getRootPanel();
     }
 
-    @Override
-    public boolean isModified() {
-
+    @Override public boolean isModified() {
         return settingsPanel != null && settingsPanel.isModified();
     }
 
-    @Override
-    public void apply() {
+    @Override public void apply() {
         if (settingsPanel != null) {
             Preferences.saveGoToPatterns(settingsPanel.getGoToPatterns());
         }
     }
 
-    @Override
-    public void reset() {
+    @Override public void reset() {
     }
 
-    @Override
-    public void disposeUIResources() {
+    @Override public void disposeUIResources() {
         settingsPanel = null;
     }
 }

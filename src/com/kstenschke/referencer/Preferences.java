@@ -26,14 +26,10 @@ import org.jetbrains.annotations.NonNls;
 public class Preferences {
 
     /*  @NonNls = element is not a string requiring internationalization and it does not contain such strings. */
-    @NonNls
-    private static final String PROPERTY_GOTO_PATTERNS = "PluginReferencer.GoToPatterns";
-    @NonNls
-    private static final String PROPERTY_REFERENCER_INDEX = "PluginReferencer.SelectedIndex";
-    @NonNls
-    private static final String PROPERTY_REFERENCER_INDEX_PHP = "PluginReferencer.SelectedIndexPHP";
-    @NonNls
-    private static final String PROPERTY_REFERENCER_INDEX_JS = "PluginReferencer.SelectedIndexJS";
+    @NonNls private static final String PROPERTY_GOTO_PATTERNS = "PluginReferencer.GoToPatterns";
+    @NonNls private static final String PROPERTY_REFERENCER_INDEX = "PluginReferencer.SelectedIndex";
+    @NonNls private static final String PROPERTY_REFERENCER_INDEX_PHP = "PluginReferencer.SelectedIndexPHP";
+    @NonNls private static final String PROPERTY_REFERENCER_INDEX_JS = "PluginReferencer.SelectedIndexJS";
 
     public static void saveGoToPatterns(String patterns) {
         PropertiesComponent.getInstance().setValue(PROPERTY_GOTO_PATTERNS, patterns);
