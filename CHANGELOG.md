@@ -1,10 +1,12 @@
-**1.2.0 - Not tagged yet**
+**1.2.1 - Not tagged yet**
+* Change README and ChANGELOG format from textile to markdown
+
+**1.2.0 - 2017-07-03**
 * Updated plugin settings implementation to be compatible w/ more recent Open API
 * Added option to copy or insert list of all method names from current file
 * Improved PHP file methods indexer
 * Improved Darcula compatibility
 * Modernized source code
-* Change ChANGELOG format from textile to markdown
 
 **1.1.1 - 2014-08-04**
 * Sorted "Go To..." jump destination from configured patterns alphabetically
