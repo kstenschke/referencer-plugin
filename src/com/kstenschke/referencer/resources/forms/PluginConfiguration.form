@@ -37,7 +37,7 @@
         </constraints>
         <properties>
           <enabled value="false"/>
-          <text value="When opening the &quot;Go to...&quot; menu of referencer, lines that contain finding places of each"/>
+          <text value="When opening the &quot;Go to...&quot; menu of com.kstenschke.referencer, lines that contain finding places of each"/>
         </properties>
       </component>
       <grid id="7a87e" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">

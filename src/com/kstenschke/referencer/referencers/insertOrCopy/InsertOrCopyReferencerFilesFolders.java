@@ -26,7 +26,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.kstenschke.referencer.resources.StaticTexts;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 class InsertOrCopyReferencerFilesFolders {

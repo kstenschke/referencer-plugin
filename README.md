@@ -22,7 +22,7 @@ quick navigation to code sections found by custom fulltext-filters.
 The plugin implements an additional list of code-completion suggestions into the editor, taken from various
 contexts, such as: the opened file(s), selection and caret position in the editor, date and time and more.
 
-When evoking the referencer plugin, a list of reference items, taken from the current contexts, is opened.
+When evoking the com.kstenschke.referencer plugin, a list of reference items, taken from the current contexts, is opened.
 The references can be inserted into the current document or copied to the clipboard.
 
 Additionally, the plugin provides an option to navigate to bookmarked lines in the current file.
