@@ -17,8 +17,9 @@ CLion, RubyMine, WebStorm, PhpStorm, PyCharm, PyCharm CE, AppCode, Android Studi
 ## Keyboard shortcuts and functionality
 
 * Ctrl+Shift+Alt+C twice - Open list of references for copying to clipboard
-* Ctrl+Shift+Alt+V twice - Open list of references for inserting into the current document
+* Ctrl+Shift+Alt+F twice - Replace occurrences of comfigured search/replace patterns in current document
 * Ctrl+Shift+Alt+G twice - Open list of jump destinations in the current file for going to
+* Ctrl+Shift+Alt+V twice - Open list of references for inserting into the current document
 
 **Mac Users:** On Macs, the keyboard shortcuts are Shift+Alt+Cmd+C twice (copy), Shift+Alt+Cmd+V twice (paste) 
 or Shift+Alt+Cmd+G twice (go)
