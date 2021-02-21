@@ -16,28 +16,27 @@
 <idea-plugin>
   <id>Referencer</id>
   <name>Referencer</name>
-  <version>1.2.1</version>
+  <version>1.3.0</version>
   <vendor email="info@stenschke.com" url="https://github.com/kstenschke">Kay Stenschke</vendor>
 
   <description><![CDATA[
-    The plugin adds three new tools for inserting, copying and navigating among references out of the edited file(s) and
-    other contexts. To copy and insert items, a list suggestions is added to the editor, taken from various contexts:
+    Provides tools for <strong>faster inserting, copying, replacing and navigating</strong> among built-in and
+    configurable references into/from/within edited file(s) and other contexts.<br/>
+    When there are multiple references, the plugin upon invocation opens a popup, listing possible references.
+    <br/><br/>
+
+    <strong>PLUGIN CONFIGURATION:</strong><br/>
+    Is given at: Settings > Other Settings > Referencer<br/><br/>
+
+    <strong>KEYBOARD SHORTCUTS:</strong>
     <ul>
-        <li>File(s)</li>
-        <li>Text selection</li>
-        <li>Caret position in the editor</li>
-        <li>Date and time</li>
-        <li>JavaScript and PHP methods</li>
-        <li>Markdown headlines</li>
-    </ul><br/>
-    When invoking the referencer plugin, a list of reference items taken from the current contexts is opened.<br/>
-    KEYBOARD SHORTCUTS<br/>
-    <ul>
-        <li>Ctrl+Shift+Alt+V twice - Open list of references for inserting into the current document</li>
         <li>Ctrl+Shift+Alt+C twice - Open list of references for copying to clipboard</li>
-        <li>Ctrl+Shift+Alt+G twice - Open list of jump destinations in current file for going to</li>
+        <li>Ctrl+Shift+Alt+G twice - Open list of GoTo destinations in current document</li>
+        <li>Ctrl+Shift+Alt+F twice - Replace configured search/replace patterns in current document</li>
+        <li>Ctrl+Shift+Alt+V twice - Open list of references for inserting into the current document</li>
     </ul><br/>
-    TYPES OF REFERENCES TO INSERT/COPY<br/>
+
+    <strong>TYPES OF REFERENCES TO INSERT/COPY:</strong><br/>
     All parsed items in the following list are relative to the current caret position,
     for example "previous classname" refers to the first classname found when searching backwards starting
     from the caret position. Some references are only specifically available for certain file types.
@@ -45,47 +44,70 @@
     <ul>
         <li>Current date/time formatted as YYYY-MM-DD and YYYY-MM-DD HH:MM:SS</li>
         <li>Current UNIX timestamp in seconds and milliseconds</li>
-    </ul><ul>
+    </ul>
+    <ul>
         <li>Path to current file</li>
         <li>Current filename</li>
         <li>Current filename::line number</li>
         <li>Path to current file::line number</li>
         <li>When having a multi-line selection: File path / selection: line num. sel. start - line num. sel. end</li>
         <li>When having opened more than one file: list of paths to all opened files</li>
-    </ul><ul>
+    </ul>
+    <ul>
         <li>PHP files: list of method names in current file</li>
         <li>PHP files: previous classname::previous method name</li>
         <li>PHP files: previous classname::line number</li>
         <li>PHP files: previous classname</li>
         <li>PHP files: previous function name</li>
         <li>PHP files: previous/next variable name</li>
-    </ul><ul>
+    </ul>
+    <ul>
         <li>JavaScript files: namespace.classname</li>
         <li>JavaScript files: namespace.classname.previous method name</li>
         <li>JavaScript files: namespace.classname::line number</li>
         <li>JavaScript files: previous/next method name</li>
         <li>JavaScript files: filepath formatted as namespace</li>
-    </ul><ul>
-        <li>General word-completions: all continuations to the word to the left of the caret, found in the current file
+    </ul>
+    <ul>
+        <li>
+            General word-completions: all continuations to the word to the left of the caret, found in the current file
         </li>
     </ul>
     <br/>
-    TYPES OF REFERENCES TO GO TO
-    <br/>
+
+    <strong>TYPES OF REFERENCES TO GO TO:</strong>
     <ul>
         <li>All lines with bookmarks in the current file</li>
         <li>All lines with PHP or JavaScript method declarations in the current file</li>
-        <li>All lines with occurrences of any of the configured dynamic jump patterns in the current file</li>
+        <li>All lines with region-comments in the current file</li>
+        <li>All lines with occurrences of any of the configured dynamic GoTo patterns in the current file</li>
     </ul>
     <br/>
-    Please note: This plugin is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
-    either express or implied.
+
+    <strong>TYPES OF REFERENCES TO FIND+REPLACE:</strong>
+    <ul>
+        <li>All matches of the configured search/replace patterns in the current file</li>
+    </ul>
+    <br/>
+
+    <strong>Please note:</strong>
+    This plugin is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+    implied.
   ]]></description>
 
   <change-notes><![CDATA[
   Recent five releases here,
   <a href="https://github.com/kstenschke/referencer-plugin/blob/master/CHANGELOG.md">complete changelog on github</a>
   <br/><br/>
+  <strong>1.3.0 - 2021-02-21</strong>
+  <ul>
+    <li>Simplify/Clarify instructions, descriptions and labels</li>
+    <li>Change pattern definitions separator from colon to tab</li>
+    <li>Add replace action</li>
+    <li>Add regions recognition to built-in go-to targets</li>
+    <li>Add referencer actions into more obvious IDE menus</li>
+    <li>Add plugin icon</li>
+  </ul>
   <strong>1.2.1 - 2021-02-12</strong>
   <ul>
     <li>Add Markdown headlines to "Go To" destinations</li>
@@ -115,8 +137,6 @@
       <li>Bugfix: IndexOutOfBoundsException in go to bookmark action</li>
       <li>Reduce changelog to previous five versions, added separate full changelog</li>
    </ul>
-  <strong>1.0.12 - 2013-12-03:</strong>
-  Bugfix: Opening Referencer on first character of document caused IndexOutOfBoundsException
   ]]></change-notes>
 
   <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/build_number_ranges.html for description -->
@@ -133,19 +153,25 @@
 
   <actions>
     <action id="CopyAction" class="com.kstenschke.referencer.actions.CopyAction" text="Copy Reference"
-            description="Copy a selectable references">
-      <add-to-group group-id="EditorPopupMenu" anchor="before" relative-to-action="CopyReference"/>
+            description="Copy reference from list">
+      <add-to-group group-id="Copy.Paste.Special" anchor="first"/>
       <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt C" second-keystroke="shift ctrl alt C"/>
     </action>
-
-    <action id="InsertAction" class="com.kstenschke.referencer.actions.InsertAction" text="Insert Reference"
-            description="Insert reference from list">
-      <add-to-group group-id="EditorActions" anchor="after" relative-to-action="EditorPaste"/>
+    <action id="InsertAction" class="com.kstenschke.referencer.actions.InsertAction" text="Paste Reference from List"
+            description="Paste reference from list">
+      <add-to-group group-id="Copy.Paste.Special" anchor="first"/>
       <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt V" second-keystroke="shift ctrl alt V"/>
     </action>
-    <action id="GoAction" class="com.kstenschke.referencer.actions.GoToAction" text="Go to Bookmark"
-            description="Go to Bookmark in current File">
+    <action id="GoAction" class="com.kstenschke.referencer.actions.GoToAction" text="Go to Reference"
+            description="Go to reference in current file">
+      <add-to-group group-id="NavigateInFileGroup" anchor="after" relative-to-action="MethodDown"/>
+      <add-to-group group-id="EditorPopupMenu.GoTo" anchor="first"/>
       <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt G" second-keystroke="shift ctrl alt G"/>
+    </action>
+    <action id="ReplaceAction" class="com.kstenschke.referencer.actions.ReplaceAction" text="Replace Reference-Patterns"
+            description="Replace all configured search/replace patterns">
+      <add-to-group group-id="FindMenuGroup" anchor="after" relative-to-action="Replace"/>
+      <keyboard-shortcut keymap="$default" first-keystroke="shift ctrl alt F" second-keystroke="shift ctrl alt F"/>
     </action>
   </actions>
 

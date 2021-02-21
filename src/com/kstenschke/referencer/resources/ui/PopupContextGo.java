@@ -21,8 +21,6 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.fileEditor.FileEditorManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.popup.JBPopup;
-import com.intellij.openapi.ui.popup.PopupChooserBuilder;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.kstenschke.referencer.resources.StaticTexts;
 
@@ -35,10 +33,10 @@ public class PopupContextGo {
 
     private final JPopupMenu popup;
 
-    public PopupContextGo(final PopupChooserBuilder<Object> popupGo, final Project curProject) {
+    public PopupContextGo(final Project curProject) {
         this.popup = new JPopupMenu();
 
-        // Remove all bookmarks from current file
+        /* Remove all bookmarks from current file */
         JMenuItem menuItemSelectedBookmarkAdd = new JMenuItem(StaticTexts.POPUP_GO_REMOVE_ALL_BOOKMARKS);
         menuItemSelectedBookmarkAdd.addActionListener(e -> {
             BookmarkManager bookmarkManager = BookmarkManager.getInstance(curProject);
@@ -53,7 +51,6 @@ public class PopupContextGo {
                             bookmarkManager.removeBookmark(curBookmark);
                         }
                     }
-                    //popupGo.cancel();
                 }
             }
         });

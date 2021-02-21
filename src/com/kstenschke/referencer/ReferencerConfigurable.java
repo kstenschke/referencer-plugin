@@ -53,6 +53,7 @@ public class ReferencerConfigurable implements Configurable {
     @Override public void apply() {
         if (settingsPanel != null) {
             Preferences.saveGoToPatterns(settingsPanel.getGoToPatterns());
+            Preferences.saveReplacePatterns(settingsPanel.getReplacePatterns());
         }
     }
 

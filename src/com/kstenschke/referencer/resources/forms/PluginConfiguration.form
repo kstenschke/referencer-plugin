@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.kstenschke.referencer.resources.forms.PluginConfiguration">
-  <grid id="27dc6" binding="rootPanel" layout-manager="GridLayoutManager" row-count="9" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="rootPanel" layout-manager="GridLayoutManager" row-count="15" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="10" left="10" bottom="10" right="10"/>
     <constraints>
-      <xy x="20" y="20" width="814" height="400"/>
+      <xy x="20" y="20" width="1223" height="470"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
       <vspacer id="2f1a5">
         <constraints>
-          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="14" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
       <component id="f0f56" class="javax.swing.JLabel">
@@ -19,7 +19,7 @@
         </constraints>
         <properties>
           <labelFor value="e3155"/>
-          <text value="&amp;Go To... Patterns:"/>
+          <text value="&amp;GoTo Patterns:"/>
         </properties>
       </component>
       <component id="24aac" class="javax.swing.JLabel">
@@ -37,10 +37,10 @@
         </constraints>
         <properties>
           <enabled value="false"/>
-          <text value="When opening the &quot;Go to...&quot; menu of com.kstenschke.referencer, lines that contain finding places of each"/>
+          <text value="When opening referencer's GoTo popup, lines containing these patterns,"/>
         </properties>
       </component>
-      <grid id="7a87e" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="7a87e" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="2" indent="0" use-parent-layout="false"/>
@@ -48,16 +48,6 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="3648f" class="javax.swing.JCheckBox" binding="regExCheckBox" default-binding="true">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <enabled value="false"/>
-              <selected value="true"/>
-              <text value="&amp;RegEx"/>
-            </properties>
-          </component>
           <component id="463e9" class="javax.swing.JCheckBox" default-binding="true">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -75,7 +65,7 @@
         </constraints>
         <properties>
           <enabled value="false"/>
-          <text value="of these patterns, are listed as a group of jump destinations."/>
+          <text value="are listed as a group of jump destinations."/>
         </properties>
       </component>
       <grid id="7aa35" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -93,7 +83,7 @@
             <properties>
               <enabled value="false"/>
               <font style="2"/>
-              <text value="ExtJs Component Definition:Ext.define"/>
+              <text value="ExtJs Component Definition    Ext.define"/>
             </properties>
           </component>
           <component id="d0c12" class="javax.swing.JLabel">
@@ -113,7 +103,7 @@
             <properties>
               <enabled value="false"/>
               <font style="2"/>
-              <text value="MySql Create Table:CREATE TABLE "/>
+              <text value="MySql Create Table    CREATE TABLE "/>
             </properties>
           </component>
         </children>
@@ -124,7 +114,7 @@
         </constraints>
         <properties>
           <enabled value="false"/>
-          <text value="Prefix each pattern with a label, followed by a colon, use newlines to separate multiple &quot;Go To...&quot; patterns."/>
+          <text value="Prefix each pattern with a label, followed by a tab. One pattern per line."/>
         </properties>
       </component>
       <component id="abb35" class="javax.swing.JLabel">
@@ -149,6 +139,101 @@
           </component>
         </children>
       </scrollpane>
+      <component id="b0d1c" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="9" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <labelFor value="e3155"/>
+          <text value="&amp;Replace Patterns:"/>
+        </properties>
+      </component>
+      <component id="26899" class="javax.swing.JSeparator">
+        <constraints>
+          <grid row="8" column="0" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+      </component>
+      <scrollpane id="2b7fa">
+        <constraints>
+          <grid row="9" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="7ad3b" class="javax.swing.JTextArea" binding="textAreaReplacePatterns">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </scrollpane>
+      <component id="461e8" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="10" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <enabled value="false"/>
+          <text value="Replacement Patterns must be defined as a tuple of: search pattern and replacement string, separated by a tab."/>
+        </properties>
+      </component>
+      <grid id="f7c76" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="13" column="1" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="8" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="e703a" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <enabled value="false"/>
+              <font style="2"/>
+              <text value="foo    bar"/>
+            </properties>
+          </component>
+          <component id="347b8" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <enabled value="false"/>
+              <font style="1"/>
+              <text value="Example: "/>
+            </properties>
+          </component>
+          <component id="fd121" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <enabled value="false"/>
+              <font style="2"/>
+              <text value="[a-z]+_baz    qux"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <component id="bb0d" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="12" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <enabled value="false"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="cb6c6" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="11" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <enabled value="false"/>
+          <text value="One tuple per line."/>
+        </properties>
+      </component>
     </children>
   </grid>
 </form>

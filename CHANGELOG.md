@@ -1,9 +1,18 @@
-**1.2.1 - Not tagged yet**
-* Ensure editor re-grabs focus after using referencer
+Referencer Changelog
+====================
 
-**1.2.1 - 2021-02-12**
+**1.3.0 - Not tagged yet**
+* Simplify/Clarify instructions, descriptions and labels
+* Change pattern definitions separator from colon to tab
+* Add replace action
+* Add regions recognition to built-in GoTo targets
+* Add referencer actions into more obvious IDE menus
+* Add plugin icon
+
+**1.2.1 - 2012-02-12**
+* Ensure editor re-grabs focus after using referencer
 * Change README and CHANGELOG format from textile to markdown
-* Add Markdown headlines to "Go To" destinations
+* Add Markdown headlines to "GoTo" destinations
 * Correct preferences textarea behavior (caret-offset was reset on modification)
 * Partly modernize source code
 
@@ -15,16 +24,16 @@
 * Modernize source code
 
 **1.1.1 - 2014-08-04**
-* Sort "Go To..." jump destination from configured patterns alphabetically
-* Sort "Go To..." methods alphabetically
+* Sort "GoTo..." jump destination from configured patterns alphabetically
+* Sort "GoTo..." methods alphabetically
 * Make section headers within options popup more visually obvious
 * Bugfix: Destination patterns were utilized even if not yet stored
 
 **1.1.0 - 2014-08-02**
-* Add: plugin settings with dynamic "Go To..." jump patterns
-* Add: PHP and JavaScript methods listing in "Go To..." menu
-* Bugfix: IndexOutOfBoundsException in go to bookmark action
-* Bugfix: Line numbers in go to bookmark action were displayed one too high
+* Add: plugin settings with dynamic "GoTo..." jump patterns
+* Add: PHP and JavaScript methods listing in "GoTo..." menu
+* Bugfix: IndexOutOfBoundsException in Goto bookmark action
+* Bugfix: Line numbers in GoTo bookmark action were displayed one too high
 * Reduce changelog to previous five versions, added separate full changelog
 
 **1.0.12 - 2013-12-03:** Bugfix: Opening Referencer on first character of document caused IndexOutOfBoundsException
@@ -33,9 +42,9 @@
 * Add notification when there are no bookmarks for going to
 * Improve compatibility: Compiled with JDK target bytecode version 1.6 (was 1.7)
 
-**1.0.10 - 2013-11-28:** Add context menu to go action: remove all bookmarks from current file
+**1.0.10 - 2013-11-28:** Add context menu to GoTo action: remove all bookmarks from current file
 
-**1.0.9 - 2013-11-05:** Add action: go to bookmarks
+**1.0.9 - 2013-11-05:** Add action: GoTo bookmarks
 
 **1.0.8 - 2013-11-04**
 * Update API to IC-129.713

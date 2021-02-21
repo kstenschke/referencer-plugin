@@ -16,17 +16,19 @@
 package com.kstenschke.referencer.resources.forms;
 
 import com.kstenschke.referencer.Preferences;
+import org.jetbrains.annotations.NotNull;
 
 import javax.swing.*;
 
 public class PluginConfiguration {
 
     private JTextArea textAreaGoToPatterns;
-    private JCheckBox regExCheckBox;
     private JPanel rootPanel;
+    private JTextArea textAreaReplacePatterns;
 
     public PluginConfiguration() {
-        textAreaGoToPatterns.setText( Preferences.getGoToPatterns() );
+        textAreaGoToPatterns.setText(Preferences.getGoToPatterns());
+        textAreaReplacePatterns.setText(Preferences.getReplacePatterns());
     }
 
     public JPanel getRootPanel() {
@@ -34,19 +36,29 @@ public class PluginConfiguration {
     }
 
     public boolean isModified() {
-        return !getGoToPatterns().equals( Preferences.getGoToPatterns() );
+        return !getGoToPatterns().equals(Preferences.getGoToPatterns())
+            || !getReplacePatterns().equals(Preferences.getReplacePatterns());
     }
 
     public String getGoToPatterns() {
-        String text = textAreaGoToPatterns.getText();
+        return getPatternTrimmedFromTextarea(textAreaGoToPatterns);
+    }
+
+    public String getReplacePatterns() {
+        return getPatternTrimmedFromTextarea(textAreaReplacePatterns);
+    }
+
+    @NotNull
+    private String getPatternTrimmedFromTextarea(JTextArea textArea) {
+        String text = textArea.getText();
         String trimmed = text.trim();
 
         if (!trimmed.equals(text)) {
-            int caretPosition = textAreaGoToPatterns.getCaretPosition();
-            textAreaGoToPatterns.setText(text);
-            textAreaGoToPatterns.setCaretPosition(caretPosition);
+            int caretPosition = textArea.getCaretPosition();
+            textArea.setText(text);
+            textArea.setCaretPosition(caretPosition);
         }
 
-        return text;
+        return trimmed;
     }
 }

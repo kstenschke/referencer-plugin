@@ -26,17 +26,28 @@ import org.jetbrains.annotations.NonNls;
 public class Preferences {
 
     /*  @NonNls = element is not a string requiring internationalization and it does not contain such strings. */
-    @NonNls private static final String PROPERTY_GOTO_PATTERNS = "PluginReferencer.GoToPatterns";
+    @NonNls private static final String PROPERTY_PATTERNS_GOTO = "PluginReferencer.GoToPatterns";
+    @NonNls private static final String PROPERTY_PATTERNS_REPLACE = "PluginReferencer.ReplacePatterns";
     @NonNls private static final String PROPERTY_REFERENCER_INDEX = "PluginReferencer.SelectedIndex";
     @NonNls private static final String PROPERTY_REFERENCER_INDEX_PHP = "PluginReferencer.SelectedIndexPHP";
     @NonNls private static final String PROPERTY_REFERENCER_INDEX_JS = "PluginReferencer.SelectedIndexJS";
 
     public static void saveGoToPatterns(String patterns) {
-        PropertiesComponent.getInstance().setValue(PROPERTY_GOTO_PATTERNS, patterns);
+        PropertiesComponent.getInstance().setValue(PROPERTY_PATTERNS_GOTO, patterns);
+    }
+
+    public static void saveReplacePatterns(String patterns) {
+        PropertiesComponent.getInstance().setValue(PROPERTY_PATTERNS_REPLACE, patterns);
     }
 
     public static String getGoToPatterns() {
-        String patterns = PropertiesComponent.getInstance().getValue(PROPERTY_GOTO_PATTERNS);
+        String patterns = PropertiesComponent.getInstance().getValue(PROPERTY_PATTERNS_GOTO);
+
+        return patterns != null ? patterns : "";
+    }
+
+    public static String getReplacePatterns() {
+        String patterns = PropertiesComponent.getInstance().getValue(PROPERTY_PATTERNS_REPLACE);
 
         return patterns != null ? patterns : "";
     }

@@ -51,27 +51,26 @@ public class GoToReferencerBookmarks extends GoToReferencer {
 
     private static String[] buildReferencesArray(Document document, List<String> bookmarkItems, String documentText,
                                                  List<Integer> bookmarkLineNumbers) {
-        String[] referencesArr = null;
-        if (!bookmarkLineNumbers.isEmpty()) {
-            int digits = Collections.max(bookmarkLineNumbers).toString().length();
-            Integer[] lineNumbersArr = bookmarkLineNumbers.toArray(new Integer[bookmarkLineNumbers.size()]);
-            Arrays.sort(lineNumbersArr);
-
-            int index = 1;
-            for (Integer curLineNum : lineNumbersArr) {
-                if (curLineNum > 0) {
-                    int offsetLineStart = document.getLineStartOffset(curLineNum);
-                    int offsetLineEnd = document.getLineEndOffset(curLineNum);
-                    String lineSummary = getLineSummary(documentText.substring(offsetLineStart, offsetLineEnd));
-                    bookmarkItems.add(index,
-                            UtilsString.makeMinLen(Integer.toString(curLineNum + 1), digits) + ": " + lineSummary);
-                    index++;
-                }
-            }
-
-            referencesArr = bookmarkItems.toArray(new String[bookmarkItems.size()]);
+        if (bookmarkLineNumbers.isEmpty()) {
+            return null;
         }
 
-        return referencesArr;
+        int digits = Collections.max(bookmarkLineNumbers).toString().length();
+        Integer[] lineNumbers = bookmarkLineNumbers.toArray(new Integer[bookmarkLineNumbers.size()]);
+        Arrays.sort(lineNumbers);
+
+        int index = 1;
+        for (Integer lineNumber : lineNumbers) {
+            if (lineNumber > 0) {
+                int offsetLineStart = document.getLineStartOffset(lineNumber);
+                int offsetLineEnd = document.getLineEndOffset(lineNumber);
+                String lineSummary = getLineSummary(documentText.substring(offsetLineStart, offsetLineEnd));
+                bookmarkItems.add(index,
+                        UtilsString.makeMinLen(Integer.toString(lineNumber + 1), digits) + ": " + lineSummary);
+                index++;
+            }
+        }
+
+        return bookmarkItems.toArray(new String[bookmarkItems.size()]);
     }
 }

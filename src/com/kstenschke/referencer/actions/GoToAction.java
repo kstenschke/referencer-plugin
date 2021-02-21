@@ -26,10 +26,7 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.components.JBList;
 import com.kstenschke.referencer.*;
 import com.kstenschke.referencer.listeners.DividedListSelectionListener;
-import com.kstenschke.referencer.referencers.goTo.GoToReferencerBookmarks;
-import com.kstenschke.referencer.referencers.goTo.GoToReferencerHeadlines;
-import com.kstenschke.referencer.referencers.goTo.GoToReferencerMethods;
-import com.kstenschke.referencer.referencers.goTo.GoToReferencerPatterns;
+import com.kstenschke.referencer.referencers.goTo.*;
 import com.kstenschke.referencer.resources.StaticTexts;
 import com.kstenschke.referencer.resources.ui.DividedListCellRenderer;
 import com.kstenschke.referencer.resources.ui.PopupContextGo;
@@ -43,59 +40,65 @@ public class GoToAction extends ReferencePopupableAction {
         Project project = e.getData(PlatformDataKeys.PROJECT);
         Editor editor = e.getData(PlatformDataKeys.EDITOR);
 
-        if (project != null && editor != null) {
-            Document document = editor.getDocument();
-            VirtualFile file = FileDocumentManager.getInstance().getFile(document);
-            String fileExtension = UtilsFile.getExtensionByDocument(document);
+        if (project == null || editor == null) {
+            return;
+        }
 
-            Object[] references = GoToReferencerBookmarks.getItems(project, document, file);
+        Document document = editor.getDocument();
+        VirtualFile file = FileDocumentManager.getInstance().getFile(document);
+        String fileExtension = UtilsFile.getExtensionByDocument(document);
 
-            String[] headlineItems = GoToReferencerHeadlines.getItems(document, fileExtension);
-            if (headlineItems != null && headlineItems.length > 1) {
-                references = ArrayUtils.addAll(references, headlineItems);
-            }
+        Object[] references = GoToReferencerBookmarks.getItems(project, document, file);
 
-                                                                        /* Add JS or PHP methods */
-            String[] methodItems = GoToReferencerMethods.getItems(document, fileExtension);
-            if (methodItems != null && methodItems.length > 1) {
-                references = ArrayUtils.addAll(references, methodItems);
-            }
+        String[] headlineItems = GoToReferencerHeadlines.getItems(document, fileExtension);
+        if (headlineItems != null && headlineItems.length > 1) {
+            references = ArrayUtils.addAll(references, headlineItems);
+        }
 
-            if (GoToReferencerPatterns.hasPatternDefinitions()) {       /* Add dynamical jump destination patterns */
-                String[] patternDefinitions = GoToReferencerPatterns.getPatternDefinitions();
-                for (String curPatterDefinition : patternDefinitions) {
-                    String[] curPatternItems = GoToReferencerPatterns.getItems(document, curPatterDefinition);
-                    if (curPatternItems != null && curPatternItems.length > 1) {
-                        references = ArrayUtils.addAll(references, curPatternItems);
-                    }
+        String[] methodItems = GoToReferencerMethods.getItems(document, fileExtension);   /* Add JS or PHP methods */
+        if (methodItems != null && methodItems.length > 1) {
+            references = ArrayUtils.addAll(references, methodItems);
+        }
+
+        String[] regionItems = GoToReferencerRegions.getItems(document);  /* Add region blocks */
+        if (regionItems != null && regionItems.length > 1) {
+            references = ArrayUtils.addAll(references, regionItems);
+        }
+
+        if (GoToReferencerPatterns.hasPatternDefinitions()) {       /* Add dynamical jump destination patterns */
+            String[] patternDefinitions = GoToReferencerPatterns.getPatternDefinitions();
+            for (String curPatterDefinition : patternDefinitions) {
+                String[] curPatternItems = GoToReferencerPatterns.getItems(document, curPatterDefinition);
+                if (curPatternItems != null && curPatternItems.length > 1) {
+                    references = ArrayUtils.addAll(references, curPatternItems);
                 }
             }
+        }
 
-            if (references != null && references.length > 0) {
-                final JBList<Object> referencesList = new JBList<>(references);
-                referencesList.setCellRenderer(new DividedListCellRenderer(referencesList));
-                referencesList.addListSelectionListener(new DividedListSelectionListener());
+        if (references != null && references.length > 0) {
+            final JBList<Object> referencesList = new JBList<>(references);
+            referencesList.setCellRenderer(new DividedListCellRenderer(referencesList));
+            referencesList.addListSelectionListener(new DividedListSelectionListener());
 
-                /* Preselect item from preferences */
-                int selectedIndex = Preferences.getSelectedIndex(fileExtension);
-                if (selectedIndex > references.length || selectedIndex == 0) {
-                    selectedIndex = 1;
-                }
-                referencesList.setSelectedIndex(selectedIndex);
-
-                PopupChooserBuilder<Object> popupGo =
-                        buildPopup(project, editor, references, referencesList, fileExtension, false, MODE_GO);
-
-                /* Add context menu */
-                PopupContextGo contextMenu = new PopupContextGo(popupGo, project);
-                referencesList.addMouseListener(contextMenu.getPopupListener());
-
-                popupGo.setMovable(true).createPopup().showCenteredInCurrentWindow(project);
+            /* Preselect item from preferences */
+            int selectedIndex = Preferences.getSelectedIndex(fileExtension);
+            if (selectedIndex > references.length || selectedIndex == 0) {
+                selectedIndex = 1;
             }
+            referencesList.setSelectedIndex(selectedIndex);
 
-            if (references == null || references.length == 0) {
-                UtilsEnvironment.notify(StaticTexts.NOTIFY_GOTO_NONE_FOUND);
-            }
+            PopupChooserBuilder<Object> popupGo =
+                    buildPopup(project, editor, references, referencesList, fileExtension, false, MODE_GO);
+
+            /* Add context menu */
+            PopupContextGo contextMenu = new PopupContextGo(project);
+            referencesList.addMouseListener(contextMenu.getPopupListener());
+
+            popupGo.setMovable(true).createPopup().showCenteredInCurrentWindow(project);
+        }
+
+        if (references == null || references.length == 0) {
+            UtilsEnvironment.notify(StaticTexts.NOTIFY_GOTO_NONE_FOUND);
         }
     }
 }

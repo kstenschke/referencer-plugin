@@ -17,24 +17,39 @@ package com.kstenschke.referencer.utils;
 
 import org.jetbrains.annotations.Nullable;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class UtilsString {
 
+    public static int regexCount(String haystack, String needle) {
+        Pattern pattern = Pattern.compile(needle);
+        Matcher matcher = pattern.matcher(haystack);
+        int amountOccurrences = 0;
+
+        while (matcher.find()) {
+            ++amountOccurrences;
+        }
+
+        return amountOccurrences;
+    }
+
     /**
-     * @param text
-     * @param subStr
+     * @param haystack
+     * @param needle
      * @param lineOffset Optional line offset where to begin searching
-     * @return Number of line containing the given subString, or null if not contained
+     * @return Line number containing given subString, or null if not contained
      */
-    public static Integer getLineNumberOfString(String text, String subStr, @Nullable Integer lineOffset) {
+    public static Integer getLineNumberOfString(String haystack, String needle, @Nullable Integer lineOffset) {
         if (lineOffset == null) {
             lineOffset = 0;
         }
 
-        String[] lines = text.split("\n");
+        String[] lines = haystack.split("\n");
 
         int curLineNumber = 0;
         for (String curLine : lines) {
-            if (curLineNumber >= lineOffset && curLine.contains(subStr)) {
+            if (curLineNumber >= lineOffset && curLine.contains(needle)) {
                 return curLineNumber;
             }
             curLineNumber++;
