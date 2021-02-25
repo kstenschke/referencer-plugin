@@ -56,7 +56,7 @@ public class GoToReferencerBookmarks extends GoToReferencer {
         }
 
         int digits = Collections.max(bookmarkLineNumbers).toString().length();
-        Integer[] lineNumbers = bookmarkLineNumbers.toArray(new Integer[bookmarkLineNumbers.size()]);
+        Integer[] lineNumbers = bookmarkLineNumbers.toArray(new Integer[0]);
         Arrays.sort(lineNumbers);
 
         int index = 1;
@@ -71,6 +71,6 @@ public class GoToReferencerBookmarks extends GoToReferencer {
             }
         }
 
-        return bookmarkItems.toArray(new String[bookmarkItems.size()]);
+        return bookmarkItems.toArray(new String[0]);
     }
 }

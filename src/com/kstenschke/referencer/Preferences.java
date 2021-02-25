@@ -17,6 +17,7 @@ package com.kstenschke.referencer;
 
 import com.intellij.ide.util.PropertiesComponent;
 import com.kstenschke.referencer.utils.UtilsFile;
+import com.kstenschke.referencer.utils.UtilsString;
 import org.jetbrains.annotations.NonNls;
 
 /**
@@ -43,19 +44,31 @@ public class Preferences {
     public static String getGoToPatterns() {
         String patterns = PropertiesComponent.getInstance().getValue(PROPERTY_PATTERNS_GOTO);
 
-        return patterns != null ? patterns : "";
+        return patterns != null ? patterns.trim() : "";
     }
 
     public static String getReplacePatterns() {
         String patterns = PropertiesComponent.getInstance().getValue(PROPERTY_PATTERNS_REPLACE);
 
-        return patterns != null ? patterns : "";
+        return patterns != null ? patterns.trim() : "";
+    }
+
+    public static String getGoToPatternsAsJson() {
+        String patterns = PropertiesComponent.getInstance().getValue(PROPERTY_PATTERNS_GOTO);
+
+        return null == patterns || patterns.isEmpty() ? "{}" : UtilsString.jsonFromTupleLines(patterns);
+    }
+
+    public static String getReplacePatternsAsJson() {
+        String patterns = PropertiesComponent.getInstance().getValue(PROPERTY_PATTERNS_REPLACE);
+
+        return null == patterns || patterns.isEmpty() ? "{}" : UtilsString.jsonFromTupleLines(patterns);
     }
 
     /**
-     * Store com.kstenschke.referencer preferences: selected index per supported file type
+     * Store referencer preferences: selected index per supported file type
      *
-     * @param fileExtension File extension of file open while using com.kstenschke.referencer
+     * @param fileExtension File extension of file open while using referencer
      * @param selectedIndex Selected item index
      */
     public static void saveSelectedIndex(String fileExtension, Integer selectedIndex) {
@@ -65,9 +78,9 @@ public class Preferences {
     }
 
     /**
-     * Get identifier for com.kstenschke.referencer preference of given file extension
+     * Get identifier for referencer preference of given file extension
      *
-     * @param fileExtension File extension of file open while using com.kstenschke.referencer
+     * @param fileExtension File extension of file open while using referencer
      * @return Preference identifier
      */
     private static String getPropertyIdentifierByFileExtension(String fileExtension) {
@@ -83,7 +96,7 @@ public class Preferences {
     }
 
     /**
-     * @param fileExtension Extension of file open while invoking com.kstenschke.referencer
+     * @param fileExtension Extension of file open while invoking referencer
      * @return Integer
      */
     public static Integer getSelectedIndex(String fileExtension) {

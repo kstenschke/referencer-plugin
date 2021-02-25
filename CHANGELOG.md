@@ -1,7 +1,12 @@
 Referencer Changelog
 ====================
 
-**1.3.0 - Not tagged yet**
+**1.4.0 - Not tagged yet**
+* Add multitenancy: Add export/import buttons to plugin settings
+* Improve performance (Modernize Java-5 left-overs, replace usages of toArray w/ pre sized array) 
+* Bugfix: GoTo-Pattern search did parse all line when no patterns given
+
+**1.3.0 - 2021-02-21**
 * Simplify/Clarify instructions, descriptions and labels
 * Change pattern definitions separator from colon to tab
 * Add replace action

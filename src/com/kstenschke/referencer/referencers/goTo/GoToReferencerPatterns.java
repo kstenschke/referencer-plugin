@@ -33,7 +33,7 @@ public class GoToReferencerPatterns extends GoToReferencer {
      * @return Any patterns defined?
      */
     public static boolean hasPatternDefinitions() {
-        return Preferences.getGoToPatterns().length() > 0 || Preferences.getReplacePatterns().length() > 0;
+        return Preferences.getGoToPatterns().length() > 0;
     }
 
     /**
@@ -85,7 +85,7 @@ public class GoToReferencerPatterns extends GoToReferencer {
 
         String[] referencesArr;
         int digits = Collections.max(methodLineNumbers).toString().length();
-        Integer[] lineNumbersArr = methodLineNumbers.toArray(new Integer[methodLineNumbers.size()]);
+        Integer[] lineNumbersArr = methodLineNumbers.toArray(new Integer[0]);
         Arrays.sort(lineNumbersArr);
 
         /* Assemble items with line summary, and post-fixed with line number */
@@ -107,7 +107,7 @@ public class GoToReferencerPatterns extends GoToReferencer {
         }
 
         /* Sort alphabetical */
-        referencesArr = methodItems.toArray(new String[methodItems.size()]);
+        referencesArr = methodItems.toArray(new String[0]);
         Arrays.sort(referencesArr, String.CASE_INSENSITIVE_ORDER);
 
         reformItemsMovePostfixToFront(referencesArr);       /* Move line numbers to front */

@@ -19,6 +19,10 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.vfs.VirtualFile;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class UtilsFile {
 
     /**
@@ -64,5 +68,20 @@ public class UtilsFile {
         return fileExtension != null && !fileExtension.isEmpty()
             ? fileExtension.toLowerCase()
             : fileExtension;
+    }
+
+    public static String getFileContents(String filePath) {
+        StringBuilder contentBuilder = new StringBuilder();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String sCurrentLine;
+            while ((sCurrentLine = br.readLine()) != null)
+            {
+                contentBuilder.append(sCurrentLine).append("\n");
+            }
+        } catch (IOException e) {
+            return null;
+        }
+
+        return contentBuilder.toString();
     }
 }

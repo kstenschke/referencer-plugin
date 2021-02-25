@@ -69,7 +69,7 @@ public class GoToReferencerRegions extends GoToReferencer {
 
         String[] referencesArr;
         int digits = Collections.max(regionLineNumbers).toString().length();
-        Integer[] lineNumbersArr = regionLineNumbers.toArray(new Integer[regionLineNumbers.size()]);
+        Integer[] lineNumbersArr = regionLineNumbers.toArray(new Integer[0]);
         Arrays.sort(lineNumbersArr);
 
         /* Assemble items with line summary, and post-fixed with line number */
@@ -86,7 +86,7 @@ public class GoToReferencerRegions extends GoToReferencer {
             }
         }
 
-        referencesArr = methodItems.toArray(new String[methodItems.size()]);
+        referencesArr = methodItems.toArray(new String[0]);
         reformItemsMovePostfixToFront(referencesArr);                                   /* Move line numbers to front */
 
         return UtilsArray.addToBeginning(referencesArr, StaticTexts.POPUP_SECTION_REGIONS);   /* Add section header */

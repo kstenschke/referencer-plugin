@@ -59,7 +59,7 @@ public class GoToReferencerMethods extends GoToReferencer {
 
         String[] referencesArr;
         int digits = Collections.max(methodLineNumbers).toString().length();
-        Integer[] lineNumbersArr = methodLineNumbers.toArray(new Integer[methodLineNumbers.size()]);
+        Integer[] lineNumbersArr = methodLineNumbers.toArray(new Integer[0]);
         Arrays.sort(lineNumbersArr);
 
         /* Assemble items with line summary, and post-fixed with line number */
@@ -76,7 +76,7 @@ public class GoToReferencerMethods extends GoToReferencer {
             }
         }
 
-        referencesArr = methodItems.toArray(new String[methodItems.size()]);            /* Sort alphabetical */
+        referencesArr = methodItems.toArray(new String[0]);
         Arrays.sort(referencesArr, String.CASE_INSENSITIVE_ORDER);
 
         reformItemsMovePostfixToFront(referencesArr);                                   /* Move line numbers to front */

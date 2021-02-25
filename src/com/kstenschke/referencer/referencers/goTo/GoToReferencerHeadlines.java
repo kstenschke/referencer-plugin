@@ -51,7 +51,7 @@ public class GoToReferencerHeadlines extends GoToReferencer {
         String[] referencesArr;
         int digits = Collections.max(methodLineNumbers).toString().length();
 
-        Integer[] lineNumbersArr = methodLineNumbers.toArray(new Integer[methodLineNumbers.size()]);
+        Integer[] lineNumbersArr = methodLineNumbers.toArray(new Integer[0]);
 
         /* Assemble items with line summary, and post-fixed with line number */
         int index = 0;
@@ -65,7 +65,7 @@ public class GoToReferencerHeadlines extends GoToReferencer {
             index++;
         }
 
-        referencesArr = headlineItems.toArray(new String[headlineItems.size()]);
+        referencesArr = headlineItems.toArray(new String[0]);
         reformItemsMovePostfixToFront(referencesArr);                                   /* Move line numbers to front */
 
         /* Add section header */

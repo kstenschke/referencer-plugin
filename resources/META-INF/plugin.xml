@@ -16,7 +16,7 @@
 <idea-plugin>
   <id>Referencer</id>
   <name>Referencer</name>
-  <version>1.3.0</version>
+  <version>1.4.0</version>
   <vendor email="info@stenschke.com" url="https://github.com/kstenschke">Kay Stenschke</vendor>
 
   <description><![CDATA[
@@ -99,6 +99,11 @@
   Recent five releases here,
   <a href="https://github.com/kstenschke/referencer-plugin/blob/master/CHANGELOG.md">complete changelog on github</a>
   <br/><br/>
+  <strong>1.4.0 - 2021-02-22</strong>
+  <ul>
+    <li>Add multitenancy: Add export/import buttons to plugin settings</li>
+    <li>Bugfix: GoTo-Pattern search did parse all line when no patterns given</li>
+  </ul>
   <strong>1.3.0 - 2021-02-21</strong>
   <ul>
     <li>Simplify/Clarify instructions, descriptions and labels</li>
@@ -129,13 +134,6 @@
       <li>Sort "Go To..." methods alphabetically</li>
       <li>Made section headers within options popup more visually obvious</li>
       <li>Bugfix: Destination patterns were utilized even if not yet stored (= would list all lines)</li>
-   </ul>
-  <strong>1.1.0 - 2014-08-02</strong>
-  <ul>
-      <li>Add plugin settings with dynamic "Go To..." jump patterns</li>
-      <li>Add PHP and JavaScript methods listing in "Go To..." menu</li>
-      <li>Bugfix: IndexOutOfBoundsException in go to bookmark action</li>
-      <li>Reduce changelog to previous five versions, added separate full changelog</li>
    </ul>
   ]]></change-notes>
 

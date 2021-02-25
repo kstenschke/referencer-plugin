@@ -15,6 +15,8 @@
  */
 package com.kstenschke.referencer.resources.ui;
 
+import com.intellij.ui.Gray;
+import com.intellij.ui.components.JBList;
 import com.intellij.util.ui.UIUtil;
 import com.kstenschke.referencer.resources.StaticTexts;
 
@@ -33,27 +35,23 @@ public class DividedListCellRenderer extends DefaultListCellRenderer {
     private final Color separatorColorBackground;
     private final Color separatorColorForeground;
 
-    public DividedListCellRenderer(JList list) {
+    public DividedListCellRenderer(JBList<Object> list) {
         boolean isUnderDarcula = UIUtil.isUnderDarcula();
 
+        //noinspection UseJBColor
         separatorBorderTopMost = isUnderDarcula
-                ? BorderFactory.createMatteBorder(0, 0, 1, 0, Color.DARK_GRAY)
-                : BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY);
+            ? BorderFactory.createMatteBorder(0, 0, 1, 0, Color.DARK_GRAY)
+            : BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY);
 
+        //noinspection UseJBColor
         separatorBorder = isUnderDarcula
             ? BorderFactory.createMatteBorder(1, 0, 1, 0, Color.DARK_GRAY)
             : BorderFactory.createMatteBorder(1, 0, 1, 0, Color.LIGHT_GRAY);
 
         Font defaultFont = list.getFont();
         this.separatorFont = new Font(defaultFont.getName(), defaultFont.getStyle(), defaultFont.getSize());
-
-        this.separatorColorBackground = isUnderDarcula
-                ? new Color(79, 79, 79)
-                : new Color(243, 243, 243);
-
-        this.separatorColorForeground = isUnderDarcula
-                ? new Color(250, 250, 250)
-                : new Color(79, 79, 79);
+        this.separatorColorBackground = isUnderDarcula ? Gray._79 : Gray._243;
+        this.separatorColorForeground = isUnderDarcula ? Gray._250 : Gray._79;
     }
 
     /**

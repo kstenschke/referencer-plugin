@@ -120,7 +120,7 @@ public class InsertOrCopyReferencer {
             }
         }
 
-        return referenceItems.toArray(new String[referenceItems.size()]);
+        return referenceItems.toArray(new String[0]);
     }
 
     private static void addReferenceItems(List<String> referenceItems, List<String> listLineParts) {
