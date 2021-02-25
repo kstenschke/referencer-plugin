@@ -56,10 +56,10 @@ public class GoToReferencerPatterns extends GoToReferencer {
 
     /**
      * @param pattern
-     * @return String      The label, or the whole definition if no colon-separated label prefix is found
+     * @return String      The label, or the whole definition if no tab-separated label prefix is found
      */
     private static String getPatternFromPatternDefinition(String pattern) {
-        int splitPosition = pattern.indexOf(':');
+        int splitPosition = pattern.indexOf("\t");
 
         return splitPosition == -1 ? pattern : pattern.substring(splitPosition + 1);
     }
@@ -73,15 +73,13 @@ public class GoToReferencerPatterns extends GoToReferencer {
         List<String> occurrences = ParserPattern.getAllOccurrencesInText(documentText, pattern);
         List<Integer> occurrenceLineNumbers = collectLineNumbers(documentText, occurrences);
 
-        return buildReferencesArray(document, documentText, occurrenceLineNumbers, label);
+        return occurrenceLineNumbers.isEmpty()
+            ? null
+            : buildReferencesArray(document, documentText, occurrenceLineNumbers, label);
     }
 
     private static String[] buildReferencesArray(Document document, String documentText, List<Integer> methodLineNumbers,
                                                  String label) {
-        if (methodLineNumbers.isEmpty()) {
-            return null;
-        }
-
         List<String> methodItems = new ArrayList<>();
 
         String[] referencesArr;

@@ -74,23 +74,23 @@ public class PluginConfiguration {
             JSONObject json = (JSONObject)parser.parse(jsonStr);
 
             for (Object o : json.keySet()) {
-                String key = (String) o;
-                String value = (String) json.get(key);
+                String key = o.toString();
+                String value = json.get(key).toString();
 
                 JSONObject innerJson = (JSONObject) parser.parse(value);
 
                 for (Object item : innerJson.keySet()) {
-                    String innerKey = (String) item;
-                    String innerValue = (String) innerJson.get(key);
+                    String innerKey = item == null ? "" : item.toString();
+                    String innerValue = innerJson.get(innerKey).toString();
 
                     if (key.equals("goto")) {
-                        if (gotoPatterns.length() == 0) {
+                        if (gotoPatterns.length() > 0) {
                             gotoPatterns.append("\n");
                         }
 
                         gotoPatterns.append(innerKey).append("\t").append(innerValue);
                     } else {
-                        if (replacePatterns.length() == 0) {
+                        if (replacePatterns.length() > 0) {
                             replacePatterns.append("\n");
                         }
 
@@ -100,9 +100,9 @@ public class PluginConfiguration {
 
                 textAreaGoToPatterns.setText(gotoPatterns.toString());
                 textAreaReplacePatterns.setText(replacePatterns.toString());
-
-                UtilsEnvironment.notify(StaticTexts.NOTIFY_REFERENCER_JSON_LOADED);
             }
+
+            UtilsEnvironment.notify(StaticTexts.NOTIFY_REFERENCER_JSON_LOADED);
         } catch (ParseException e) {
             UtilsEnvironment.notify(StaticTexts.NOTIFY_REFERENCER_JSON_FAILED_PARSE);
         }
@@ -163,15 +163,6 @@ public class PluginConfiguration {
 
     @NotNull
     private String getPatternTrimmedFromTextarea(JTextArea textArea) {
-        String text = textArea.getText();
-        String trimmed = text.trim();
-
-        if (!trimmed.equals(text)) {
-            int caretPosition = textArea.getCaretPosition();
-            textArea.setText(text);
-            textArea.setCaretPosition(caretPosition);
-        }
-
-        return trimmed;
+        return textArea.getText();
     }
 }

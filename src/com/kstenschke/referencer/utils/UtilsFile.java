@@ -28,7 +28,7 @@ public class UtilsFile {
     /**
      * Compare given extension against known PHP extensions
      *
-     * @param    fileExtension    Extension to be checked
+     * @param  fileExtension    Extension to be checked
      * @return PHP extension?
      */
     public static Boolean isPhpFileExtension(String fileExtension) {
@@ -38,7 +38,7 @@ public class UtilsFile {
 
         fileExtension = fileExtension.toLowerCase();
 
-        return  "func".equals(fileExtension)
+        return "func".equals(fileExtension)
                 || "phpsh".equals(fileExtension)
                 || "php".equals(fileExtension)
                 || "php3".equals(fileExtension)
@@ -50,7 +50,7 @@ public class UtilsFile {
     /**
      * Compare given extension against known JavaScript extensions
      *
-     * @param    fileExtension    Extension to be checked
+     * @param  fileExtension    Extension to be checked
      * @return JavaScript extension?
      */
     public static Boolean isJavaScriptFileExtension(String fileExtension) {
