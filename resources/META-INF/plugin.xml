@@ -99,7 +99,7 @@
   Recent five releases here,
   <a href="https://github.com/kstenschke/referencer-plugin/blob/master/CHANGELOG.md">complete changelog on github</a>
   <br/><br/>
-  <strong>1.4.0 - 2021-02-22</strong>
+  <strong>1.4.0 - 2021-02-25</strong>
   <ul>
     <li>Add multitenancy: Add export/import buttons to plugin settings</li>
     <li>Bugfix: GoTo-Pattern search did parse all line when no patterns given</li>
