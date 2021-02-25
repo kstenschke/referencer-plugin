@@ -78,10 +78,11 @@ public class GoToReferencerPatterns extends GoToReferencer {
 
     private static String[] buildReferencesArray(Document document, String documentText, List<Integer> methodLineNumbers,
                                                  String label) {
-        List<String> methodItems = new ArrayList<>();
         if (methodLineNumbers.isEmpty()) {
             return null;
         }
+
+        List<String> methodItems = new ArrayList<>();
 
         String[] referencesArr;
         int digits = Collections.max(methodLineNumbers).toString().length();

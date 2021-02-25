@@ -37,16 +37,14 @@ public class GoToReferencerHeadlines extends GoToReferencer {
         List<String> headlines = ParserMarkdown.getAllHeadlinesInText(documentText);
         List<Integer> headlineLineNumbers = collectLineNumbers(documentText, headlines);
 
-        return buildReferencesArray(document, documentText, headlineLineNumbers);
+        return headlineLineNumbers.isEmpty()
+            ? null
+            : buildReferencesArray(document, documentText, headlineLineNumbers);
     }
 
     private static String[] buildReferencesArray(Document document, String documentText,
                                                  List<Integer> methodLineNumbers) {
         List<String> headlineItems = new ArrayList<>();
-
-        if (methodLineNumbers.isEmpty()) {
-            return null;
-        }
 
         String[] referencesArr;
         int digits = Collections.max(methodLineNumbers).toString().length();

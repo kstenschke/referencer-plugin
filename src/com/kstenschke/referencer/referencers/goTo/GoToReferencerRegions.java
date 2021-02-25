@@ -61,11 +61,11 @@ public class GoToReferencerRegions extends GoToReferencer {
 
     private static String[] buildReferencesArray(Document document, String documentText,
                                                  List<Integer> regionLineNumbers) {
-        List<String> methodItems = new ArrayList<>();
-
         if (regionLineNumbers.isEmpty()) {
             return null;
         }
+
+        List<String> methodItems = new ArrayList<>();
 
         String[] referencesArr;
         int digits = Collections.max(regionLineNumbers).toString().length();
