@@ -19,6 +19,7 @@ import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.PlatformDataKeys;
 import com.intellij.openapi.command.CommandProcessor;
+import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
@@ -26,6 +27,7 @@ import com.kstenschke.referencer.Preferences;
 import com.kstenschke.referencer.resources.StaticTexts;
 import com.kstenschke.referencer.utils.UtilsEnvironment;
 import com.kstenschke.referencer.utils.UtilsString;
+import org.jetbrains.annotations.NotNull;
 
 public class ReplaceAction extends AnAction {
 
@@ -46,11 +48,11 @@ public class ReplaceAction extends AnAction {
 
         final Document document = editor.getDocument();
         final String documentText = document.getText();
+        final int amountLines = documentText.split("\n").length;
 
         CommandProcessor.getInstance().executeCommand(project, () -> {      /* Replace undoable */
             String replacedText = documentText;
             String[] replaceTuples = replacePatterns.split("\n");
-
             int amountReplaced = 0;
 
             for (String replaceTuple : replaceTuples) {
@@ -60,7 +62,6 @@ public class ReplaceAction extends AnAction {
 
                 String[] parts = replaceTuple.split("\t");
                 int amountOccurrences = UtilsString.regexCount(replacedText, parts[0]);
-
                 if (amountOccurrences == 0) {
                     continue;
                 }
@@ -69,10 +70,26 @@ public class ReplaceAction extends AnAction {
                 amountReplaced += amountOccurrences;
             }
 
-            document.setText(replacedText);
-            UtilsEnvironment.notify("Replaced " + amountReplaced + " strings.");
+            final String replaceText = replacedText;
+            WriteCommandAction.runWriteCommandAction(project, () -> document.setText(replaceText));
 
+            final int amountLinesAfterReplace = replacedText.split("\n").length;
+            UtilsEnvironment.notify(renderSuccessMessage(amountLines, amountReplaced, amountLinesAfterReplace));
             editor.getContentComponent().grabFocus();
         }, null, null);
+    }
+
+    @NotNull
+    private String renderSuccessMessage(int amountLines, int amountReplaced, int amountLinesAfterReplace) {
+        String message = "Replaced " + amountReplaced + " strings";
+
+        if (amountLines > amountLinesAfterReplace) {
+            return message + ",\nreduced code by " + (amountLines - amountLinesAfterReplace) + " lines.";
+        }
+        if (amountLines < amountLinesAfterReplace) {
+            return message + ",\nreformatting added " + (amountLinesAfterReplace - amountLines) + " lines.";
+        }
+
+        return message + ".";
     }
 }

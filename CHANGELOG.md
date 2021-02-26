@@ -1,6 +1,10 @@
 Referencer Changelog
 ====================
 
+**1.4.1 - 2021-02-26**
+* Add info about the amount of lines, that document is reduced/grown by after replace action
+* Fix IDE warnings during replace action: Wrap document modification into WriteCommandAction lambda
+
 **1.4.0 - 2021-02-25**
 * Add multitenancy: Add export/import buttons to plugin settings
 * Improve performance (Modernize Java-5 left-overs, replace usages of toArray w/ pre sized array) 

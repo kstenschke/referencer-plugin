@@ -54,8 +54,8 @@ class InsertOrCopyReferencerFilesFolders {
 
         /* File path and name */
         VirtualFile file = FileDocumentManager.getInstance().getFile(document);
-        String filePath = (file != null) ? file.getPath() : "";
-        String filename = (file != null) ? file.getName() : "";
+        String filePath = file != null ? file.getPath() : "";
+        String filename = file != null ? file.getName() : "";
 
         /* Add items */
         FileEditorManager fileEditorManager = FileEditorManager.getInstance(project);

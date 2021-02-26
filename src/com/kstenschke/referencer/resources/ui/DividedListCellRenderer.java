@@ -68,7 +68,7 @@ public class DividedListCellRenderer extends DefaultListCellRenderer {
         if (value != null) {
             String valueStr = value.toString();
 
-            // Apply section title styling
+            /* Apply section title styling */
             if (valueStr.startsWith(StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE)) {
                 String labelText = valueStr.replace(StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE + " ", "");
                 if (!labelText.endsWith(":")) {
@@ -81,20 +81,16 @@ public class DividedListCellRenderer extends DefaultListCellRenderer {
                 return sectionLabel;
             }
         }
-        // Non-separator item
+        /* Non-separator item */
         return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
     }
 
     private void setLabelUI(JLabel label, Boolean isTopMost) {
         label.setOpaque(true);
-
         label.setFont(separatorFont);
-
         label.setBorder(isTopMost ? separatorBorderTopMost : separatorBorder);
-
         label.setBackground(separatorColorBackground);
         label.setForeground(separatorColorForeground);
-
         label.setEnabled(false);
         label.setFocusable(false);
         label.setVisible(true);

@@ -48,17 +48,17 @@ class InsertOrCopyReferencerJavascript {
 
         final Document document = editor.getDocument();
 
-        // Get line number the caret is in
+        /* Get line number the caret is in */
         int caretOffset = editor.getCaretModel().getOffset();
         String textFull = document.getText();
         String textBeforeCaret = textFull.substring(0, caretOffset);
         String textAfterCaret = textFull.substring(caretOffset);
 
-        // File path and name
+        /* File path and name */
         VirtualFile file = FileDocumentManager.getInstance().getFile(document);
-        String filePath = (file != null) ? file.getPath() : "";
+        String filePath = file != null ? file.getPath() : "";
 
-        // Add namespace
+        /* Add namespace */
         String namespaceBefore = null;
         List<String> allNamespaces = ParserJavaScript.getAllNamespaceInText(textBeforeCaret);
         if (!allNamespaces.isEmpty()) {
@@ -66,42 +66,40 @@ class InsertOrCopyReferencerJavascript {
             referenceItems.add(namespaceBefore);
         }
 
-        // Add classname
+        /* Add classname */
         String classnameBefore = null;
         List<String> allClassnames = ParserJavaScript.getAllClassNamesInText(textBeforeCaret);
         if (!allClassnames.isEmpty()) {
             classnameBefore = cleanClassname(allClassnames.get(allClassnames.size() - 1));
             referenceItems.add(classnameBefore);
         }
-        // Add namespace + classname
+        /* Add namespace + classname */
         String namespacedClassname = null;
         if (namespaceBefore != null && classnameBefore != null) {
             namespacedClassname = namespaceBefore + "." + classnameBefore;
             referenceItems.add(namespacedClassname);
         }
 
-        // Add method before caret
+        /* Add method before caret */
         String methodBefore = null;
         List<String> allMethodsBeforeCaret = ParserJavaScript.getAllMethodsInText(textBeforeCaret);
         if (!allMethodsBeforeCaret.isEmpty()) {
             methodBefore = cleanMethodName(allMethodsBeforeCaret.get(allMethodsBeforeCaret.size() - 1));
         }
 
-        // Add method after caret
+        /* Add method after caret */
         String methodAfter = null;
         List<String> allMethodsAfterCaret = ParserJavaScript.getAllMethodsInText(textAfterCaret);
         if (!allMethodsAfterCaret.isEmpty()) {
             methodAfter = cleanMethodName(allMethodsAfterCaret.get(0));
         }
 
-        // Add namespace.classname.methodBefore
-        // -or classname.methodBefore if no namespace found
+        /* Add namespace.classname.methodBefore -or classname.methodBefore if no namespace found */
         if (classnameBefore != null && methodBefore != null) {
             if (namespacedClassname != null) {
                 referenceItems.add(namespacedClassname + "." + methodBefore);
             }
-            // Classname.method
-            referenceItems.add(classnameBefore + "." + methodBefore);
+            referenceItems.add(classnameBefore + "." + methodBefore);   /* Classname.method */
         }
 
         if (null != methodBefore) {
@@ -111,7 +109,7 @@ class InsertOrCopyReferencerJavascript {
             referenceItems.add(methodAfter);
         }
 
-        // Convert path to namespace (slashes to dots)
+        /* Convert path to namespace (slashes to dots) */
         String namespaceFromFilepath = filePath.replace("/", ".").replaceFirst("\\.", "");
         namespaceFromFilepath = UtilsString.replaceLast(namespaceFromFilepath, ".js", "");
         referenceItems.add(namespaceFromFilepath);

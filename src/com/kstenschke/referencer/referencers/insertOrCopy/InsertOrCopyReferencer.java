@@ -55,7 +55,7 @@ public class InsertOrCopyReferencer {
 
         /* File path and name */
         VirtualFile file = FileDocumentManager.getInstance().getFile(document);
-        String filePath = (file != null) ? file.getPath() : "";
+        String filePath = file != null ? file.getPath() : "";
         String fileExtension = UtilsFile.getExtensionByDocument(document);
 
         int caretOffset = editor.getCaretModel().getOffset();                   /* Get line number the caret is in */
