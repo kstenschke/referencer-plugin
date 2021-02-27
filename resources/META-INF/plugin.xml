@@ -20,10 +20,9 @@
   <vendor email="info@stenschke.com" url="https://github.com/kstenschke">Kay Stenschke</vendor>
 
   <description><![CDATA[
-    Provides tools for <strong>faster inserting, copying, replacing and navigating</strong> among built-in and
-    configurable references into/from/within edited file(s) and other contexts.<br/>
-    When there are multiple references, the plugin upon invocation opens a popup, listing possible references.
-    <br/><br/>
+    Tools for faster <strong>inserting, copying, replacing and navigating</strong> among built-in and
+    configurable references (date, filename, text completions, bookmarks, and many more) into/from/within 
+    edited file(s).<br/><br/>
 
     <strong>PLUGIN CONFIGURATION:</strong><br/>
     Is given at: Settings > Other Settings > Referencer<br/><br/>
