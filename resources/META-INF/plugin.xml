@@ -76,10 +76,11 @@
 
     <strong>TYPES OF REFERENCES TO GO TO:</strong>
     <ul>
-        <li>All lines with bookmarks in the current file</li>
-        <li>All lines with PHP or JavaScript method declarations in the current file</li>
-        <li>All lines with region-comments in the current file</li>
-        <li>All lines with occurrences of any of the configured dynamic GoTo patterns in the current file</li>
+        <li>Lines w/ bookmarks in the current document</li>
+        <li>Lines w/ PHP or JavaScript method declarations in the current document</li>
+        <li>Lines w/ region-comments in the current document</li>
+        <li>Lines w/ occurrences of any of the configured dynamic GoTo patterns in the current document</li>
+        <li>Headlines within the current markdown document</li>
     </ul>
     <br/>
 
