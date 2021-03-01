@@ -217,33 +217,4 @@ public class UtilsString {
     public static String cleanReference(String referenceStr, String removeOnceStr, String[] removeEachStr, String postfix) {
         return cleanReference(referenceStr, removeOnceStr, removeEachStr) + postfix;
     }
-
-    public static String jsonFromTupleLines(String patterns) {
-        StringBuilder jsonInner = new StringBuilder();
-        String[] tupels = patterns.split("\\n");
-        int index = 1;
-
-        for (String tupel : tupels) {
-            String[] parts = tupel.split("\\t");
-
-            if (parts.length != 2) {
-                continue;
-            }
-
-            jsonInner.append("        \"")
-                .append(parts[0].replaceAll("\"", "\\\""))
-                .append("\":\"")
-                .append(parts[1].replaceAll("\"", "\\\""))
-                .append("\"");
-
-            if (index < tupels.length) {
-                jsonInner.append(",\n");
-            }
-
-            ++index;
-        }
-
-        return jsonInner.toString().isEmpty()
-            ? "{}"
-            : "{\n" + jsonInner + "\n    }";
-    }}
+}

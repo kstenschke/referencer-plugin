@@ -17,7 +17,6 @@ package com.kstenschke.referencer;
 
 import com.intellij.ide.util.PropertiesComponent;
 import com.kstenschke.referencer.utils.UtilsFile;
-import com.kstenschke.referencer.utils.UtilsString;
 import org.jetbrains.annotations.NonNls;
 
 /**
@@ -27,8 +26,8 @@ import org.jetbrains.annotations.NonNls;
 public class Preferences {
 
     /*  @NonNls = element is not a string requiring internationalization and it does not contain such strings. */
+    @NonNls public static final String PROPERTY_PATTERNS_REPLACE = "PluginReferencer.ReplacePatterns";
     @NonNls private static final String PROPERTY_PATTERNS_GOTO = "PluginReferencer.GoToPatterns";
-    @NonNls private static final String PROPERTY_PATTERNS_REPLACE = "PluginReferencer.ReplacePatterns";
     @NonNls private static final String PROPERTY_REFERENCER_INDEX = "PluginReferencer.SelectedIndex";
     @NonNls private static final String PROPERTY_REFERENCER_INDEX_PHP = "PluginReferencer.SelectedIndexPHP";
     @NonNls private static final String PROPERTY_REFERENCER_INDEX_JS = "PluginReferencer.SelectedIndexJS";
@@ -51,18 +50,6 @@ public class Preferences {
         String patterns = PropertiesComponent.getInstance().getValue(PROPERTY_PATTERNS_REPLACE);
 
         return patterns != null ? patterns.trim() : "";
-    }
-
-    public static String getGoToPatternsAsJson() {
-        String patterns = PropertiesComponent.getInstance().getValue(PROPERTY_PATTERNS_GOTO);
-
-        return null == patterns || patterns.isEmpty() ? "{}" : UtilsString.jsonFromTupleLines(patterns);
-    }
-
-    public static String getReplacePatternsAsJson() {
-        String patterns = PropertiesComponent.getInstance().getValue(PROPERTY_PATTERNS_REPLACE);
-
-        return null == patterns || patterns.isEmpty() ? "{}" : UtilsString.jsonFromTupleLines(patterns);
     }
 
     /**

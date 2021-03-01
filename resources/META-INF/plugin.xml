@@ -16,7 +16,7 @@
 <idea-plugin>
   <id>Referencer</id>
   <name>Referencer</name>
-  <version>1.4.1</version>
+  <version>1.4.2</version>
   <vendor email="info@stenschke.com" url="https://github.com/kstenschke">Kay Stenschke</vendor>
 
   <description><![CDATA[
@@ -99,6 +99,10 @@
   Recent five releases here,
   <a href="https://github.com/kstenschke/referencer-plugin/blob/master/CHANGELOG.md">complete changelog on github</a>
   <br/><br/>
+  <strong>1.4.2 - 2021-03-01</strong>
+  <ul>
+    <li>Change multitenancy: export/import search/replace patterns only (drop goTo patterns)</li>
+  </ul>
   <strong>1.4.1 - 2021-02-26</strong>
   <ul>
     <li>Add info about amount of lines, that document is reduced/grown by after replace action</li>
@@ -124,14 +128,6 @@
     <li>Change README and CHANGELOG format from textile to markdown</li>
     <li>Correct preferences textarea behavior (caret-offset was reset on modification)</li>
     <li>Partly modernize source code</li>
-  </ul>
-  <strong>1.2.0 - 2017-07-03</strong>
-  <ul>
-      <li>Update plugin settings implementation to be compatible w/ recent Open API</li>
-      <li>Add option to copy or insert list of all method names from current file</li>
-      <li>Improve PHP file methods indexer</li>
-      <li>Improve Darcula compatibility</li>
-      <li>Modernize source code</li>
   </ul>
   ]]></change-notes>
 

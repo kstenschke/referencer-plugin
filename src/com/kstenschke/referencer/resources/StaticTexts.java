@@ -49,10 +49,10 @@ public class StaticTexts {
     /* Notifications */
     @NonNls public static final String NOTIFY_GOTO_NONE_FOUND = "No GoTo destinations found";
     @NonNls public static final String NOTIFY_NO_PROJECT_OPEN = "A project must be loaded before using this option";
-    @NonNls public static final String NOTIFY_REFERENCER_JSON_DOESNT_EXIST = "No referencer.json found";
-    @NonNls public static final String NOTIFY_REFERENCER_JSON_FAILED_PARSE = "Failed parsing referencer.json";
-    @NonNls public static final String NOTIFY_REFERENCER_JSON_FAILED_SAVE = "Failed saving referencer.json";
-    @NonNls public static final String NOTIFY_REFERENCER_JSON_LOADED = "Imported settings from referencer.json";
-    @NonNls public static final String NOTIFY_REFERENCER_JSON_SAVED = "Exported settings to referencer.json";
+    @NonNls public static final String NOTIFY_REFERENCER_TXT_DOESNT_EXIST = "No referencer_patterns.txt found";
+    @NonNls public static final String NOTIFY_REFERENCER_TXT_FAILED_SAVE = "Failed saving referencer_patterns.txt";
+    @NonNls public static final String NOTIFY_REFERENCER_NO_REPLACE_PATTERNS = "No search/replace patterns";
+    @NonNls public static final String NOTIFY_REFERENCER_TXT_LOADED = "Imported settings from referencer_patterns.txt";
+    @NonNls public static final String NOTIFY_REFERENCER_TXT_SAVED = "Exported settings to referencer_patterns.txt";
     @NonNls public static final String NOTIFY_REPLACE_NONE_CONFIGURED = "No replace patterns configured";
 }

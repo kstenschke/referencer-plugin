@@ -15,6 +15,7 @@
  */
 package com.kstenschke.referencer.resources.forms;
 
+import com.intellij.ide.util.PropertiesComponent;
 import com.intellij.openapi.module.ModuleManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.roots.ModuleRootManager;
@@ -23,9 +24,6 @@ import com.kstenschke.referencer.resources.StaticTexts;
 import com.kstenschke.referencer.utils.UtilsEnvironment;
 import com.kstenschke.referencer.utils.UtilsFile;
 import org.jetbrains.annotations.NotNull;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import javax.swing.*;
 import java.io.File;
@@ -45,7 +43,7 @@ public class PluginConfiguration {
         textAreaReplacePatterns.setText(Preferences.getReplacePatterns());
 
         buttonImportSettings.addActionListener(e -> importSettingsFromJson());
-        buttonExportSettings.addActionListener(e -> exportSettingsToJson());
+        buttonExportSettings.addActionListener(e -> exportSettingsToFile());
     }
 
     private void importSettingsFromJson() {
@@ -56,59 +54,20 @@ public class PluginConfiguration {
             return;
         }
 
-        String pathReferencerJson = getPathReferencerJson(project);
-        File jsonFile = new File(pathReferencerJson);
+        String pathReferencerPatternsTxt = getPathReferencerPatternsTxt(project);
+        File patternsFile = new File(pathReferencerPatternsTxt);
 
-        if (!jsonFile.exists()) {
-            UtilsEnvironment.notify(StaticTexts.NOTIFY_REFERENCER_JSON_DOESNT_EXIST);
+        if (!patternsFile.exists()) {
+            UtilsEnvironment.notify(StaticTexts.NOTIFY_REFERENCER_TXT_DOESNT_EXIST);
             return;
         }
 
-        String jsonStr = UtilsFile.getFileContents(pathReferencerJson);
-
-        try {
-            StringBuilder gotoPatterns = new StringBuilder();
-            StringBuilder replacePatterns = new StringBuilder();
-
-            JSONParser parser = new JSONParser();
-            JSONObject json = (JSONObject)parser.parse(jsonStr);
-
-            for (Object o : json.keySet()) {
-                String key = o.toString();
-                String value = json.get(key).toString();
-
-                JSONObject innerJson = (JSONObject) parser.parse(value);
-
-                for (Object item : innerJson.keySet()) {
-                    String innerKey = item == null ? "" : item.toString();
-                    String innerValue = innerJson.get(innerKey).toString();
-
-                    if (key.equals("goto")) {
-                        if (gotoPatterns.length() > 0) {
-                            gotoPatterns.append("\n");
-                        }
-
-                        gotoPatterns.append(innerKey).append("\t").append(innerValue);
-                    } else {
-                        if (replacePatterns.length() > 0) {
-                            replacePatterns.append("\n");
-                        }
-
-                        replacePatterns.append(innerKey).append("\t").append(innerValue);
-                    }
-                }
-
-                textAreaGoToPatterns.setText(gotoPatterns.toString());
-                textAreaReplacePatterns.setText(replacePatterns.toString());
-            }
-
-            UtilsEnvironment.notify(StaticTexts.NOTIFY_REFERENCER_JSON_LOADED);
-        } catch (ParseException e) {
-            UtilsEnvironment.notify(StaticTexts.NOTIFY_REFERENCER_JSON_FAILED_PARSE);
-        }
+        String replacePatterns = UtilsFile.getFileContents(pathReferencerPatternsTxt);
+        textAreaReplacePatterns.setText(replacePatterns);
+        UtilsEnvironment.notify(StaticTexts.NOTIFY_REFERENCER_TXT_LOADED);
     }
 
-    private void exportSettingsToJson() {
+    private void exportSettingsToFile() {
         Project project = UtilsEnvironment.getOpenProject();
 
         if (null == project) {
@@ -116,32 +75,36 @@ public class PluginConfiguration {
             return;
         }
 
-        String pathReferencerJson = getPathReferencerJson(project);
-        File jsonFile = new File(pathReferencerJson);
+        String pathReferencerPatternsTxt = getPathReferencerPatternsTxt(project);
+        File patternsFile = new File(pathReferencerPatternsTxt);
 
-        if ((jsonFile.exists() && jsonFile.setWritable(true)) && !jsonFile.delete()) {
-            UtilsEnvironment.notify(StaticTexts.NOTIFY_REFERENCER_JSON_FAILED_SAVE);
+        if ((patternsFile.exists() && patternsFile.setWritable(true)) && !patternsFile.delete()) {
+            UtilsEnvironment.notify(StaticTexts.NOTIFY_REFERENCER_TXT_FAILED_SAVE);
             return;
         }
 
         try {
-            FileWriter myWriter = new FileWriter(pathReferencerJson);
-            myWriter.write("{\n"
-                + "    \"goto\": " + Preferences.getGoToPatternsAsJson() +",\n"
-                + "    \"replace\": " + Preferences.getReplacePatternsAsJson() + "\n}");
+            String replacePatterns = PropertiesComponent.getInstance().getValue(Preferences.PROPERTY_PATTERNS_REPLACE);
+            if (null == replacePatterns) {
+                UtilsEnvironment.notify(StaticTexts.NOTIFY_REFERENCER_NO_REPLACE_PATTERNS);
+                return;
+            }
+
+            FileWriter myWriter = new FileWriter(pathReferencerPatternsTxt);
+            myWriter.write(replacePatterns);
             myWriter.close();
 
-            UtilsEnvironment.notify(StaticTexts.NOTIFY_REFERENCER_JSON_SAVED);
+            UtilsEnvironment.notify(StaticTexts.NOTIFY_REFERENCER_TXT_SAVED);
         } catch (IOException exception) {
-            UtilsEnvironment.notify(StaticTexts.NOTIFY_REFERENCER_JSON_FAILED_SAVE);
+            UtilsEnvironment.notify(StaticTexts.NOTIFY_REFERENCER_TXT_FAILED_SAVE);
         }
     }
 
     @NotNull
-    private String getPathReferencerJson(Project project) {
+    private String getPathReferencerPatternsTxt(Project project) {
         return ModuleRootManager.getInstance(
             ModuleManager.getInstance(project).getModules()[0]
-        ).getContentRoots()[0].getPath() + "/referencer.json";
+        ).getContentRoots()[0].getPath() + "/referencer_patterns.txt";
     }
 
     public JPanel getRootPanel() {
