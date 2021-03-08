@@ -1,8 +1,9 @@
 Referencer Changelog
 ====================
 
-**1.4.2 - 2021-03-01**
+**1.4.2 - 2021-03-08**
 * Change multitenancy: export/import search/replace patterns only (drop goTo patterns)
+* Recognize and limit replace action to selection within document if given  
 
 **1.4.1 - 2021-02-26**
 * Add info about the amount of lines, that document is reduced/grown by after replace action

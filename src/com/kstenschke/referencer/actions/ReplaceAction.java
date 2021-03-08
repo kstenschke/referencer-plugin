@@ -22,6 +22,7 @@ import com.intellij.openapi.command.CommandProcessor;
 import com.intellij.openapi.command.WriteCommandAction;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
+import com.intellij.openapi.editor.SelectionModel;
 import com.intellij.openapi.project.Project;
 import com.kstenschke.referencer.Preferences;
 import com.kstenschke.referencer.resources.StaticTexts;
@@ -47,11 +48,19 @@ public class ReplaceAction extends AnAction {
         }
 
         final Document document = editor.getDocument();
-        final String documentText = document.getText();
-        final int amountLines = documentText.split("\n").length;
+        SelectionModel selectionModel = editor.getSelectionModel();
+        boolean hasSelection = selectionModel.hasSelection();
+
+        final String sourceText = hasSelection ? selectionModel.getSelectedText() : document.getText();
+
+        if (sourceText == null) {
+            return;
+        }
+
+        final int amountLines = sourceText.split("\n").length;
 
         CommandProcessor.getInstance().executeCommand(project, () -> {      /* Replace undoable */
-            String replacedText = documentText;
+            String replacedText = sourceText;
             String[] replaceTuples = replacePatterns.split("\n");
             int amountReplaced = 0;
 
@@ -70,8 +79,21 @@ public class ReplaceAction extends AnAction {
                 amountReplaced += amountOccurrences;
             }
 
-            final String replaceText = replacedText;
-            WriteCommandAction.runWriteCommandAction(project, () -> document.setText(replaceText));
+            if (hasSelection) {
+                String text = document.getText();
+                int selectionStart = selectionModel.getSelectionStart();
+                final String replaceText = text.substring(0, selectionStart) + replacedText
+                        + text.substring(selectionModel.getSelectionEnd());
+                final int selectionLength = replacedText.length();
+
+                WriteCommandAction.runWriteCommandAction(project, () -> {
+                    document.setText(replaceText);
+                    selectionModel.setSelection(selectionStart, selectionStart + selectionLength);
+                });
+            } else {
+                final String replaceText = replacedText;
+                WriteCommandAction.runWriteCommandAction(project, () -> document.setText(replaceText));
+            }
 
             final int amountLinesAfterReplace = replacedText.split("\n").length;
             UtilsEnvironment.notify(renderSuccessMessage(amountLines, amountReplaced, amountLinesAfterReplace));

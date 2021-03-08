@@ -99,9 +99,10 @@
   Recent five releases here,
   <a href="https://github.com/kstenschke/referencer-plugin/blob/master/CHANGELOG.md">complete changelog on github</a>
   <br/><br/>
-  <strong>1.4.2 - 2021-03-01</strong>
+  <strong>1.4.2 - 2021-03-08</strong>
   <ul>
     <li>Change multitenancy: export/import search/replace patterns only (drop goTo patterns)</li>
+    <li>Recognize and limit replace action to selection within document if given</li>
   </ul>
   <strong>1.4.1 - 2021-02-26</strong>
   <ul>
