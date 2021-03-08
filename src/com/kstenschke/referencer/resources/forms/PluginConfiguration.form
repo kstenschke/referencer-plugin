@@ -357,7 +357,7 @@
             </constraints>
             <properties>
               <enabled value="false"/>
-              <text value="Lines NOT containing any tab-character are being ignored, this is usful for add comments and"/>
+              <text value="Lines NOT containing any tab-character are being ignored. This is usful for adding comments and"/>
             </properties>
           </component>
           <component id="fbc0d" class="javax.swing.JLabel">
