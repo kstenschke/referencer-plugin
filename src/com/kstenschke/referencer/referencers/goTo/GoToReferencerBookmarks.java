@@ -19,6 +19,7 @@ import com.intellij.ide.bookmarks.Bookmark;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
+import com.kstenschke.referencer.Preferences;
 import com.kstenschke.referencer.resources.StaticTexts;
 import com.kstenschke.referencer.utils.UtilsString;
 
@@ -30,23 +31,25 @@ import java.util.List;
 public class GoToReferencerBookmarks extends GoToReferencer {
 
     public static String[] getItems(Project project, Document document, VirtualFile file) {
-        com.intellij.ide.bookmarks.BookmarkManager bookmarkManager =
-                com.intellij.ide.bookmarks.BookmarkManager.getInstance(project);
-
         List<String> bookmarkItems = new ArrayList<>();
-        bookmarkItems.add(StaticTexts.POPUP_SECTION_BOOKMARKS);
-
-        List<Bookmark> bookmarks = bookmarkManager.getValidBookmarks();
-        String documentText = document.getText();
-
         List<Integer> bookmarkLineNumbers = new ArrayList<>();
-        for (Bookmark curBookmark : bookmarks) {
-            if (curBookmark.getFile().equals(file)) {
-                bookmarkLineNumbers.add(curBookmark.getLine());
+
+        if (Preferences.getShowBookmarksInGoToList()) {
+            com.intellij.ide.bookmarks.BookmarkManager bookmarkManager =
+                    com.intellij.ide.bookmarks.BookmarkManager.getInstance(project);
+
+            bookmarkItems.add(StaticTexts.POPUP_SECTION_BOOKMARKS);
+
+            List<Bookmark> bookmarks = bookmarkManager.getValidBookmarks();
+
+            for (Bookmark curBookmark : bookmarks) {
+                if (curBookmark.getFile().equals(file)) {
+                    bookmarkLineNumbers.add(curBookmark.getLine());
+                }
             }
         }
 
-        return buildReferencesArray(document, bookmarkItems, documentText, bookmarkLineNumbers);
+        return buildReferencesArray(document, bookmarkItems, document.getText(), bookmarkLineNumbers);
     }
 
     private static String[] buildReferencesArray(Document document, List<String> bookmarkItems, String documentText,

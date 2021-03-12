@@ -52,6 +52,7 @@ public class ReferencerConfigurable implements Configurable {
 
     @Override public void apply() {
         if (settingsPanel != null) {
+            Preferences.saveShowBookmarksInGoToList(settingsPanel.getShowBookmarksInGotoDestinations());
             Preferences.saveGoToPatterns(settingsPanel.getGoToPatterns());
             Preferences.saveReplacePatterns(settingsPanel.getReplacePatterns());
         }

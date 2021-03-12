@@ -99,9 +99,11 @@
   Recent five releases here,
   <a href="https://github.com/kstenschke/referencer-plugin/blob/master/CHANGELOG.md">complete changelog on github</a>
   <br/><br/>
-  <strong>1.4.3 - Not tagged yet</strong>
+  <strong>1.4.3 - 2021-03-12</strong>
   <ul>
-    <li>Fix deprecation: Use Intellij API since 182.2371.4 / Platform version 2018.2 (was API 173.0 / Platform 2107.3)
+    <li>
+        Resolve use of deprecated Intellij API: Use API since 182.2371.4 / Platform version 2018.2
+        (was: 173.0 / Platform 2107.3)
     </li>
     <li>Make bookmarks section within GoTo action optional (configurable in plugin settings)</li>
   </ul>
@@ -128,13 +130,6 @@
     <li>Add regions recognition to built-in go-to targets</li>
     <li>Add referencer actions into more obvious IDE menus</li>
     <li>Add plugin icon</li>
-  </ul>
-  <strong>1.2.1 - 2021-02-12</strong>
-  <ul>
-    <li>Add Markdown headlines to "Go To" destinations</li>
-    <li>Change README and CHANGELOG format from textile to markdown</li>
-    <li>Correct preferences textarea behavior (caret-offset was reset on modification)</li>
-    <li>Partly modernize source code</li>
   </ul>
   ]]></change-notes>
 

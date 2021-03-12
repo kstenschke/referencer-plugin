@@ -38,6 +38,7 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.util.ArrayList;
+import java.util.Random;
 
 abstract class ReferencePopupAbleAction extends AnAction {
 
@@ -175,7 +176,10 @@ abstract class ReferencePopupAbleAction extends AnAction {
                 return StaticTexts.POPUP_TITLE_ACTION_INSERT;
             case ACTION_GO:
             default:
-                return StaticTexts.POPUP_TITLE_ACTION_GO;
+                Random rand = new Random();
+
+                return rand.nextInt(20) > 18
+                    ? StaticTexts.POPUP_TITLE_ACTION_GO_FUNNY : StaticTexts.POPUP_TITLE_ACTION_GO;
         }
     }
 }

@@ -40,6 +40,7 @@ public class PluginConfiguration {
     private JCheckBox checkboxListBookmarks;
 
     public PluginConfiguration() {
+        checkboxListBookmarks.setSelected(Preferences.getShowBookmarksInGoToList());
         textAreaGoToPatterns.setText(Preferences.getGoToPatterns());
         textAreaReplacePatterns.setText(Preferences.getReplacePatterns());
 
@@ -114,7 +115,12 @@ public class PluginConfiguration {
 
     public boolean isModified() {
         return !getGoToPatterns().equals(Preferences.getGoToPatterns())
-            || !getReplacePatterns().equals(Preferences.getReplacePatterns());
+            || !getReplacePatterns().equals(Preferences.getReplacePatterns())
+            || getShowBookmarksInGotoDestinations() != Preferences.getShowBookmarksInGoToList();
+    }
+
+    public boolean getShowBookmarksInGotoDestinations() {
+        return checkboxListBookmarks.isSelected();
     }
 
     public String getGoToPatterns() {

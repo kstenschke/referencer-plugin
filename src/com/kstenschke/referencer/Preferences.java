@@ -31,6 +31,7 @@ public class Preferences {
     @NonNls private static final String PROPERTY_REFERENCER_INDEX = "PluginReferencer.SelectedIndex";
     @NonNls private static final String PROPERTY_REFERENCER_INDEX_PHP = "PluginReferencer.SelectedIndexPHP";
     @NonNls private static final String PROPERTY_REFERENCER_INDEX_JS = "PluginReferencer.SelectedIndexJS";
+    @NonNls private static final String PROPERTY_GOTO_LIST_BOOKMARKS = "PluginReferencer.GotoListBookmarks";
 
     public static void saveGoToPatterns(String patterns) {
         PropertiesComponent.getInstance().setValue(PROPERTY_PATTERNS_GOTO, patterns);
@@ -38,6 +39,10 @@ public class Preferences {
 
     public static void saveReplacePatterns(String patterns) {
         PropertiesComponent.getInstance().setValue(PROPERTY_PATTERNS_REPLACE, patterns);
+    }
+
+    public static void saveShowBookmarksInGoToList(boolean doShow) {
+        PropertiesComponent.getInstance().setValue(PROPERTY_GOTO_LIST_BOOKMARKS, doShow ? "1" : "0");
     }
 
     public static String getGoToPatterns() {
@@ -50,6 +55,12 @@ public class Preferences {
         String patterns = PropertiesComponent.getInstance().getValue(PROPERTY_PATTERNS_REPLACE);
 
         return patterns != null ? patterns.trim() : "";
+    }
+
+    public static boolean getShowBookmarksInGoToList() {
+        String doShow = PropertiesComponent.getInstance().getValue(PROPERTY_GOTO_LIST_BOOKMARKS);
+
+        return doShow != null && doShow.equals("1");
     }
 
     /**

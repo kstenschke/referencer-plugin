@@ -25,6 +25,7 @@ public class StaticTexts {
     @NonNls public static final String POPUP_TITLE_ACTION_COPY = "Select what to copy";
     @NonNls public static final String POPUP_TITLE_ACTION_INSERT = "Select Insertion";
     @NonNls public static final String POPUP_TITLE_ACTION_GO = "Select where to go";
+    @NonNls public static final String POPUP_TITLE_ACTION_GO_FUNNY = "Where do you want to go today?";
 
     /* Popup items */
     @NonNls public static final String POPUP_ITEM_METHODS_IN_FILE = "List of methods in current file";
