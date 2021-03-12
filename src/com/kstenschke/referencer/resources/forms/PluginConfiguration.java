@@ -49,11 +49,11 @@ public class PluginConfiguration {
         textAreaGoToPatterns.setText(Preferences.getGoToPatterns());
         textAreaReplacePatterns.setText(Preferences.getReplacePatterns());
 
-        buttonImportSettings.addActionListener(e -> importSettingsFromJson());
-        buttonExportSettings.addActionListener(e -> exportSettingsToFile());
+        buttonImportSettings.addActionListener(e -> importReplacePatterns());
+        buttonExportSettings.addActionListener(e -> exportReplacePatterns());
     }
 
-    private void importSettingsFromJson() {
+    private void importReplacePatterns() {
         Project project = UtilsEnvironment.getOpenProject();
 
         if (null == project) {
@@ -74,7 +74,7 @@ public class PluginConfiguration {
         UtilsEnvironment.notify(StaticTexts.NOTIFY_REFERENCER_TXT_LOADED);
     }
 
-    private void exportSettingsToFile() {
+    private void exportReplacePatterns() {
         Project project = UtilsEnvironment.getOpenProject();
 
         if (null == project) {
@@ -131,11 +131,11 @@ public class PluginConfiguration {
     }
 
     public boolean getShowJsMethodsInGotoDestinations() {
-        return checkboxListPhpMethods.isSelected();
+        return checkboxListJsMethods.isSelected();
     }
 
     public boolean getShowPhpMethodsInGotoDestinations() {
-        return checkboxListJsMethods.isSelected();
+        return checkboxListPhpMethods.isSelected();
     }
 
     public String getGoToPatterns() {
