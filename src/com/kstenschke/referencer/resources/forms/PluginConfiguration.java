@@ -38,9 +38,14 @@ public class PluginConfiguration {
     private JButton buttonImportSettings;
     private JButton buttonExportSettings;
     private JCheckBox checkboxListBookmarks;
+    private JCheckBox checkboxListPhpMethods;
+    private JCheckBox checkboxListJsMethods;
 
     public PluginConfiguration() {
         checkboxListBookmarks.setSelected(Preferences.getShowBookmarksInGoToList());
+        checkboxListPhpMethods.setSelected(Preferences.getShowPhpMethodsInGoToList());
+        checkboxListJsMethods.setSelected(Preferences.getShowJsMethodsInGoToList());
+
         textAreaGoToPatterns.setText(Preferences.getGoToPatterns());
         textAreaReplacePatterns.setText(Preferences.getReplacePatterns());
 
@@ -116,11 +121,21 @@ public class PluginConfiguration {
     public boolean isModified() {
         return !getGoToPatterns().equals(Preferences.getGoToPatterns())
             || !getReplacePatterns().equals(Preferences.getReplacePatterns())
-            || getShowBookmarksInGotoDestinations() != Preferences.getShowBookmarksInGoToList();
+            || getShowBookmarksInGotoDestinations() != Preferences.getShowBookmarksInGoToList()
+            || getShowPhpMethodsInGotoDestinations() != Preferences.getShowPhpMethodsInGoToList()
+            || getShowJsMethodsInGotoDestinations() != Preferences.getShowJsMethodsInGoToList();
     }
 
     public boolean getShowBookmarksInGotoDestinations() {
         return checkboxListBookmarks.isSelected();
+    }
+
+    public boolean getShowJsMethodsInGotoDestinations() {
+        return checkboxListPhpMethods.isSelected();
+    }
+
+    public boolean getShowPhpMethodsInGotoDestinations() {
+        return checkboxListJsMethods.isSelected();
     }
 
     public String getGoToPatterns() {

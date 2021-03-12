@@ -2,7 +2,9 @@ Referencer Changelog
 ====================
 
 **2.0.0 - Not tagged yet**
-* Make bookmarks section within GoTo action optional (configurable in plugin settings)
+* Add plugin setting: Show bookmarks section within GoTo destinations?
+* Add plugin setting: Show PHP methods section within GoTo destinations?
+* Add plugin setting: Show JavaScript methods section within GoTo destinations?
 * Resolve use of deprecated Intellij API: Use API since 182.2371.4 / Platform version 2018.2 
   (was: 173.0 / Platform 2107.3)
 

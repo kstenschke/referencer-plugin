@@ -16,6 +16,7 @@
 package com.kstenschke.referencer.referencers.goTo;
 
 import com.intellij.openapi.editor.Document;
+import com.kstenschke.referencer.Preferences;
 import com.kstenschke.referencer.parsers.ParserJavaScript;
 import com.kstenschke.referencer.parsers.ParserPhp;
 import com.kstenschke.referencer.resources.StaticTexts;
@@ -34,7 +35,10 @@ public class GoToReferencerMethods extends GoToReferencer {
         boolean isJavaScript = UtilsFile.isJavaScriptFileExtension(fileExtension);
         boolean isPhp        = UtilsFile.isPhpFileExtension(fileExtension);
 
-        if (!isJavaScript && !isPhp) {
+        if ((!isJavaScript && !isPhp)
+            || (isPhp && !Preferences.getShowPhpMethodsInGoToList())
+            || (isJavaScript && !Preferences.getShowJsMethodsInGoToList())
+        ) {
             return null;
         }
 

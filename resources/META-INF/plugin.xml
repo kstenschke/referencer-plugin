@@ -16,7 +16,7 @@
 <idea-plugin>
   <id>Referencer</id>
   <name>Referencer</name>
-  <version>1.4.3</version>
+  <version>2.0.0</version>
   <vendor email="info@stenschke.com" url="https://github.com/kstenschke">Kay Stenschke</vendor>
 
   <description><![CDATA[
@@ -99,13 +99,15 @@
   Recent five releases here,
   <a href="https://github.com/kstenschke/referencer-plugin/blob/master/CHANGELOG.md">complete changelog on github</a>
   <br/><br/>
-  <strong>1.4.3 - 2021-03-12</strong>
+  <strong>2.0.0 - 2021-03-12</strong>
   <ul>
     <li>
         Resolve use of deprecated Intellij API: Use API since 182.2371.4 / Platform version 2018.2
         (was: 173.0 / Platform 2107.3)
     </li>
-    <li>Make bookmarks section within GoTo action optional (configurable in plugin settings)</li>
+    <li>Add plugin setting: Show bookmarks section within GoTo destination?</li>
+    <li>Add plugin setting: Show PHP methods section within GoTo destinations?</li>
+    <li>Add plugin setting: Show JavaScript methods section within GoTo destinations?</li>
   </ul>
   <strong>1.4.2 - 2021-03-08</strong>
   <ul>
