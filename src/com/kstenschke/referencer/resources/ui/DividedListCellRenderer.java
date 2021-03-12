@@ -16,12 +16,12 @@
 package com.kstenschke.referencer.resources.ui;
 
 import com.intellij.ui.Gray;
+import com.intellij.ui.components.JBLabel;
 import com.intellij.ui.components.JBList;
 import com.intellij.util.ui.UIUtil;
 import com.kstenschke.referencer.resources.StaticTexts;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 /**
@@ -29,24 +29,12 @@ import java.awt.*;
  */
 public class DividedListCellRenderer extends DefaultListCellRenderer {
 
-    private final Border separatorBorder;
-    private final Border separatorBorderTopMost;
     private final Font separatorFont;
     private final Color separatorColorBackground;
     private final Color separatorColorForeground;
 
     public DividedListCellRenderer(JBList<Object> list) {
         boolean isUnderDarcula = UIUtil.isUnderDarcula();
-
-        //noinspection UseJBColor
-        separatorBorderTopMost = isUnderDarcula
-            ? BorderFactory.createMatteBorder(0, 0, 1, 0, Color.DARK_GRAY)
-            : BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY);
-
-        //noinspection UseJBColor
-        separatorBorder = isUnderDarcula
-            ? BorderFactory.createMatteBorder(1, 0, 1, 0, Color.DARK_GRAY)
-            : BorderFactory.createMatteBorder(1, 0, 1, 0, Color.LIGHT_GRAY);
 
         Font defaultFont = list.getFont();
         this.separatorFont = new Font(defaultFont.getName(), defaultFont.getStyle(), defaultFont.getSize());
@@ -65,8 +53,11 @@ public class DividedListCellRenderer extends DefaultListCellRenderer {
     @Override
     public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
                                                   boolean cellHasFocus) {
+        String valueStr = null;
+
         if (value != null) {
-            String valueStr = value.toString();
+            valueStr = value.toString();
+            valueStr = valueStr.substring(valueStr.indexOf("=>") + 2);  /* Do not output item index prefix */
 
             /* Apply section title styling */
             if (valueStr.startsWith(StaticTexts.POPUP_ITEM_PREFIX_SECTION_TITLE)) {
@@ -75,24 +66,23 @@ public class DividedListCellRenderer extends DefaultListCellRenderer {
                     labelText += ":";
                 }
 
-                JLabel sectionLabel = new JLabel("<html><b>" + labelText + "</b></html>");
-                setLabelUI(sectionLabel, index == 0);
-
-                return sectionLabel;
+                return setLabelUI(new JBLabel(labelText));
             }
         }
         /* Non-separator item */
-        return super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+        return super.getListCellRendererComponent(list, valueStr, index, isSelected, cellHasFocus);
     }
 
-    private void setLabelUI(JLabel label, Boolean isTopMost) {
+    private JLabel setLabelUI(JBLabel label) {
         label.setOpaque(true);
         label.setFont(separatorFont);
-        label.setBorder(isTopMost ? separatorBorderTopMost : separatorBorder);
         label.setBackground(separatorColorBackground);
         label.setForeground(separatorColorForeground);
         label.setEnabled(false);
         label.setFocusable(false);
         label.setVisible(true);
+        label.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+
+        return label;
     }
 }

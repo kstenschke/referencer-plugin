@@ -21,20 +21,17 @@ import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.fileEditor.FileDocumentManager;
 import com.intellij.openapi.project.Project;
-import com.intellij.openapi.ui.popup.PopupChooserBuilder;
+import com.intellij.openapi.ui.popup.JBPopup;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.ui.components.JBList;
-import com.kstenschke.referencer.*;
-import com.kstenschke.referencer.listeners.DividedListSelectionListener;
 import com.kstenschke.referencer.referencers.goTo.*;
 import com.kstenschke.referencer.resources.StaticTexts;
-import com.kstenschke.referencer.resources.ui.DividedListCellRenderer;
 import com.kstenschke.referencer.resources.ui.PopupContextGo;
 import com.kstenschke.referencer.utils.UtilsEnvironment;
 import com.kstenschke.referencer.utils.UtilsFile;
 import org.apache.commons.lang.ArrayUtils;
 
-public class GoToAction extends ReferencePopupableAction {
+public class GoToAction extends ReferencePopupAbleAction {
 
     public void actionPerformed(AnActionEvent e) {
         Project project = e.getData(PlatformDataKeys.PROJECT);
@@ -77,24 +74,13 @@ public class GoToAction extends ReferencePopupableAction {
 
         if (references != null && references.length > 0) {
             final JBList<Object> referencesList = new JBList<>(references);
-            referencesList.setCellRenderer(new DividedListCellRenderer(referencesList));
-            referencesList.addListSelectionListener(new DividedListSelectionListener());
-
-            /* Preselect item from preferences */
-            int selectedIndex = Preferences.getSelectedIndex(fileExtension);
-            if (selectedIndex > references.length || selectedIndex == 0) {
-                selectedIndex = 1;
-            }
-            referencesList.setSelectedIndex(selectedIndex);
-
-            PopupChooserBuilder<Object> popupGo =
-                    buildPopup(project, editor, references, referencesList, fileExtension, false, MODE_GO);
+            JBPopup popupGo = buildPopup(project, editor, references, referencesList, fileExtension, false, ACTION_GO);
 
             /* Add context menu */
             PopupContextGo contextMenu = new PopupContextGo(project);
             referencesList.addMouseListener(contextMenu.getPopupListener());
 
-            popupGo.setMovable(true).createPopup().showCenteredInCurrentWindow(project);
+            popupGo.showCenteredInCurrentWindow(project);
         }
 
         if (references == null || references.length == 0) {

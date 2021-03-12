@@ -1,6 +1,10 @@
 Referencer Changelog
 ====================
 
+**2.0.0 - Not tagged yet**
+* Fix deprecation: Use Intellij API since 182.2371.4 / Platform version 2018.2 (was API 173.0 / Platform 2107.3)
+* Make bookmarks section within GoTo action optional (configurable in plugin settings) 
+
 **1.4.2 - 2021-03-08**
 * Change multitenancy: export/import search/replace patterns only (drop goTo patterns)
 * Recognize and limit replace action to selection within document if given  

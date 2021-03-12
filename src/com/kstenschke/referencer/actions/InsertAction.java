@@ -21,14 +21,14 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.project.Project;
 import com.kstenschke.referencer.referencers.insertOrCopy.InsertOrCopyReferencer;
 
-public class InsertAction extends ReferencePopupableAction {
+public class InsertAction extends ReferencePopupAbleAction {
 
     public void actionPerformed(final AnActionEvent e) {
         final Project project = e.getData(PlatformDataKeys.PROJECT);
         final Editor editor = e.getData(PlatformDataKeys.EDITOR);
 
         if (project != null && editor != null) {
-            launchPopup(InsertOrCopyReferencer.getItems(e), project, editor, MODE_INSERT);
+            launchPopup(InsertOrCopyReferencer.getItems(e), project, editor, ACTION_INSERT);
         }
     }
 }

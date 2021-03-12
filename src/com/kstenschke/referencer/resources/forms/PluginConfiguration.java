@@ -37,6 +37,7 @@ public class PluginConfiguration {
     private JTextArea textAreaReplacePatterns;
     private JButton buttonImportSettings;
     private JButton buttonExportSettings;
+    private JCheckBox checkboxListBookmarks;
 
     public PluginConfiguration() {
         textAreaGoToPatterns.setText(Preferences.getGoToPatterns());
