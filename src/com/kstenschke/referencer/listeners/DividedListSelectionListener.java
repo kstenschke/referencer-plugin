@@ -35,7 +35,7 @@ public class DividedListSelectionListener extends JFrame implements ListSelectio
      */
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        var list = (JList) e.getSource();
+        var list = (JList<?>) e.getSource();
 
         int selectedIndex = list.getSelectedIndex();
         if (selectedIndex >= 0 && list.isVisible()) {
