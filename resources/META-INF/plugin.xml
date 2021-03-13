@@ -99,7 +99,7 @@
   Recent five releases here,
   <a href="https://github.com/kstenschke/referencer-plugin/blob/master/CHANGELOG.md">complete changelog on github</a>
   <br/><br/>
-  <strong>2.0.0 - 2021-03-12</strong>
+  <strong>2.0.0 - 2021-03-13</strong>
   <ul>
     <li>
         Resolve use of deprecated Intellij API: Use API since 182.2371.4 / Platform version 2018.2

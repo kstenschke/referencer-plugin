@@ -1,7 +1,7 @@
 Referencer Changelog
 ====================
 
-**2.0.0 - Not tagged yet**
+**2.0.0 - 2020-03-13**
 * Add plugin setting: Show bookmarks section within GoTo destinations?
 * Add plugin setting: Show PHP methods section within GoTo destinations?
 * Add plugin setting: Show JavaScript methods section within GoTo destinations?

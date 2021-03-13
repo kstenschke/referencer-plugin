@@ -74,13 +74,13 @@ public class Preferences {
     }
 
     public static boolean getShowPhpMethodsInGoToList() {
-        String doShow = PropertiesComponent.getInstance().getValue(PROPERTY_GOTO_LIST_BOOKMARKS);
+        String doShow = PropertiesComponent.getInstance().getValue(PROPERTY_GOTO_LIST_PHP_METHODS);
 
         return doShow != null && doShow.equals("1");
     }
 
     public static boolean getShowJsMethodsInGoToList() {
-        String doShow = PropertiesComponent.getInstance().getValue(PROPERTY_GOTO_LIST_BOOKMARKS);
+        String doShow = PropertiesComponent.getInstance().getValue(PROPERTY_GOTO_LIST_JS_METHODS);
 
         return doShow != null && doShow.equals("1");
     }

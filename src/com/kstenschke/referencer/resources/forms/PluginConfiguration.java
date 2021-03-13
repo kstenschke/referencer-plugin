@@ -122,8 +122,8 @@ public class PluginConfiguration {
         return !getGoToPatterns().equals(Preferences.getGoToPatterns())
             || !getReplacePatterns().equals(Preferences.getReplacePatterns())
             || getShowBookmarksInGotoDestinations() != Preferences.getShowBookmarksInGoToList()
-            || getShowPhpMethodsInGotoDestinations() != Preferences.getShowPhpMethodsInGoToList()
-            || getShowJsMethodsInGotoDestinations() != Preferences.getShowJsMethodsInGoToList();
+            || getShowJsMethodsInGotoDestinations() != Preferences.getShowJsMethodsInGoToList()
+            || getShowPhpMethodsInGotoDestinations() != Preferences.getShowPhpMethodsInGoToList();
     }
 
     public boolean getShowBookmarksInGotoDestinations() {
