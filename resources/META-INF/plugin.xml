@@ -34,6 +34,8 @@
         <li>Ctrl+Shift+Alt+F twice - Replace configured search/replace patterns in current document</li>
         <li>Ctrl+Shift+Alt+V twice - Open list of references for inserting into the current document</li>
     </ul><br/>
+    <strong>Mac Users:</strong> On Macs, the default keyboard shortcuts are Shift+Alt+Cmd+C twice (copy), 
+    Shift+Alt+Cmd+F twice (replacee), Shift+Alt+Cmd+V twice (paste) and Shift+Alt+Cmd+G twice (go)
 
     <strong>TYPES OF REFERENCES TO INSERT/COPY:</strong><br/>
     All parsed items in the following list are relative to the current caret position,
