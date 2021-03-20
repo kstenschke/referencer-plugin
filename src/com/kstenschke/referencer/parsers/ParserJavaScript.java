@@ -39,7 +39,7 @@ public class ParserJavaScript {
             }
         }
 
-        /* No matches found? look for OOP style methods, ala: "methodname: function(" */
+        /* No matches found? look for OOP style methods, ala: "methodName: function(" */
         if (!allMatches.isEmpty()) {
             return allMatches;
         }

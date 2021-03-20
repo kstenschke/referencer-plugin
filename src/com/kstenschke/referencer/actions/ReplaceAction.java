@@ -48,20 +48,20 @@ public class ReplaceAction extends AnAction {
         }
 
         final Document document = editor.getDocument();
+        String documentText = document.getText();
+
         SelectionModel selectionModel = editor.getSelectionModel();
         boolean hasSelection = selectionModel.hasSelection();
 
-        String sourceText = hasSelection ? selectionModel.getSelectedText() : document.getText();
-
-        if (sourceText == null) {
-            return;
-        }
-
-        final int amountLines = sourceText.split("\n").length;
+        final int amountLines = documentText.split("\n").length;
 
         CommandProcessor.getInstance().executeCommand(project, () -> {      /* Replace undoable */
+            String replacedText = hasSelection ? selectionModel.getSelectedText() : documentText;
+            if (replacedText == null) {
+                return;
+            }
+
             boolean doLoopReplace = Preferences.getDoLoopReplace();
-            String replacedText = sourceText;
             String[] replaceTuples = replacePatterns.split("\n");
 
             int amountReplacedTotal = 0;
@@ -86,14 +86,18 @@ public class ReplaceAction extends AnAction {
                 }
             } while (doLoopReplace && amountReplaced > 0);
 
-            int selectionStart = hasSelection ? selectionModel.getSelectionStart() : 0;
+            if (amountReplacedTotal > 0) {
+                final String documentTextReplaced;
+                if (hasSelection) {
+                    int selectionStart = selectionModel.getSelectionStart();
+                    documentTextReplaced = documentText.substring(0, selectionStart) + replacedText
+                        + documentText.substring(selectionModel.getSelectionEnd());
+                } else {
+                    documentTextReplaced = replacedText;
+                }
 
-            final String replaceText = hasSelection
-                ? sourceText.substring(0, selectionStart) + replacedText
-                    + sourceText.substring(selectionModel.getSelectionEnd())
-                : replacedText;
-
-            WriteCommandAction.runWriteCommandAction(project, () -> document.setText(replaceText));
+                WriteCommandAction.runWriteCommandAction(project, () -> document.setText(documentTextReplaced));
+            }
 
             final int amountLinesAfterReplace = replacedText.split("\n").length;
             UtilsEnvironment.notify(renderSuccessMessage(amountLines, amountReplacedTotal, amountLinesAfterReplace));

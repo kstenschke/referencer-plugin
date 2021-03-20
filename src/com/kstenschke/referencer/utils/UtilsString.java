@@ -34,17 +34,17 @@ public class UtilsString {
     }
 
     /**
-     * @param haystack
-     * @param needle
+     * @param sourceCode  One or more lines of code, lines separated by "\n"
+     * @param needle    Substring to be located within given code lines
      * @param lineOffset Optional line offset where to begin searching
      * @return Line number containing given subString, or null if not contained
      */
-    public static Integer getLineNumberOfString(String haystack, String needle, @Nullable Integer lineOffset) {
+    public static Integer getLineNumberOfString(String sourceCode, String needle, @Nullable Integer lineOffset) {
         if (lineOffset == null) {
             lineOffset = 0;
         }
 
-        String[] lines = haystack.split("\n");
+        String[] lines = sourceCode.split("\n");
 
         int curLineNumber = 0;
         for (String curLine : lines) {
@@ -193,16 +193,16 @@ public class UtilsString {
     }
 
     /**
-     * @param    referenceStr    String to be cleaned
-     * @param    removeOnceStr    Sub string to be removed only once (first occurrence)
-     * @param    removeEachStrs    Sub strings to be removed allover
+     * @param    referenceString    String to be cleaned
+     * @param    removeOnceNeedle    Substring to be removed only once (first occurrence)
+     * @param    removeNeedles    Substrings to be removed allover
      * @return The cleaned string
      */
-    public static String cleanReference(String referenceStr, String removeOnceStr, String[] removeEachStrs) {
-        referenceStr = cleanReference(referenceStr, removeOnceStr);
-        referenceStr = UtilsString.removeSubStrings(referenceStr, removeEachStrs);
+    public static String cleanReference(String referenceString, String removeOnceNeedle, String[] removeNeedles) {
+        referenceString = cleanReference(referenceString, removeOnceNeedle);
+        referenceString = UtilsString.removeSubStrings(referenceString, removeNeedles);
 
-        return referenceStr.trim();
+        return referenceString.trim();
     }
 
     /**

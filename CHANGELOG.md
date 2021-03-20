@@ -1,7 +1,7 @@
 Referencer Changelog
 ====================
 
-**2.0.0 - 2020-03-20**
+**2.0.1 - 2020-03-20**
 * Add option to loop replacing until replacement-result contains no more replacement patterns
 * Add default keyboard shortcuts into built-in plugin description shown in IDE
 

@@ -136,9 +136,9 @@ class InsertOrCopyReferencerJavascript {
      * @return Cleaned namespace name
      */
     private static String cleanNamespaceName(String namespaceName) {
-        String[] removeEachStrs = {"\t"};
+        String[] removeNeedles = {"\t"};
 
-        return UtilsString.cleanReference(namespaceName, "@namespace", removeEachStrs);
+        return UtilsString.cleanReference(namespaceName, "@namespace", removeNeedles);
     }
 
     /**
@@ -148,8 +148,8 @@ class InsertOrCopyReferencerJavascript {
      * @return Cleaned class name
      */
     private static String cleanClassname(String className) {
-        String[] removeEachStrs = {"\t", " ", "=", "("};
-        className = UtilsString.cleanReference(className, "@class", removeEachStrs);
+        String[] removeNeedles = {"\t", " ", "=", "("};
+        className = UtilsString.cleanReference(className, "@class", removeNeedles);
 
         className = className.replace("Class.create", "");
 

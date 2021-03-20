@@ -32,7 +32,7 @@ class InsertOrCopyReferencerPhp {
     /**
      * Parse document of given event for PHP references and return them
      *
-     * @param    e    Action system event
+     * @param  e    Action system event
      * @return List of PHP items
      */
     public static List<String> getReferenceItems(AnActionEvent e) {
@@ -126,9 +126,9 @@ class InsertOrCopyReferencerPhp {
      * @param    methodName    Method name to be cleaned
      */
     private static String cleanMethodName(String methodName) {
-        String[] removeEachStrs = {"("};
+        String[] removeNeedles = {"("};
 
-        return UtilsString.cleanReference(methodName, "function", removeEachStrs, "();");
+        return UtilsString.cleanReference(methodName, "function", removeNeedles, "();");
     }
 
     /**

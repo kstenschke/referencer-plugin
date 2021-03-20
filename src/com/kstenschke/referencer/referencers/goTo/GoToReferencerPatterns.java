@@ -44,8 +44,8 @@ public class GoToReferencerPatterns extends GoToReferencer {
     }
 
     /**
-     * @param pattern
-     * @return String      The label, or the whole definition if no tab-separated label prefix is found
+     * @param pattern   Regular expression to match code lines and plaintext label of destination, separated by "\t"
+     * @return String   The label, or the whole definition if no tab-separated label prefix is found
      */
     private static String getLabelFromPatternDefinition(String pattern) {
         int splitPosition = pattern.indexOf("\t");
@@ -55,8 +55,8 @@ public class GoToReferencerPatterns extends GoToReferencer {
     }
 
     /**
-     * @param pattern
-     * @return String      The label, or the whole definition if no tab-separated label prefix is found
+     * @param pattern   Regular expression to match code lines and plaintext label of destination, separated by "\t"
+     * @return String   The label, or the whole definition if no tab-separated label prefix is found
      */
     private static String getPatternFromPatternDefinition(String pattern) {
         int splitPosition = pattern.indexOf("\t");

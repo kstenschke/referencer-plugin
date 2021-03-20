@@ -18,15 +18,13 @@
   <name>Referencer</name>
   <version>2.0.1</version>
   <vendor email="info@stenschke.com" url="https://github.com/kstenschke">Kay Stenschke</vendor>
-
   <description><![CDATA[
     Tools for faster <strong>inserting, copying, replacing and navigating</strong> among built-in and
     configurable references (date, filename, text completions, bookmarks, and many more) into/from/within 
     edited file(s).<br/><br/>
-
     <strong>PLUGIN CONFIGURATION:</strong><br/>
-    Is given at: Settings > Other Settings > Referencer<br/><br/>
-
+    Is given at: Settings > Other Settings > Referencer
+    <br/><br/>
     <strong>KEYBOARD SHORTCUTS:</strong>
     <ul>
         <li>Ctrl+Shift+Alt+C twice - Open list of references for copying to clipboard</li>
@@ -36,7 +34,7 @@
     </ul><br/>
     <strong>Mac Users:</strong> On Macs, the default keyboard shortcuts are Shift+Alt+Cmd+C twice (copy), 
     Shift+Alt+Cmd+F twice (replacee), Shift+Alt+Cmd+V twice (paste) and Shift+Alt+Cmd+G twice (go)
-
+    <br/><br/>
     <strong>TYPES OF REFERENCES TO INSERT/COPY:</strong><br/>
     All parsed items in the following list are relative to the current caret position,
     for example "previous classname" refers to the first classname found when searching backwards starting
@@ -75,7 +73,6 @@
         </li>
     </ul>
     <br/>
-
     <strong>TYPES OF REFERENCES TO GO TO:</strong>
     <ul>
         <li>Lines w/ bookmarks in the current document</li>
@@ -85,13 +82,11 @@
         <li>Headlines within the current markdown document</li>
     </ul>
     <br/>
-
     <strong>TYPES OF REFERENCES TO FIND+REPLACE:</strong>
     <ul>
         <li>All matches of the configured search/replace patterns in the current file</li>
     </ul>
     <br/>
-
     <strong>Please note:</strong>
     This plugin is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
     implied.
@@ -101,7 +96,7 @@
   Recent five releases here,
   <a href="https://github.com/kstenschke/referencer-plugin/blob/master/CHANGELOG.md">complete changelog on github</a>
   <br/><br/>
-  <strong>2.0.1 - 2021-03-19</strong>
+  <strong>2.0.1 - 2021-03-20</strong>
   <ul>
     <li>Add option to loop replacing until replacement-result contains no more replacement patterns</li>
     <li>Add default keyboard shortcuts into built-in plugin description shown in IDE</li>
