@@ -56,6 +56,7 @@ public class ReferencerConfigurable implements Configurable {
             Preferences.saveShowJsMethodsInGoToList(settingsPanel.getShowJsMethodsInGotoDestinations());
             Preferences.saveShowPhpMethodsInGoToList(settingsPanel.getShowPhpMethodsInGotoDestinations());
             Preferences.saveGoToPatterns(settingsPanel.getGoToPatterns());
+            Preferences.saveDoLoopReplace(settingsPanel.getDoLoopReplace());
             Preferences.saveReplacePatterns(settingsPanel.getReplacePatterns());
         }
     }

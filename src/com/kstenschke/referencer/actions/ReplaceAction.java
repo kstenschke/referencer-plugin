@@ -51,7 +51,7 @@ public class ReplaceAction extends AnAction {
         SelectionModel selectionModel = editor.getSelectionModel();
         boolean hasSelection = selectionModel.hasSelection();
 
-        final String sourceText = hasSelection ? selectionModel.getSelectedText() : document.getText();
+        String sourceText = hasSelection ? selectionModel.getSelectedText() : document.getText();
 
         if (sourceText == null) {
             return;
@@ -60,43 +60,43 @@ public class ReplaceAction extends AnAction {
         final int amountLines = sourceText.split("\n").length;
 
         CommandProcessor.getInstance().executeCommand(project, () -> {      /* Replace undoable */
+            boolean doLoopReplace = Preferences.getDoLoopReplace();
             String replacedText = sourceText;
             String[] replaceTuples = replacePatterns.split("\n");
-            int amountReplaced = 0;
 
-            for (String replaceTuple : replaceTuples) {
-                if (!replaceTuple.contains("\t")) {
-                    continue;
+            int amountReplacedTotal = 0;
+            int amountReplaced;
+
+            do {
+                amountReplaced = 0;
+                for (String replaceTuple : replaceTuples) {
+                    if (!replaceTuple.contains("\t")) {
+                        continue;
+                    }
+
+                    String[] parts = replaceTuple.split("\t");
+                    int amountOccurrences = UtilsString.regexCount(replacedText, parts[0]);
+                    if (amountOccurrences == 0) {
+                        continue;
+                    }
+
+                    replacedText = replacedText.replaceAll(parts[0], parts[1]);
+                    amountReplaced += amountOccurrences;
+                    amountReplacedTotal += amountOccurrences;
                 }
+            } while (doLoopReplace && amountReplaced > 0);
 
-                String[] parts = replaceTuple.split("\t");
-                int amountOccurrences = UtilsString.regexCount(replacedText, parts[0]);
-                if (amountOccurrences == 0) {
-                    continue;
-                }
+            int selectionStart = hasSelection ? selectionModel.getSelectionStart() : 0;
 
-                replacedText = replacedText.replaceAll(parts[0], parts[1]);
-                amountReplaced += amountOccurrences;
-            }
+            final String replaceText = hasSelection
+                ? sourceText.substring(0, selectionStart) + replacedText
+                    + sourceText.substring(selectionModel.getSelectionEnd())
+                : replacedText;
 
-            if (hasSelection) {
-                String text = document.getText();
-                int selectionStart = selectionModel.getSelectionStart();
-                final String replaceText = text.substring(0, selectionStart) + replacedText
-                        + text.substring(selectionModel.getSelectionEnd());
-                final int selectionLength = replacedText.length();
-
-                WriteCommandAction.runWriteCommandAction(project, () -> {
-                    document.setText(replaceText);
-                    selectionModel.setSelection(selectionStart, selectionStart + selectionLength);
-                });
-            } else {
-                final String replaceText = replacedText;
-                WriteCommandAction.runWriteCommandAction(project, () -> document.setText(replaceText));
-            }
+            WriteCommandAction.runWriteCommandAction(project, () -> document.setText(replaceText));
 
             final int amountLinesAfterReplace = replacedText.split("\n").length;
-            UtilsEnvironment.notify(renderSuccessMessage(amountLines, amountReplaced, amountLinesAfterReplace));
+            UtilsEnvironment.notify(renderSuccessMessage(amountLines, amountReplacedTotal, amountLinesAfterReplace));
             editor.getContentComponent().grabFocus();
         }, null, null);
     }

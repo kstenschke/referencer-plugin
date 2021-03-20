@@ -40,6 +40,7 @@ public class PluginConfiguration {
     private JCheckBox checkboxListBookmarks;
     private JCheckBox checkboxListPhpMethods;
     private JCheckBox checkboxListJsMethods;
+    private JCheckBox checkboxLoopReplace;
 
     public PluginConfiguration() {
         checkboxListBookmarks.setSelected(Preferences.getShowBookmarksInGoToList());
@@ -48,6 +49,7 @@ public class PluginConfiguration {
 
         textAreaGoToPatterns.setText(Preferences.getGoToPatterns());
         textAreaReplacePatterns.setText(Preferences.getReplacePatterns());
+        checkboxLoopReplace.setSelected(Preferences.getDoLoopReplace());
 
         buttonImportSettings.addActionListener(e -> importReplacePatterns());
         buttonExportSettings.addActionListener(e -> exportReplacePatterns());
@@ -121,6 +123,7 @@ public class PluginConfiguration {
     public boolean isModified() {
         return !getGoToPatterns().equals(Preferences.getGoToPatterns())
             || !getReplacePatterns().equals(Preferences.getReplacePatterns())
+            || getDoLoopReplace() != Preferences.getDoLoopReplace()
             || getShowBookmarksInGotoDestinations() != Preferences.getShowBookmarksInGoToList()
             || getShowJsMethodsInGotoDestinations() != Preferences.getShowJsMethodsInGoToList()
             || getShowPhpMethodsInGotoDestinations() != Preferences.getShowPhpMethodsInGoToList();
@@ -136,6 +139,10 @@ public class PluginConfiguration {
 
     public boolean getShowPhpMethodsInGotoDestinations() {
         return checkboxListPhpMethods.isSelected();
+    }
+
+    public boolean getDoLoopReplace() {
+        return checkboxLoopReplace.isSelected();
     }
 
     public String getGoToPatterns() {

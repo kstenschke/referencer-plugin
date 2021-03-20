@@ -26,14 +26,24 @@ import org.jetbrains.annotations.NonNls;
 public class Preferences {
 
     /*  @NonNls = element is not a string requiring internationalization and it does not contain such strings. */
-    @NonNls public static final String PROPERTY_PATTERNS_REPLACE = "PluginReferencer.ReplacePatterns";
-    @NonNls private static final String PROPERTY_PATTERNS_GOTO = "PluginReferencer.GoToPatterns";
-    @NonNls private static final String PROPERTY_REFERENCER_INDEX = "PluginReferencer.SelectedIndex";
-    @NonNls private static final String PROPERTY_REFERENCER_INDEX_PHP = "PluginReferencer.SelectedIndexPHP";
-    @NonNls private static final String PROPERTY_REFERENCER_INDEX_JS = "PluginReferencer.SelectedIndexJS";
-    @NonNls private static final String PROPERTY_GOTO_LIST_BOOKMARKS = "PluginReferencer.GotoListBookmarks";
-    @NonNls private static final String PROPERTY_GOTO_LIST_PHP_METHODS = "PluginReferencer.GotoListPhpMethods";
-    @NonNls private static final String PROPERTY_GOTO_LIST_JS_METHODS = "PluginReferencer.GotoListJsMethods";
+    @NonNls
+    private static final String PROPERTY_GOTO_LIST_BOOKMARKS = "PluginReferencer.GotoListBookmarks";
+    @NonNls
+    private static final String PROPERTY_GOTO_LIST_JS_METHODS = "PluginReferencer.GotoListJsMethods";
+    @NonNls
+    private static final String PROPERTY_GOTO_LIST_PHP_METHODS = "PluginReferencer.GotoListPhpMethods";
+    @NonNls
+    private static final String PROPERTY_LOOP_REPLACE = "PluginReferencer.ReplaceInLoop";
+    @NonNls
+    private static final String PROPERTY_PATTERNS_GOTO = "PluginReferencer.GoToPatterns";
+    @NonNls
+    private static final String PROPERTY_REFERENCER_INDEX = "PluginReferencer.SelectedIndex";
+    @NonNls
+    private static final String PROPERTY_REFERENCER_INDEX_JS = "PluginReferencer.SelectedIndexJS";
+    @NonNls
+    private static final String PROPERTY_REFERENCER_INDEX_PHP = "PluginReferencer.SelectedIndexPHP";
+    @NonNls
+    public static final String PROPERTY_PATTERNS_REPLACE = "PluginReferencer.ReplacePatterns";
 
     public static void saveGoToPatterns(String patterns) {
         PropertiesComponent.getInstance().setValue(PROPERTY_PATTERNS_GOTO, patterns);
@@ -53,6 +63,10 @@ public class Preferences {
 
     public static void saveShowJsMethodsInGoToList(boolean doShow) {
         PropertiesComponent.getInstance().setValue(PROPERTY_GOTO_LIST_JS_METHODS, doShow ? "1" : "0");
+    }
+
+    public static void saveDoLoopReplace(boolean doLoop) {
+        PropertiesComponent.getInstance().setValue(PROPERTY_LOOP_REPLACE, doLoop ? "1" : "0");
     }
 
     public static String getGoToPatterns() {
@@ -83,6 +97,12 @@ public class Preferences {
         String doShow = PropertiesComponent.getInstance().getValue(PROPERTY_GOTO_LIST_JS_METHODS);
 
         return doShow != null && doShow.equals("1");
+    }
+
+    public static boolean getDoLoopReplace() {
+        String doLoop = PropertiesComponent.getInstance().getValue(PROPERTY_LOOP_REPLACE);
+
+        return doLoop != null && doLoop.equals("1");
     }
 
     /**
