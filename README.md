@@ -1,4 +1,6 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/kstenschke/referencer-plugin/badge)](https://www.codefactor.io/repository/github/kstenschke/referencer-plugin)  
+[![CodeFactor](https://www.codefactor.io/repository/github/kstenschke/referencer-plugin/badge)](https://www.codefactor.io/repository/github/kstenschke/referencer-plugin)
+[![License](https://img.shields.io/badge/License-Apache%202.0-yellowgreen)](https://github.com/kstenschke/referencer-plugin/blob/master/LICENSE)  
+
 
 # Referencer Plugin
 
