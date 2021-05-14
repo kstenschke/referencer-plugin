@@ -1,4 +1,4 @@
-[![CodeFactor](https://www.codefactor.io/repository/github/kstenschke/referencer/badge)](https://www.codefactor.io/repository/github/kstenschke/referencer)  
+[![CodeFactor](https://www.codefactor.io/repository/github/kstenschke/referencer-plugin/badge)](https://www.codefactor.io/repository/github/kstenschke/referencer-plugin)  
 
 # Referencer Plugin
 
