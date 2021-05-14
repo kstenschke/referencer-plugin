@@ -1,3 +1,5 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/kstenschke/referencer/badge)](https://www.codefactor.io/repository/github/kstenschke/referencer)  
+
 # Referencer Plugin
 
 Source code of the [Referencer plugin](http://plugins.intellij.net/plugin?pr=&pluginId=7104).
